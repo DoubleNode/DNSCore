@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension Notification.Name {
+public extension Notification.Name {
     static let reachabilityStatusChanged = Notification.Name("DNS_C_reachabilityStatusChanged")
 }
 
-enum C {
-    enum AppConstants {
+public enum C {
+    public enum AppConstants {
         static let appConstantsNoUI = "appConstantsNoUI"
         static let button = "button"
         static let `default` = "default"
@@ -32,13 +32,13 @@ enum C {
         static let toggles = "toggles"
         static let `true` = "true"
     }
-    enum AppGlobals {
+    public enum AppGlobals {
         static let launchedCount = "appLaunchedCount"
         static let launchedFirstTime = "appLaunchedFirstTime"
         static let launchedLastTime = "appLaunchedLastTime"
         static let reviewRequestLastTime = "appReviewRequestLastTime"
 
-        enum ReachabilityStatus {
+        public enum ReachabilityStatus {
             case unknown, notReachable
             case reachableViaWWAN, reachableViaWWANWithoutInternet
             case reachableViaWiFi, reachableViaWiFiWithoutInternet
