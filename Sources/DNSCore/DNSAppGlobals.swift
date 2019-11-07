@@ -40,9 +40,9 @@ open class DNSAppGlobals {
 
     // MARK: - Application methods
 
-    func applicationDidBecomeActive() {
+    open func applicationDidBecomeActive() {
     }
-    func applicationWillResignActive() {
+    open func applicationWillResignActive() {
     }
 
     // MARK: - Review methods
