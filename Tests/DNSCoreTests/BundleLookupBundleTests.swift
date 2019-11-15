@@ -23,16 +23,16 @@ class BundleLookupBundleTests: XCTestCase {
         let result: Bundle? = Bundle.dnsLookupNibBundle(for: DNSThread.self)
         XCTAssertEqual(result, nil)
     }
-    func test_dnsLookupNibBundleForClasstype_withTestViewController_shouldReturnMainBundle() {
-        let result: Bundle? = Bundle.dnsLookupNibBundle(for: TestViewController.self)
+    func test_dnsLookupNibBundleForClasstype_withTestViewController_shouldReturnMainBundle() throws {
+        let result: Bundle? = try XCTUnwrap(Bundle.dnsLookupNibBundle(for: TestViewController.self))
         XCTAssertEqual(result, Bundle.main)
     }
     func test_dnsLookupBundleForClasstype_withNil_shouldReturnNil() {
         let result: Bundle? = Bundle.dnsLookupBundle(for: nil)
         XCTAssertEqual(result, nil)
     }
-    func test_dnsLookupBundleForClasstype_withDNSThread_shouldReturnMainBundle() {
-        let result: Bundle? = Bundle.dnsLookupBundle(for: DNSThread.self)
+    func test_dnsLookupBundleForClasstype_withDNSThread_shouldReturnMainBundle() throws {
+        let result: Bundle? = try XCTUnwrap(Bundle.dnsLookupBundle(for: DNSThread.self))
         XCTAssertEqual(result, Bundle.main)
     }
     func test_dnsLookupBundleForClassname_withEmptyClassname_shouldReturnNil() {
@@ -45,9 +45,9 @@ class BundleLookupBundleTests: XCTestCase {
         let result: Bundle? = Bundle.dnsLookupBundle(for: className)
         XCTAssertEqual(result, nil)
     }
-    func test_dnsLookupBundleForClassname_withDNSThreadClassname_shouldReturnMainBundle() {
+    func test_dnsLookupBundleForClassname_withDNSThreadClassname_shouldReturnMainBundle() throws {
         let className = NSStringFromClass(DNSThread.self)
-        let result: Bundle? = Bundle.dnsLookupBundle(for: className)
+        let result: Bundle? = try XCTUnwrap(Bundle.dnsLookupBundle(for: className))
         XCTAssertEqual(result, Bundle.main)
     }
 }
