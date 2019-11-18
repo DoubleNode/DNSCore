@@ -20,49 +20,49 @@ open class DNSAppConstants: NSObject {
     static let translator   = DNSDataTranslation()
 
     // MARK: - Constant plist to object functions
-    public class func constant(from key: String, and filter: String = "") -> Bool {
+    public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.bool(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> CGFloat {
+    public class func constant(from key: String, and filter: String = "") throws -> CGFloat {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return CGFloat(translator.double(from: value)!)
     }
-    public class func constant(from key: String, and filter: String = "") -> Date {
+    public class func constant(from key: String, and filter: String = "") throws -> Date {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.date(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> Double {
+    public class func constant(from key: String, and filter: String = "") throws -> Double {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.double(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> Int {
+    public class func constant(from key: String, and filter: String = "") throws -> Int {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.int(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> String {
+    public class func constant(from key: String, and filter: String = "") throws -> String {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.string(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> UIColor {
+    public class func constant(from key: String, and filter: String = "") throws -> UIColor {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.color(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> UInt {
+    public class func constant(from key: String, and filter: String = "") throws -> UInt {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.uint(from: value)!
     }
-    public class func constant(from key: String, and filter: String = "") -> URL {
+    public class func constant(from key: String, and filter: String = "") throws -> URL {
         let value = self._constant(from: key, and: filter)
-        assert(value != nil, "Constant '\(key)' \(filter.isEmpty ? "" : "with filter '\(filter)'") not found!")
+        guard value != nil else { throw DNSCoreError.constantNotFound(key: key, filter: filter) }
         return translator.url(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") -> [Any] {
@@ -83,19 +83,19 @@ open class DNSAppConstants: NSObject {
     // key + Name is the generated key for loading the font postscript name.
     // key + Scale is the appFontScaling override for @2x, @3x (ie: 1.0, 2.0, 3.0)
     // key + Size is the generated key for loading the font size in points. (divided by appFontScaling)
-    public class func constant(from key: String, and filter: String = "") -> UIFont {
-        let fontName: String    = self.constant(from: "\(key)Name", and: filter)
-        let fontScale: Double   = self.constant(from: "\(key)Size", and: filter)
-        let fontSize: Double    = self.constant(from: "\(key)Size", and: filter)
+    public class func constant(from key: String, and filter: String = "") throws -> UIFont {
+        let fontName: String    = try self.constant(from: "\(key)Name", and: filter)
+        let fontScale: Double   = try self.constant(from: "\(key)Size", and: filter)
+        let fontSize: Double    = try self.constant(from: "\(key)Size", and: filter)
 
         return UIFont.dnsCustom(with: fontName, and: CGFloat(fontSize / fontScale))
     }
 
     // key + Height is the generated key for loading the height.
     // key + Width is the generated key for loading the width.
-    public class func constant(from key: String, and filter: String = "") -> CGSize {
-        let height: Double  = self.constant(from: "\(key)Height", and: filter)
-        let width: Double   = self.constant(from: "\(key)Width", and: filter)
+    public class func constant(from key: String, and filter: String = "") throws -> CGSize {
+        let height: Double  = try self.constant(from: "\(key)Height", and: filter)
+        let width: Double   = try self.constant(from: "\(key)Width", and: filter)
 
         return CGSize.init(width: width, height: height)
     }
@@ -135,7 +135,11 @@ open class DNSAppConstants: NSObject {
                     tokenValue = dictionaryLookup(fromConstant: selectionToken, for: selectionKey)
                 }
                 if tokenValue == nil {
-                    tokenValue = self.constant(from: token, and: filter)
+                    do {
+                        tokenValue = try self.constant(from: token, and: filter)
+                    } catch {
+                        tokenValue = nil
+                    }
                 }
                 if tokenValue == nil {
                     tokenValue = tokenString
@@ -159,6 +163,10 @@ open class DNSAppConstants: NSObject {
 
     private static var _plistDictionary: [String: Any] = [:]
 
+    public func merge(constants: [String: Any]) {
+        DNSAppConstants._plistDictionary.merge(constants) { (_, new) in new }
+    }
+    
     private func plistDictionary() -> [String: Any] {
         objc_sync_enter(DNSAppConstants._plistDictionary)
         defer { objc_sync_exit(DNSAppConstants._plistDictionary) }

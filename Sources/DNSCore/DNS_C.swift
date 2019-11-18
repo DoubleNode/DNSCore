@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum DNSCoreError: Error, Equatable {
+    case constantNotFound(key: String, filter: String)
+}
+
 public extension Notification.Name {
     static let reachabilityStatusChanged = Notification.Name("DNS_C_reachabilityStatusChanged")
 }

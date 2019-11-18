@@ -40,6 +40,13 @@ open class DNSDataTranslation: NSObject {
         return retval
     }
 
+    static var defaultDateFormatter3: DateFormatter {
+        let retval = DateFormatter.init()
+        retval.timeZone     = NSTimeZone.local
+        retval.dateFormat   = "yyyyMMdd"
+        return retval
+    }
+
     static var firebaseDateFormatter: DateFormatter {
         let retval = DateFormatter.init()
         retval.timeZone     = NSTimeZone.local

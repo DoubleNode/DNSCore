@@ -40,10 +40,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DNSCoreTests"
@@ -53,13 +56,13 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "BundleLookupBundleTests">
+               </Test>
+               <Test
                   Identifier = "DNSAppConstantsDefaultsTests">
                </Test>
                <Test
                   Identifier = "DNSAppConstantsDictionaryLookupsTests">
-               </Test>
-               <Test
-                  Identifier = "DNSAppConstantsTests">
                </Test>
                <Test
                   Identifier = "DNSAppGlobalsTests">

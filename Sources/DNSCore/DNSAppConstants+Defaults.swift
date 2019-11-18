@@ -19,32 +19,59 @@ public extension DNSAppConstants {
     static var appBuildType: BuildType = .unknown
 
     static var appGroupPath: String {
-        return self.constant(from: "appGroupPath") as String
+        do {
+            return try self.constant(from: "appGroupPath") as String
+        }
+        catch { return "" }
     }
     static var appFontScaling: Double {
-        return self.constant(from: "appFontScaling") as Double
+        do {
+            return try self.constant(from: "appFontScaling") as Double
+        }
+        catch { return 0 }
     }
 
     // MARK: - App Request Review Constants
     static var requestReviews: Bool {
-        return self.constant(from: "requestReviews") as Bool
+        do {
+            return try self.constant(from: "requestReviews") as Bool
+        }
+        catch { return false }
     }
     static var requestReviewFirstMinimumLaunches: UInt {
-        return self.constant(from: "requestReviewFirstMinimumLaunches") as UInt
+        do {
+            return try self.constant(from: "requestReviewFirstMinimumLaunches") as UInt
+        }
+        catch { return 0 }
     }
     static var requestReviewFirstMaximumLaunches: UInt {
-        return self.constant(from: "requestReviewFirstMaximumLaunches") as UInt
+        do {
+            return try self.constant(from: "requestReviewFirstMaximumLaunches") as UInt
+        }
+        catch { return 0 }
     }
     static var requestReviewFrequency: UInt {
-        return self.constant(from: "requestReviewFrequency") as UInt
+        do {
+            return try self.constant(from: "requestReviewFrequency") as UInt
+        }
+        catch { return 0 }
     }
     static var requestReviewDaysSinceFirstLaunch: UInt {
-        return self.constant(from: "requestReviewDaysSinceFirstLaunch") as UInt
+        do {
+            return try self.constant(from: "requestReviewDaysSinceFirstLaunch") as UInt
+        }
+        catch { return 0 }
     }
     static var requestReviewHoursSinceLastLaunch: UInt {
-        return self.constant(from: "requestReviewHoursSinceLastLaunch") as UInt
+        do {
+            return try self.constant(from: "requestReviewHoursSinceLastLaunch") as UInt
+        }
+        catch { return 0 }
     }
     static var requestReviewDaysSinceLastReview: UInt {
-        return self.constant(from: "requestReviewDaysSinceLastReview") as UInt
+        do {
+            return try self.constant(from: "requestReviewDaysSinceLastReview") as UInt
+        }
+        catch { return 0 }
     }
 }
