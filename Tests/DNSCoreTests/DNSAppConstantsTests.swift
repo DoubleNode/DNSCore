@@ -35,6 +35,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantBool tests
     func test_constantBool_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as Bool) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -48,6 +49,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantCGFloat tests
     func test_constantCGFloat_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as CGFloat) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -61,6 +63,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantDate tests
     func test_constantDate_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as Date) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -78,6 +81,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantDouble tests
     func test_constantDouble_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as Double) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -91,6 +95,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantInt tests
     func test_constantInt_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as Int) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -100,10 +105,11 @@ class DNSAppConstantsTests: XCTestCase {
 
         XCTAssertEqual(result, Int(57321))
     }
-    
+
     // MARK: - constantString tests
     func test_constantString_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as String) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -117,6 +123,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantUIColor tests
     func test_constantUIColor_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as UIColor) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
@@ -145,6 +152,7 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantUInt tests
     func test_constantUInt_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as UInt) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
