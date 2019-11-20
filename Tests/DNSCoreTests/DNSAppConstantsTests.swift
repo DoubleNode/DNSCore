@@ -135,7 +135,7 @@ class DNSAppConstantsTests: XCTestCase {
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         UIColor.systemIndigo.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
+
         XCTAssertEqual(resultRed, red)
         XCTAssertEqual(resultGreen, green)
         XCTAssertEqual(resultBlue, blue)
@@ -158,11 +158,12 @@ class DNSAppConstantsTests: XCTestCase {
     // MARK: - constantURL tests
     func test_constantURL_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as URL) { error in
+            // swiftlint:disable:next force_cast
             XCTAssertEqual(error as! DNSCoreError, DNSCoreError.constantNotFound(key: "TestValueNotThere", filter: ""))
         }
     }
     func test_constantURL_withTestValueStringAndNoFilter_shouldReturnString() {
-        var result: URL? = nil
+        var result: URL?
         XCTAssertNoThrow(result = try DNSAppConstants.constant(from: "TestValueURL"))
 
         XCTAssertEqual(result, URL(string: "https:8080//www.google.com/search?q=test"))

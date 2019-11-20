@@ -21,57 +21,48 @@ public extension DNSAppConstants {
     static var appGroupPath: String {
         do {
             return try self.constant(from: "appGroupPath") as String
-        }
-        catch { return "" }
+        } catch { return "" }
     }
     static var appFontScaling: Double {
         do {
             return try self.constant(from: "appFontScaling") as Double
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
 
     // MARK: - App Request Review Constants
     static var requestReviews: Bool {
         do {
             return try self.constant(from: "requestReviews") as Bool
-        }
-        catch { return false }
+        } catch { return false }
     }
     static var requestReviewFirstMinimumLaunches: UInt {
         do {
             return try self.constant(from: "requestReviewFirstMinimumLaunches") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
     static var requestReviewFirstMaximumLaunches: UInt {
         do {
             return try self.constant(from: "requestReviewFirstMaximumLaunches") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
     static var requestReviewFrequency: UInt {
         do {
             return try self.constant(from: "requestReviewFrequency") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
     static var requestReviewDaysSinceFirstLaunch: UInt {
         do {
             return try self.constant(from: "requestReviewDaysSinceFirstLaunch") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
     static var requestReviewHoursSinceLastLaunch: UInt {
         do {
             return try self.constant(from: "requestReviewHoursSinceLastLaunch") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
     static var requestReviewDaysSinceLastReview: UInt {
         do {
             return try self.constant(from: "requestReviewDaysSinceLastReview") as UInt
-        }
-        catch { return 0 }
+        } catch { return 0 }
     }
 }

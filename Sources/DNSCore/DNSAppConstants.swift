@@ -166,7 +166,7 @@ open class DNSAppConstants: NSObject {
     public func merge(constants: [String: Any]) {
         DNSAppConstants._plistDictionary.merge(constants) { (_, new) in new }
     }
-    
+
     private func plistDictionary() -> [String: Any] {
         objc_sync_enter(DNSAppConstants._plistDictionary)
         defer { objc_sync_exit(DNSAppConstants._plistDictionary) }
