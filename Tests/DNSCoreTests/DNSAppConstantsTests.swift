@@ -45,7 +45,7 @@ class DNSAppConstantsTests: XCTestCase {
 
         XCTAssertEqual(result, true)
     }
-    
+
     // MARK: - constantCGFloat tests
     func test_constantCGFloat_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as CGFloat) { error in
