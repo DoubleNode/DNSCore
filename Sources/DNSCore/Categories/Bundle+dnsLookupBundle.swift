@@ -26,6 +26,10 @@ public extension Bundle {
         if classBundle == nil {
             classBundle = Bundle.init(for: classType!)
         }
+        if classBundle == nil {
+            classBundle = Bundle(for: classType!)
+        }
+
         return Bundle.init(for: classType!)
     }
     class func dnsLookupBundle(for className: String) -> Bundle? {
