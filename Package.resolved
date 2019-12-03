@@ -12,20 +12,20 @@
       },
       {
         "package": "DNSCoreThreading",
-        "repositoryURL": "https://github.com/DoubleNode/DNSCoreThreading.git",
+        "repositoryURL": "git@github.com:DoubleNode/DNSCoreThreading.git",
         "state": {
           "branch": null,
-          "revision": "aaf603f768e0da8917a3f353222a7f190842c33f",
-          "version": "1.0.2"
+          "revision": "59f7fdd6603f67dcf084e0fa279b5a64789eda67",
+          "version": "1.0.3"
         }
       },
       {
         "package": "DNSProtocols",
-        "repositoryURL": "https://github.com/DoubleNode/DNSProtocols.git",
+        "repositoryURL": "git@github.com:DoubleNode/DNSProtocols.git",
         "state": {
           "branch": null,
-          "revision": "530911f1023d1d774409f008364b7030302eb565",
-          "version": "1.0.2"
+          "revision": "960055d6d34b8d7663e2bf76e2360eab8f27abbb",
+          "version": "1.0.5"
         }
       }
     ]
