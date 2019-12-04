@@ -20,8 +20,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/MarioIannotta/AtomicSwift.git", from: "1.2.1"),
-        .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.0.0"),
-        .package(url: "https://github.com/DoubleNode/DNSProtocols.git", from: "1.0.0"),
+        .package(url: "git@github.com:DoubleNode/DNSCoreThreading.git", from: "1.0.0"),
+        .package(url: "git@github.com:DoubleNode/DNSProtocols.git", from: "1.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
