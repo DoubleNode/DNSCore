@@ -25,6 +25,11 @@ class DNSAppConstantsTests: XCTestCase {
             "TestValueString"       : "This is a test string!",
             "TestValueTrue"         : true,
             "TestValueURL"          : "https:8080//www.google.com/search?q=test",
+            "TestValueDictionary"   : [
+                "TestSubValueOne": [
+                    "TestSubSubValueOne": "Test String"
+                ],
+            ],
         ])
     }
     override func tearDown() {
@@ -118,6 +123,13 @@ class DNSAppConstantsTests: XCTestCase {
         XCTAssertNoThrow(result = try DNSAppConstants.constant(from: "TestValueString"))
 
         XCTAssertEqual(result, "This is a test string!")
+    }
+
+    func test_constantString_withTestValueDictionaryDotTestSubValueOneAndNoFilter_shouldReturnString() {
+        var result: String = ""
+        XCTAssertNoThrow(result = try DNSAppConstants.constant(from: "TestValueDictionary.TestSubValueOne.TestSubSubValueOne"))
+
+        XCTAssertEqual(result, "Test String")
     }
 
     // MARK: - constantUIColor tests

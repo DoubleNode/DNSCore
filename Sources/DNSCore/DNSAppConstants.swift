@@ -102,7 +102,27 @@ open class DNSAppConstants: NSObject {
 
     // MARK: - Internal Low-Level Methods
     private class func _constant(from key: String, and filter: String = "") -> Any? {
-        var retval = plistConfigValue(for: key)
+        let plistDictionary = shared.plistDictionary()
+        return _constant(in: plistDictionary, from: key, and: filter)
+    }
+
+    private class func _constant(in plistData: [String: Any], from key: String, and filter: String = "") -> Any? {
+        var retval = plistData[key]
+        if (retval == nil) {
+            if key.contains(".") {
+                let stringKeys = key.components(separatedBy: ".")
+                if stringKeys.count > 1 {
+                    let subPlistData: [String: Any]? = plistData[stringKeys[0]] as? [String: Any]
+                    if subPlistData != nil {
+                        var subKey = stringKeys[1]
+                        for i in 2..<stringKeys.count {
+                            subKey += "." + stringKeys[i]
+                        }
+                        retval = _constant(in: subPlistData!, from: subKey, and: filter)
+                    }
+                }
+            }
+        }
 
         if (retval as? [String: Any]) != nil {
             if !filter.isEmpty {
