@@ -107,10 +107,43 @@ open class DNSAppConstants: NSObject {
     }
 
     private class func _constant(in plistData: [String: Any], from key: String, and filter: String = "") -> Any? {
-        var retval = plistData[key]
+        var stringKey = key
+        while stringKey.contains("{{") {
+            let stringKeys = stringKey.components(separatedBy: "{{")
+            if stringKeys.count <= 1 {
+                break
+            }
+
+            let tokenFragment   = stringKeys[1]
+            let token: String   = tokenFragment.components(separatedBy: "}}").first!
+            let tokenString     = "{{\(token)}}"
+
+            var tokenKey: String?
+            if token.contains(":") {
+                let selectionKeys   = token.components(separatedBy: ":")
+                let selectionToken  = selectionKeys[0]
+                let selectionKey    = selectionKeys[1]
+
+                tokenKey = dictionaryLookup(fromConstant: selectionToken, for: selectionKey)
+            }
+            if tokenKey == nil {
+                do {
+                    tokenKey = try self.constant(from: token, and: filter)
+                } catch {
+                    tokenKey = nil
+                }
+            }
+            if tokenKey == nil {
+                tokenKey = tokenString
+            }
+
+            stringKey = stringKey.replacingOccurrences(of: tokenString, with: (tokenKey ?? ""))
+        }
+
+        var retval = plistData[stringKey]
         if (retval == nil) {
-            if key.contains(".") {
-                let stringKeys = key.components(separatedBy: ".")
+            if stringKey.contains(".") {
+                let stringKeys = stringKey.components(separatedBy: ".")
                 if stringKeys.count > 1 {
                     let subPlistData: [String: Any]? = plistData[stringKeys[0]] as? [String: Any]
                     if subPlistData != nil {
@@ -130,7 +163,7 @@ open class DNSAppConstants: NSObject {
             }
         }
         if (retval as? [String: Any]) != nil {
-            retval = dictionarySelection(from: (retval as? [String: Any] ?? [:]), for: key)
+            retval = dictionarySelection(from: (retval as? [String: Any] ?? [:]), for: stringKey)
         } else {
             // TODO(dme): Confirm this shouldn't be here!! retval = translator.string(from: retval)
         }

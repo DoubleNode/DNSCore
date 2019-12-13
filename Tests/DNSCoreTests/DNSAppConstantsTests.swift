@@ -25,6 +25,7 @@ class DNSAppConstantsTests: XCTestCase {
             "TestValueString"       : "This is a test string!",
             "TestValueTrue"         : true,
             "TestValueURL"          : "https:8080//www.google.com/search?q=test",
+            "TestValueKey"          : "One",
             "TestValueDictionary"   : [
                 "TestSubValueOne": [
                     "TestSubSubValueOne": "Test String"
@@ -127,7 +128,7 @@ class DNSAppConstantsTests: XCTestCase {
 
     func test_constantString_withTestValueDictionaryDotTestSubValueOneAndNoFilter_shouldReturnString() {
         var result: String = ""
-        XCTAssertNoThrow(result = try DNSAppConstants.constant(from: "TestValueDictionary.TestSubValueOne.TestSubSubValueOne"))
+        XCTAssertNoThrow(result = try DNSAppConstants.constant(from: "TestValueDictionary.TestSubValue{{TestValueKey}}.TestSubSubValueOne"))
 
         XCTAssertEqual(result, "Test String")
     }
