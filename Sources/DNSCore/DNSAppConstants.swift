@@ -107,41 +107,11 @@ open class DNSAppConstants: NSObject {
     }
 
     private class func _constant(in plistData: [String: Any], from key: String, and filter: String = "") -> Any? {
-        var stringKey = key
-        while stringKey.contains("{{") {
-            let stringKeys = stringKey.components(separatedBy: "{{")
-            if stringKeys.count <= 1 {
-                break
-            }
-
-            let tokenFragment   = stringKeys[1]
-            let token: String   = tokenFragment.components(separatedBy: "}}").first!
-            let tokenString     = "{{\(token)}}"
-
-            var tokenKey: String?
-            if token.contains(":") {
-                let selectionKeys   = token.components(separatedBy: ":")
-                let selectionToken  = selectionKeys[0]
-                let selectionKey    = selectionKeys[1]
-
-                tokenKey = dictionaryLookup(fromConstant: selectionToken, for: selectionKey)
-            }
-            if tokenKey == nil {
-                do {
-                    tokenKey = try self.constant(from: token, and: filter)
-                } catch {
-                    tokenKey = nil
-                }
-            }
-            if tokenKey == nil {
-                tokenKey = tokenString
-            }
-
-            stringKey = stringKey.replacingOccurrences(of: tokenString, with: (tokenKey ?? ""))
-        }
+        // swiftlint:disable:next force_cast
+        let stringKey = stringTokenReplacement(with: key, and: filter) as! String
 
         var retval = plistData[stringKey]
-        if (retval == nil) {
+        if retval == nil {
             if stringKey.contains(".") {
                 let stringKeys = stringKey.components(separatedBy: ".")
                 if stringKeys.count > 1 {
@@ -168,38 +138,46 @@ open class DNSAppConstants: NSObject {
             // TODO(dme): Confirm this shouldn't be here!! retval = translator.string(from: retval)
         }
         if (retval as? String) != nil {
-            var stringValue = retval as? String ?? ""
-            while stringValue.contains("{{") {
-                let stringValues = stringValue.components(separatedBy: "{{")
-                if stringValues.count <= 1 {
-                    break
-                }
+            // swiftlint:disable:next force_cast
+            retval = stringTokenReplacement(with: retval as! String, and: filter)
+        }
 
-                let tokenFragment   = stringValues[1]
-                let token: String   = tokenFragment.components(separatedBy: "}}").first!
-                let tokenString     = "{{\(token)}}"
+        return retval
+    }
 
-                var tokenValue: String?
-                if token.contains(":") {
-                    let selectionValues = token.components(separatedBy: ":")
-                    let selectionToken  = selectionValues[0]
-                    let selectionKey    = selectionValues[1]
-
-                    tokenValue = dictionaryLookup(fromConstant: selectionToken, for: selectionKey)
-                }
-                if tokenValue == nil {
-                    do {
-                        tokenValue = try self.constant(from: token, and: filter)
-                    } catch {
-                        tokenValue = nil
-                    }
-                }
-                if tokenValue == nil {
-                    tokenValue = tokenString
-                }
-
-                retval = stringValue = stringValue.replacingOccurrences(of: tokenString, with: (tokenValue ?? ""))
+    class func stringTokenReplacement(with string: String, and filter: String = "") -> Any? {
+        var retval = string
+        
+        while retval.contains("{{") {
+            let stringValues = retval.components(separatedBy: "{{")
+            if stringValues.count <= 1 {
+                break
             }
+
+            let tokenFragment   = stringValues[1]
+            let token: String   = tokenFragment.components(separatedBy: "}}").first!
+            let tokenString     = "{{\(token)}}"
+
+            var tokenValue: String?
+            if token.contains(":") {
+                let selectionValues = token.components(separatedBy: ":")
+                let selectionToken  = selectionValues[0]
+                let selectionKey    = selectionValues[1]
+
+                tokenValue = dictionaryLookup(fromConstant: selectionToken, for: selectionKey)
+            }
+            if tokenValue == nil {
+                do {
+                    tokenValue = try self.constant(from: token, and: filter)
+                } catch {
+                    tokenValue = nil
+                }
+            }
+            if tokenValue == nil {
+                tokenValue = tokenString
+            }
+
+            retval = retval.replacingOccurrences(of: tokenString, with: (tokenValue ?? ""))
         }
 
         return retval
