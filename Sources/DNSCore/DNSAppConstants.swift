@@ -147,7 +147,7 @@ open class DNSAppConstants: NSObject {
 
     class func stringTokenReplacement(with string: String, and filter: String = "") -> Any? {
         var retval = string
-        
+
         while retval.contains("{{") {
             let stringValues = retval.components(separatedBy: "{{")
             if stringValues.count <= 1 {
