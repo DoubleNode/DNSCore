@@ -60,13 +60,13 @@ public class DNSCore {
         return UserDefaults.standard
     }
 
-    class func appSetting(for key:String, withDefault defaultValue:Any = "") -> Any {
+    public class func appSetting(for key:String, withDefault defaultValue:Any = "") -> Any {
         let retval: Any?    = appSettingsUserDefaults.object(forKey: key)
         guard retval != nil else { return appSettingsUserDefaults.set(defaultValue, forKey: key) }
 
         return retval ?? defaultValue
     }
-    class func appSetting(set key:String, with value:Any?) -> Any? {
+    public class func appSetting(set key:String, with value:Any?) -> Any? {
         defer {
             settingsUserDefaults.synchronize()
         }
