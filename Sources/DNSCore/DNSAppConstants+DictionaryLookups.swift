@@ -193,7 +193,7 @@ extension DNSAppConstants {
 
         _ = semaphore.wait()
 
-        var retval: [String: Any] = [:]
+        var retval: [String: [String: Any]] = [:]
 
         DNSUIThread.run {
             for key: String in toggles.keys {
@@ -204,7 +204,7 @@ extension DNSAppConstants {
                 } else {
                     object[C.AppConstants.state] = C.AppConstants.false
                 }
-                retval[key] = object[C.AppConstants.state]
+                retval[key] = object
             }
         }
 
@@ -213,14 +213,14 @@ extension DNSAppConstants {
     private class func dictionaryLookupWithoutUI(fromToggles togglesData: [String: Any], for key: String) -> Any {
         let toggles     = togglesData[C.AppConstants.toggles] as? [[String: Any]] ?? []
 
-        var retval: [String: Any] = [:]
+        var retval: [String: [String: Any]] = [:]
 
         for var toggle: [String: Any] in toggles {
             let key     = translator.string(from: toggle[C.AppConstants.key]) ?? "\(key)_TOGGLE_KEY_NOT_SPECIFIED"
             let state   = translator.bool(from: toggle[C.AppConstants.default]) ?? false
 
             toggle[C.AppConstants.state] = translator.string(from: state) ?? C.AppConstants.false
-            retval[key] = toggle[C.AppConstants.state]
+            retval[key] = toggle
         }
 
         return self.plistConfigValue(replace: key, with: retval)
