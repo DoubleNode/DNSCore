@@ -106,9 +106,9 @@ extension DNSAppConstants {
                            for: UIControl.Event.touchUpInside)
 
         checkbox.imageView?.contentMode = .scaleAspectFit
-        checkbox.setImage(UIImage.init(named: C.AppConstants.iconCheckmarkOff), for: UIControl.State.normal)
-        checkbox.setImage(UIImage.init(named: C.AppConstants.iconCheckmarkOn), for: UIControl.State.selected)
-        checkbox.setImage(UIImage.init(named: C.AppConstants.iconCheckmarkOn), for: UIControl.State.highlighted)
+        checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOff), for: UIControl.State.normal)
+        checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOn), for: UIControl.State.selected)
+        checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOn), for: UIControl.State.highlighted)
         checkbox.adjustsImageWhenHighlighted = true
 
         return checkbox
