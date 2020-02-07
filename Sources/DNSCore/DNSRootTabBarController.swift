@@ -1,5 +1,5 @@
 //
-//  DNSRootViewController.swift
+//  DNSRootTabBarController.swift
 //  DNSCore
 //
 //  Created by Darren Ehlers on 8/14/19.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class DNSRootViewController: UIViewController, DNSAppConstantsRootProtocol, UITextFieldDelegate {
+public class DNSRootTabBarController: UITabBarController, DNSAppConstantsRootProtocol, UITextFieldDelegate {
     @objc
     public func checkBoxPressed(sender: UIButton) {
         sender.isSelected = !sender.isSelected
