@@ -175,12 +175,17 @@ extension DNSAppConstants {
     private class func dictionaryLookup(fromToggles togglesData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
+        // swiftlint:disable:next force_cast
+        if DNSCore.appDelegate.rootViewController() as? DNSAppConstantsRootProtocol == nil {
+            noUI = true
+        }
         if Thread.isMainThread {
             noUI = true
         }
         if translator.bool(from: togglesData[C.AppConstants.noUI]) ?? false {
             noUI = true
         }
+
         if noUI {
             return dictionaryLookupWithoutUI(fromToggles: togglesData, for: key)
         }
