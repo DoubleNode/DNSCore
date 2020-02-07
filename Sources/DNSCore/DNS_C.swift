@@ -32,7 +32,7 @@ public enum C {
         public static let noUI = "noUI"
         public static let options = "options"
         public static let state = "state"
-        public static let title = "toggles"
+        public static let title = "title"
         public static let toggles = "toggles"
         public static let `true` = "true"
     }
