@@ -187,22 +187,24 @@ extension DNSAppConstants {
 
         let semaphore = DNSSemaphoreGate()
 
-        var retval = dictionaryLookupDisplayToggles(fromToggles: togglesData, for: key, completionBlock: {
+        let toggles = dictionaryLookupDisplayToggles(fromToggles: togglesData, for: key, completionBlock: {
             _ = semaphore.done()
         })
 
         _ = semaphore.wait()
 
+        var retval: [String: Any] = [:]
+
         DNSUIThread.run {
-            for key: String in retval.keys {
-                var object      = retval[key]!
+            for key: String in toggles.keys {
+                var object      = toggles[key]!
                 let checkbox    = object[C.AppConstants.button] as? UIButton ?? nil
                 if checkbox?.isSelected ?? false {
                     object[C.AppConstants.state] = C.AppConstants.true
                 } else {
                     object[C.AppConstants.state] = C.AppConstants.false
                 }
-                retval[key]     = object
+                retval[key] = object[C.AppConstants.state]
             }
         }
 
@@ -211,14 +213,14 @@ extension DNSAppConstants {
     private class func dictionaryLookupWithoutUI(fromToggles togglesData: [String: Any], for key: String) -> Any {
         let toggles     = togglesData[C.AppConstants.toggles] as? [[String: Any]] ?? []
 
-        var retval: [String: [String: Any]] = [:]
+        var retval: [String: Any] = [:]
 
         for var toggle: [String: Any] in toggles {
             let key     = translator.string(from: toggle[C.AppConstants.key]) ?? "\(key)_TOGGLE_KEY_NOT_SPECIFIED"
             let state   = translator.bool(from: toggle[C.AppConstants.default]) ?? false
 
             toggle[C.AppConstants.state] = translator.string(from: state) ?? C.AppConstants.false
-            retval[key]     = toggle
+            retval[key] = toggle[C.AppConstants.state]
         }
 
         return self.plistConfigValue(replace: key, with: retval)
