@@ -189,6 +189,7 @@ open class DNSAppConstants: NSObject {
     class func plistConfigValue(replace key: String, with value: Any) -> Any {
         var plistDict = shared.plistDictionary()
         plistDict.updateValue(value, forKey: key)
+        shared.merge(constants: plistDict)
         return plistDict[key]!
     }
 
