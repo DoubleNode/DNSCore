@@ -11,7 +11,7 @@
 
 import UIKit
 
-@IBDesignable class MEEUIView: UIView {
+@IBDesignable class DNSUIView: UIView {
 
     // MARK: - Private Variables -
 
@@ -20,6 +20,7 @@ import UIKit
 
     // MARK: - Public Attributes -
 
+    /*
     @IBInspectable public var backgroundImage: UIImage? {
         get {
             return self.containerImageView.image
@@ -38,7 +39,7 @@ import UIKit
             if backgroundColor != UIColor.clear { backgroundColor = UIColor.clear }
         }
     }
-
+    */
     @IBInspectable var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
@@ -157,7 +158,7 @@ import UIKit
 
         // Image View
         self.containerImageView.backgroundColor = UIColor.clear
-        self.containerImageView.image = backgroundImage
+        //self.containerImageView.image = backgroundImage
         self.containerImageView.layer.cornerRadius = cornerRadius
         self.containerImageView.layer.masksToBounds = true
         self.containerImageView.clipsToBounds = true
