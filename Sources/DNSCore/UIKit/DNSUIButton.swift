@@ -170,6 +170,9 @@ import UIKit
         self.insertSubview(self.containerView, at: 0)
         self.containerView.addSubview(self.containerImageView)
 
+        self.containerView.isUserInteractionEnabled = false
+        self.containerImageView.isUserInteractionEnabled = false
+
         // add image constraints
         self.containerImageView.translatesAutoresizingMaskIntoConstraints = false
         self.containerImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
