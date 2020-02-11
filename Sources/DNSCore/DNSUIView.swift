@@ -11,15 +11,15 @@
 
 import UIKit
 
-@IBDesignable class DNSUIView: UIView {
-    
+@IBDesignable class MEEUIView: UIView {
+
     // MARK: - Private Variables -
-    
+
     private let containerView = UIView()
     private var containerImageView = UIImageView()
-    
+
     // MARK: - Public Attributes -
-    
+
     @IBInspectable public var backgroundImage: UIImage? {
         get {
             return self.containerImageView.image
@@ -29,7 +29,7 @@ import UIKit
             self.containerImageView.image = newValue
         }
     }
-    
+
     override open var backgroundColor: UIColor? {
         didSet(new) {
             if let color = new {
@@ -38,7 +38,7 @@ import UIKit
             if backgroundColor != UIColor.clear { backgroundColor = UIColor.clear }
         }
     }
-    
+
     @IBInspectable var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
@@ -48,7 +48,7 @@ import UIKit
             self.containerView.layer.borderColor = newValue.cgColor
         }
     }
-    
+
     @IBInspectable var borderWidth: CGFloat {
         get {
             return self.containerView.layer.borderWidth
@@ -58,7 +58,7 @@ import UIKit
             self.containerView.layer.borderWidth = newValue
         }
     }
-    
+
     @IBInspectable var cornerRadius: CGFloat {
         get {
             return self.containerView.layer.cornerRadius
@@ -68,7 +68,7 @@ import UIKit
             self.containerView.layer.cornerRadius = newValue
         }
     }
-    
+
     @IBInspectable var shadowOpacity: Float {
         get {
             return self.layer.shadowOpacity
@@ -77,7 +77,7 @@ import UIKit
             self.layer.shadowOpacity = newValue
         }
     }
-    
+
     @IBInspectable var shadowRadius: CGFloat {
         get {
             return self.layer.shadowRadius
@@ -86,7 +86,7 @@ import UIKit
             self.layer.shadowRadius = newValue
         }
     }
-    
+
     @IBInspectable var shadowOffset: CGSize {
         get {
             return self.layer.shadowOffset
@@ -95,7 +95,7 @@ import UIKit
             self.layer.shadowOffset = newValue
         }
     }
-    
+
     @IBInspectable var shadowColor: UIColor {
         get {
             return UIColor(cgColor: self.layer.shadowColor!)
@@ -104,57 +104,57 @@ import UIKit
             self.layer.shadowColor = newValue.cgColor
         }
     }
-    
+
 //    @IBInspectable var shadowColorFromImage: Bool = false {
 //        didSet {
 //            addShadowColorFromBackgroundImage()
 //        }
 //    }
-    
+
     // MARK: - Life Cycle -
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViewLayoutSubViews()
         refreshViewLayout()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addViewLayoutSubViews()
         refreshViewLayout()
     }
-    
+
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
         refreshViewLayout()
 //        addShadowColorFromBackgroundImage()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         refreshViewLayout()
 //        addShadowColorFromBackgroundImage()
     }
-    
+
     // MARK: - Private Methods -
-    
+
     private func refreshViewLayout() {
         // View
         self.clipsToBounds = true
         self.layer.masksToBounds = false
         self.layer.cornerRadius = cornerRadius
-        
+
         // Shadow
         self.layer.shadowOpacity = shadowOpacity
         self.layer.shadowColor = shadowColor.cgColor
         self.layer.shadowOffset = shadowOffset
         self.layer.shadowRadius = shadowRadius
-        
+
         // Container View
         self.containerView.layer.masksToBounds = true
         self.containerView.layer.cornerRadius = cornerRadius
-        
+
         // Image View
         self.containerImageView.backgroundColor = UIColor.clear
         self.containerImageView.image = backgroundImage
@@ -163,19 +163,19 @@ import UIKit
         self.containerImageView.clipsToBounds = true
         self.containerImageView.contentMode = .redraw
     }
-    
+
     private func addViewLayoutSubViews() {
         // add subViews
-        self.addSubview(self.containerView)
+        self.insertSubview(self.containerView, at: 0)
         self.containerView.addSubview(self.containerImageView)
-        
+
         // add image constraints
         self.containerImageView.translatesAutoresizingMaskIntoConstraints = false
         self.containerImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         self.containerImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         self.containerImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         self.containerImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
+
         // add view constraints
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -183,7 +183,7 @@ import UIKit
         self.containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         self.containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
+
 //    private func addShadowColorFromBackgroundImage() {
 //        // Get the averageColor from the image for set the Shadow Color
 //        if shadowColorFormImage {
