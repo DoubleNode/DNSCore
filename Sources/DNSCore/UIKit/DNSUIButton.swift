@@ -30,6 +30,7 @@ import UIKit
             self.containerImageView.image = newValue
         }
     }
+     */
 
     override open var backgroundColor: UIColor? {
         didSet(new) {
@@ -39,7 +40,7 @@ import UIKit
             if backgroundColor != UIColor.clear { backgroundColor = UIColor.clear }
         }
     }
-    */
+
     @IBInspectable var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
@@ -153,9 +154,6 @@ import UIKit
         self.layer.shadowRadius = shadowRadius
 
         // Container View
-        self.containerView.backgroundColor = self.backgroundColor
-        self.backgroundColor = UIColor.clear
-        
         self.containerView.layer.masksToBounds = true
         self.containerView.layer.cornerRadius = cornerRadius
 
