@@ -153,6 +153,9 @@ import UIKit
         self.layer.shadowRadius = shadowRadius
 
         // Container View
+        self.containerView.backgroundColor = self.backgroundColor
+        self.backgroundColor = UIColor.clear
+        
         self.containerView.layer.masksToBounds = true
         self.containerView.layer.cornerRadius = cornerRadius
 
