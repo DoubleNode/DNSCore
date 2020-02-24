@@ -61,10 +61,14 @@ public class DNSCore {
     }
 
     public class func appSetting(for key:String, withDefault defaultValue:Any = "") -> Any {
-        let retval: Any?    = appSettingsUserDefaults.object(forKey: key)
-        guard retval != nil else { return appSettingsUserDefaults.set(defaultValue, forKey: key) }
+        let retval: Any? = appSettingsUserDefaults.object(forKey: key)
+        guard retval != nil else {
+            appSettingsUserDefaults.set(defaultValue, forKey: key)
+            appSettingsUserDefaults.synchronize()
+            return defaultValue
+        }
 
-        return retval ?? defaultValue
+        return retval!
     }
     public class func appSetting(set key:String, with value:Any?) -> Any? {
         defer {
@@ -91,7 +95,11 @@ public class DNSCore {
 
     private class func _setting(for key:String, withDefault defaultValue:Any = "") -> Any {
         let retval: Any?    = settingsUserDefaults.object(forKey: key)
-        guard retval != nil else { return settingsUserDefaults.set(defaultValue, forKey: key) }
+        guard retval != nil else {
+            settingsUserDefaults.set(defaultValue, forKey: key)
+            settingsUserDefaults.synchronize()
+            return defaultValue
+        }
         return retval ?? defaultValue
     }
     private class func _setting(set key:String, with value:Any?) -> Any? {
