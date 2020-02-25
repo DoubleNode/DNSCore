@@ -12,7 +12,7 @@
 import Differ
 import UIKit
 
-@IBDesignable class DNSUICollectionView: UICollectionView {
+@IBDesignable open class DNSUICollectionView: UICollectionView {
 
     // MARK: - Private Variables -
 
@@ -123,7 +123,7 @@ import UIKit
         refreshViewLayout()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addViewLayoutSubViews()
         refreshViewLayout()
@@ -135,7 +135,7 @@ import UIKit
 //        addShadowColorFromBackgroundImage()
     }
 
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         refreshViewLayout()
 //        addShadowColorFromBackgroundImage()
