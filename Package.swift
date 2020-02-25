@@ -20,6 +20,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/MarioIannotta/AtomicSwift.git", from: "1.2.1"),
+        .package(url: "https://github.com/tonyarnold/Differ", from: "1.4.4"),
         .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.0.0"),
     ],
     targets: [
@@ -27,7 +28,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "DNSCore",
-            dependencies: ["AtomicSwift", "DNSCoreThreading"]),
+            dependencies: ["AtomicSwift", "Differ", "DNSCoreThreading"]),
         .testTarget(
             name: "DNSCoreTests",
             dependencies: ["DNSCore"]),
