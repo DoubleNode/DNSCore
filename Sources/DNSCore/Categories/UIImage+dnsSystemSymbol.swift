@@ -10,7 +10,7 @@ import SFSymbol
 import UIKit
 
 public extension UIImage {
-    convenience init(systemSymbol symbol: SFSymbol) {
+    convenience init(dnsSystemSymbol symbol: SFSymbol) {
         self.init(systemName: symbol.rawValue)!
     }
 }
