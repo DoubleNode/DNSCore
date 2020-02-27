@@ -198,15 +198,3 @@ import UIKit
 //        }
 //    }
 }
-
-extension DNSUICollectionView {
-    func reloadChanges<T: Collection>(from old: T, to new: T)
-        where T.Element: Collection,
-        T.Element: Equatable,
-        T.Element.Element: Equatable {
-            animateItemAndSectionChanges(oldData: old,
-                                         newData: new,
-                                         updateData: { () -> Void in
-            })
-    }
-}
