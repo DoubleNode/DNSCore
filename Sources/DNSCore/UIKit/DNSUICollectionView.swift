@@ -9,7 +9,6 @@
 //  https://github.com/paulosilva/CustomUIView
 //
 
-import Differ
 import UIKit
 
 @IBDesignable open class DNSUICollectionView: UICollectionView {
