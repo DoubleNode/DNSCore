@@ -15,14 +15,16 @@ import UIKit
     
     // MARK: - Private Variables -
 
-    privare var style = NSMutableParagraphStyle()
+    private var style = NSMutableParagraphStyle()
 
     // MARK: - Public Attributes -
     
-    open var text: String? {
+    override open var text: String? {
         didSet {
-            let attributeString = NSMutableAttributedString(string: self.text)
-            attributeString.addAttribute(NSParagraphStyleAttributeName, value: self.style, range: NSMakeRange(0, self.text?.count))
+            let attributeString = NSMutableAttributedString(string: self.text ?? "")
+            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                         value: self.style,
+                                         range: NSMakeRange(0, self.text?.count ?? 0))
             self.attributedText = attributeString
         }
     }
@@ -34,8 +36,10 @@ import UIKit
         set {
             self.style.lineHeightMultiple = newValue
             
-            let attributeString = NSMutableAttributedString(string: self.text)
-            attributeString.addAttribute(NSParagraphStyleAttributeName, value: self.style, range: NSMakeRange(0, self.text?.count))
+            let attributeString = NSMutableAttributedString(string: self.text ?? "")
+            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                         value: self.style,
+                                         range: NSMakeRange(0, self.text?.count ?? 0))
             self.attributedText = attributeString
         }
     }
@@ -47,8 +51,10 @@ import UIKit
         set {
             self.style.lineSpacing = newValue
 
-            let attributeString = NSMutableAttributedString(string: self.text)
-            attributeString.addAttribute(NSParagraphStyleAttributeName, value: self.style, range: NSMakeRange(0, self.text?.count))
+            let attributeString = NSMutableAttributedString(string: self.text ?? "")
+            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                         value: self.style,
+                                         range: NSMakeRange(0, self.text?.count ?? 0))
             self.attributedText = attributeString
         }
     }
