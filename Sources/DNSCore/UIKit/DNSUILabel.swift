@@ -27,6 +27,19 @@ import UIKit
         }
     }
     
+    @IBInspectable var lineHeightMultiple: CGFloat {
+        get {
+            return self.style.lineHeightMultiple
+        }
+        set {
+            self.style.lineHeightMultiple = newValue
+            
+            let attributeString = NSMutableAttributedString(string: self.text)
+            attributeString.addAttribute(NSParagraphStyleAttributeName, value: self.style, range: NSMakeRange(0, self.text?.count))
+            self.attributedText = attributeString
+        }
+    }
+
     @IBInspectable var lineSpacing: CGFloat {
         get {
             return self.style.lineSpacing
