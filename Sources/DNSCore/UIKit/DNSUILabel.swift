@@ -11,7 +11,7 @@
 
 import UIKit
 
-@IBDesignable open class MEEUILabel: UILabel {
+@IBDesignable open class DNSUILabel: UILabel {
 
     // MARK: - Private Variables -
 
