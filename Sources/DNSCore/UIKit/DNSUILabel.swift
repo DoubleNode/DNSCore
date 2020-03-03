@@ -11,50 +11,37 @@
 
 import UIKit
 
-@IBDesignable open class DNSUILabel: UILabel {
-    
+@IBDesignable open class MEEUILabel: UILabel {
+
     // MARK: - Private Variables -
 
     private var style = NSMutableParagraphStyle()
 
     // MARK: - Public Attributes -
-    
+
     override open var text: String? {
         didSet {
             let attributeString = NSMutableAttributedString(string: self.text ?? "")
             attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
                                          value: self.style,
-                                         range: NSMakeRange(0, self.text?.count ?? 0))
-            self.attributedText = attributeString
-        }
-    }
-    
-    @IBInspectable var lineHeightMultiple: CGFloat {
-        get {
-            return self.style.lineHeightMultiple
-        }
-        set {
-            self.style.lineHeightMultiple = newValue
-            
-            let attributeString = NSMutableAttributedString(string: self.text ?? "")
-            attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
-                                         value: self.style,
-                                         range: NSMakeRange(0, self.text?.count ?? 0))
+                                         range: NSRange(location: 0, length: self.text?.count ?? 0))
             self.attributedText = attributeString
         }
     }
 
-    @IBInspectable var lineSpacing: CGFloat {
+    @IBInspectable var zeplinLineHeight: CGFloat {
         get {
-            return self.style.lineSpacing
+            let fontOffset = self.font.lineHeight - self.font.pointSize
+            return self.style.lineSpacing + self.font.pointSize + fontOffset
         }
         set {
-            self.style.lineSpacing = newValue
+            let fontOffset = self.font.lineHeight - self.font.pointSize
+            self.style.lineSpacing = newValue - self.font.pointSize - fontOffset
 
             let attributeString = NSMutableAttributedString(string: self.text ?? "")
             attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
                                          value: self.style,
-                                         range: NSMakeRange(0, self.text?.count ?? 0))
+                                         range: NSRange(location: 0, length: self.text?.count ?? 0))
             self.attributedText = attributeString
         }
     }
