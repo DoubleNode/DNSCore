@@ -50,7 +50,7 @@ extension DNSAppConstants {
             let message = translator.string(from: optionsData[C.AppConstants.message]) ?? "\(key)_MESSAGE_NOT_SPECIFIED"
             let options = optionsData[C.AppConstants.options] as? [[String: Any]] ?? []
 
-            let alertController = UIAlertController.init(title: "S: \(title)",
+            let alertController = UIAlertController.init(title: "\(title)",
                                                          message: message,
                                                          preferredStyle: UIAlertController.Style.alert)
             for option: [String: Any] in options {
