@@ -71,6 +71,24 @@ import UIKit
         }
     }
 
+    @IBInspectable var multiCornerRadius: Bool = false
+
+    @IBInspectable open var topLeftRadius: CGFloat = 0 {
+        didSet { setNeedsLayout() }
+    }
+
+    @IBInspectable open var topRightRadius: CGFloat = 0 {
+        didSet { setNeedsLayout() }
+    }
+
+    @IBInspectable open var bottomLeftRadius: CGFloat = 0 {
+        didSet { setNeedsLayout() }
+    }
+
+    @IBInspectable open var bottomRightRadius: CGFloat = 0 {
+        didSet { setNeedsLayout() }
+    }
+
     @IBInspectable var shadowOpacity: Float {
         get {
             return self.layer.shadowOpacity
@@ -137,6 +155,7 @@ import UIKit
         super.layoutSubviews()
         refreshViewLayout()
 //        addShadowColorFromBackgroundImage()
+        applyRadiusMaskFor()
     }
 
     // MARK: - Private Methods -
@@ -198,4 +217,17 @@ import UIKit
 //            }
 //        }
 //    }
+
+    private func applyRadiusMaskFor() {
+        guard multiCornerRadius else { return }
+
+        let path = UIBezierPath(shouldRoundRect: bounds,
+                                topLeftRadius: topLeftRadius,
+                                topRightRadius: topRightRadius,
+                                bottomLeftRadius: bottomLeftRadius,
+                                bottomRightRadius: bottomRightRadius)
+        let shape = CAShapeLayer()
+        shape.path = path.cgPath
+        layer.mask = shape
+    }
 }
