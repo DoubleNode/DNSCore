@@ -41,7 +41,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var borderColor: UIColor {
+    @IBInspectable open var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
         }
@@ -51,7 +51,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable open var borderWidth: CGFloat {
         get {
             return self.containerView.layer.borderWidth
         }
@@ -61,7 +61,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable open var cornerRadius: CGFloat {
         get {
             return self.containerView.layer.cornerRadius
         }
@@ -71,7 +71,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var multiCornerRadius: Bool = false
+    @IBInspectable open var multiCornerRadius: Bool = false
 
     @IBInspectable open var topLeftRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
@@ -89,7 +89,7 @@ import UIKit
         didSet { setNeedsLayout() }
     }
 
-    @IBInspectable var shadowOpacity: Float {
+    @IBInspectable open var shadowOpacity: Float {
         get {
             return self.layer.shadowOpacity
         }
@@ -98,7 +98,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var shadowRadius: CGFloat {
+    @IBInspectable open var shadowRadius: CGFloat {
         get {
             return self.layer.shadowRadius
         }
@@ -107,7 +107,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var shadowOffset: CGSize {
+    @IBInspectable open var shadowOffset: CGSize {
         get {
             return self.layer.shadowOffset
         }
@@ -116,7 +116,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var shadowColor: UIColor {
+    @IBInspectable open var shadowColor: UIColor {
         get {
             return UIColor(cgColor: self.layer.shadowColor!)
         }

@@ -29,7 +29,7 @@ import UIKit
         }
     }
 
-    @IBInspectable var zeplinLineHeight: CGFloat {
+    @IBInspectable public var zeplinLineHeight: CGFloat {
         get {
             let fontOffset = self.font.lineHeight - self.font.pointSize
             return self.style.lineSpacing + self.font.pointSize + fontOffset
