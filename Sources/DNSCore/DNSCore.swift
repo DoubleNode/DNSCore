@@ -53,6 +53,9 @@ public class DNSCore {
     public class var versionString: String {
         return DNSCore.appDelegate.versionString()
     }
+    public class var appBuildString: String {
+        return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
+    }
 
     // MARK: - NSUserDefaults Settings methods
 
