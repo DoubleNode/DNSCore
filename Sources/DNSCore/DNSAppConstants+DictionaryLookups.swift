@@ -2,8 +2,8 @@
 //  DNSAppConstants+DictionaryLookups.swift
 //  DNSCore
 //
-//  Created by Darren Ehlers on 8/14/19.
-//  Copyright © 2019 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading

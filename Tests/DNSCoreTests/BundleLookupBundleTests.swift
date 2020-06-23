@@ -1,18 +1,15 @@
 //
-//  BundleLookupBundleTests.m
+//  BundleLookupBundleTests.swift
 //  DNSCoreTests
 //
-//  Created by Darren Ehlers on 10/23/16.
-//  Copyright © 2019 - 2016 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import XCTest
 
 @testable import DNSCore
-
-class TestViewController: UIViewController {
-}
 
 class BundleLookupBundleTests: XCTestCase {
     func test_dnsLookupNibBundleForClasstype_withNil_shouldReturnNil() {
@@ -33,7 +30,7 @@ class BundleLookupBundleTests: XCTestCase {
     }
     func test_dnsLookupBundleForClasstype_withDNSThread_shouldReturnMainBundle() throws {
         let result: Bundle? = try XCTUnwrap(Bundle.dnsLookupBundle(for: DNSThread.self))
-        XCTAssertEqual(result, Bundle.main)
+        XCTAssertNotEqual(result, Bundle.main)
     }
     func test_dnsLookupBundleForClassname_withEmptyClassname_shouldReturnNil() {
         let className = ""
@@ -48,6 +45,6 @@ class BundleLookupBundleTests: XCTestCase {
     func test_dnsLookupBundleForClassname_withDNSThreadClassname_shouldReturnMainBundle() throws {
         let className = NSStringFromClass(DNSThread.self)
         let result: Bundle? = try XCTUnwrap(Bundle.dnsLookupBundle(for: className))
-        XCTAssertEqual(result, Bundle.main)
+        XCTAssertNotEqual(result, Bundle.main)
     }
 }

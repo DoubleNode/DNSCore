@@ -2,8 +2,8 @@
 //  Bundle+dnsLookupBundle.swift
 //  DNSCore
 //
-//  Created by Darren Ehlers on 8/15/19.
-//  Copyright © 2019 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import Foundation
@@ -30,7 +30,7 @@ public extension Bundle {
             classBundle = Bundle(for: classType!)
         }
 
-        return Bundle.init(for: classType!)
+        return classBundle ?? Bundle.init(for: classType!)
     }
     class func dnsLookupBundle(for className: String) -> Bundle? {
         guard !className.isEmpty else { return nil }

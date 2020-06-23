@@ -2,8 +2,8 @@
 //  DNSQueue.swift
 //  DNSCore
 //
-//  Created by Darren Ehlers on 10/14/19.
-//  Copyright © 2019 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 //  Based on code from the Swift Algorithm Club
 //  Licensed under the MIT open source license

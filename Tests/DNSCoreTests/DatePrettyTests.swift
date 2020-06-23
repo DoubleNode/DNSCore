@@ -1,9 +1,9 @@
 //
-//  DatePrettyTests.m
+//  DatePrettyTests.swift
 //  DNSCoreTests
 //
-//  Created by Darren Ehlers on 10/23/16.
-//  Copyright © 2019 - 2016 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import XCTest
@@ -11,10 +11,12 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1570645241      // 2019-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "2020"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
-
+    
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
+    let defaultDateYear = DatePrettyTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
 
     private var sut: Date!
@@ -44,12 +46,12 @@ class DatePrettyTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end)
-        XCTAssertEqual(result, "Oct 9, 2019 - Sep 3, 2031")
+        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) - Sep 3, 2031")
     }
     func test_dnsTime_withDefaultAndEndDateDefaultFormat_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end)
-        XCTAssertEqual(result, "Oct 9, 2019, 1:20:41pm - Sep 3, 2031, 11:32:21am")
+        XCTAssertEqual(result, "Oct 9, \(defaultDateYear), 1:20:41pm - Sep 3, 2031, 11:32:21am")
     }
 }

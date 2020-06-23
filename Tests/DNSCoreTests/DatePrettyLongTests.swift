@@ -1,9 +1,9 @@
 //
-//  DatePrettyTests.m
+//  DatePrettyLongTests.swift
 //  DNSCoreTests
 //
-//  Created by Darren Ehlers on 10/23/16.
-//  Copyright © 2019 - 2016 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import XCTest
@@ -11,10 +11,12 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyLongTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1570645241      // 2019-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "2020"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
-
+    
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
+    let defaultDateYear = DatePrettyLongTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
 
     private var sut: Date!
@@ -33,7 +35,7 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsDate_withDefaultAndFormatLongSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsDate(as: .longSimple)
-        XCTAssertEqual(result, "October 9, 2019")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear)")
     }
     func test_dnsDate_withDefaultAndFormatLongSmart_shouldReturnString() {
         sut = defaultDate
@@ -48,7 +50,7 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsTime_withDefaultAndFormatLongSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .longSimple)
-        XCTAssertEqual(result, "October 9, 2019 at 1:20:41pm CDT")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20:41pm CDT")
     }
     func test_dnsTime_withDefaultAndFormatLongSmart_shouldReturnString() {
         sut = defaultDate
@@ -64,13 +66,13 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .longSimple)
-        XCTAssertEqual(result, "October 9, 2019 - September 3, 2031")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) - September 3, 2031")
     }
     func test_dnsDate_withDefaultAndEndDateFormatLongSmart_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .longSmart)
-        XCTAssertEqual(result, "October 9, 2019 - September 3, 2031")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) - September 3, 2031")
     }
     func test_dnsDate_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate
@@ -82,13 +84,13 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSimple)
-        XCTAssertEqual(result, "October 9, 2019 at 1:20:41pm CDT - September 3, 2031 at 11:32:21am CDT")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20:41pm CDT - September 3, 2031 at 11:32:21am CDT")
     }
     func test_dnsTime_withDefaultAndEndDateFormatLongSmart_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSmart)
-        XCTAssertEqual(result, "October 9, 2019, 1:20:41pm CDT - September 3, 2031, 11:32:21am CDT")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear), 1:20:41pm CDT - September 3, 2031, 11:32:21am CDT")
     }
     func test_dnsTime_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate

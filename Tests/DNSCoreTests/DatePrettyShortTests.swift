@@ -1,9 +1,9 @@
 //
-//  DatePrettyTests.m
+//  DatePrettyShortTests.swift
 //  DNSCoreTests
 //
-//  Created by Darren Ehlers on 10/23/16.
-//  Copyright © 2019 - 2016 DoubleNode.com. All rights reserved.
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import XCTest
@@ -11,11 +11,13 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyShortTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1570645241              // 2019-10-09T18:20:41+00:00
-    static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541           // 2031-09-03T16:32:21+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "20"
+    static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let defaultEndFromNowDateTimeIntervalSinceNow: TimeInterval = 86400 * 5
 
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
+    let defaultDateYear = DatePrettyShortTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
     let defaultEndFromNowDate = Date(timeIntervalSinceNow: defaultEndFromNowDateTimeIntervalSinceNow)
 
@@ -35,7 +37,7 @@ class DatePrettyShortTests: XCTestCase {
     func test_dnsDate_withDefaultAndFormatShortSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsDate(as: .shortSimple)
-        XCTAssertEqual(result, "10/9/19")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear)")
     }
     func test_dnsDate_withDefaultAndFormatShortSmart_shouldReturnString() {
         sut = defaultDate
@@ -62,7 +64,7 @@ class DatePrettyShortTests: XCTestCase {
     func test_dnTime_withDefaultAndFormatShortSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .shortSimple)
-        XCTAssertEqual(result, "10/9/19, 1:20p")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p")
     }
     func test_dnsTime_withDefaultAndFormatShortSmart_shouldReturnString() {
         sut = defaultDate
@@ -90,13 +92,13 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .shortSimple)
-        XCTAssertEqual(result, "10/9/19 - 9/3/31")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear) - 9/3/31")
     }
     func test_dnsDate_withDefaultAndEndDateFormatShortSmart_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/19 - 9/3/31")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear) - 9/3/31")
     }
     func test_dnsDate_withNowAndEndDateFormatShortPretty_shouldReturnString() {
         struct TestInterval {
@@ -121,13 +123,13 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSimple)
-        XCTAssertEqual(result, "10/9/19, 1:20p - 9/3/31, 11:32a")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p - 9/3/31, 11:32a")
     }
     func test_dnsTime_withDefaultAndEndDateFormatShortSmart_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/19, 1:20p - 9/3/31, 11:32a")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p - 9/3/31, 11:32a")
     }
     func test_dnsTime_withEndDateFormatShortPretty_shouldReturnString() {
         struct TestInterval {
