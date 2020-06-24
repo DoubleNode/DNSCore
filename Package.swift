@@ -1,5 +1,11 @@
 // swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+//
+//  Package.swift
+//  DoubleNode Swift Framework (DNSFramework) - DNSCore
+//
+//  Created by Darren Ehlers.
+//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
+//
 
 import PackageDescription
 
