@@ -20,7 +20,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/MarioIannotta/AtomicSwift.git", from: "1.2.1"),
-        .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.0.0"),
+        .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.1.0"),
         .package(url: "https://github.com/Nirma/SFSymbol", from: "0.2.0"),
     ],
     targets: [
