@@ -21,7 +21,7 @@ DNSCore is a collection of core classes used for the DNSFramework
 ## Requirements
 
 -   iOS 13.0+ / macOS 10.15+ / tvOS 13.0+ / watchOS 6.0+
--   Xcode 11.1+
+-   Xcode 11.6+
 -   Swift 5.1+
 
 ## Installation
