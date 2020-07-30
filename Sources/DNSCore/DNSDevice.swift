@@ -51,48 +51,70 @@ public class DNSDevice {
     }
 
     public class var landscape: Bool {
-        if self.activeWindowScene?.interfaceOrientation == .landscapeLeft ||
-            self.activeWindowScene?.interfaceOrientation == .landscapeRight {
+        #if os(tvOS)
             return true
-        }
-        return false
+        #elseif os(iOS)
+            if self.activeWindowScene?.interfaceOrientation == .landscapeLeft ||
+                self.activeWindowScene?.interfaceOrientation == .landscapeRight {
+                return true
+            }
+        
+            return false
+        #endif
     }
     public class var portrait: Bool {
-        if self.activeWindowScene?.interfaceOrientation == .portrait ||
-            self.activeWindowScene?.interfaceOrientation == .portraitUpsideDown {
-            return true
-        }
-        return false
+        #if os(tvOS)
+            return false
+        #elseif os(iOS)
+            if self.activeWindowScene?.interfaceOrientation == .portrait ||
+                self.activeWindowScene?.interfaceOrientation == .portraitUpsideDown {
+                return true
+            }
+        
+            return false
+        #endif
     }
 
     public class var biometricIdAvailable: Bool {
-        guard NSClassFromString("LAContext") != nil else { return false }
-        guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+        if #available(iOS 13, *) {
+            guard NSClassFromString("LAContext") != nil else { return false }
+            guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+                return false
+            }
+            
+            return true
+        } else {
             return false
         }
-
-        return true
     }
     public class var faceIdAvailable: Bool {
-        guard NSClassFromString("LAContext") != nil else { return false }
-        guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+        #if os(tvOS)
             return false
-        }
-        guard #available(iOS 11, *) else { return false }
-        guard LAContext.init().biometryType == LABiometryType.faceID else { return false }
-
-        return true
+        #elseif os(iOS)
+            guard NSClassFromString("LAContext") != nil else { return false }
+            guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+                return false
+            }
+            guard #available(iOS 11, *) else { return false }
+            guard LAContext.init().biometryType == LABiometryType.faceID else { return false }
+        
+            return true
+        #endif
     }
     public class var touchIdAvailable: Bool {
-        guard NSClassFromString("LAContext") != nil else { return false }
-        guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+        #if os(tvOS)
             return false
-        }
-        if #available(iOS 11, *) {
-            guard LAContext.init().biometryType == LABiometryType.touchID else { return false }
-        }
+        #elseif os(iOS)
+            guard NSClassFromString("LAContext") != nil else { return false }
+            guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
+                return false
+            }
+            if #available(iOS 11, *) {
+                guard LAContext.init().biometryType == LABiometryType.touchID else { return false }
+            }
 
-        return true
+            return true
+        #endif
     }
 
     public class var applicationDocumentsDirectory: String {
