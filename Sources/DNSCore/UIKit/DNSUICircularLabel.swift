@@ -27,46 +27,46 @@ import UIKit
     //          More complete definition: http://www.mathsisfun.com/sine-cosine-tangent.html
     // cosine: Also takes an angle in degrees and gives you another number from using the two radiuses (radii).
     // *******************************************************
-    
+
     @IBInspectable var angle: CGFloat = 1.6
     @IBInspectable var clockwise: Bool = true
-    
+
     override open func draw(_ rect: CGRect) {
         centreArcPerpendicular()
     }
-    
+
     // This draws the self.text around an arc of radius, with the text centred at polar angle theta
     func centreArcPerpendicular() {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        
+
         let string = text ?? ""
         let size = bounds.size
         context.translateBy(x: size.width / 2, y: size.height / 2)
-        
+
         let radius = getRadiusForLabel()
         let length = string.count
         let attributes = [NSAttributedString.Key.font : self.font!]
-        
+
         let characters: [String] = string.map { String($0) } // An array of single character strings, each character in str
         var arcs: [CGFloat] = [] // This will be the arcs subtended by each character
         var totalArc: CGFloat = 0 // ... and the total arc subtended by the string
-        
+
         // Calculate the arc subtended by each letter and their total
         for index in 0 ..< length {
             arcs += [ chordToArc(characters[index].size(withAttributes: attributes).width, radius: radius) ]
             totalArc += arcs[index]
         }
-        
+
         // Are we writing clockwise (right way up at 12 o'clock, upside down at 6 o'clock)
         // or anti-clockwise (right way up at 6 o'clock)?
         let direction: CGFloat = clockwise ? -1 : 1
         let slantCorrection = clockwise ? -CGFloat.pi/2 : CGFloat.pi/2
-        
+
         // The centre of the first character will then be at
         // thetaI = theta - totalArc / 2 + arcs[0] / 2
         // But we add the last term inside the loop
         var thetaI = angle - direction * totalArc / 2
-        
+
         for index in 0 ..< length {
             thetaI += direction * arcs[index] / 2
             // Call centre with each character in turn.
@@ -79,7 +79,7 @@ import UIKit
             thetaI += direction * arcs[index] / 2
         }
     }
-    
+
     func chordToArc(_ chord: CGFloat,
                     radius: CGFloat) -> CGFloat {
         // *******************************************************
@@ -87,7 +87,7 @@ import UIKit
         // *******************************************************
         return 2 * asin(chord / (2 * radius))
     }
-    
+
     /**
      This draws the String str centred at the position
      specified by the polar coordinates (r, theta)
@@ -120,7 +120,7 @@ import UIKit
         // Restore the context
         context.restoreGState()
     }
-    
+
     func getRadiusForLabel() -> CGFloat {
         // Imagine the bounds of this label will have a circle inside it.
         // The circle will be as big as the smallest width or height of this label.
@@ -128,7 +128,7 @@ import UIKit
         // smaller so the text does not get drawn outside the bounds of the circle.
         let smallestWidthOrHeight = min(bounds.size.height, bounds.size.width)
         let heightOfFont = text?.size(withAttributes: [NSAttributedString.Key.font: self.font!]).height ?? 0
-        
+
         // Dividing the smallestWidthOrHeight by 2 gives us the radius for the circle.
         return (smallestWidthOrHeight/2) - heightOfFont + 5
     }
