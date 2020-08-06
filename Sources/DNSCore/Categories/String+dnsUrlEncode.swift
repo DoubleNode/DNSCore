@@ -42,7 +42,7 @@ import Foundation
 
 public extension String {
     func dnsUrlEncode() -> String? {
-        return stringByAddingPercentEncodingForRFC3986()
+        return dnsStringByAddingPercentEncodingForRFC3986()
     }
 
     func dnsStringByAddingPercentEncodingForRFC3986() -> String? {
