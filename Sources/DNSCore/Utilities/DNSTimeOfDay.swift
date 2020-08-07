@@ -11,18 +11,24 @@ import Foundation
 public class DNSTimeOfDay {
     var value: Float = 0
 
+    public var hour: Int {
+        return Int(value)
+    }
+    public var minutes: Int {
+        return Int((value - Float(Int(value))) * 60)
+    }
+
     public required init(timeValue: Float) {
         value = timeValue
     }
 
     public func timeAsString() -> String {
-        let hour = Int(value) % 12
-        let min = Int((value - Float(Int(value))) * 60)
-        let amPm = (Int(value) % 24) < 12 ? "a" : "p"
+        let hour = self.hour % 12
+        let amPm = (self.hour % 24) < 12 ? "a" : "p"
 
         var minStr = ""
-        if min > 0 {
-            minStr = String(format: ":%02d", min)
+        if self.minutes > 0 {
+            minStr = String(format: ":%02d", self.minutes)
         }
 
         return "\((hour != 0) ? hour : 12)\(minStr)\(amPm)"
