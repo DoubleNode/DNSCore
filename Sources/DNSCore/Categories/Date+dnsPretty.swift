@@ -17,21 +17,21 @@ public extension Date {
             case simple, smart, pretty
         }
 
-        static let shortSimple: Format = Format(size: .short, style: .simple)
-        static let shortSmart: Format = Format(size: .short, style: .smart)
-        static let shortPretty: Format = Format(size: .short, style: .pretty)
+        public static let shortSimple: Format = Format(size: .short, style: .simple)
+        public static let shortSmart: Format = Format(size: .short, style: .smart)
+        public static let shortPretty: Format = Format(size: .short, style: .pretty)
 
-        static let normalSimple: Format = Format(size: .normal, style: .simple)
-        static let normalSmart: Format = Format(size: .normal, style: .smart)
-        static let normalPretty: Format = Format(size: .normal, style: .pretty)
+        public static let normalSimple: Format = Format(size: .normal, style: .simple)
+        public static let normalSmart: Format = Format(size: .normal, style: .smart)
+        public static let normalPretty: Format = Format(size: .normal, style: .pretty)
 
-        static let longSimple: Format = Format(size: .long, style: .simple)
-        static let longSmart: Format = Format(size: .long, style: .smart)
-        static let longPretty: Format = Format(size: .long, style: .pretty)
+        public static let longSimple: Format = Format(size: .long, style: .simple)
+        public static let longSmart: Format = Format(size: .long, style: .smart)
+        public static let longPretty: Format = Format(size: .long, style: .pretty)
 
-        static let fullSimple: Format = Format(size: .full, style: .simple)
-        static let fullSmart: Format = Format(size: .full, style: .smart)
-        static let fullPretty: Format = Format(size: .full, style: .pretty)
+        public static let fullSimple: Format = Format(size: .full, style: .simple)
+        public static let fullSmart: Format = Format(size: .full, style: .smart)
+        public static let fullPretty: Format = Format(size: .full, style: .pretty)
 
         let size: Size
         let style: Style
