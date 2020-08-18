@@ -200,14 +200,14 @@ public extension Date {
     }
     var isLast7Days: Bool {
         let last7Days = Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
-        return Date().timeIntervalSince(last7Days) < Seconds.deltaOneWeek
+        return self.timeIntervalSince(last7Days) < Seconds.deltaOneWeek
     }
     var isLast30Days: Bool {
         let last30Days = Date(timeIntervalSinceNow: -Seconds.deltaThirtyDays)
-        return Date().timeIntervalSince(last30Days) < Seconds.deltaThirtyDays
+        return self.timeIntervalSince(last30Days) < Seconds.deltaThirtyDays
     }
     var isLast365Days: Bool {
         let last365Days = Date(timeIntervalSinceNow: -Seconds.delta365Days)
-        return Date().timeIntervalSince(last365Days) < Seconds.delta365Days
+        return self.timeIntervalSince(last365Days) < Seconds.delta365Days
     }
 }
