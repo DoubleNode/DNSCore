@@ -80,7 +80,9 @@ public extension Date {
         static let deltaOneWeek = Double(86400 * 7)
         static let deltaTwoWeeks = Double(86400 * 14)
         static let deltaThreeWeeks = Double(86400 * 21)
+        static let deltaThirtyDays = Double(86400 * 30)
         static let deltaSixWeeks = Double(86400 * 42)
+        static let delta365Days = Double(86400 * 365)
     }
 
     func dnsDate(as format: Format = Format()) -> String {
@@ -188,5 +190,24 @@ public extension Date {
         return (selfDay == dateDay) &&
                 (selfMonth == dateMonth) &&
                 (selfYear == dateYear)
+    }
+    var isToday: Bool {
+        return isSameDate()
+    }
+    var isYesterday: Bool {
+        let yesterday = Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
+        return isSameDate(as: yesterday)
+    }
+    var isLast7Days: Bool {
+        let last7Days = Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
+        return Date().timeIntervalSince(last7Days) < Seconds.deltaOneWeek
+    }
+    var isLast30Days: Bool {
+        let last30Days = Date(timeIntervalSinceNow: -Seconds.deltaThirtyDays)
+        return Date().timeIntervalSince(last30Days) < Seconds.deltaThirtyDays
+    }
+    var isLast365Days: Bool {
+        let last365Days = Date(timeIntervalSinceNow: -Seconds.delta365Days)
+        return Date().timeIntervalSince(last365Days) < Seconds.delta365Days
     }
 }
