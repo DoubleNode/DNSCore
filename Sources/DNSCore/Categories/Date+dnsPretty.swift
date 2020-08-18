@@ -199,15 +199,12 @@ public extension Date {
         return isSameDate(as: yesterday)
     }
     var isLast7Days: Bool {
-        let last7Days = Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
-        return self.timeIntervalSince(last7Days) < Seconds.deltaOneWeek
+        return self.timeIntervalSinceNow > -Seconds.deltaOneWeek
     }
     var isLast30Days: Bool {
-        let last30Days = Date(timeIntervalSinceNow: -Seconds.deltaThirtyDays)
-        return self.timeIntervalSince(last30Days) < Seconds.deltaThirtyDays
+        return self.timeIntervalSinceNow > -Seconds.deltaThirtyDays
     }
     var isLast365Days: Bool {
-        let last365Days = Date(timeIntervalSinceNow: -Seconds.delta365Days)
-        return self.timeIntervalSince(last365Days) < Seconds.delta365Days
+        return self.timeIntervalSinceNow > -Seconds.delta365Days
     }
 }
