@@ -67,22 +67,26 @@ public extension Date {
 
     enum Seconds {
         public static let deltaOneMinute = Double(60)
-        public static let deltaTwoMinutes = Double(120)
-        public static let deltaThreeMinutes = Double(180)
-        public static let deltaSixMinutes = Double(320)
-        public static let deltaOneHour = Double(3600)
-        public static let deltaTwoHours = Double(7200)
-        public static let deltaThreeHours = Double(10800)
-        public static let deltaSixHours = Double(21600)
-        public static let deltaOneDay = Double(86400)
-        public static let deltaTwoDays = Double(86400 * 2)
-        public static let deltaThreeDays = Double(86400 * 3)
-        public static let deltaOneWeek = Double(86400 * 7)
-        public static let deltaTwoWeeks = Double(86400 * 14)
-        public static let deltaThreeWeeks = Double(86400 * 21)
-        public static let deltaThirtyDays = Double(86400 * 30)
-        public static let deltaSixWeeks = Double(86400 * 42)
-        public static let delta365Days = Double(86400 * 365)
+        public static let deltaTwoMinutes = Seconds.deltaOneMinute * 2
+        public static let deltaThreeMinutes = Seconds.deltaOneMinute * 3
+        public static let deltaSixMinutes = Seconds.deltaOneMinute * 6
+        public static let deltaTenMinutes = Seconds.deltaOneMinute * 10
+        public static let deltaFifteenMinutes = Seconds.deltaOneMinute * 15
+        public static let deltaThirtyMinutes = Seconds.deltaOneMinute * 30
+        public static let deltaFourtyFiveMinutes = Seconds.deltaOneMinute * 45
+        public static let deltaOneHour = Seconds.deltaOneMinute * 60
+        public static let deltaTwoHours = Seconds.deltaOneHour * 2
+        public static let deltaThreeHours = Seconds.deltaOneHour * 3
+        public static let deltaSixHours = Seconds.deltaOneHour * 6
+        public static let deltaOneDay = Seconds.deltaOneHour * 24
+        public static let deltaTwoDays = Seconds.deltaOneDay * 2
+        public static let deltaThreeDays = Seconds.deltaOneDay * 3
+        public static let deltaOneWeek = Seconds.deltaOneDay * 7
+        public static let deltaTwoWeeks = Seconds.deltaOneWeek * 2
+        public static let deltaThreeWeeks = Seconds.deltaOneWeek * 3
+        public static let deltaThirtyDays = Seconds.deltaOneDay * 30
+        public static let deltaSixWeeks = Seconds.deltaOneWeek * 6
+        public static let delta365Days = Seconds.deltaOneDay * 365
     }
 
     func dnsDate(as format: Format = Format()) -> String {
