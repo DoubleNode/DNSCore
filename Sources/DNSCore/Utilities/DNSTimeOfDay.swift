@@ -22,7 +22,7 @@ public class DNSTimeOfDay: Hashable {
         return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
     }
 
-    public required init(timeValue: Float) {
+    public required init(timeValue: Float = 0) {
         value = timeValue
     }
 
@@ -38,9 +38,15 @@ public class DNSTimeOfDay: Hashable {
         return "\((hour != 0) ? hour : 12)\(minStr)\(amPm)"
     }
 
+    // MARK: - Comparable methods
+
+    static func <(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+        return lhs.value < rhs.value
+    }
+
     // MARK: - Hashable methods
 
-    public static func == (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+    public static func ==(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value == rhs.value
     }
 
