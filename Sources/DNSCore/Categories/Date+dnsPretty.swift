@@ -149,51 +149,36 @@ public extension Date {
         }
     }
 
-    func isSameDay(as date: Date? = nil) -> Bool {
+    func dnsComponent(component: Calendar.Component) -> Int {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-
-        let selfDay = calendar.component(Calendar.Component.day, from: self)
-        let dateDay = calendar.component(Calendar.Component.day, from: date ?? Date())
-
-        return selfDay == dateDay
+        return calendar.component(component, from: self)
     }
-    func isSameWeekday(as date: Date? = nil) -> Bool {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    func dnsEra() -> Int        {   return dnsComponent(component: .era)        }
+    func dnsYear() -> Int       {   return dnsComponent(component: .year)       }
+    func dnsMonth() -> Int      {   return dnsComponent(component: .month)      }
+    func dnsDay() -> Int        {   return dnsComponent(component: .day)        }
+    func dnsHour() -> Int       {   return dnsComponent(component: .hour)       }
+    func dnsMinute() -> Int     {   return dnsComponent(component: .minute)     }
+    func dnsSecond() -> Int     {   return dnsComponent(component: .second)     }
+    func dnsWeekday() -> Int    {   return dnsComponent(component: .weekday)    }
+    func dnsQuarter() -> Int    {   return dnsComponent(component: .quarter)    }
 
-        let selfWeekday = calendar.component(Calendar.Component.weekday, from: self)
-        let dateWeekday = calendar.component(Calendar.Component.weekday, from: date ?? Date())
-
-        return selfWeekday == dateWeekday
+    func isSameDay(as date: Date? = Date()) -> Bool {
+        return self.dnsDay() == date?.dnsDay()
     }
-    func isSameMonth(as date: Date? = nil) -> Bool {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-
-        let selfMonth = calendar.component(Calendar.Component.month, from: self)
-        let dateMonth = calendar.component(Calendar.Component.month, from: date ?? Date())
-
-        return selfMonth == dateMonth
+    func isSameWeekday(as date: Date? = Date()) -> Bool {
+        return self.dnsWeekday() == date?.dnsWeekday()
     }
-    func isSameYear(as date: Date? = nil) -> Bool {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-
-        let selfYear = calendar.component(Calendar.Component.year, from: self)
-        let dateYear = calendar.component(Calendar.Component.year, from: date ?? Date())
-
-        return selfYear == dateYear
+    func isSameMonth(as date: Date? = Date()) -> Bool {
+        return self.dnsMonth() == date?.dnsMonth()
     }
-    func isSameDate(as date: Date? = nil) -> Bool {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-
-        let selfDay = calendar.component(Calendar.Component.day, from: self)
-        let dateDay = calendar.component(Calendar.Component.day, from: date ?? Date())
-        let selfMonth = calendar.component(Calendar.Component.month, from: self)
-        let dateMonth = calendar.component(Calendar.Component.month, from: date ?? Date())
-        let selfYear = calendar.component(Calendar.Component.year, from: self)
-        let dateYear = calendar.component(Calendar.Component.year, from: date ?? Date())
-
-        return (selfDay == dateDay) &&
-                (selfMonth == dateMonth) &&
-                (selfYear == dateYear)
+    func isSameYear(as date: Date? = Date()) -> Bool {
+        return self.dnsYear() == date?.dnsYear()
+    }
+    func isSameDate(as date: Date? = Date()) -> Bool {
+        return self.isSameDay(as: date) &&
+            self.isSameMonth(as: date) &&
+            self.isSameYear(as: date)
     }
     var isToday: Bool {
         return isSameDate()
