@@ -22,12 +22,12 @@ public class DNSTimeOfDay: Hashable {
         value = timeValue
     }
 
-    public func timeAsString() -> String {
+    public func timeAsString(forceMinutes: Bool = false) -> String {
         let hour = self.hour % 12
         let amPm = (self.hour % 24) < 12 ? "a" : "p"
 
         var minStr = ""
-        if self.minutes > 0 {
+        if forceMinutes || (self.minutes > 0) {
             minStr = String(format: ":%02d", self.minutes)
         }
 
