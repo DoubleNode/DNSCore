@@ -9,13 +9,17 @@
 import Foundation
 
 public class DNSTimeOfDay: Hashable {
-    var value: Float = 0
+    public var value: Float = 0
 
     public var hour: Int {
         return Int(value)
     }
-    public var minutes: Int {
+    public var minute: Int {
         return Int((value - Float(Int(value))) * 60)
+    }
+    
+    public var totalSeconds: Int {
+        return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
     }
 
     public required init(timeValue: Float) {
@@ -27,8 +31,8 @@ public class DNSTimeOfDay: Hashable {
         let amPm = (self.hour % 24) < 12 ? "a" : "p"
 
         var minStr = ""
-        if forceMinutes || (self.minutes > 0) {
-            minStr = String(format: ":%02d", self.minutes)
+        if forceMinutes || (self.minute > 0) {
+            minStr = String(format: ":%02d", self.minute)
         }
 
         return "\((hour != 0) ? hour : 12)\(minStr)\(amPm)"
