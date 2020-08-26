@@ -40,7 +40,7 @@ public class DNSTimeOfDay: Hashable {
 
     // MARK: - Comparable methods
 
-    static func <(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+    public static func <(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value < rhs.value
     }
 
