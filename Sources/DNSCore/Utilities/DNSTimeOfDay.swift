@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DNSTimeOfDay {
+public class DNSTimeOfDay: Hashable {
     var value: Float = 0
 
     public var hour: Int {
@@ -32,5 +32,15 @@ public class DNSTimeOfDay {
         }
 
         return "\((hour != 0) ? hour : 12)\(minStr)\(amPm)"
+    }
+
+    // MARK: - Hashable methods
+
+    public static func == (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+        return lhs.value == rhs.value
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(value)
     }
 }
