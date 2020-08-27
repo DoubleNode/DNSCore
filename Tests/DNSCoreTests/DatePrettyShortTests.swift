@@ -140,7 +140,7 @@ class DatePrettyShortTests: XCTestCase {
         let testIntervals: [TestInterval] = [
             TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: "1m ago - 2hrs"),
             TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "3+m ago - tmw"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "1wk ago - 5mins"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "1wk ago - 6mins"),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
