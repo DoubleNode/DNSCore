@@ -202,8 +202,8 @@ public extension Date {
     func utilityMinimizeAmPm(of string: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
-        let amSymbol = dateFormatter.amSymbol.replacingOccurrences(of: "a. m.", with: "a.m.")
-        let pmSymbol = dateFormatter.pmSymbol.replacingOccurrences(of: "p. m.", with: "p.m.")
+        let amSymbol = dateFormatter.amSymbol.replacingOccurrences(of: "a. m.", with: "a.m.")
+        let pmSymbol = dateFormatter.pmSymbol.replacingOccurrences(of: "p. m.", with: "p.m.")
         
         var retval = string
         retval = retval.replacingOccurrences(of: " \(amSymbol)", with: amSymbol)
