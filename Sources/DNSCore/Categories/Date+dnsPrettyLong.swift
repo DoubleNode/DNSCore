@@ -56,23 +56,23 @@ public extension Date {
         var retval = ""
 
         if delta < Seconds.deltaOneDay {
-            retval = NSLocalizedString("today", comment: "")
+            retval = C.Localizations.DatePretty.today
         } else if delta < Seconds.deltaTwoDays {
-            retval = NSLocalizedString("yesterday", comment: "")
+            retval = C.Localizations.DatePretty.yesterday
         } else if delta < Seconds.deltaOneWeek {
             let daysAgo = Int(floor(delta / Seconds.deltaOneDay))
-            retval = NSLocalizedString("\(daysAgo) days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
         } else if delta < Seconds.deltaTwoWeeks {
-            retval = NSLocalizedString("last week", comment: "")
+            retval = C.Localizations.DatePretty.lastWeek
         } else if delta < Seconds.deltaSixWeeks {
             let weeksAgo = Int(floor(delta / Seconds.deltaOneWeek))
-            retval = NSLocalizedString("\(weeksAgo) weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
         } else {
-            retval = NSLocalizedString("\(Formatters.dateLong.string(from: self))", comment: "")
+            retval = Formatters.dateLong.string(from: self)
         }
         guard end != nil else { return retval }
 
-        retval += " to " + end!.utilityDateLongPretty(delta: endDelta!)
+        retval += " \(C.Localizations.DatePretty.to) " + end!.utilityDateLongPretty(delta: endDelta!)
         return retval
     }
 
@@ -109,33 +109,33 @@ public extension Date {
         var retval = ""
 
         if delta < Seconds.deltaOneMinute {
-            retval = NSLocalizedString("just now", comment: "")
+            retval = C.Localizations.DatePretty.justNow
         } else if delta < Seconds.deltaTwoMinutes {
-            retval = NSLocalizedString("one minute ago", comment: "")
+            retval = C.Localizations.DatePretty.oneMinuteAgo
         } else if delta < Seconds.deltaOneHour {
             let minutesAgo = Int(floor(delta / Seconds.deltaOneMinute))
-            retval = NSLocalizedString("\(minutesAgo) minutes ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutesAgo, "\(minutesAgo)")
         } else if delta < Seconds.deltaTwoHours {
-            retval = NSLocalizedString("one hour ago", comment: "")
+            retval = C.Localizations.DatePretty.oneHourAgo
         } else if delta < Seconds.deltaOneDay {
             let hoursAgo = Int(floor(delta / Seconds.deltaOneHour))
-            retval = NSLocalizedString("\(hoursAgo) hours ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hoursAgo, "\(hoursAgo)")
         } else if delta < Seconds.deltaTwoDays {
-            retval = NSLocalizedString("yesterday", comment: "")
+            retval = C.Localizations.DatePretty.yesterday
         } else if delta < Seconds.deltaOneWeek {
             let daysAgo = Int(floor(delta / Seconds.deltaOneDay))
-            retval = NSLocalizedString("\(daysAgo) days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
         } else if delta < Seconds.deltaTwoWeeks {
-            retval = NSLocalizedString("last week", comment: "")
+            retval = C.Localizations.DatePretty.lastWeek
         } else if delta < Seconds.deltaSixWeeks {
             let weeksAgo = Int(floor(delta / Seconds.deltaOneWeek))
-            retval = NSLocalizedString("\(weeksAgo) weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
         } else {
-            retval = NSLocalizedString("\(Formatters.dateLong.string(from: self))", comment: "")
+            retval = Formatters.dateLong.string(from: self)
         }
         guard end != nil else { return retval }
 
-        retval += " to " + end!.utilityTimeLongPretty(delta: endDelta!)
+        retval += " \(C.Localizations.DatePretty.to) " + end!.utilityTimeLongPretty(delta: endDelta!)
         return retval
     }
 }

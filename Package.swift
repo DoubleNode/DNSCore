@@ -11,6 +11,7 @@ import PackageDescription
 
 let package = Package(
     name: "DNSCore",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13),
         .tvOS(.v13),
@@ -35,7 +36,10 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "DNSCore",
-            dependencies: ["AtomicSwift", "DNSCoreThreading", "SFSymbol"]),
+            dependencies: ["AtomicSwift", "DNSCoreThreading", "SFSymbol"],
+            resources: [
+                .copy("Resources"),
+            ]),
         .testTarget(
             name: "DNSCoreTests",
             dependencies: ["DNSCore"]),

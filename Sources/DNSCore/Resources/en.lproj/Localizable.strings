@@ -1,0 +1,122 @@
+/* DNSCoreDatePrettyAt */
+"DNSCoreDatePrettyAt" = "at";
+
+/* DNSCoreDatePrettyDays */
+"DNSCoreDatePrettyDays" = "%s days";
+
+/* DNSCoreDatePrettyDaysShort */
+"DNSCoreDatePrettyDays" = "%sdays";
+
+/* DNSCoreDatePrettyDaysAgo */
+"DNSCoreDatePrettyDaysAgo" = "%s days ago";
+
+/* DNSCoreDatePrettyDaysAgoShort */
+"DNSCoreDatePrettyDaysAgoShort" = "%sdays ago";
+
+/* DNSCoreDatePrettyHour */
+"DNSCoreDatePrettyHour" = "%s hour";
+
+/* DNSCoreDatePrettyHourShort */
+"DNSCoreDatePrettyHourShort" = "%shr";
+
+/* DNSCoreDatePrettyHours */
+"DNSCoreDatePrettyHours" = "%s hours";
+
+/* DNSCoreDatePrettyHoursShort */
+"DNSCoreDatePrettyHoursShort" = "%shrs";
+
+/* DNSCoreDatePrettyHoursAgo */
+"DNSCoreDatePrettyHoursAgo" = "%s hours ago";
+
+/* DNSCoreDatePrettyHoursAgoShort */
+"DNSCoreDatePrettyHoursAgo" = "%shrs ago";
+
+/* DNSCoreDatePrettyJustNow */
+"DNSCoreDatePrettyJustNow" = "just now";
+
+/* DNSCoreDatePrettyLastWeek */
+"DNSCoreDatePrettyLastWeek" = "last week";
+
+/* DNSCoreDatePrettyMinute */
+"DNSCoreDatePrettyMinute" = "%s minute";
+
+/* DNSCoreDatePrettyMinuteShort */
+"DNSCoreDatePrettyMinuteShort" = "%sm";
+
+/* DNSCoreDatePrettyMinuteAgo */
+"DNSCoreDatePrettyMinuteAgo" = "%s minute ago";
+
+/* DNSCoreDatePrettyMinuteAgoShort */
+"DNSCoreDatePrettyMinuteAgoShort" = "%sm ago";
+
+/* DNSCoreDatePrettyMinutes */
+"DNSCoreDatePrettyMinutes" = "%s minutes";
+
+/* DNSCoreDatePrettyMinutesAbbrev */
+"DNSCoreDatePrettyMinutesAbbrev" = "%smins";
+
+/* DNSCoreDatePrettyMinutesShort */
+"DNSCoreDatePrettyMinutes" = "%sm";
+
+/* DNSCoreDatePrettyMinutesAgo */
+"DNSCoreDatePrettyMinutesAgo" = "%s minutes ago";
+
+/* DNSCoreDatePrettyMinutesAgoAbbrev */
+"DNSCoreDatePrettyMinutesAgoAbbrev" = "%smins ago";
+
+/* DNSCoreDatePrettyMinutesAgoShort */
+"DNSCoreDatePrettyMinutesAgo" = "%sm ago";
+
+/* DNSCoreDatePrettyNow */
+"DNSCoreDatePrettyNow" = "now";
+
+/* DNSCoreDatePrettyOneHourAgo */
+"DNSCoreDatePrettyOneHourAgo" = "one hour ago";
+
+/* DNSCoreDatePrettyOneMinuteAgo */
+"DNSCoreDatePrettyOneMinuteAgo" = "one minute ago";
+
+/* DNSCoreDatePrettyTo */
+"DNSCoreDatePrettyTo" = "to";
+
+/* DNSCoreDatePrettyToday */
+"DNSCoreDatePrettyToday" = "today";
+
+/* DNSCoreDatePrettyTodayShort */
+"DNSCoreDatePrettyTodayShort" = "tdy";
+
+/* DNSCoreDatePrettyTomorrow */
+"DNSCoreDatePrettyTomorrow" = "tomorrow";
+
+/* DNSCoreDatePrettyTomorrowShort */
+"DNSCoreDatePrettyTomorrowShort" = "tmw";
+
+/* DNSCoreDatePrettyWeek */
+"DNSCoreDatePrettyWeek" = "%s week";
+
+/* DNSCoreDatePrettyWeekShort */
+"DNSCoreDatePrettyWeekShort" = "%swk";
+
+/* DNSCoreDatePrettyWeekAgo */
+"DNSCoreDatePrettyWeekAgo" = "%s week ago";
+
+/* DNSCoreDatePrettyWeekAgoShort */
+"DNSCoreDatePrettyWeekAgoShort" = "%swk ago";
+
+/* DNSCoreDatePrettyWeeks */
+"DNSCoreDatePrettyWeeks" = "%s weeks";
+
+/* DNSCoreDatePrettyWeeksShort */
+"DNSCoreDatePrettyWeeksShort" = "%swks";
+
+/* DNSCoreDatePrettyWeeksAgo */
+"DNSCoreDatePrettyWeeksAgo" = "%s weeks ago";
+
+/* DNSCoreDatePrettyWeeksAgoShort */
+"DNSCoreDatePrettyWeeksAgoShort" = "%swks ago";
+
+/* DNSCoreDatePrettyYesterday */
+"DNSCoreDatePrettyYesterday" = "yesterday";
+
+/* DNSCoreDatePrettyYesterdayShort */
+"DNSCoreDatePrettyYesterdayShort" = "yda";

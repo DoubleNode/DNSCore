@@ -81,21 +81,21 @@ public extension Date {
 
         switch delta {
         case 0..<Seconds.deltaOneDay:
-            retval = NSLocalizedString("today", comment: "")
+            retval = C.Localizations.DatePretty.today
         case 0..<Seconds.deltaTwoDays:
-            retval = NSLocalizedString("tomorrow", comment: "")
+            retval = C.Localizations.DatePretty.tomorrow
         case 0..<Seconds.deltaThreeDays:
-            retval = NSLocalizedString("2 days", comment: "")
+            retval = String(format: C.Localizations.DatePretty.days, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = NSLocalizedString("3+ days", comment: "")
+            retval = String(format: C.Localizations.DatePretty.days, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = NSLocalizedString("1 week", comment: "")
+            retval = String(format: C.Localizations.DatePretty.week, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = NSLocalizedString("2 weeks", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeks, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = NSLocalizedString("3+ weeks", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeks, "3+")
         default:
-            retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
+            retval = Formatters.dateShort.string(from: self)
         }
 
         return retval
@@ -106,21 +106,21 @@ public extension Date {
 
         switch deltaPast {
         case 0..<Seconds.deltaOneDay:
-            retval = NSLocalizedString("today", comment: "")
+            retval = C.Localizations.DatePretty.today
         case 0..<Seconds.deltaTwoDays:
-            retval = NSLocalizedString("yesterday", comment: "")
+            retval = C.Localizations.DatePretty.yesterday
         case 0..<Seconds.deltaThreeDays:
-            retval = NSLocalizedString("2 days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = NSLocalizedString("3+ days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = NSLocalizedString("1 week ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weekAgo, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = NSLocalizedString("2 weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = NSLocalizedString("3+ weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "3+")
         default:
-            retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
+            retval = Formatters.dateShort.string(from: self)
         }
 
         return retval
@@ -180,38 +180,38 @@ public extension Date {
 
         switch delta {
         case 0..<Seconds.deltaOneMinute:
-            retval = NSLocalizedString("just now", comment: "")
+            retval = C.Localizations.DatePretty.justNow
         case 0..<Seconds.deltaTwoMinutes:
-            retval = NSLocalizedString("1 minute", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minute, "1")
         case 0..<Seconds.deltaThreeMinutes:
-            retval = NSLocalizedString("2 minutes", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutes, "2")
         case 0..<Seconds.deltaSixMinutes:
-            retval = NSLocalizedString("3+ minutes", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutes, "3+")
         case 0..<Seconds.deltaOneHour:
             let minutes = Int(floor(delta / Seconds.deltaOneMinute))
-            retval = NSLocalizedString("\(minutes) minutes", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutes, "\(minutes)")
         case 0..<Seconds.deltaTwoHours:
-            retval = NSLocalizedString("1 hour", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hour, "1")
         case 0..<Seconds.deltaThreeHours:
-            retval = NSLocalizedString("2 hours", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hours, "2")
         case 0..<Seconds.deltaSixHours:
-            retval = NSLocalizedString("3+ hours", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hours, "3+")
         case 0..<Seconds.deltaOneDay:
-            retval = NSLocalizedString("today", comment: "")
+            retval = C.Localizations.DatePretty.today
         case 0..<Seconds.deltaTwoDays:
-            retval = NSLocalizedString("tomorrow", comment: "")
+            retval = C.Localizations.DatePretty.tomorrow
         case 0..<Seconds.deltaThreeDays:
-            retval = NSLocalizedString("2 days", comment: "")
+            retval = String(format: C.Localizations.DatePretty.days, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = NSLocalizedString("3+ days", comment: "")
+            retval = String(format: C.Localizations.DatePretty.days, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = NSLocalizedString("1 week", comment: "")
+            retval = String(format: C.Localizations.DatePretty.week, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = NSLocalizedString("2 weeks", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeks, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = NSLocalizedString("3+ weeks", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeks, "3+")
         default:
-            retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
+            retval = Formatters.dateShort.string(from: self)
         }
 
         return retval
@@ -223,36 +223,36 @@ public extension Date {
 
         switch deltaPast {
         case 0..<Seconds.deltaOneMinute:
-            retval = NSLocalizedString("just now", comment: "")
+            retval = C.Localizations.DatePretty.justNow
         case 0..<Seconds.deltaTwoMinutes:
-            retval = NSLocalizedString("1 minute ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minuteAgo, "1")
         case 0..<Seconds.deltaThreeMinutes:
-            retval = NSLocalizedString("2 minutes ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutesAgo, "2")
         case 0..<Seconds.deltaSixMinutes:
-            retval = NSLocalizedString("3+ minutes ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutesAgo, "3+")
         case 0..<Seconds.deltaOneHour:
             let minutesAgo = Int(floor(deltaPast / Seconds.deltaOneMinute))
-            retval = NSLocalizedString("\(minutesAgo) minutes ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.minutesAgo, "\(minutesAgo)")
         case 0..<Seconds.deltaTwoHours:
-            retval = NSLocalizedString("1 hour ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hourAgo, "1")
         case 0..<Seconds.deltaThreeHours:
-            retval = NSLocalizedString("2 hours ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hoursAgo, "2")
         case 0..<Seconds.deltaSixHours:
-            retval = NSLocalizedString("3+ hours ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.hoursAgo, "3+")
         case 0..<Seconds.deltaOneDay:
-            retval = NSLocalizedString("today", comment: "")
+            retval = C.Localizations.DatePretty.today
         case 0..<Seconds.deltaTwoDays:
-            retval = NSLocalizedString("yesterday", comment: "")
+            retval = C.Localizations.DatePretty.yesterday
         case 0..<Seconds.deltaThreeDays:
-            retval = NSLocalizedString("2 days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = NSLocalizedString("3+ days ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.daysAgo, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = NSLocalizedString("1 week ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weekAgo, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = NSLocalizedString("2 weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = NSLocalizedString("3+ weeks ago", comment: "")
+            retval = String(format: C.Localizations.DatePretty.weeksAgo, "3+")
         default:
             retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
         }
