@@ -196,4 +196,18 @@ public extension Date {
     var isLast365Days: Bool {
         return self.timeIntervalSinceNow > -Seconds.delta365Days
     }
+    
+    // MARK: - Utility methods
+    
+    func utilityMinimizeAmPm(of string: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        let amSymbol = dateFormatter.amSymbol.replacingOccurrences(of: "a. m.", with: "a.m.")
+        let pmSymbol = dateFormatter.pmSymbol.replacingOccurrences(of: "p. m.", with: "p.m.")
+        
+        var retval = string
+        retval = retval.replacingOccurrences(of: " \(amSymbol)", with: amSymbol)
+        retval = retval.replacingOccurrences(of: " \(pmSymbol)", with: pmSymbol)
+        return retval
+    }
 }

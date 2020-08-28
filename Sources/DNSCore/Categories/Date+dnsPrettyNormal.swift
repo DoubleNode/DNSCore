@@ -131,11 +131,7 @@ public extension Date {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: dateStyle,
                                                    timeStyle: DateFormatter.Style.medium)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
+        retval = utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeNormalSimple(delta: endDelta!)
@@ -144,15 +140,14 @@ public extension Date {
     private func utilityTimeNormalSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end) ? "" : "MMM d\(yearFormatSubString) @ "
-        let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a"
+        let timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
                                                             options: 0,
                                                             locale: Locale.current)
         var retval = dateFormatter.string(from: self)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
+        retval = utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeNormalSmart(delta: endDelta!)

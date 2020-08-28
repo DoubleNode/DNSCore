@@ -129,11 +129,7 @@ public extension Date {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: dateStyle,
                                                    timeStyle: DateFormatter.Style.short)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
+        retval = utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeShortSimple(delta: endDelta!)
@@ -150,8 +146,7 @@ public extension Date {
                                                             options: 0,
                                                             locale: Locale.current)
         var retval = dateFormatter.string(from: self)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
-        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
+        retval = utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeShortSmart(delta: endDelta!)
