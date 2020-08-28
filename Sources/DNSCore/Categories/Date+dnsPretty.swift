@@ -206,8 +206,8 @@ public extension Date {
         let pmSymbol = dateFormatter.pmSymbol.replacingOccurrences(of: "p. m.", with: "p.m.")
         
         var retval = string
-        retval = retval.replacingOccurrences(of: " \(amSymbol)", with: amSymbol)
-        retval = retval.replacingOccurrences(of: " \(pmSymbol)", with: pmSymbol)
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: amSymbol)
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: pmSymbol)
         return retval
     }
 }
