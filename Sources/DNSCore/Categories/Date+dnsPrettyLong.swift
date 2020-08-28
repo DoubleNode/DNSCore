@@ -81,26 +81,28 @@ public extension Date {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: dateStyle,
                                                    timeStyle: DateFormatter.Style.long)
-        //retval = retval.replacingOccurrences(of: " PM", with: "pm")
-        //retval = retval.replacingOccurrences(of: " AM", with: "am")
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeLongSimple(delta: endDelta!)
         return retval
     }
     private func utilityTimeLongSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
-        let dateFormatter = DateFormatter()
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end) ? "" : "MMMM d\(yearFormatSubString) @ "
         let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
+
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
                                                             options: 0,
                                                             locale: Locale.current)
         var retval = dateFormatter.string(from: self)
-        let am = dateFormatter.amSymbol
-        let pm = dateFormatter.pmSymbol
-        //retval = retval.replacingOccurrences(of: " PM", with: "pm")
-        //retval = retval.replacingOccurrences(of: " AM", with: "am")
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: dateFormatter.pmSymbol)
+        retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: dateFormatter.amSymbol)
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeLongSmart(delta: endDelta!)
