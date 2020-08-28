@@ -2,34 +2,34 @@
 "DNSCoreDatePrettyAt" = "at";
 
 /* DNSCoreDatePrettyDays */
-"DNSCoreDatePrettyDays" = "%s days";
+"DNSCoreDatePrettyDays" = "%@ days";
 
 /* DNSCoreDatePrettyDaysShort */
-"DNSCoreDatePrettyDays" = "%sdays";
+"DNSCoreDatePrettyDays" = "%@days";
 
 /* DNSCoreDatePrettyDaysAgo */
-"DNSCoreDatePrettyDaysAgo" = "%s days ago";
+"DNSCoreDatePrettyDaysAgo" = "%@ days ago";
 
 /* DNSCoreDatePrettyDaysAgoShort */
-"DNSCoreDatePrettyDaysAgoShort" = "%sdays ago";
+"DNSCoreDatePrettyDaysAgoShort" = "%@days ago";
 
 /* DNSCoreDatePrettyHour */
-"DNSCoreDatePrettyHour" = "%s hour";
+"DNSCoreDatePrettyHour" = "%@ hour";
 
 /* DNSCoreDatePrettyHourShort */
-"DNSCoreDatePrettyHourShort" = "%shr";
+"DNSCoreDatePrettyHourShort" = "%@hr";
 
 /* DNSCoreDatePrettyHours */
-"DNSCoreDatePrettyHours" = "%s hours";
+"DNSCoreDatePrettyHours" = "%@ hours";
 
 /* DNSCoreDatePrettyHoursShort */
-"DNSCoreDatePrettyHoursShort" = "%shrs";
+"DNSCoreDatePrettyHoursShort" = "%@hrs";
 
 /* DNSCoreDatePrettyHoursAgo */
-"DNSCoreDatePrettyHoursAgo" = "%s hours ago";
+"DNSCoreDatePrettyHoursAgo" = "%@ hours ago";
 
 /* DNSCoreDatePrettyHoursAgoShort */
-"DNSCoreDatePrettyHoursAgo" = "%shrs ago";
+"DNSCoreDatePrettyHoursAgo" = "%@hrs ago";
 
 /* DNSCoreDatePrettyJustNow */
 "DNSCoreDatePrettyJustNow" = "just now";
@@ -38,34 +38,34 @@
 "DNSCoreDatePrettyLastWeek" = "last week";
 
 /* DNSCoreDatePrettyMinute */
-"DNSCoreDatePrettyMinute" = "%s minute";
+"DNSCoreDatePrettyMinute" = "%@ minute";
 
 /* DNSCoreDatePrettyMinuteShort */
-"DNSCoreDatePrettyMinuteShort" = "%sm";
+"DNSCoreDatePrettyMinuteShort" = "%@m";
 
 /* DNSCoreDatePrettyMinuteAgo */
-"DNSCoreDatePrettyMinuteAgo" = "%s minute ago";
+"DNSCoreDatePrettyMinuteAgo" = "%@ minute ago";
 
 /* DNSCoreDatePrettyMinuteAgoShort */
-"DNSCoreDatePrettyMinuteAgoShort" = "%sm ago";
+"DNSCoreDatePrettyMinuteAgoShort" = "%@m ago";
 
 /* DNSCoreDatePrettyMinutes */
-"DNSCoreDatePrettyMinutes" = "%s minutes";
+"DNSCoreDatePrettyMinutes" = "%@ minutes";
 
 /* DNSCoreDatePrettyMinutesAbbrev */
-"DNSCoreDatePrettyMinutesAbbrev" = "%smins";
+"DNSCoreDatePrettyMinutesAbbrev" = "%@mins";
 
 /* DNSCoreDatePrettyMinutesShort */
-"DNSCoreDatePrettyMinutes" = "%sm";
+"DNSCoreDatePrettyMinutes" = "%@m";
 
 /* DNSCoreDatePrettyMinutesAgo */
-"DNSCoreDatePrettyMinutesAgo" = "%s minutes ago";
+"DNSCoreDatePrettyMinutesAgo" = "%@ minutes ago";
 
 /* DNSCoreDatePrettyMinutesAgoAbbrev */
-"DNSCoreDatePrettyMinutesAgoAbbrev" = "%smins ago";
+"DNSCoreDatePrettyMinutesAgoAbbrev" = "%@mins ago";
 
 /* DNSCoreDatePrettyMinutesAgoShort */
-"DNSCoreDatePrettyMinutesAgo" = "%sm ago";
+"DNSCoreDatePrettyMinutesAgo" = "%@m ago";
 
 /* DNSCoreDatePrettyNow */
 "DNSCoreDatePrettyNow" = "now";
@@ -92,28 +92,28 @@
 "DNSCoreDatePrettyTomorrowShort" = "tmw";
 
 /* DNSCoreDatePrettyWeek */
-"DNSCoreDatePrettyWeek" = "%s week";
+"DNSCoreDatePrettyWeek" = "%@ week";
 
 /* DNSCoreDatePrettyWeekShort */
-"DNSCoreDatePrettyWeekShort" = "%swk";
+"DNSCoreDatePrettyWeekShort" = "%@wk";
 
 /* DNSCoreDatePrettyWeekAgo */
-"DNSCoreDatePrettyWeekAgo" = "%s week ago";
+"DNSCoreDatePrettyWeekAgo" = "%@ week ago";
 
 /* DNSCoreDatePrettyWeekAgoShort */
-"DNSCoreDatePrettyWeekAgoShort" = "%swk ago";
+"DNSCoreDatePrettyWeekAgoShort" = "%@wk ago";
 
 /* DNSCoreDatePrettyWeeks */
-"DNSCoreDatePrettyWeeks" = "%s weeks";
+"DNSCoreDatePrettyWeeks" = "%@ weeks";
 
 /* DNSCoreDatePrettyWeeksShort */
-"DNSCoreDatePrettyWeeksShort" = "%swks";
+"DNSCoreDatePrettyWeeksShort" = "%@wks";
 
 /* DNSCoreDatePrettyWeeksAgo */
-"DNSCoreDatePrettyWeeksAgo" = "%s weeks ago";
+"DNSCoreDatePrettyWeeksAgo" = "%@ weeks ago";
 
 /* DNSCoreDatePrettyWeeksAgoShort */
-"DNSCoreDatePrettyWeeksAgoShort" = "%swks ago";
+"DNSCoreDatePrettyWeeksAgoShort" = "%@wks ago";
 
 /* DNSCoreDatePrettyYesterday */
 "DNSCoreDatePrettyYesterday" = "yesterday";

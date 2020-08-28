@@ -81,8 +81,8 @@ public extension Date {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: dateStyle,
                                                    timeStyle: DateFormatter.Style.long)
-        retval = retval.replacingOccurrences(of: " PM", with: "pm")
-        retval = retval.replacingOccurrences(of: " AM", with: "am")
+        //retval = retval.replacingOccurrences(of: " PM", with: "pm")
+        //retval = retval.replacingOccurrences(of: " AM", with: "am")
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeLongSimple(delta: endDelta!)
@@ -92,14 +92,15 @@ public extension Date {
         let dateFormatter = DateFormatter()
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end) ? "" : "MMMM d\(yearFormatSubString) @ "
-        let timeFormatString = "\(dayFormatString)h:mm:ssa zzz"
+        let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
                                                             options: 0,
                                                             locale: Locale.current)
         var retval = dateFormatter.string(from: self)
-        retval = retval.replacingOccurrences(of: ":00", with: "")
-        retval = retval.replacingOccurrences(of: " PM", with: "pm")
-        retval = retval.replacingOccurrences(of: " AM", with: "am")
+        let am = dateFormatter.amSymbol
+        let pm = dateFormatter.pmSymbol
+        //retval = retval.replacingOccurrences(of: " PM", with: "pm")
+        //retval = retval.replacingOccurrences(of: " AM", with: "am")
         guard end != nil else { return retval }
 
         retval += " - " + end!.utilityTimeLongSmart(delta: endDelta!)
