@@ -199,7 +199,7 @@ public extension Date {
     
     // MARK: - Utility methods
     
-    func utilityMinimizeAmPm(of string: String) -> String {
+    static func utilityMinimizeAmPm(of string: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         let amSymbol = dateFormatter.amSymbol.replacingOccurrences(of: "a. m.", with: "a.m.")

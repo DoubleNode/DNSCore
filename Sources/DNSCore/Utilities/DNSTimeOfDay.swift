@@ -28,15 +28,25 @@ public class DNSTimeOfDay: Hashable {
 
     public func timeAsString(forceMinutes: Bool = false,
                              longAmPm: Bool = false) -> String {
-        let hour = self.hour % 12
-        let amPm = (self.hour % 24) < 12 ? (longAmPm ? " AM" : "a") : (longAmPm ? " PM" : "p")
-
-        var minStr = ""
-        if forceMinutes || (self.minute > 0) {
-            minStr = String(format: ":%02d", self.minute)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "h:mm",
+                                                            options: 0,
+                                                            locale: Locale.current)
+        let date = dateFormatter.date(from: "\(self.hour):\(String(format: "%02d", self.minute))")
+        guard date != nil else {
+            return ""
         }
 
-        return "\((hour != 0) ? hour : 12)\(minStr)\(amPm)"
+        var timeFormatString = "ha"
+        if forceMinutes || (self.minute > 0) {
+            timeFormatString = "h:mma"
+        }
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
+                                                            options: 0,
+                                                            locale: Locale.current)
+        var retval = dateFormatter.string(from: date!)
+        retval = Date.utilityMinimizeAmPm(of: retval)
+        return retval
     }
 
     // MARK: - Comparable methods
