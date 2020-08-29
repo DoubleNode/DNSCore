@@ -29,7 +29,7 @@ public class DNSTimeOfDay: Hashable {
     public func timeAsString(forceMinutes: Bool = false,
                              longAmPm: Bool = false) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "h:mm",
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm",
                                                             options: 0,
                                                             locale: Locale.current)
         let date = dateFormatter.date(from: "\(self.hour):\(String(format: "%02d", self.minute))")
