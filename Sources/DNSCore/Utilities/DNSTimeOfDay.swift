@@ -26,8 +26,7 @@ public class DNSTimeOfDay: Hashable {
         value = timeValue
     }
 
-    public func timeAsString(forceMinutes: Bool = false,
-                             longAmPm: Bool = false) -> String {
+    public func timeAsString(forceMinutes: Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm",
                                                             options: 0,

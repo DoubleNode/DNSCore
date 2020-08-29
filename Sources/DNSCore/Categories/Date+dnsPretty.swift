@@ -208,6 +208,6 @@ public extension Date {
         var retval = string
         retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: amSymbol)
         retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: pmSymbol)
-        return retval
+        return retval.lowercased()
     }
 }
