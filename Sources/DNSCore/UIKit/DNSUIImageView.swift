@@ -95,6 +95,7 @@ import UIKit
         }
         set {
             self.layer.shadowOpacity = newValue
+            self.containerView.layer.shadowOpacity = newValue
         }
     }
     
@@ -104,6 +105,7 @@ import UIKit
         }
         set {
             self.layer.shadowRadius = newValue
+            self.containerView.layer.shadowRadius = newValue
         }
     }
     
@@ -113,6 +115,7 @@ import UIKit
         }
         set {
             self.layer.shadowOffset = newValue
+            self.containerView.layer.shadowOffset = newValue
         }
     }
     
@@ -122,6 +125,7 @@ import UIKit
         }
         set {
             self.layer.shadowColor = newValue.cgColor
+            self.containerView.layer.shadowColor = newValue.cgColor
         }
     }
     
