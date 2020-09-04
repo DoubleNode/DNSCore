@@ -98,7 +98,7 @@ import UIKit
             self.containerView.layer.shadowOpacity = newValue
         }
     }
-    
+
     @IBInspectable open var shadowRadius: CGFloat {
         get {
             return self.layer.shadowRadius
@@ -108,7 +108,7 @@ import UIKit
             self.containerView.layer.shadowRadius = newValue
         }
     }
-    
+
     @IBInspectable open var shadowOffset: CGSize {
         get {
             return self.layer.shadowOffset
@@ -118,7 +118,7 @@ import UIKit
             self.containerView.layer.shadowOffset = newValue
         }
     }
-    
+
     @IBInspectable open var shadowColor: UIColor {
         get {
             return UIColor(cgColor: self.layer.shadowColor!)
@@ -128,7 +128,7 @@ import UIKit
             self.containerView.layer.shadowColor = newValue.cgColor
         }
     }
-    
+
     //    @IBInspectable var shadowColorFromImage: Bool = false {
     //        didSet {
     //            addShadowColorFromBackgroundImage()
