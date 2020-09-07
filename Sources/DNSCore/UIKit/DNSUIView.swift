@@ -41,6 +41,13 @@ import UIKit
         }
     }
 
+    override open var clipsToBounds: Bool {
+        didSet(new) {
+            containerView.clipsToBounds = new
+            containerImageView.clipsToBounds = new
+        }
+    }
+
     @IBInspectable open var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
