@@ -9,6 +9,22 @@
 import Foundation
 
 public class DNSTimeOfDay: Hashable {
+    public enum Period {
+        case morning
+        case afternoon
+        case evening
+    }
+    public var period: Period {
+        switch hour {
+        case ..<11:
+            return .morning
+        case 12..<17:
+            return .afternoon
+        default:
+            return .evening
+        }
+    }
+
     public var value: Float = 0
 
     public var hour: Int {
