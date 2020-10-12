@@ -16,7 +16,7 @@ public class DNSTimeOfDay: Hashable {
     }
     public var period: Period {
         switch hour {
-        case ..<11:
+        case ..<12:
             return .morning
         case 12..<17:
             return .afternoon
