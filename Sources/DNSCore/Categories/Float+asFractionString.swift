@@ -10,6 +10,7 @@ import Foundation
 
 public extension Float {
     func asFractionString() -> String {
+        var wholeStr = "\(Int(self))"
         var fractionStr = ""
         let fractionValue = self - Float(Int(self))
         switch fractionValue {
@@ -22,6 +23,9 @@ public extension Float {
         default:
             break
         }
-        return "\(Int(self))\(fractionStr)"
+        if !fractionStr.isEmpty && wholeStr == "0" {
+            wholeStr = ""
+        }
+        return wholeStr + fractionStr
     }
 }
