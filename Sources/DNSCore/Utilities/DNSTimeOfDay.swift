@@ -42,6 +42,9 @@ public class DNSTimeOfDay: Hashable {
         value = timeValue
     }
 
+    public func asMilitary() -> String {
+        return String(format: "%02d%02d", self.hour % 24, self.minute)
+    }
     public func timeAsString(forceMinutes: Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm",
