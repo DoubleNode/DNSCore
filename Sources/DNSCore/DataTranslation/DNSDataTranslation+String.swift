@@ -26,6 +26,10 @@ public extension DNSDataTranslation {
             return self.string(from: any as? UIColor)
         } else if any as? URL != nil {
             return self.string(from: any as? URL)
+        } else if any as? [Any] != nil {
+            return self.string(from: any as? [Any])
+        } else if any as? [String: Any] != nil {
+            return self.string(from: any as? [String: Any])
         } else if any as? NSNumber != nil {
             return self.string(from: any as? NSNumber)
         } else if any as? Decimal != nil {
