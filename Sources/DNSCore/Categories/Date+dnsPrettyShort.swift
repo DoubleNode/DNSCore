@@ -20,6 +20,8 @@ public extension Date {
             return utilityDateShortSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityDateShortPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return utilityDateShortMilitary(delta: delta, to: end, endDelta: endDelta)
         }
     }
     func utilityTimeShort(delta: TimeInterval,
@@ -33,6 +35,8 @@ public extension Date {
             return utilityTimeShortSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityTimeShortPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return utilityTimeShortMilitary(delta: delta, to: end, endDelta: endDelta)
         }
     }
 
@@ -121,6 +125,17 @@ public extension Date {
             retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
         }
 
+        return retval
+    }
+    private func utilityDateShortMilitary(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "YYYYMMdd",
+                                                            options: 0,
+                                                            locale: Locale.current)
+        var retval = dateFormatter.string(from: self)
+        guard end != nil else { return retval }
+        
+        retval += " - " + end!.utilityDateShortMilitary(delta: endDelta!)
         return retval
     }
 
@@ -252,6 +267,17 @@ public extension Date {
             retval = Formatters.dateShort.string(from: self)
         }
 
+        return retval
+    }
+    private func utilityTimeShortMilitary(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HHmm",
+                                                            options: 0,
+                                                            locale: Locale.current)
+        var retval = dateFormatter.string(from: self)
+        guard end != nil else { return retval }
+        
+        retval += " - " + end!.utilityTimeShortMilitary(delta: endDelta!)
         return retval
     }
 }

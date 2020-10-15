@@ -17,6 +17,8 @@ public extension Date {
             return utilityDateLongSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityDateLongPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
     func utilityTimeLong(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil, style: Format.Style) -> String {
@@ -27,6 +29,8 @@ public extension Date {
             return utilityTimeLongSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityTimeLongPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
 

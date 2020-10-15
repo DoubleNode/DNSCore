@@ -20,6 +20,8 @@ public extension Date {
             return utilityDateNormalSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityDateNormalPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
     func utilityTimeNormal(delta: TimeInterval,
@@ -33,6 +35,8 @@ public extension Date {
             return utilityTimeNormalSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityTimeNormalPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
 

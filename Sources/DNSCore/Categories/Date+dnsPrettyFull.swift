@@ -17,6 +17,8 @@ public extension Date {
             return utilityDateFullSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityDateFullPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
 
@@ -28,6 +30,8 @@ public extension Date {
             return utilityTimeFullSmart(delta: delta, to: end, endDelta: endDelta)
         case .pretty:
             return utilityTimeFullPretty(delta: delta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
         }
     }
 
