@@ -57,7 +57,8 @@ public extension DNSDataTranslation {
         guard array != nil else { return nil }
 
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: array!)
+            let jsonData = try JSONSerialization.data(withJSONObject: array!,
+                                                      options: .withoutEscapingSlashes)
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
             return ""
@@ -67,7 +68,8 @@ public extension DNSDataTranslation {
         guard dictionary != nil else { return nil }
 
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictionary!)
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary!,
+                                                      options: .withoutEscapingSlashes)
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
             return ""
