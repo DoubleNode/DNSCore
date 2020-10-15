@@ -25,6 +25,8 @@ public extension DNSDataTranslation {
             return self.timeOfDay(from: any as? Date)
         } else if any as? UIColor != nil {
             return self.timeOfDay(from: any as? UIColor)
+        } else if any as? DNSTimeOfDay != nil {
+            return self.timeOfDay(from: any as? DNSTimeOfDay)
         } else if any as? URL != nil {
             return self.timeOfDay(from: any as? URL)
         } else if any as? NSNumber != nil {
