@@ -129,7 +129,7 @@ public extension Date {
     }
     private func utilityDateShortMilitary(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "YYYYMMdd",
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMdd",
                                                             options: 0,
                                                             locale: Locale.current)
         var retval = dateFormatter.string(from: self)
