@@ -36,6 +36,8 @@ public extension DNSDataTranslation {
             return self.uint(from: any as? Decimal)
         } else if any as? Double != nil {
             return self.uint(from: any as? Double)
+        } else if any as? Float != nil {
+            return self.uint(from: any as? Float)
         } else if any as? Bool != nil {
             return self.uint(from: any as? Bool)
         }

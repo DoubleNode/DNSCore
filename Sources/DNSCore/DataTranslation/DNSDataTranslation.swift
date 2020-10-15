@@ -110,6 +110,7 @@ open class DNSDataTranslation: NSObject {
     var numberEntryCount = 0
     var stringEntryCount = 0
     var timeEntryCount = 0
+    var timeOfDayEntryCount = 0
     var uintEntryCount = 0
     var urlEntryCount = 0
 
