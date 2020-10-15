@@ -104,6 +104,7 @@ open class DNSDataTranslation: NSObject {
     var decimalEntryCount = 0
     var doubleEntryCount = 0
     var firebaseKeyEntryCount = 0
+    var floatEntryCount = 0
     var idEntryCount = 0
     var intEntryCount = 0
     var numberEntryCount = 0
