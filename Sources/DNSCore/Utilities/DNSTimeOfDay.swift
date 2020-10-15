@@ -47,9 +47,7 @@ public class DNSTimeOfDay: Hashable {
     }
     public func timeAsString(forceMinutes: Bool = false) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm",
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = "HH:mm"
         let date = dateFormatter.date(from: "\(String(format: "%02d", self.hour % 24)):\(String(format: "%02d", self.minute))")
         guard date != nil else {
             return ""
@@ -59,9 +57,7 @@ public class DNSTimeOfDay: Hashable {
         if forceMinutes || (self.minute > 0) {
             timeFormatString = "h:mma"
         }
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: date!)
         retval = Date.utilityMinimizeAmPm(of: retval)
         return retval

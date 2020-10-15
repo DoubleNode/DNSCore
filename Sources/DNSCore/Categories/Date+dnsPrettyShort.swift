@@ -53,9 +53,7 @@ public extension Date {
         let dateFormatter = DateFormatter()
         let yearFormatSubString = self.isSameYear(as: end) ? "" : "/yy"
         let dateFormatString = "M/d\(yearFormatSubString)"
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: dateFormatString,
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
@@ -129,9 +127,7 @@ public extension Date {
     }
     private func utilityDateShortMilitary(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMdd",
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = "yyyyMMdd"
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
         
@@ -157,9 +153,7 @@ public extension Date {
         let timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
@@ -271,9 +265,7 @@ public extension Date {
     }
     private func utilityTimeShortMilitary(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HHmm",
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = "HHmm"
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
         

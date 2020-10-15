@@ -47,9 +47,7 @@ public extension Date {
         let dateFormatter = DateFormatter()
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dateFormatString = "MMMM d\(yearFormatSubString)"
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: dateFormatString,
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
@@ -97,9 +95,7 @@ public extension Date {
         let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: timeFormatString,
-                                                            options: 0,
-                                                            locale: Locale.current)
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
