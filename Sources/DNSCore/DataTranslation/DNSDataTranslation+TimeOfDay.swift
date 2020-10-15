@@ -11,7 +11,7 @@ import UIKit
 public extension DNSDataTranslation {
     // MARK: - timeOfDay...
     // swiftlint:disable:next cyclomatic_complexity
-    func timeOfDay(from any: Any?) -> Date? {
+    func timeOfDay(from any: Any?) -> DNSTimeOfDay? {
         guard timeOfDayEntryCount == 0 else {
             assertionFailure("DNSDataTranslation.timeOfDay(from any) reentered!")
             return nil
