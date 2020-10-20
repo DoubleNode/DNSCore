@@ -58,7 +58,7 @@ public extension DNSDataTranslation {
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: array!,
-                                                      options: .withoutEscapingSlashes)
+                                                      options: [.withoutEscapingSlashes])
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
             return ""
@@ -69,7 +69,7 @@ public extension DNSDataTranslation {
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: dictionary!,
-                                                      options: .withoutEscapingSlashes)
+                                                      options: [.withoutEscapingSlashes])
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
             return ""

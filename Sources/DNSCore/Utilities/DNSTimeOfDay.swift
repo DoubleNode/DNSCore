@@ -42,6 +42,19 @@ public class DNSTimeOfDay: Hashable {
         value = timeValue
     }
 
+    public func timeOnDate(date: Date) -> Date {
+        var components = DateComponents()
+        components.year = date.dnsYear()
+        components.month = date.dnsMonth()
+        components.day = date.dnsDay()
+        components.hour = self.hour
+        components.minute = self.minute
+
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let retDate = calendar.date(from: components)
+        return retDate ?? date
+    }
+
     public func asMilitary() -> String {
         return String(format: "%02d%02d", self.hour % 24, self.minute)
     }
