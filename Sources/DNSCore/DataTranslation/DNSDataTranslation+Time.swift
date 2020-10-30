@@ -59,10 +59,13 @@ public extension DNSDataTranslation {
         }
 
         for formatter in [ DNSDataTranslation.firebaseTimeFormatterMilliseconds,
+                           DNSDataTranslation.firebaseTimeFormatterMilliseconds2,
                            DNSDataTranslation.firebaseTimeFormatter,
                            DNSDataTranslation.defaultDateFormatter1,
                            DNSDataTranslation.defaultDateFormatter2,
                            DNSDataTranslation.localTimeFormatterWithoutTimezone,
+                           DNSDataTranslation.localTimeFormatterMillisecondsWithoutTimezone,
+                           DNSDataTranslation.localTimeFormatterMilliseconds2WithoutTimezone,
                            ] {
             let retval = self.date(from: string, formatter)
             guard retval == nil else {  return retval   }
