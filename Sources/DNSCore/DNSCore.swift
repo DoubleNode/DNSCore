@@ -58,6 +58,10 @@ public class DNSCore {
     public class var appBuildString: String {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
+    public class func shortenErrorFilename(filename: String) -> String {
+        return DNSCore.appDelegate.shortenErrorFilename(filename: filename)
+    }
+
 
     // MARK: - NSUserDefaults Settings methods
 
