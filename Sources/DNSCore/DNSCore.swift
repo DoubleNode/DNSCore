@@ -24,6 +24,8 @@ public protocol DNSCoreApplicationProtocol {
     func networkActivity(display:Bool)
     func rootViewController() -> UIViewController
 
+    func shortenErrorFilename(filename: String) -> String
+
     // MARK: - CoreData methods
 
     func disableUrlCache()
