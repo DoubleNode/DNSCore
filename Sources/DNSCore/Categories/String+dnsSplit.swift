@@ -13,7 +13,7 @@ public extension String {
         guard length > 0 && length < count else {
             return [suffix(from:startIndex)]
         }
-        
+
         return (0 ... (count - 1) / length)
             .map { dropFirst($0 * length).prefix(length) }
     }
@@ -21,7 +21,7 @@ public extension String {
         guard length > 0 && length < count else {
             return [suffix(from:startIndex)]
         }
-        
+
         return (0 ... (count - 1) / length)
             .map { dropLast($0 * length).suffix(length) }
             .reversed()
