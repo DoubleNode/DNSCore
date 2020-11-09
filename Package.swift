@@ -39,11 +39,11 @@ let package = Package(
             dependencies: ["AtomicSwift", "DNSCoreThreading", "SFSymbol"],
             resources: [
                 .process("Resources"),
-//                .copy("Resources"),
             ]),
         .testTarget(
             name: "DNSCoreTests",
-            dependencies: ["DNSCore"]),
+            dependencies: ["DNSCore"]
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )
