@@ -50,9 +50,12 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: C.Localizations.DatePretty.todayShort),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: C.Localizations.DatePretty.todayShort),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: C.Localizations.DatePretty.weekAgoShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute,
+                         result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes,
+                         result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek,
+                         result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)")),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -77,9 +80,12 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: C.Localizations.DatePretty.minuteAgoShort),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: C.Localizations.DatePretty.minutesAgoShort),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: C.Localizations.DatePretty.weekAgoShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute,
+                         result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)")),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes,
+                         result: C.Localizations.DatePretty.minutesAgoShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek,
+                         result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)")),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -107,9 +113,12 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: C.Localizations.DatePretty.todayShort),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "\(C.Localizations.DatePretty.todayShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "\(C.Localizations.DatePretty.weekAgoShort) - \(C.Localizations.DatePretty.todayShort)"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours,
+                         result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay,
+                         result: "\(C.Localizations.DatePretty.todayShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes,
+                         result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)") + " - \(C.Localizations.DatePretty.todayShort)"),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -138,9 +147,15 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: "\(C.Localizations.DatePretty.minuteAgoShort) - \(C.Localizations.DatePretty.hoursShort)"),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "\(C.Localizations.DatePretty.minutesAgoShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "\(C.Localizations.DatePretty.weekAgoShort) - \(C.Localizations.DatePretty.minutesAbbrev)"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours,
+                         result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)") + " - " +
+                            String(format: C.Localizations.DatePretty.hoursShort, "\(2)")),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay,
+                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)") + " - " +
+                            C.Localizations.DatePretty.tomorrowShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes,
+                         result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)") + " - " +
+                            String(format: C.Localizations.DatePretty.minutesAbbrev, "\(6)")),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
