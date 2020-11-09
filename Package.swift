@@ -23,7 +23,7 @@ let package = Package(
         .library(
             name: "DNSCore",
             type: .static,
-            targets: ["DNSCore"]),
+            targets: ["DNSCore", "DNSCoreTests"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
