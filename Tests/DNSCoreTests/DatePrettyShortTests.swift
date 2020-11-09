@@ -50,9 +50,9 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: "tdy"),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: "tdy"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: "1wk ago"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: C.Localizations.DatePretty.weekAgoShort),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -64,12 +64,12 @@ class DatePrettyShortTests: XCTestCase {
     func test_dnTime_withDefaultAndFormatShortSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .shortSimple)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20pm")
     }
     func test_dnsTime_withDefaultAndFormatShortSmart_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .shortSmart)
-        XCTAssertEqual(result, "10/9, 1:20p")
+        XCTAssertEqual(result, "10/9 @ 1:20pm")
     }
     func test_dnsTime_withNowAndFormatShortPretty_shouldReturnString() {
         struct TestInterval {
@@ -77,9 +77,9 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: "1m ago"),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: "3+m ago"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: "1wk ago"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, result: C.Localizations.DatePretty.minuteAgoShort),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, result: C.Localizations.DatePretty.minutesAgoShort),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, result: C.Localizations.DatePretty.weekAgoShort),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -107,9 +107,9 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: "tdy"),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "tdy - tmw"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "1wk ago - tdy"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: C.Localizations.DatePretty.todayShort),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "\(C.Localizations.DatePretty.todayShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "\(C.Localizations.DatePretty.weekAgoShort) - \(C.Localizations.DatePretty.todayShort)"),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))
@@ -123,13 +123,13 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSimple)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p - 9/3/31, 11:32a")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20pm - 9/3/31, 11:32am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatShortSmart_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20p - 9/3/31, 11:32a")
+        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 1:20pm - 9/3/31 @ 11:32am")
     }
     func test_dnsTime_withEndDateFormatShortPretty_shouldReturnString() {
         struct TestInterval {
@@ -138,9 +138,9 @@ class DatePrettyShortTests: XCTestCase {
             let result: String
         }
         let testIntervals: [TestInterval] = [
-            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: "1m ago - 2hrs"),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "3+m ago - tmw"),
-            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "1wk ago - 6mins"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours, result: "\(C.Localizations.DatePretty.minuteAgoShort) - \(C.Localizations.DatePretty.hoursShort)"),
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay, result: "\(C.Localizations.DatePretty.minutesAgoShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
+            TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes, result: "\(C.Localizations.DatePretty.weekAgoShort) - \(C.Localizations.DatePretty.minutesAbbrev)"),
         ]
         for testInterval in testIntervals {
             sut = Date(timeIntervalSinceNow: testInterval.start + (testInterval.start > 0 ? 20 : -20))

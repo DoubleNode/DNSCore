@@ -44,7 +44,7 @@ class DatePrettyLongTests: XCTestCase {
     }
     func test_dnsDate_withNowAndFormatLongPretty_shouldReturnString() {
         let result: String = sut.dnsDate(as: .longPretty)
-        XCTAssertEqual(result, NSLocalizedString("today", comment: ""))
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
     }
 
     func test_dnsTime_withDefaultAndFormatLongSimple_shouldReturnString() {
@@ -55,11 +55,11 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsTime_withDefaultAndFormatLongSmart_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .longSmart)
-        XCTAssertEqual(result, "October 9, 1:20:41pm CDT")
+        XCTAssertEqual(result, "October 9 @ 1:20:41pm CDT")
     }
     func test_dnsTime_withNowAndFormatLongPretty_shouldReturnString() {
         let result: String = sut.dnsTime(as: .longPretty)
-        XCTAssertEqual(result, NSLocalizedString("just now", comment: ""))
+        XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
     }
 
     func test_dnsDate_withDefaultAndEndDateFormatLongSimple_shouldReturnString() {
@@ -77,7 +77,7 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsDate_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .longPretty)
-        XCTAssertEqual(result, "today to September 3, 2031")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today) \(C.Localizations.DatePretty.to) September 3, 2031")
     }
 
     func test_dnsTime_withDefaultAndEndDateFormatLongSimple_shouldReturnString() {
@@ -90,11 +90,11 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSmart)
-        XCTAssertEqual(result, "October 9, \(defaultDateYear), 1:20:41pm CDT - September 3, 2031, 11:32:21am CDT")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) @ 1:20:41pm CDT - September 3, 2031 @ 11:32:21am CDT")
     }
     func test_dnsTime_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longPretty)
-        XCTAssertEqual(result, "just now to September 3, 2031")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) \(C.Localizations.DatePretty.to) September 3, 2031")
     }
 }

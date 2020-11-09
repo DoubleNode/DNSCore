@@ -40,7 +40,7 @@ class DatePrettyTests: XCTestCase {
     func test_dnsTime_withDefaultAndDefaultFormat_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime()
-        XCTAssertEqual(result, "Oct 9, 1:20:41pm")
+        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
     }
     func test_dnsDate_withDefaultAndEndDateDefaultFormat_shouldReturnString() {
         sut = defaultDate
@@ -52,6 +52,6 @@ class DatePrettyTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end)
-        XCTAssertEqual(result, "Oct 9, \(defaultDateYear), 1:20:41pm - Sep 3, 2031, 11:32:21am")
+        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) @ 1:20pm - Sep 3, 2031 @ 11:32am")
     }
 }

@@ -44,7 +44,7 @@ class DatePrettyNormalTests: XCTestCase {
     }
     func test_dnsDate_withNowAndFormatNormalPretty_shouldReturnString() {
         let result: String = sut.dnsDate(as: .normalPretty)
-        XCTAssertEqual(result, NSLocalizedString("today", comment: ""))
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
     }
 
     func test_dnsTime_withDefaultAndFormatNormalSimple_shouldReturnString() {
@@ -55,11 +55,11 @@ class DatePrettyNormalTests: XCTestCase {
     func test_dnsTime_withDefaultAndFormatNormalSmart_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .normalSmart)
-        XCTAssertEqual(result, "Oct 9, 1:20:41pm")
+        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
     }
     func test_dnsTime_withNowAndFormatNormalPretty_shouldReturnString() {
         let result: String = sut.dnsTime(as: .normalPretty)
-        XCTAssertEqual(result, NSLocalizedString("just now", comment: ""))
+        XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
     }
 
     func test_dnsDate_withDefaultAndEndDateFormatNormalSimple_shouldReturnString() {
@@ -77,7 +77,7 @@ class DatePrettyNormalTests: XCTestCase {
     func test_dnsDate_withNowAndEndDateFormatNormalPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .normalPretty)
-        XCTAssertEqual(result, "today - 9/3/31")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today) - 9/3/31")
     }
 
     func test_dnsTime_withDefaultAndEndDateFormatNormalSimple_shouldReturnString() {
@@ -90,11 +90,11 @@ class DatePrettyNormalTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .normalSmart)
-        XCTAssertEqual(result, "Oct 9, \(defaultDateYear), 1:20:41pm - Sep 3, 2031, 11:32:21am")
+        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) @ 1:20pm - Sep 3, 2031 @ 11:32am")
     }
     func test_dnsTime_withNowAndEndDateFormatNormalPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .normalPretty)
-        XCTAssertEqual(result, "just now - 9/3/31")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) - 9/3/31")
     }
 }
