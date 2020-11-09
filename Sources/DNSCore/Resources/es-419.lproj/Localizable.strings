@@ -1,122 +1,122 @@
 /* DNSCoreDatePrettyAt */
-"DNSCoreDatePrettyAt" = "es-419|at";
+"DNSCoreDatePrettyAt" = "a";
 
 /* DNSCoreDatePrettyDays */
-"DNSCoreDatePrettyDays" = "es-419|%@ days";
+"DNSCoreDatePrettyDays" = "%@ dias";
 
 /* DNSCoreDatePrettyDaysShort */
-"DNSCoreDatePrettyDays" = "es-419|%@days";
+"DNSCoreDatePrettyDays" = "%@dias";
 
 /* DNSCoreDatePrettyDaysAgo */
-"DNSCoreDatePrettyDaysAgo" = "es-419|%@ days ago";
+"DNSCoreDatePrettyDaysAgo" = "hace %@ dias";
 
 /* DNSCoreDatePrettyDaysAgoShort */
-"DNSCoreDatePrettyDaysAgoShort" = "es-419|%@days ago";
+"DNSCoreDatePrettyDaysAgoShort" = "hace %@dias";
 
 /* DNSCoreDatePrettyHour */
-"DNSCoreDatePrettyHour" = "es-419|%@ hour";
+"DNSCoreDatePrettyHour" = "%@ hora";
 
 /* DNSCoreDatePrettyHourShort */
-"DNSCoreDatePrettyHourShort" = "es-419|%@hr";
+"DNSCoreDatePrettyHourShort" = "%@hr";
 
 /* DNSCoreDatePrettyHours */
-"DNSCoreDatePrettyHours" = "es-419|%@ hours";
+"DNSCoreDatePrettyHours" = "%@ horas";
 
 /* DNSCoreDatePrettyHoursShort */
-"DNSCoreDatePrettyHoursShort" = "es-419|%@hrs";
+"DNSCoreDatePrettyHoursShort" = "hrs";
 
 /* DNSCoreDatePrettyHoursAgo */
-"DNSCoreDatePrettyHoursAgo" = "es-419|%@ hours ago";
+"DNSCoreDatePrettyHoursAgo" = "hace %@ horas";
 
 /* DNSCoreDatePrettyHoursAgoShort */
-"DNSCoreDatePrettyHoursAgo" = "es-419|%@hrs ago";
+"DNSCoreDatePrettyHoursAgo" = "hace %@hrs";
 
 /* DNSCoreDatePrettyJustNow */
-"DNSCoreDatePrettyJustNow" = "es-419|just now";
+"DNSCoreDatePrettyJustNow" = "ahora mismo";
 
 /* DNSCoreDatePrettyLastWeek */
-"DNSCoreDatePrettyLastWeek" = "es-419|last week";
+"DNSCoreDatePrettyLastWeek" = "semana pasada";
 
 /* DNSCoreDatePrettyMinute */
-"DNSCoreDatePrettyMinute" = "es-419|%@ minute";
+"DNSCoreDatePrettyMinute" = "minuto";
 
 /* DNSCoreDatePrettyMinuteShort */
-"DNSCoreDatePrettyMinuteShort" = "es-419|%@m";
+"DNSCoreDatePrettyMinuteShort" = "%@m";
 
 /* DNSCoreDatePrettyMinuteAgo */
-"DNSCoreDatePrettyMinuteAgo" = "es-419|%@ minute ago";
+"DNSCoreDatePrettyMinuteAgo" = "Hace %@ minute";
 
 /* DNSCoreDatePrettyMinuteAgoShort */
-"DNSCoreDatePrettyMinuteAgoShort" = "es-419|%@m ago";
+"DNSCoreDatePrettyMinuteAgoShort" = "Hace %@m";
 
 /* DNSCoreDatePrettyMinutes */
-"DNSCoreDatePrettyMinutes" = "es-419|%@ minutes";
+"DNSCoreDatePrettyMinutes" = "%@ minutos";
 
 /* DNSCoreDatePrettyMinutesAbbrev */
-"DNSCoreDatePrettyMinutesAbbrev" = "es-419|%@mins";
+"DNSCoreDatePrettyMinutesAbbrev" = "%@mins";
 
 /* DNSCoreDatePrettyMinutesShort */
-"DNSCoreDatePrettyMinutes" = "es-419|%@m";
+"DNSCoreDatePrettyMinutes" = "%@m";
 
 /* DNSCoreDatePrettyMinutesAgo */
-"DNSCoreDatePrettyMinutesAgo" = "es-419|%@ minutes ago";
+"DNSCoreDatePrettyMinutesAgo" = "Hace %@ minutos";
 
 /* DNSCoreDatePrettyMinutesAgoAbbrev */
-"DNSCoreDatePrettyMinutesAgoAbbrev" = "es-419|%@mins ago";
+"DNSCoreDatePrettyMinutesAgoAbbrev" = "Hace %@mins";
 
 /* DNSCoreDatePrettyMinutesAgoShort */
-"DNSCoreDatePrettyMinutesAgo" = "es-419|%@m ago";
+"DNSCoreDatePrettyMinutesAgo" = "Hace %@m";
 
 /* DNSCoreDatePrettyNow */
-"DNSCoreDatePrettyNow" = "es-419|now";
+"DNSCoreDatePrettyNow" = "Ahorita";
 
 /* DNSCoreDatePrettyOneHourAgo */
-"DNSCoreDatePrettyOneHourAgo" = "es-419|one hour ago";
+"DNSCoreDatePrettyOneHourAgo" = "hace una hora";
 
 /* DNSCoreDatePrettyOneMinuteAgo */
-"DNSCoreDatePrettyOneMinuteAgo" = "es-419|one minute ago";
+"DNSCoreDatePrettyOneMinuteAgo" = "hace un minuto";
 
 /* DNSCoreDatePrettyTo */
-"DNSCoreDatePrettyTo" = "es-419|to";
+"DNSCoreDatePrettyTo" = "para";
 
 /* DNSCoreDatePrettyToday */
-"DNSCoreDatePrettyToday" = "es-419|today";
+"DNSCoreDatePrettyToday" = "hoy";
 
 /* DNSCoreDatePrettyTodayShort */
-"DNSCoreDatePrettyTodayShort" = "es-419|tdy";
+"DNSCoreDatePrettyTodayShort" = "hoy";
 
 /* DNSCoreDatePrettyTomorrow */
-"DNSCoreDatePrettyTomorrow" = "es-419|tomorrow";
+"DNSCoreDatePrettyTomorrow" = "mañana";
 
 /* DNSCoreDatePrettyTomorrowShort */
-"DNSCoreDatePrettyTomorrowShort" = "es-419|tmw";
+"DNSCoreDatePrettyTomorrowShort" = "mañ";
 
 /* DNSCoreDatePrettyWeek */
-"DNSCoreDatePrettyWeek" = "es-419|%@ week";
+"DNSCoreDatePrettyWeek" = "%@ semana";
 
 /* DNSCoreDatePrettyWeekShort */
-"DNSCoreDatePrettyWeekShort" = "es-419|%@wk";
+"DNSCoreDatePrettyWeekShort" = "%@sm";
 
 /* DNSCoreDatePrettyWeekAgo */
-"DNSCoreDatePrettyWeekAgo" = "es-419|%@ week ago";
+"DNSCoreDatePrettyWeekAgo" = "hace %@ semanas";
 
 /* DNSCoreDatePrettyWeekAgoShort */
-"DNSCoreDatePrettyWeekAgoShort" = "es-419|%@wk ago";
+"DNSCoreDatePrettyWeekAgoShort" = "hace %@sm";
 
 /* DNSCoreDatePrettyWeeks */
-"DNSCoreDatePrettyWeeks" = "es-419|%@ weeks";
+"DNSCoreDatePrettyWeeks" = "%@ semanas";
 
 /* DNSCoreDatePrettyWeeksShort */
-"DNSCoreDatePrettyWeeksShort" = "es-419|%@wks";
+"DNSCoreDatePrettyWeeksShort" = "%@smn";
 
 /* DNSCoreDatePrettyWeeksAgo */
-"DNSCoreDatePrettyWeeksAgo" = "es-419|%@ weeks ago";
+"DNSCoreDatePrettyWeeksAgo" = "hace %@ semanas";
 
 /* DNSCoreDatePrettyWeeksAgoShort */
-"DNSCoreDatePrettyWeeksAgoShort" = "es-419|%@wks ago";
+"DNSCoreDatePrettyWeeksAgoShort" = "hace %@smn";
 
 /* DNSCoreDatePrettyYesterday */
-"DNSCoreDatePrettyYesterday" = "es-419|yesterday";
+"DNSCoreDatePrettyYesterday" = "ayer";
 
 /* DNSCoreDatePrettyYesterdayShort */
-"DNSCoreDatePrettyYesterdayShort" = "es-419|yda";
+"DNSCoreDatePrettyYesterdayShort" = "aye";
