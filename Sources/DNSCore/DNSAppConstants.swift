@@ -16,8 +16,8 @@ public protocol DNSAppConstantsRootProtocol: UITextFieldDelegate {
 }
 
 open class DNSAppConstants: NSObject {
-    static let shared       = DNSAppConstants()
-    static let translator   = DNSDataTranslation()
+    static public let shared       = DNSAppConstants()
+    static public let translator   = DNSDataTranslation()
 
     // MARK: - Constant plist to object functions
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
