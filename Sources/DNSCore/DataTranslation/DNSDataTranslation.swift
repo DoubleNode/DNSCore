@@ -42,6 +42,18 @@ open class DNSDataTranslation: NSObject {
         retval.dateFormat   = "yyyyMMdd"
         return retval
     }
+    static var defaultDateFormatter4: DateFormatter {
+        let retval = DateFormatter.init()
+        retval.timeZone     = NSTimeZone.local
+        retval.dateFormat   = "MM-dd"
+        return retval
+    }
+    static var defaultDateFormatter5: DateFormatter {
+        let retval = DateFormatter.init()
+        retval.timeZone     = NSTimeZone.local
+        retval.dateFormat   = "MM/dd"
+        return retval
+    }
     static var firebaseDateFormatter: DateFormatter {
         let retval = DateFormatter.init()
         retval.timeZone     = NSTimeZone.local
@@ -96,6 +108,29 @@ open class DNSDataTranslation: NSObject {
         retval.dateFormat   = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SS"
         return retval
     }
+
+    static var defaultDateFormatters = [
+        defaultDateFormatter1,
+        defaultDateFormatter2,
+        defaultDateFormatter3,
+        firebaseDateFormatter,
+        defaultDateFormatter4,
+        defaultDateFormatter5,
+    ]
+    static var defaultTimeFormatters = [
+        firebaseTimeFormatterMilliseconds,
+        firebaseTimeFormatterMilliseconds2,
+        firebaseTimeFormatter,
+        defaultDateFormatter1,
+        defaultDateFormatter2,
+        localTimeFormatterWithoutTimezone,
+        localTimeFormatterMillisecondsWithoutTimezone,
+        localTimeFormatterMilliseconds2WithoutTimezone,
+        defaultDateFormatter3,
+        firebaseDateFormatter,
+        defaultDateFormatter4,
+        defaultDateFormatter5,
+    ]
 
     // MARK: - Reentrancy Checks
 

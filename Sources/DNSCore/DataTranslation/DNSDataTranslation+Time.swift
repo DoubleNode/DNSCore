@@ -58,19 +58,10 @@ public extension DNSDataTranslation {
             return self.date(fromTimeIntervalSince1970: number)
         }
 
-        for formatter in [ DNSDataTranslation.firebaseTimeFormatterMilliseconds,
-                           DNSDataTranslation.firebaseTimeFormatterMilliseconds2,
-                           DNSDataTranslation.firebaseTimeFormatter,
-                           DNSDataTranslation.defaultDateFormatter1,
-                           DNSDataTranslation.defaultDateFormatter2,
-                           DNSDataTranslation.localTimeFormatterWithoutTimezone,
-                           DNSDataTranslation.localTimeFormatterMillisecondsWithoutTimezone,
-                           DNSDataTranslation.localTimeFormatterMilliseconds2WithoutTimezone,
-                           ] {
+        for formatter in DNSDataTranslation.defaultTimeFormatters {
             let retval = self.date(from: string, formatter)
             guard retval == nil else {  return retval   }
         }
-
         return nil
     }
     func time(from time: Date?) -> Date? {

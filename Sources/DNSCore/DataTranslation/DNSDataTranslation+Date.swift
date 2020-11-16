@@ -68,9 +68,11 @@ public extension DNSDataTranslation {
     func date(from string: String?, _ dateFormatter: DateFormatter?) -> Date? {
         guard !(string?.isEmpty ?? true) else { return nil }
         guard dateFormatter != nil else {
-            return DNSDataTranslation.defaultDateFormatter1.date(from: string!)
-                ?? (DNSDataTranslation.defaultDateFormatter2.date(from: string!)
-                ?? DNSDataTranslation.defaultDateFormatter3.date(from: string!))
+            for formatter in DNSDataTranslation.defaultDateFormatters {
+                let retval = self.date(from: string, formatter)
+                guard retval == nil else {  return retval   }
+            }
+            return nil
         }
 
         return dateFormatter!.date(from: string!)
