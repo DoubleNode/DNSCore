@@ -19,6 +19,15 @@ open class DNSAppConstants: NSObject {
     static public let shared       = DNSAppConstants()
     static public let translator   = DNSDataTranslation()
 
+    public enum BuildType {
+        case unknown, dev, qa, alpha, beta, gamma, prod
+    }
+    
+    static var appBuildType: BuildType = DNSAppConstants.shared.appBuildType()
+    open func appBuildType() -> BuildType {
+        return .unknown
+    }
+    
     // MARK: - Constant plist to object functions
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)

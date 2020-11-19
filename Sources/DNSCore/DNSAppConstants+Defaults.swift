@@ -11,17 +11,6 @@ import UIKit
 
 @objc
 extension DNSAppConstants {
-    public enum BuildType {
-        case unknown, dev, qa, alpha, beta, gamma, prod
-    }
-
-    @nonobjc
-    static var appBuildType: BuildType = DNSAppConstants.shared.appBuildType()
-    @nonobjc
-    open func appBuildType() -> BuildType {
-        return .unknown
-    }
-    
     static var appGroupPath: String = DNSAppConstants.shared.appGroupPath()
     open func appGroupPath() -> String {
         do {
