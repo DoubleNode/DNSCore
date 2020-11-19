@@ -11,13 +11,13 @@ import UIKit
 
 @objc
 extension DNSAppConstants {
-    static var appGroupPath: String = DNSAppConstants.shared.appGroupPath()
+    static var appGroupPath: String { DNSAppConstants.shared.appGroupPath() }
     open func appGroupPath() -> String {
         do {
             return try DNSAppConstants.constant(from: "appGroupPath") as String
         } catch { return "" }
     }
-    static var appFontScaling: Double = DNSAppConstants.shared.appFontScaling()
+    static var appFontScaling: Double { DNSAppConstants.shared.appFontScaling() }
     open func appFontScaling() -> Double {
         do {
             return try DNSAppConstants.constant(from: "appFontScaling") as Double
