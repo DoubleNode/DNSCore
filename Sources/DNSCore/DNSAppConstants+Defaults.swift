@@ -10,59 +10,72 @@ import Foundation
 import UIKit
 
 @objc
-public extension DNSAppConstants {
-    enum BuildType {
-        case unknown, dev, qa, alpha, beta, prod
+extension DNSAppConstants {
+    public enum BuildType {
+        case unknown, dev, qa, alpha, beta, gamma, prod
     }
 
     @nonobjc
-    static var appBuildType: BuildType = .unknown
-
-    static var appGroupPath: String {
+    static var appBuildType: BuildType = DNSAppConstants.shared.appBuildType()
+    @nonobjc
+    open func appBuildType() -> BuildType {
+        return .unknown
+    }
+    
+    static var appGroupPath: String = DNSAppConstants.shared.appGroupPath()
+    open func appGroupPath() -> String {
         do {
-            return try self.constant(from: "appGroupPath") as String
+            return try DNSAppConstants.constant(from: "appGroupPath") as String
         } catch { return "" }
     }
-    static var appFontScaling: Double {
+    static var appFontScaling: Double = DNSAppConstants.shared.appFontScaling()
+    open func appFontScaling() -> Double {
         do {
-            return try self.constant(from: "appFontScaling") as Double
+            return try DNSAppConstants.constant(from: "appFontScaling") as Double
         } catch { return 0 }
     }
 
     // MARK: - App Request Review Constants
-    static var requestReviews: Bool {
+    static var requestReviews: Bool = DNSAppConstants.shared.requestReviews()
+    open func requestReviews() -> Bool {
         do {
-            return try self.constant(from: "requestReviews") as Bool
+            return try DNSAppConstants.constant(from: "requestReviews") as Bool
         } catch { return false }
     }
-    static var requestReviewFirstMinimumLaunches: UInt {
+    static var requestReviewFirstMinimumLaunches: UInt = DNSAppConstants.shared.requestReviewFirstMinimumLaunches()
+    open func requestReviewFirstMinimumLaunches() -> UInt {
         do {
-            return try self.constant(from: "requestReviewFirstMinimumLaunches") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewFirstMinimumLaunches") as UInt
         } catch { return 0 }
     }
-    static var requestReviewFirstMaximumLaunches: UInt {
+    static var requestReviewFirstMaximumLaunches: UInt = DNSAppConstants.shared.requestReviewFirstMaximumLaunches()
+    open func requestReviewFirstMaximumLaunches() -> UInt {
         do {
-            return try self.constant(from: "requestReviewFirstMaximumLaunches") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewFirstMaximumLaunches") as UInt
         } catch { return 0 }
     }
-    static var requestReviewFrequency: UInt {
+    static var requestReviewFrequency: UInt = DNSAppConstants.shared.requestReviewFrequency()
+    open func requestReviewFrequency() -> UInt {
         do {
-            return try self.constant(from: "requestReviewFrequency") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewFrequency") as UInt
         } catch { return 0 }
     }
-    static var requestReviewDaysSinceFirstLaunch: UInt {
+    static var requestReviewDaysSinceFirstLaunch: UInt = DNSAppConstants.shared.requestReviewDaysSinceFirstLaunch()
+    open func requestReviewDaysSinceFirstLaunch() -> UInt {
         do {
-            return try self.constant(from: "requestReviewDaysSinceFirstLaunch") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewDaysSinceFirstLaunch") as UInt
         } catch { return 0 }
     }
-    static var requestReviewHoursSinceLastLaunch: UInt {
+    static var requestReviewHoursSinceLastLaunch: UInt = DNSAppConstants.shared.requestReviewHoursSinceLastLaunch()
+    open func requestReviewHoursSinceLastLaunch() -> UInt {
         do {
-            return try self.constant(from: "requestReviewHoursSinceLastLaunch") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewHoursSinceLastLaunch") as UInt
         } catch { return 0 }
     }
-    static var requestReviewDaysSinceLastReview: UInt {
+    static var requestReviewDaysSinceLastReview: UInt = DNSAppConstants.shared.requestReviewDaysSinceLastReview()
+    open func requestReviewDaysSinceLastReview() -> UInt {
         do {
-            return try self.constant(from: "requestReviewDaysSinceLastReview") as UInt
+            return try DNSAppConstants.constant(from: "requestReviewDaysSinceLastReview") as UInt
         } catch { return 0 }
     }
 }
