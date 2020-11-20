@@ -23,8 +23,8 @@ open class DNSAppConstants: NSObject {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
 
-    static var appBuildType: BuildType { DNSAppConstants.shared.appBuildType() }
-    open func appBuildType() -> BuildType {
+    static var appBuildType: BuildType { DNSAppConstants.shared.appBuildTypeRead() }
+    open func appBuildTypeRead() -> BuildType {
         return .unknown
     }
 
