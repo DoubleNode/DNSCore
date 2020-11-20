@@ -16,8 +16,8 @@ public protocol DNSAppConstantsRootProtocol: UITextFieldDelegate {
 }
 
 open class DNSAppConstants: NSObject {
-    static public let shared       = DNSAppConstants()
-    static public let translator   = DNSDataTranslation()
+    static public var shared = DNSAppConstants()
+    static public var translator = DNSDataTranslation()
 
     public enum BuildType {
         case unknown, dev, qa, alpha, beta, gamma, prod
