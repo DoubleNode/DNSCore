@@ -30,6 +30,11 @@ open class DNSAppConstants: NSObject {
         return .unknown
     }
 
+    override public required init() {
+        super.init()
+        DNSAppConstants.resetPlistDictionary()
+    }
+
     // MARK: - Constant plist to object functions
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)
@@ -204,6 +209,9 @@ open class DNSAppConstants: NSObject {
         return plistDict[key]!
     }
 
+    public class func resetPlistDictionary() {
+        self._plistDictionary = [:]
+    }
     private static var _plistDictionary: [String: Any] = [:]
 
     public func merge(constants: [String: Any]) {
