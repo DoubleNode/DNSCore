@@ -24,6 +24,7 @@ public protocol DNSCoreApplicationProtocol {
     func networkActivity(display:Bool)
     func rootViewController() -> UIViewController
 
+    func reportException(_ nsError: NSError)
     func shortenErrorPath(_ filename: String) -> String
 
     // MARK: - CoreData methods
@@ -34,34 +35,36 @@ public protocol DNSCoreApplicationProtocol {
 public class DNSCore {
     private static let translator   = DNSDataTranslation()
 
-    public class var appDelegate: DNSCoreApplicationProtocol {
+    public class var appDelegate: DNSCoreApplicationProtocol? {
         var retval: DNSCoreApplicationProtocol?
 
         DNSUIThread.run {
             retval = UIApplication.shared.delegate as? DNSCoreApplicationProtocol
         }
 
-        return retval!
+        return retval
     }
 
     // MARK: - Base methods
 
     public class var buildString: String {
-        return DNSCore.appDelegate.buildString()
+        return DNSCore.appDelegate?.buildString() ?? ""
     }
     public class var bundleName: String {
-        return DNSCore.appDelegate.bundleName()
+        return DNSCore.appDelegate?.bundleName() ?? ""
     }
     public class var versionString: String {
-        return DNSCore.appDelegate.versionString()
+        return DNSCore.appDelegate?.versionString() ?? ""
     }
     public class var appBuildString: String {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
-    public class func shortenErrorPath(_ filename: String) -> String {
-        return DNSCore.appDelegate.shortenErrorPath(filename)
+    public class func reportException(_ nsError: NSError) {
+        DNSCore.appDelegate?.reportException(nsError)
     }
-
+    public class func shortenErrorPath(_ filename: String) -> String {
+        return DNSCore.appDelegate?.shortenErrorPath(filename) ?? filename
+    }
 
     // MARK: - NSUserDefaults Settings methods
 

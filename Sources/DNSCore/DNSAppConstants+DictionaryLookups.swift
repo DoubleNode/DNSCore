@@ -32,10 +32,16 @@ extension DNSAppConstants {
     class func dictionaryLookup(fromOptions optionsData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
-        if Thread.isMainThread {
+        if !noUI || DNSCore.appDelegate == nil {
             noUI = true
         }
-        if translator.bool(from: optionsData[C.AppConstants.noUI]) ?? false {
+        if !noUI || DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
+            noUI = true
+        }
+        if !noUI || Thread.isMainThread {
+            noUI = true
+        }
+        if !noUI || translator.bool(from: optionsData[C.AppConstants.noUI]) ?? false {
             noUI = true
         }
         if noUI {
@@ -65,9 +71,9 @@ extension DNSAppConstants {
                 })
             }
 
-            DNSCore.appDelegate.rootViewController().present(alertController,
-                                                             animated: true,
-                                                             completion: nil)
+            DNSCore.appDelegate?.rootViewController().present(alertController,
+                                                              animated: true,
+                                                              completion: nil)
         }
 
         _ = semaphore.wait()
@@ -92,9 +98,8 @@ extension DNSAppConstants {
     }
 
     private class func dictionaryLookupCreateCheckbox(forState state: Bool) -> UIButton {
-        let targetController: DNSAppConstantsRootProtocol =
-            // swiftlint:disable:next force_cast
-            DNSCore.appDelegate.rootViewController() as! DNSAppConstantsRootProtocol
+        let targetController: DNSAppConstantsRootProtocol? =
+            DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol
 
         let checkbox = UIButton.init(type: UIButton.ButtonType.custom)
 
@@ -122,9 +127,8 @@ extension DNSAppConstants {
         var retval: [String: [String: Any]] = [:]
 
         DNSUIThread.run {
-            let targetController: DNSAppConstantsRootProtocol =
-                // swiftlint:disable:next force_cast
-                DNSCore.appDelegate.rootViewController() as! DNSAppConstantsRootProtocol
+            let targetController: DNSAppConstantsRootProtocol? =
+                DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol
 
             let title   = translator.string(from: togglesData[C.AppConstants.title]) ?? "\(key)_TITLE_NOT_SPECIFIED"
             let message = translator.string(from: togglesData[C.AppConstants.message]) ?? "\(key)_MESSAGE_NOT_SPECIFIED"
@@ -164,9 +168,9 @@ extension DNSAppConstants {
                 completionBlock()
             })
 
-            DNSCore.appDelegate.rootViewController().present(alertController,
-                                                             animated: true,
-                                                             completion: nil)
+            DNSCore.appDelegate?.rootViewController().present(alertController,
+                                                              animated: true,
+                                                              completion: nil)
         }
 
         return retval
@@ -175,8 +179,10 @@ extension DNSAppConstants {
     private class func dictionaryLookup(fromToggles togglesData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
-        // swiftlint:disable:next force_cast
-        if !noUI || DNSCore.appDelegate.rootViewController() as? DNSAppConstantsRootProtocol == nil {
+        if !noUI || DNSCore.appDelegate == nil {
+            noUI = true
+        }
+        if !noUI || DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
             noUI = true
         }
         if !noUI || Thread.isMainThread {
