@@ -25,6 +25,8 @@ public protocol DNSCoreApplicationProtocol {
     func rootViewController() -> UIViewController
 
     func reportException(_ nsError: NSError)
+    func reportException(_ nsException: NSException)
+    func reportExceptionLog(_ string: String)
     func shortenErrorPath(_ filename: String) -> String
 
     // MARK: - CoreData methods
@@ -61,6 +63,12 @@ public class DNSCore {
     }
     public class func reportException(_ nsError: NSError) {
         DNSCore.appDelegate?.reportException(nsError)
+    }
+    public class func reportException(_ nsException: NSException) {
+        DNSCore.appDelegate?.reportException(nsException)
+    }
+    public class func reportExceptionLog(_ string: String) {
+        DNSCore.appDelegate?.reportExceptionLog(string)
     }
     public class func shortenErrorPath(_ filename: String) -> String {
         return DNSCore.appDelegate?.shortenErrorPath(filename) ?? filename
