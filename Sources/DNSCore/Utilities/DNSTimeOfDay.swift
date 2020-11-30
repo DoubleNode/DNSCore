@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class DNSTimeOfDay: Hashable {
-    public enum Period {
+public class DNSTimeOfDay: Hashable, Codable {
+    public enum Period: Int, CaseIterable, Codable {
         case morning
         case afternoon
         case evening
