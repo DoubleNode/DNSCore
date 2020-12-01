@@ -32,16 +32,16 @@ extension DNSAppConstants {
     class func dictionaryLookup(fromOptions optionsData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
-        if !noUI || DNSCore.appDelegate == nil {
+        if !noUI && DNSCore.appDelegate == nil {
             noUI = true
         }
-        if !noUI || DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
+        if !noUI && DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
             noUI = true
         }
-        if !noUI || Thread.isMainThread {
+        if !noUI && Thread.isMainThread {
             noUI = true
         }
-        if !noUI || translator.bool(from: optionsData[C.AppConstants.noUI]) ?? false {
+        if !noUI && translator.bool(from: optionsData[C.AppConstants.noUI]) ?? false {
             noUI = true
         }
         if noUI {
@@ -179,16 +179,16 @@ extension DNSAppConstants {
     private class func dictionaryLookup(fromToggles togglesData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
-        if !noUI || DNSCore.appDelegate == nil {
+        if !noUI && DNSCore.appDelegate == nil {
             noUI = true
         }
-        if !noUI || DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
+        if !noUI && DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol == nil {
             noUI = true
         }
-        if !noUI || Thread.isMainThread {
+        if !noUI && Thread.isMainThread {
             noUI = true
         }
-        if !noUI || translator.bool(from: togglesData[C.AppConstants.noUI]) ?? false {
+        if !noUI && translator.bool(from: togglesData[C.AppConstants.noUI]) ?? false {
             noUI = true
         }
         if noUI {
