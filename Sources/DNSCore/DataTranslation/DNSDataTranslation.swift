@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import AtomicSwift
 import Foundation
 
 open class DNSDataTranslation: NSObject {
@@ -134,21 +135,22 @@ open class DNSDataTranslation: NSObject {
 
     // MARK: - Reentrancy Checks
 
-    var boolEntryCount = 0
-    var colorEntryCount = 0
-    var dateEntryCount = 0
-    var decimalEntryCount = 0
-    var doubleEntryCount = 0
-    var firebaseKeyEntryCount = 0
-    var floatEntryCount = 0
-    var idEntryCount = 0
-    var intEntryCount = 0
-    var numberEntryCount = 0
-    var stringEntryCount = 0
-    var timeEntryCount = 0
-    var timeOfDayEntryCount = 0
-    var uintEntryCount = 0
-    var urlEntryCount = 0
+    @Atomic var boolEntryCount = 0
+    @Atomic var colorEntryCount = 0
+    @Atomic var dateEntryCount = 0
+    @Atomic var decimalEntryCount = 0
+    @Atomic var doubleEntryCount = 0
+    @Atomic var firebaseKeyEntryCount = 0
+    @Atomic var floatEntryCount = 0
+    @Atomic var idEntryCount = 0
+    @Atomic var intEntryCount = 0
+    @Atomic var numberEntryCount = 0
+    @Atomic var timeEntryCount = 0
+    @Atomic var timeOfDayEntryCount = 0
+    @Atomic var uintEntryCount = 0
+    @Atomic var urlEntryCount = 0
+
+    @Atomic var stringEntryCounts: [Thread: Bool] = [:]
 
     public override init() {
     }
