@@ -154,7 +154,7 @@ open class DNSDataTranslation: NSObject {
 
     }
     
-    func localized(from object: Any) -> Any {
+    public func localized(from object: Any) -> Any {
         guard let dictionary = object as? [String: Any] else {
             return object
         }
