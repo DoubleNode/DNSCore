@@ -47,6 +47,15 @@ public class DNSCore {
         return retval
     }
 
+    public static var languageCode: String = {
+        let currentLocale = NSLocale.current
+        var languageCode = currentLocale.languageCode ?? "en"
+        if languageCode == "es" {
+            languageCode = "es-419"
+        }
+        return languageCode
+    }()
+    
     // MARK: - Base methods
 
     public class var buildString: String {
