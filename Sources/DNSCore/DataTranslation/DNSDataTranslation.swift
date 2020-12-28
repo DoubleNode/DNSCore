@@ -151,13 +151,12 @@ open class DNSDataTranslation: NSObject {
     var urlEntryCount = 0
 
     public override init() {
-
     }
     
-    public func localized(from object: Any) -> Any {
+    public func localized(_ object: Any??) -> Any {
         guard let dictionary = object as? [String: Any] else {
-            return object
+            return object as Any
         }
-        return (dictionary[DNSCore.languageCode] ?? dictionary["en"]) ?? object
+        return (dictionary[DNSCore.languageCode] ?? dictionary["en"]) ?? object as Any
     }
 }
