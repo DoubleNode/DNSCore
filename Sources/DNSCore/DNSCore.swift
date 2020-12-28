@@ -55,7 +55,7 @@ public class DNSCore {
         }
         return languageCode
     }()
-    
+
     // MARK: - Base methods
 
     public class var buildString: String {
