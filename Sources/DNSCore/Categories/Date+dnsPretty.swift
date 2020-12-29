@@ -90,6 +90,9 @@ public extension Date {
         public static let delta365Days = Seconds.deltaOneDay * 365
     }
 
+    func dnsDateTime(as format: Format = Format()) -> String {
+        return dnsDate(as: format) + dnsTime(as: format)
+    }
     func dnsDate(as format: Format = Format()) -> String {
         let delta = self.timeIntervalSinceNow
 
