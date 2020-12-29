@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func float(from any: Any?) -> Float? {
         guard any != nil else { return nil }
         guard !(floatEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.float(from any) reentered!")
             assertionFailure("DNSDataTranslation.float(from any) reentered!")
             return nil
         }

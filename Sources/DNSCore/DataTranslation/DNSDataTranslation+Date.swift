@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func date(from any: Any?) -> Date? {
         guard any != nil else { return nil }
         guard !(dateEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.date(from any) reentered!")
             assertionFailure("DNSDataTranslation.date(from any) reentered!")
             return nil
         }

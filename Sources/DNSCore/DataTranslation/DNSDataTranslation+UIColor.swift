@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func color(from any: Any?) -> UIColor? {
         guard any != nil else { return nil }
         guard !(colorEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.color(from any) reentered!")
             assertionFailure("DNSDataTranslation.color(from any) reentered!")
             return nil
         }

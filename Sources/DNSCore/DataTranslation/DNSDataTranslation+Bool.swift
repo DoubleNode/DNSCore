@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func bool(from any: Any?) -> Bool? {
         guard any != nil else { return nil }
         guard !(boolEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.bool(from any) reentered!")
             assertionFailure("DNSDataTranslation.bool(from any) reentered!")
             return nil
         }

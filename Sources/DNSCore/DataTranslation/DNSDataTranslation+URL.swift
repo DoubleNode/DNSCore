@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func url(from any: Any?) -> URL? {
         guard any != nil else { return nil }
         guard !(urlEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.url(from any) reentered!")
             assertionFailure("DNSDataTranslation.url(from any) reentered!")
             return nil
         }

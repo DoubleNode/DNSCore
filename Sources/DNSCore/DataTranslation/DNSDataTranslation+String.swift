@@ -14,6 +14,7 @@ public extension DNSDataTranslation {
     func string(from any: Any?) -> String? {
         guard any != nil else { return nil }
         guard !(stringEntryCounts[Thread.current] ?? false) else {
+            DNSCore.reportLog("DNSDataTranslation.string(from any) reentered!")
             assertionFailure("DNSDataTranslation.string(from any) reentered!")
             return nil
         }
