@@ -135,22 +135,21 @@ open class DNSDataTranslation: NSObject {
 
     // MARK: - Reentrancy Checks
 
-    @Atomic var boolEntryCount = 0
-    @Atomic var colorEntryCount = 0
-    @Atomic var dateEntryCount = 0
-    @Atomic var decimalEntryCount = 0
-    @Atomic var doubleEntryCount = 0
-    @Atomic var firebaseKeyEntryCount = 0
-    @Atomic var floatEntryCount = 0
-    @Atomic var idEntryCount = 0
-    @Atomic var intEntryCount = 0
-    @Atomic var numberEntryCount = 0
-    @Atomic var timeEntryCount = 0
-    @Atomic var timeOfDayEntryCount = 0
-    @Atomic var uintEntryCount = 0
-    @Atomic var urlEntryCount = 0
-
+    @Atomic var boolEntryCounts: [Thread: Bool] = [:]
+    @Atomic var colorEntryCounts: [Thread: Bool] = [:]
+    @Atomic var dateEntryCounts: [Thread: Bool] = [:]
+    @Atomic var decimalEntryCounts: [Thread: Bool] = [:]
+    @Atomic var doubleEntryCounts: [Thread: Bool] = [:]
+    @Atomic var firebaseKeyEntryCounts: [Thread: Bool] = [:]
+    @Atomic var floatEntryCounts: [Thread: Bool] = [:]
+    @Atomic var idEntryCounts: [Thread: Bool] = [:]
+    @Atomic var intEntryCounts: [Thread: Bool] = [:]
+    @Atomic var numberEntryCounts: [Thread: Bool] = [:]
     @Atomic var stringEntryCounts: [Thread: Bool] = [:]
+    @Atomic var timeEntryCounts: [Thread: Bool] = [:]
+    @Atomic var timeOfDayEntryCounts: [Thread: Bool] = [:]
+    @Atomic var uintEntryCounts: [Thread: Bool] = [:]
+    @Atomic var urlEntryCounts: [Thread: Bool] = [:]
 
     public override init() {
     }

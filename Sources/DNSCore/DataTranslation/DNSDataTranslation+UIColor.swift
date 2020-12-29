@@ -12,13 +12,13 @@ public extension DNSDataTranslation {
     // MARK: - color...
     // swiftlint:disable:next cyclomatic_complexity
     func color(from any: Any?) -> UIColor? {
-        guard colorEntryCount == 0 else {
+        guard any != nil else { return nil }
+        guard !(colorEntryCounts[Thread.current] ?? false) else {
             assertionFailure("DNSDataTranslation.color(from any) reentered!")
             return nil
         }
-        colorEntryCount += 1
-        defer { colorEntryCount -= 1 }
-        guard any != nil else { return nil }
+        colorEntryCounts[Thread.current] = true
+        defer { colorEntryCounts.removeValue(forKey: Thread.current) }
 
         if any as? Date != nil {
             return self.color(from: any as? Date)

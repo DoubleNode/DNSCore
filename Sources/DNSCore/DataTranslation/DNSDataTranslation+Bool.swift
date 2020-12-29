@@ -12,13 +12,13 @@ public extension DNSDataTranslation {
     // MARK: - bool...
     // swiftlint:disable:next cyclomatic_complexity
     func bool(from any: Any?) -> Bool? {
-        guard boolEntryCount == 0 else {
+        guard any != nil else { return nil }
+        guard !(boolEntryCounts[Thread.current] ?? false) else {
             assertionFailure("DNSDataTranslation.bool(from any) reentered!")
             return nil
         }
-        boolEntryCount += 1
-        defer { boolEntryCount -= 1 }
-        guard any != nil else { return nil }
+        boolEntryCounts[Thread.current] = true
+        defer { boolEntryCounts.removeValue(forKey: Thread.current) }
 
         if any as? Date != nil {
             return self.bool(from: any as? Date)

@@ -12,13 +12,13 @@ public extension DNSDataTranslation {
     // MARK: - decimal...
     // swiftlint:disable:next cyclomatic_complexity
     func decimal(from any: Any?) -> Decimal? {
-        guard decimalEntryCount == 0 else {
+        guard any != nil else { return nil }
+        guard !(decimalEntryCounts[Thread.current] ?? false) else {
             assertionFailure("DNSDataTranslation.decimal(from any) reentered!")
             return nil
         }
-        decimalEntryCount += 1
-        defer { decimalEntryCount -= 1 }
-        guard any != nil else { return nil }
+        decimalEntryCounts[Thread.current] = true
+        defer { decimalEntryCounts.removeValue(forKey: Thread.current) }
 
         if any as? Date != nil {
             return self.decimal(from: any as? Date)

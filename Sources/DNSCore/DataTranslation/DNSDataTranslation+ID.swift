@@ -12,13 +12,13 @@ public extension DNSDataTranslation {
     // MARK: - id...
     // swiftlint:disable:next cyclomatic_complexity
     func id(from any: Any?) -> String? {
-        guard idEntryCount == 0 else {
+        guard any != nil else { return nil }
+        guard !(idEntryCounts[Thread.current] ?? false) else {
             assertionFailure("DNSDataTranslation.id(from any) reentered!")
             return nil
         }
-        idEntryCount += 1
-        defer { idEntryCount -= 1 }
-        guard any != nil else { return nil }
+        idEntryCounts[Thread.current] = true
+        defer { idEntryCounts.removeValue(forKey: Thread.current) }
 
         if any as? Date != nil {
             return self.id(from: any as? Date)

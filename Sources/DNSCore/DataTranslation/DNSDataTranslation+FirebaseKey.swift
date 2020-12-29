@@ -12,14 +12,13 @@ public extension DNSDataTranslation {
     // MARK: - firebaseKeyFrom...
     // swiftlint:disable:next cyclomatic_complexity
     func firebaseKey(from any: Any?) -> String? {
-        guard firebaseKeyEntryCount == 0 else {
+        guard any != nil else { return nil }
+        guard !(firebaseKeyEntryCounts[Thread.current] ?? false) else {
             assertionFailure("DNSDataTranslation.firebaseKey(from any) reentered!")
             return nil
         }
-        firebaseKeyEntryCount += 1
-        defer { firebaseKeyEntryCount -= 1 }
-
-        guard any != nil else { return nil }
+        firebaseKeyEntryCounts[Thread.current] = true
+        defer { firebaseKeyEntryCounts.removeValue(forKey: Thread.current) }
 
         if any as? Date != nil {
             return self.firebaseKey(from: any as? Date)
