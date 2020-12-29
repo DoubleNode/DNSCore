@@ -14,8 +14,12 @@ public extension DNSDataTranslation {
     func int(from any: Any?) -> Int? {
         guard any != nil else { return nil }
         guard !(intEntryCounts[Thread.current] ?? false) else {
-            DNSCore.reportLog("DNSDataTranslation.int(from any) reentered!")
-            assertionFailure("DNSDataTranslation.int(from any) reentered!")
+            let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
+                                                             file: DNSCore.shortenErrorPath("\(#file)"),
+                                                             line: "\(#line)",
+                                                             method: "\(#function)")
+            DNSCore.reportError(dnsError.nsError)
+            assertionFailure(dnsError.errorDescription!)
             return nil
         }
         intEntryCounts[Thread.current] = true

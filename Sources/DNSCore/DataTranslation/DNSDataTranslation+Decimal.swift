@@ -14,8 +14,12 @@ public extension DNSDataTranslation {
     func decimal(from any: Any?) -> Decimal? {
         guard any != nil else { return nil }
         guard !(decimalEntryCounts[Thread.current] ?? false) else {
-            DNSCore.reportLog("DNSDataTranslation.decimal(from any) reentered!")
-            assertionFailure("DNSDataTranslation.decimal(from any) reentered!")
+            let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
+                                                             file: DNSCore.shortenErrorPath("\(#file)"),
+                                                             line: "\(#line)",
+                                                             method: "\(#function)")
+            DNSCore.reportError(dnsError.nsError)
+            assertionFailure(dnsError.errorDescription!)
             return nil
         }
         decimalEntryCounts[Thread.current] = true

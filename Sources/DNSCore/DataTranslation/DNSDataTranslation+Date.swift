@@ -14,8 +14,12 @@ public extension DNSDataTranslation {
     func date(from any: Any?) -> Date? {
         guard any != nil else { return nil }
         guard !(dateEntryCounts[Thread.current] ?? false) else {
-            DNSCore.reportLog("DNSDataTranslation.date(from any) reentered!")
-            assertionFailure("DNSDataTranslation.date(from any) reentered!")
+            let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
+                                                             file: DNSCore.shortenErrorPath("\(#file)"),
+                                                             line: "\(#line)",
+                                                             method: "\(#function)")
+            DNSCore.reportError(dnsError.nsError)
+            assertionFailure(dnsError.errorDescription!)
             return nil
         }
         dateEntryCounts[Thread.current] = true

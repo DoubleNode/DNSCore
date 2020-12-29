@@ -14,8 +14,12 @@ public extension DNSDataTranslation {
     func firebaseKey(from any: Any?) -> String? {
         guard any != nil else { return nil }
         guard !(firebaseKeyEntryCounts[Thread.current] ?? false) else {
-            DNSCore.reportLog("DNSDataTranslation.firebaseKey(from any) reentered!")
-            assertionFailure("DNSDataTranslation.firebaseKey(from any) reentered!")
+            let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
+                                                             file: DNSCore.shortenErrorPath("\(#file)"),
+                                                             line: "\(#line)",
+                                                             method: "\(#function)")
+            DNSCore.reportError(dnsError.nsError)
+            assertionFailure(dnsError.errorDescription!)
             return nil
         }
         firebaseKeyEntryCounts[Thread.current] = true
