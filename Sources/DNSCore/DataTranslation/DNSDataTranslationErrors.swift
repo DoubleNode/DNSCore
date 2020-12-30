@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSCoreThreading
 import Foundation
 
 public enum DNSDataTranslationError: Error
@@ -45,4 +46,3 @@ extension DNSDataTranslationError: DNSError {
         }
     }
 }
-
