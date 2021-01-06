@@ -25,9 +25,9 @@ public extension DNSDataTranslation {
             return nil
         }
         numberEntryCounts[Thread.current] = true
-        dnsLog.debug("numberEntryCounts.start = \(currentThread.name ?? "")")
+        dnsLog.debug("numberEntryCounts.start = \(currentThread ?? "")")
         defer {
-            dnsLog.debug("numberEntryCounts.end = \(currentThread.name ?? "")")
+            dnsLog.debug("numberEntryCounts.end = \(currentThread ?? "")")
             numberEntryCounts.removeValue(forKey: currentThread)
         }
 
