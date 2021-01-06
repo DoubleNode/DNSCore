@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSCoreThreading
 import UIKit
 
 public extension DNSDataTranslation {
@@ -13,6 +14,7 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func color(from any: Any?) -> UIColor? {
         guard any != nil else { return nil }
+        let currentThread = Thread.current
         guard !(colorEntryCounts[Thread.current] ?? false) else {
             let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
                                                              file: DNSCore.shortenErrorPath("\(#file)"),
@@ -23,7 +25,11 @@ public extension DNSDataTranslation {
             return nil
         }
         colorEntryCounts[Thread.current] = true
-        defer { colorEntryCounts.removeValue(forKey: Thread.current) }
+        dnsLog.debug("colorEntryCounts.start = \(currentThread.name ?? "")")
+        defer {
+            dnsLog.debug("colorEntryCounts.end = \(currentThread.name ?? "")")
+            colorEntryCounts.removeValue(forKey: currentThread)
+        }
 
         if any as? Date != nil {
             return self.color(from: any as? Date)

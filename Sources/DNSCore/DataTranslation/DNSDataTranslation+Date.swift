@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSCoreThreading
 import UIKit
 
 public extension DNSDataTranslation {
@@ -13,6 +14,7 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func date(from any: Any?) -> Date? {
         guard any != nil else { return nil }
+        let currentThread = Thread.current
         guard !(dateEntryCounts[Thread.current] ?? false) else {
             let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
                                                              file: DNSCore.shortenErrorPath("\(#file)"),
@@ -23,7 +25,11 @@ public extension DNSDataTranslation {
             return nil
         }
         dateEntryCounts[Thread.current] = true
-        defer { dateEntryCounts.removeValue(forKey: Thread.current) }
+        dnsLog.debug("dateEntryCounts.start = \(currentThread.name ?? "")")
+        defer {
+            dnsLog.debug("dateEntryCounts.end = \(currentThread.name ?? "")")
+            dateEntryCounts.removeValue(forKey: currentThread)
+        }
 
         if any as? Date != nil {
             return self.date(from: any as? Date)
