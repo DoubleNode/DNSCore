@@ -25,9 +25,13 @@ public extension DNSDataTranslation {
             return nil
         }
         colorEntryCounts[Thread.current] = true
+#if DEBUG
         dnsLog.debug("colorEntryCounts.start = \(currentThread)")
+#endif
         defer {
+#if DEBUG
             dnsLog.debug("colorEntryCounts.end = \(currentThread)")
+#endif
             colorEntryCounts.removeValue(forKey: currentThread)
         }
 

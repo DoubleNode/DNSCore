@@ -25,9 +25,13 @@ public extension DNSDataTranslation {
             return nil
         }
         firebaseKeyEntryCounts[Thread.current] = true
+#if DEBUG
         dnsLog.debug("firebaseKeyEntryCounts.start = \(currentThread)")
+#endif
         defer {
+#if DEBUG
             dnsLog.debug("firebaseKeyEntryCounts.end = \(currentThread)")
+#endif
             firebaseKeyEntryCounts.removeValue(forKey: currentThread)
         }
 

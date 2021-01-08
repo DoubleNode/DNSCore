@@ -25,10 +25,14 @@ public extension DNSDataTranslation {
             return nil
         }
         dateEntryCounts[Thread.current] = true
+#if DEBUG
         dnsLog.debug("dateEntryCounts.start = \(currentThread)")
+#endif
         defer {
+#if DEBUG
             dnsLog.debug("dateEntryCounts.end = \(currentThread)")
-            dateEntryCounts.removeValue(forKey: currentThread)
+#endif
+           dateEntryCounts.removeValue(forKey: currentThread)
         }
 
         if any as? Date != nil {

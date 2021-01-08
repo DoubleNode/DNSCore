@@ -25,9 +25,13 @@ public extension DNSDataTranslation {
             return nil
         }
         urlEntryCounts[Thread.current] = true
+#if DEBUG
         dnsLog.debug("urlEntryCounts.start = \(currentThread)")
+#endif
         defer {
+#if DEBUG
             dnsLog.debug("urlEntryCounts.end = \(currentThread)")
+#endif
             urlEntryCounts.removeValue(forKey: currentThread)
         }
 
