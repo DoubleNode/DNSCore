@@ -24,15 +24,15 @@ public extension DNSDataTranslation {
             assertionFailure(dnsError.errorDescription!)
             return nil
         }
-        timeOfDayEntryCounts[Thread.current] = true
 #if DEBUG
         dnsLog.debug("timeOfDayEntryCounts.start = \(currentThread)")
 #endif
+        timeOfDayEntryCounts[Thread.current] = true
         defer {
+            timeOfDayEntryCounts.removeValue(forKey: currentThread)
 #if DEBUG
             dnsLog.debug("timeOfDayEntryCounts.end = \(currentThread)")
 #endif
-            timeOfDayEntryCounts.removeValue(forKey: currentThread)
         }
 
         if any as? Date != nil {

@@ -24,15 +24,15 @@ public extension DNSDataTranslation {
             assertionFailure(dnsError.errorDescription!)
             return nil
         }
-        firebaseKeyEntryCounts[Thread.current] = true
 #if DEBUG
         dnsLog.debug("firebaseKeyEntryCounts.start = \(currentThread)")
 #endif
+        firebaseKeyEntryCounts[Thread.current] = true
         defer {
+            firebaseKeyEntryCounts.removeValue(forKey: currentThread)
 #if DEBUG
             dnsLog.debug("firebaseKeyEntryCounts.end = \(currentThread)")
 #endif
-            firebaseKeyEntryCounts.removeValue(forKey: currentThread)
         }
 
         if any as? Date != nil {
