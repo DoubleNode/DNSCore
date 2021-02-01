@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSCoreThreading
 import Foundation
 import UIKit
 
@@ -218,9 +219,10 @@ open class DNSAppConstants: NSObject {
         DNSAppConstants._plistDictionary.merge(constants) { (_, new) in new }
     }
 
+    private let semaphoreLoadFuncards = DNSSemaphoreGate(count: 1)
     private func plistDictionary() -> [String: Any] {
-        objc_sync_enter(DNSAppConstants._plistDictionary)
-        defer { objc_sync_exit(DNSAppConstants._plistDictionary) }
+        _ = self.semaphoreLoadFuncards.wait()
+        defer { _ = self.semaphoreLoadFuncards.done() }
 
         if !DNSAppConstants._plistDictionary.isEmpty {
             return DNSAppConstants._plistDictionary
