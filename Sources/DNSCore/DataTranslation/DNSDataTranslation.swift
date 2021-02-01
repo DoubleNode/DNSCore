@@ -133,24 +133,6 @@ open class DNSDataTranslation: NSObject {
         defaultDateFormatter5,
     ]
 
-    // MARK: - Reentrancy Checks
-
-    @Atomic var boolEntryCounts: [Thread: Bool] = [:]
-    @Atomic var colorEntryCounts: [Thread: Bool] = [:]
-    @Atomic var dateEntryCounts: [Thread: Bool] = [:]
-    @Atomic var decimalEntryCounts: [Thread: Bool] = [:]
-    @Atomic var doubleEntryCounts: [Thread: Bool] = [:]
-    @Atomic var firebaseKeyEntryCounts: [Thread: Bool] = [:]
-    @Atomic var floatEntryCounts: [Thread: Bool] = [:]
-    @Atomic var idEntryCounts: [Thread: Bool] = [:]
-    @Atomic var intEntryCounts: [Thread: Bool] = [:]
-    @Atomic var numberEntryCounts: [Thread: Bool] = [:]
-    @Atomic var stringEntryCounts: [Thread: Bool] = [:]
-    @Atomic var timeEntryCounts: [Thread: Bool] = [:]
-    @Atomic var timeOfDayEntryCounts: [Thread: Bool] = [:]
-    @Atomic var uintEntryCounts: [Thread: Bool] = [:]
-    @Atomic var urlEntryCounts: [Thread: Bool] = [:]
-
     public override init() {
     }
 

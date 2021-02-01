@@ -14,27 +14,6 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func date(from any: Any?) -> Date? {
         guard any != nil else { return nil }
-        let currentThread = Thread.current
-        guard !(dateEntryCounts[Thread.current] ?? false) else {
-            let dnsError = DNSDataTranslationError.reentered(domain: "com.doublenode.\(type(of: self))",
-                                                             file: DNSCore.shortenErrorPath("\(#file)"),
-                                                             line: "\(#line)",
-                                                             method: "\(#function)")
-            DNSCore.reportError(dnsError.nsError)
-            assertionFailure(dnsError.errorDescription!)
-            return nil
-        }
-#if DEBUG
-        dnsLog.debug("dateEntryCounts.start = \(currentThread)")
-#endif
-        dateEntryCounts[Thread.current] = true
-        defer {
-            dateEntryCounts.removeValue(forKey: currentThread)
-#if DEBUG
-            dnsLog.debug("dateEntryCounts.end = \(currentThread)")
-#endif
-        }
-
         if any as? Date != nil {
             return self.date(from: any as? Date)
         } else if any as? UIColor != nil {
