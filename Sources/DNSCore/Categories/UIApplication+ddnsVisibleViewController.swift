@@ -6,10 +6,15 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSCoreThreading
 import UIKit
 
 public extension UIApplication {
     var dnsVisibleViewController : UIViewController? {
-        return keyWindow?.rootViewController?.dnsTopViewController
+        var retval: UIViewController?
+        DNSUIThread.run(.synchronously) {
+            retval = self.keyWindow?.rootViewController?.dnsTopViewController
+        }
+        return retval
     }
 }
