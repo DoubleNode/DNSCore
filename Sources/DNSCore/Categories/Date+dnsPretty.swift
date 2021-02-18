@@ -241,6 +241,10 @@ public extension Date {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
     }
+    func timeOfDay() -> DNSTimeOfDay {
+        return DNSTimeOfDay(hour: self.dnsHour(),
+                            minute: self.dnsMinute())
+    }
 
     // MARK: - Utility methods
 

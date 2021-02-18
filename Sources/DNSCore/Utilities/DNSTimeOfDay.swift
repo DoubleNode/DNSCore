@@ -41,6 +41,10 @@ public class DNSTimeOfDay: Hashable, Codable {
     public required init(timeValue: Float = 0) {
         value = timeValue
     }
+    public required init(hour: Int,
+                         minute: Int) {
+        value = Float(hour) + (Float(minute) / 60)
+    }
 
     public func timeOnDate(date: Date) -> Date {
         var components = DateComponents()
