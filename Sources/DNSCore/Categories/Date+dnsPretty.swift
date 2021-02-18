@@ -215,7 +215,7 @@ public extension Date {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
     }
-    func replaceTime(with seconds: TimeInterval = 0) -> Date? {
+    func replaceTime(with seconds: TimeInterval) -> Date? {
         var remainingSeconds = seconds
         let hour = Int(remainingSeconds / Seconds.deltaOneHour)
         remainingSeconds -= Double(hour) * Seconds.deltaOneHour
@@ -227,9 +227,9 @@ public extension Date {
                                 and: minute,
                                 and: second)
     }
-    func replaceTime(with hour: Int = 0,
-                     and minute: Int = 0,
-                     and second: Int = 0) -> Date? {
+    func replaceTime(with hour: Int,
+                     and minute: Int,
+                     and second: Int) -> Date? {
         var components = DateComponents()
         components.year = self.dnsYear()
         components.month = self.dnsMonth()
