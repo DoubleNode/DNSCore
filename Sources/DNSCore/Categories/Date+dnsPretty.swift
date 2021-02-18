@@ -200,9 +200,50 @@ public extension Date {
     var isLast365Days: Bool {
         return self.timeIntervalSinceNow > -Seconds.delta365Days
     }
-    
+
+    func replaceDate(with year: Int = 0,
+                     and month: Int = 0,
+                     and day: Int = 0) -> Date? {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        components.hour = self.dnsHour()
+        components.minute = self.dnsMinute()
+        components.second = self.dnsSecond()
+
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(from: components)
+    }
+    func replaceTime(with seconds: TimeInterval = 0) -> Date? {
+        var remainingSeconds = seconds
+        let hour = Int(remainingSeconds / Seconds.deltaOneHour)
+        remainingSeconds -= Double(hour) * Seconds.deltaOneHour
+        let minute = Int(remainingSeconds / Seconds.deltaOneMinute)
+        remainingSeconds -= Double(minute) * Seconds.deltaOneMinute
+        let second = Int(remainingSeconds)
+
+        return self.replaceTime(with: hour,
+                                and: minute,
+                                and: second)
+    }
+    func replaceTime(with hour: Int = 0,
+                     and minute: Int = 0,
+                     and second: Int = 0) -> Date? {
+        var components = DateComponents()
+        components.year = self.dnsYear()
+        components.month = self.dnsMonth()
+        components.day = self.dnsDay()
+        components.hour = hour
+        components.minute = minute
+        components.second = second
+
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(from: components)
+    }
+
     // MARK: - Utility methods
-    
+
     static func utilityMinimizeAmPm(of string: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
