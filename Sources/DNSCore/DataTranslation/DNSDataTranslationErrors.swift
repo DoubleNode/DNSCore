@@ -34,7 +34,7 @@ extension DNSDataTranslationError: DNSError {
     public var errorDescription: String? {
         return self.errorString
     }
-    public var errorString: String? {
+    public var errorString: String {
         switch self {
         case .reentered:
             return NSLocalizedString("DATATRANSLATION-Reentered Error", comment: "")
