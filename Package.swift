@@ -29,6 +29,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/DoubleNodeOpen/AtomicSwift.git", from: "1.2.2"),
         .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.3.0"),
+        .package(url: "https://github.com/DoubleNode/DNSError.git", from: "1.3.0"),
         .package(url: "https://github.com/Nirma/SFSymbol", from: "1.0.0"),
     ],
     targets: [
@@ -36,7 +37,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "DNSCore",
-            dependencies: ["AtomicSwift", "DNSCoreThreading", "SFSymbol"],
+            dependencies: ["AtomicSwift", "DNSCoreThreading", "DNSError", "SFSymbol"],
             resources: [
                 .process("Resources"),
             ]),

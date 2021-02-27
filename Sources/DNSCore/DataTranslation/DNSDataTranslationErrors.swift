@@ -7,11 +7,12 @@
 //
 
 import DNSCoreThreading
+import DNSError
 import Foundation
 
 public enum DNSDataTranslationError: Error
 {
-    case reentered(domain: String, file: String, line: String, method: String)
+    case reentered(_ codeLocation: DNSCodeLocation)
 }
 extension DNSDataTranslationError: DNSError {
     public static let domain = "DATATRANSLATION"
@@ -22,17 +23,18 @@ extension DNSDataTranslationError: DNSError {
     
     public var nsError: NSError! {
         switch self {
-        case .reentered(let domain, let file, let line, let method):
-            let userInfo: [String : Any] = [
-                "DNSDomain": domain, "DNSFile": file, "DNSLine": line, "DNSMethod": method,
-                NSLocalizedDescriptionKey: self.errorDescription ?? "Reentered Error"
-            ]
+        case .reentered(let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
             return NSError.init(domain: Self.domain,
                                 code: Self.Code.reentered.rawValue,
                                 userInfo: userInfo)
         }
     }
     public var errorDescription: String? {
+        return self.errorString
+    }
+    public var errorString: String? {
         switch self {
         case .reentered:
             return NSLocalizedString("DATATRANSLATION-Reentered Error", comment: "")
@@ -41,8 +43,8 @@ extension DNSDataTranslationError: DNSError {
     }
     public var failureReason: String? {
         switch self {
-        case .reentered(let domain, let file, let line, let method):
-            return "\(domain):\(file):\(line):\(method)"
+        case .reentered(let codeLocation):
+            return codeLocation.failureReason
         }
     }
 }

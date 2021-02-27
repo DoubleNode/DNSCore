@@ -222,7 +222,6 @@ public extension Date {
         let minute = Int(remainingSeconds / Seconds.deltaOneMinute)
         remainingSeconds -= Double(minute) * Seconds.deltaOneMinute
         let second = Int(remainingSeconds)
-
         return self.replaceTime(with: hour,
                                 and: minute,
                                 and: second)
