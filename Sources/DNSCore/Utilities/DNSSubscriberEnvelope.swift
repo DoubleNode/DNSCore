@@ -24,7 +24,7 @@ public class DNSSubscriberEnvelope {
         }
     }
 
-    required init(with newSubscriber: AnyCancellable? = nil) {
+    public required init(with newSubscriber: AnyCancellable? = nil) {
         guard let newSubscriber = subscriber else { return }
         self.open(with: newSubscriber)
     }
