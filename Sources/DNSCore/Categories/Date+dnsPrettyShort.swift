@@ -44,8 +44,7 @@ public extension Date {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: DateFormatter.Style.short,
                                                    timeStyle: DateFormatter.Style.none)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortSimple(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -58,8 +57,7 @@ public extension Date {
         let dateFormatString = "M/d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortSmart(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -74,8 +72,7 @@ public extension Date {
         } else {
             retval = utilityDateShortPrettyFuture(delta: delta)
         }
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -135,8 +132,7 @@ public extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         var retval = dateFormatter.string(from: self)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortMilitary(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -150,8 +146,7 @@ public extension Date {
                                                    dateStyle: dateStyle,
                                                    timeStyle: DateFormatter.Style.short)
         retval = Date.utilityMinimizeAmPm(of: retval)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityTimeShortSimple(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -168,8 +163,7 @@ public extension Date {
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityTimeShortSmart(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -185,8 +179,7 @@ public extension Date {
         } else {
             retval = utilityTimeShortPrettyFuture(delta: delta)
         }
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityTimeShortPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -282,8 +275,7 @@ public extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HHmm"
         var retval = dateFormatter.string(from: self)
-        guard end != nil else { return retval }
-        guard end == self else { return retval }
+        guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityTimeShortMilitary(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
