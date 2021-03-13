@@ -46,7 +46,9 @@ public extension Date {
                                                    timeStyle: DateFormatter.Style.none)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityDateShortSimple(delta: endDelta!)
+        let endString = end!.utilityDateShortSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateShortSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -57,10 +59,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityDateShortSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityDateShortSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateShortPretty(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -73,9 +74,8 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        let endString = end!.utilityDateShortPretty(delta: endDelta!)
+        let endString = end!.utilityDateShortPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
-
         retval += " - " + endString
         return retval
     }
@@ -134,7 +134,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
         
-        retval += " - " + end!.utilityDateShortMilitary(delta: endDelta!)
+        let endString = end!.utilityDateShortMilitary(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
 
@@ -146,7 +148,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityTimeShortSimple(delta: endDelta!)
+        let endString = end!.utilityTimeShortSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
 
@@ -161,10 +165,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityTimeShortSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityTimeShortSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
 
@@ -178,9 +181,8 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        let endString = end!.utilityTimeShortPretty(delta: endDelta!)
+        let endString = end!.utilityTimeShortPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
-
         retval += " - " + endString
         return retval
     }
@@ -275,7 +277,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
         
-        retval += " - " + end!.utilityTimeShortMilitary(delta: endDelta!)
+        let endString = end!.utilityTimeShortMilitary(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
 }

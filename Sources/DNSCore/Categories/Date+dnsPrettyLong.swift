@@ -40,7 +40,9 @@ public extension Date {
                                                    timeStyle: DateFormatter.Style.none)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityDateLongSimple(delta: endDelta!)
+        let endString = end!.utilityDateLongSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateLongSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -51,10 +53,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityDateLongSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityDateLongSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateLongPretty(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -77,7 +78,9 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        retval += " \(C.Localizations.DatePretty.to) " + end!.utilityDateLongPretty(delta: endDelta!)
+        let endString = end!.utilityDateLongPretty(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " \(C.Localizations.DatePretty.to) " + endString
         return retval
     }
 
@@ -89,7 +92,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityTimeLongSimple(delta: endDelta!)
+        let endString = end!.utilityTimeLongSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityTimeLongSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -103,10 +108,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityTimeLongSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityTimeLongSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityTimeLongPretty(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -139,7 +143,9 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        retval += " \(C.Localizations.DatePretty.to) " + end!.utilityTimeLongPretty(delta: endDelta!)
+        let endString = end!.utilityTimeLongPretty(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " \(C.Localizations.DatePretty.to) " + endString
         return retval
     }
 }

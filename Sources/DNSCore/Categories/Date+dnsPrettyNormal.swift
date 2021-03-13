@@ -46,7 +46,9 @@ public extension Date {
                                                    timeStyle: DateFormatter.Style.none)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityDateNormalSimple(delta: endDelta!)
+        let endString = end!.utilityDateNormalSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateNormalSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -57,10 +59,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityDateNormalSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityDateNormalSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityDateNormalPretty(delta: TimeInterval,
@@ -75,9 +76,8 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        let endString = end!.utilityDateNormalPretty(delta: endDelta!)
+        let endString = end!.utilityDateNormalPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
-
         retval += " - " + endString
         return retval
     }
@@ -139,7 +139,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityTimeNormalSimple(delta: endDelta!)
+        let endString = end!.utilityTimeNormalSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
     private func utilityTimeNormalSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -153,10 +155,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        let endRetval = end!.utilityTimeNormalSmart(delta: endDelta!)
-        if endRetval != retval {
-            retval += " - " + endRetval
-        }
+        let endString = end!.utilityTimeNormalSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
         return retval
     }
 
@@ -172,9 +173,8 @@ public extension Date {
         }
         guard end != nil else { return retval }
 
-        let endString = end!.utilityTimeNormalPretty(delta: endDelta!)
+        let endString = end!.utilityTimeNormalPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
-
         retval += " - " + endString
         return retval
     }
