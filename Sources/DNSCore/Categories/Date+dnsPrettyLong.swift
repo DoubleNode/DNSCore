@@ -39,6 +39,7 @@ public extension Date {
                                                    dateStyle: DateFormatter.Style.long,
                                                    timeStyle: DateFormatter.Style.none)
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityDateLongSimple(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -52,6 +53,7 @@ public extension Date {
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityDateLongSmart(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -77,6 +79,7 @@ public extension Date {
             retval = Formatters.dateLong.string(from: self)
         }
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityDateLongPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -91,6 +94,7 @@ public extension Date {
                                                    timeStyle: DateFormatter.Style.long)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityTimeLongSimple(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -107,6 +111,7 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityTimeLongSmart(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
@@ -142,6 +147,7 @@ public extension Date {
             retval = Formatters.dateLong.string(from: self)
         }
         guard end != nil else { return retval }
+        guard end == self else { return retval }
 
         let endString = end!.utilityTimeLongPretty(delta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
