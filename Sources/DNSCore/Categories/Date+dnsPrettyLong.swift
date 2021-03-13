@@ -51,7 +51,10 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityDateLongSmart(delta: endDelta!)
+        let endRetval = end!.utilityDateLongSmart(delta: endDelta!)
+        if endRetval != retval {
+            retval += " - " + endRetval
+        }
         return retval
     }
     private func utilityDateLongPretty(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
@@ -100,7 +103,10 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil else { return retval }
 
-        retval += " - " + end!.utilityTimeLongSmart(delta: endDelta!)
+        let endRetval = end!.utilityTimeLongSmart(delta: endDelta!)
+        if endRetval != retval {
+            retval += " - " + endRetval
+        }
         return retval
     }
     private func utilityTimeLongPretty(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
