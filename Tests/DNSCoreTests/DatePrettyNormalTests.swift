@@ -11,8 +11,8 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyNormalTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
-    static let defaultDateYear: String = "2020"
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "2021"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
@@ -47,15 +47,30 @@ class DatePrettyNormalTests: XCTestCase {
         XCTAssertEqual(result, C.Localizations.DatePretty.today)
     }
 
+    func test_dnsDateTime_withDefaultAndFormatNormalSimple_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime(as: .normalSimple)
+        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) at 1:20:41pm")
+    }
+    func test_dnsDateTime_withDefaultAndFormatNormalSmart_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime(as: .normalSmart)
+        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
+    }
+    func test_dnsDateTime_withNowAndFormatNormalPretty_shouldReturnString() {
+        let result: String = sut.dnsDateTime(as: .normalPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
+    }
+
     func test_dnsTime_withDefaultAndFormatNormalSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .normalSimple)
-        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) at 1:20:41pm")
+        XCTAssertEqual(result, "1:20:41pm")
     }
     func test_dnsTime_withDefaultAndFormatNormalSmart_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .normalSmart)
-        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
+        XCTAssertEqual(result, "1:20pm")
     }
     func test_dnsTime_withNowAndFormatNormalPretty_shouldReturnString() {
         let result: String = sut.dnsTime(as: .normalPretty)

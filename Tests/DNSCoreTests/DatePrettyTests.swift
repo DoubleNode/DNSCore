@@ -11,8 +11,8 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
-    static let defaultDateYear: String = "2020"
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "2021"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
@@ -37,10 +37,15 @@ class DatePrettyTests: XCTestCase {
         let result: String = sut.dnsDate()
         XCTAssertEqual(result, "Oct 9")
     }
+    func test_dnsDateTime_withDefaultAndDefaultFormat_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime()
+        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
+    }
     func test_dnsTime_withDefaultAndDefaultFormat_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime()
-        XCTAssertEqual(result, "Oct 9 @ 1:20pm")
+        XCTAssertEqual(result, "1:20pm")
     }
     func test_dnsDate_withDefaultAndEndDateDefaultFormat_shouldReturnString() {
         sut = defaultDate

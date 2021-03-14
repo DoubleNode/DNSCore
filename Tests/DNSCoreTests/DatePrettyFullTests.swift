@@ -11,11 +11,11 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyFullTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1602267641      // 2020-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "Central Daylight Time"
-    static let defaultDateDay: String = "Friday"
+    static let defaultDateDay: String = "Saturday"
     static let defaultDateMonth: String = "October"
-    static let defaultDateYear: String = "2020"
+    static let defaultDateYear: String = "2021"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
 
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
@@ -53,15 +53,30 @@ class DatePrettyFullTests: XCTestCase {
         XCTAssertEqual(result, C.Localizations.DatePretty.today)
     }
 
+    func test_dnsDateTime_withDefaultAndFormatFullSimple_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime(as: .fullSimple)
+        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9, \(defaultDateYear) at 1:20:41pm \(defaultDateTimezone)")
+    }
+    func test_dnsDateTime_withDefaultAndFormatFullSmart_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime(as: .fullSmart)
+        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9 \(C.Localizations.DatePretty.at) 1:20:41pm \(defaultDateTimezone)")
+    }
+    func test_dnsDateTime_withNowAndFormatFullPretty_shouldReturnString() {
+        let result: String = sut.dnsDateTime(as: .fullPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
+    }
+
     func test_dnsTime_withDefaultAndFormatFullSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .fullSimple)
-        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9, \(defaultDateYear) at 1:20:41pm \(defaultDateTimezone)")
+        XCTAssertEqual(result, "1:20:41pm \(defaultDateTimezone)")
     }
     func test_dnsTime_withDefaultAndFormatFullSmart_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .fullSmart)
-        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9 \(C.Localizations.DatePretty.at) 1:20:41pm \(defaultDateTimezone)")
+        XCTAssertEqual(result, "1:20:41pm \(defaultDateTimezone)")
     }
     func test_dnsTime_withNowAndFormatFullPretty_shouldReturnString() {
         let result: String = sut.dnsTime(as: .fullPretty)

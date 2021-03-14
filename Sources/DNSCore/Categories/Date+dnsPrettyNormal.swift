@@ -9,49 +9,75 @@
 import Foundation
 
 public extension Date {
-    func utilityDateNormal(delta: TimeInterval,
-                           to end: Date? = nil,
-                           endDelta: TimeInterval? = nil,
-                           style: Format.Style) -> String {
+    func utilityDateNormal(delta: TimeInterval, style: Format.Style) -> String {
         switch style {
         case .simple:
-            return utilityDateNormalSimple(delta: delta, to: end, endDelta: endDelta)
+            return utilityDateNormalSimple(delta: delta)
         case .smart:
-            return utilityDateNormalSmart(delta: delta, to: end, endDelta: endDelta)
+            return utilityDateNormalSmart(delta: delta)
         case .pretty:
-            return utilityDateNormalPretty(delta: delta, to: end, endDelta: endDelta)
+            return utilityDateNormalPretty(delta: delta)
         case .military:
             return ""
         }
     }
-    func utilityTimeNormal(delta: TimeInterval,
-                           to end: Date? = nil,
-                           endDelta: TimeInterval? = nil,
-                           style: Format.Style) -> String {
+    func utilityTimeNormal(delta: TimeInterval, style: Format.Style) -> String {
         switch style {
         case .simple:
-            return utilityTimeNormalSimple(delta: delta, to: end, endDelta: endDelta)
+            return utilityTimeNormalSimple(delta: delta)
         case .smart:
-            return utilityTimeNormalSmart(delta: delta, to: end, endDelta: endDelta)
+            return utilityTimeNormalSmart(delta: delta)
         case .pretty:
-            return utilityTimeNormalPretty(delta: delta, to: end, endDelta: endDelta)
+            return utilityTimeNormalPretty(delta: delta)
+        case .military:
+            return ""
+        }
+    }
+    func utilityDateNormal(startDelta: TimeInterval, to end: Date? = nil,
+                           endDelta: TimeInterval? = nil, style: Format.Style) -> String {
+        switch style {
+        case .simple:
+            return utilityDateNormalSimple(startDelta: startDelta, to: end, endDelta: endDelta)
+        case .smart:
+            return utilityDateNormalSmart(startDelta: startDelta, to: end, endDelta: endDelta)
+        case .pretty:
+            return utilityDateNormalPretty(startDelta: startDelta, to: end, endDelta: endDelta)
+        case .military:
+            return ""
+        }
+    }
+    func utilityTimeNormal(startDelta: TimeInterval, to end: Date? = nil,
+                           endDelta: TimeInterval? = nil, style: Format.Style) -> String {
+        switch style {
+        case .simple:
+            return utilityTimeNormalSimple(startDelta: startDelta, to: end, endDelta: endDelta)
+        case .smart:
+            return utilityTimeNormalSmart(startDelta: startDelta, to: end, endDelta: endDelta)
+        case .pretty:
+            return utilityTimeNormalPretty(startDelta: startDelta, to: end, endDelta: endDelta)
         case .military:
             return ""
         }
     }
 
-    private func utilityDateNormalSimple(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+    private func utilityDateNormalSimple(delta: TimeInterval) -> String {
+        return self.utilityDateNormalSimple(startDelta: delta)
+    }
+    private func utilityDateNormalSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: DateFormatter.Style.medium,
                                                    timeStyle: DateFormatter.Style.none)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateNormalSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityDateNormalSimple(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityDateNormalSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+    private func utilityDateNormalSmart(delta: TimeInterval) -> String {
+        return self.utilityDateNormalSmart(startDelta: delta)
+    }
+    private func utilityDateNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let dateFormatter = DateFormatter()
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dateFormatString = "MMM d\(yearFormatSubString)"
@@ -59,24 +85,27 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateNormalSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityDateNormalSmart(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityDateNormalPretty(delta: TimeInterval,
+    private func utilityDateNormalPretty(delta: TimeInterval) -> String {
+        return self.utilityDateNormalPretty(startDelta: delta)
+    }
+    private func utilityDateNormalPretty(startDelta: TimeInterval,
                                          to end: Date? = nil,
                                          endDelta: TimeInterval? = nil) -> String {
         var retval = ""
 
-        if delta < 0 {
-            retval = utilityDateShortPrettyPast(delta: delta)
+        if startDelta < 0 {
+            retval = utilityDateShortPrettyPast(delta: startDelta)
         } else {
-            retval = utilityDateShortPrettyFuture(delta: delta)
+            retval = utilityDateShortPrettyFuture(delta: startDelta)
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateNormalPretty(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityDateNormalPretty(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -131,7 +160,13 @@ public extension Date {
         return retval
     }
 
-    private func utilityTimeNormalSimple(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+    private func utilityTimeNormalSimple(delta: TimeInterval) -> String {
+        let retval = DateFormatter.localizedString(from: self,
+                                                   dateStyle: DateFormatter.Style.none,
+                                                   timeStyle: DateFormatter.Style.medium)
+        return Date.utilityMinimizeAmPm(of: retval)
+    }
+    private func utilityTimeNormalSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let dateStyle = self.isSameDate(as: end) ? DateFormatter.Style.none : DateFormatter.Style.medium
         var retval = DateFormatter.localizedString(from: self,
                                                    dateStyle: dateStyle,
@@ -139,12 +174,20 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeNormalSimple(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityTimeNormalSimple(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityTimeNormalSmart(delta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
+    private func utilityTimeNormalSmart(delta: TimeInterval) -> String {
+        let timeFormatString = "h\(self.dnsMinute() > 0 ? ":mm" : "")a"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = timeFormatString
+        let retval = dateFormatter.string(from: self)
+        return Date.utilityMinimizeAmPm(of: retval)
+    }
+    private func utilityTimeNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil) -> String {
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end) ? "" : "MMM d\(yearFormatSubString) @ "
         let timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
@@ -155,25 +198,32 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeNormalSmart(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityTimeNormalSmart(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
 
-    private func utilityTimeNormalPretty(delta: TimeInterval,
+    private func utilityTimeNormalPretty(delta: TimeInterval) -> String {
+        if delta < 0 {
+            return utilityTimeNormalPrettyPast(delta: delta)
+        } else {
+            return utilityTimeNormalPrettyFuture(delta: delta)
+        }
+    }
+    private func utilityTimeNormalPretty(startDelta: TimeInterval,
                                          to end: Date? = nil,
                                          endDelta: TimeInterval? = nil) -> String {
         var retval = ""
 
-        if delta < 0 {
-            retval = utilityTimeNormalPrettyPast(delta: delta)
+        if startDelta < 0 {
+            retval = utilityTimeNormalPrettyPast(delta: startDelta)
         } else {
-            retval = utilityTimeNormalPrettyFuture(delta: delta)
+            retval = utilityTimeNormalPrettyFuture(delta: startDelta)
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeNormalPretty(delta: endDelta!, to: end, endDelta: endDelta)
+        let endString = end!.utilityTimeNormalPretty(startDelta: endDelta!, to: end, endDelta: endDelta)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

@@ -91,7 +91,18 @@ public extension Date {
     }
 
     func dnsDateTime(as format: Format = Format()) -> String {
-        return dnsDate(as: format) + " " + dnsTime(as: format)
+        let startDelta = self.timeIntervalSinceNow
+        
+        switch format.size {
+        case .short:
+            return utilityTimeShort(startDelta: startDelta, style: format.style)
+        case .normal:
+            return utilityTimeNormal(startDelta: startDelta, style: format.style)
+        case .long:
+            return utilityTimeLong(startDelta: startDelta, style: format.style)
+        case .full:
+            return utilityTimeFull(startDelta: startDelta, style: format.style)
+        }
     }
     func dnsDate(as format: Format = Format()) -> String {
         let delta = self.timeIntervalSinceNow
@@ -123,33 +134,33 @@ public extension Date {
     }
 
     func dnsDate(to end: Date, as format: Format = Format()) -> String {
-        let delta = self.timeIntervalSinceNow
+        let startDelta = self.timeIntervalSinceNow
         let endDelta = end.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityDateShort(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .normal:
-            return utilityDateNormal(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .long:
-            return utilityDateLong(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .full:
-            return utilityDateFull(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         }
     }
     func dnsTime(to end: Date, as format: Format = Format()) -> String {
-        let delta = self.timeIntervalSinceNow
+        let startDelta = self.timeIntervalSinceNow
         let endDelta = end.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityTimeShort(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .normal:
-            return utilityTimeNormal(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .long:
-            return utilityTimeLong(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         case .full:
-            return utilityTimeFull(delta: delta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
         }
     }
 
