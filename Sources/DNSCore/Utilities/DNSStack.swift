@@ -10,9 +10,11 @@
 //  https://github.com/raywenderlich/swift-algorithm-club
 //
 
+import AtomicSwift
 import Foundation
 
 public struct DNSStack<T> {
+    @Atomic
     fileprivate var array = [T]()
 
     public var isEmpty: Bool {

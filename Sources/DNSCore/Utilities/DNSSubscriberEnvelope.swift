@@ -6,9 +6,11 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import AtomicSwift
 import Combine
 
 public class DNSSubscriberEnvelope {
+    @Atomic
     public static var subscribers: [AnyCancellable] = []
     
     var subscriber: AnyCancellable? {

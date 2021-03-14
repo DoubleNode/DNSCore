@@ -10,10 +10,13 @@
 //  https://github.com/raywenderlich/swift-algorithm-club
 //
 
+import AtomicSwift
 import Foundation
 
 public struct DNSQueue<T> {
+    @Atomic
     fileprivate var array = [T?]()
+    @Atomic
     fileprivate var head = 0
 
     public var isEmpty: Bool {
