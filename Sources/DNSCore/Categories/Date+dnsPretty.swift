@@ -90,77 +90,82 @@ public extension Date {
         public static let delta365Days = Seconds.deltaOneDay * 365
     }
 
-    func dnsDateTime(as format: Format = Format()) -> String {
+    func dnsDateTime(as format: Format = Format(),
+                     in timeZone: TimeZone = TimeZone.current) -> String {
         let startDelta = self.timeIntervalSinceNow
         
         switch format.size {
         case .short:
-            return utilityTimeShort(startDelta: startDelta, style: format.style)
+            return utilityTimeShort(startDelta: startDelta, style: format.style, in: timeZone)
         case .normal:
-            return utilityTimeNormal(startDelta: startDelta, style: format.style)
+            return utilityTimeNormal(startDelta: startDelta, style: format.style, in: timeZone)
         case .long:
-            return utilityTimeLong(startDelta: startDelta, style: format.style)
+            return utilityTimeLong(startDelta: startDelta, style: format.style, in: timeZone)
         case .full:
-            return utilityTimeFull(startDelta: startDelta, style: format.style)
+            return utilityTimeFull(startDelta: startDelta, style: format.style, in: timeZone)
         }
     }
-    func dnsDate(as format: Format = Format()) -> String {
+    func dnsDate(as format: Format = Format(),
+                 in timeZone: TimeZone = TimeZone.current) -> String {
         let delta = self.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityDateShort(delta: delta, style: format.style)
+            return utilityDateShort(delta: delta, style: format.style, in: timeZone)
         case .normal:
-            return utilityDateNormal(delta: delta, style: format.style)
+            return utilityDateNormal(delta: delta, style: format.style, in: timeZone)
         case .long:
-            return utilityDateLong(delta: delta, style: format.style)
+            return utilityDateLong(delta: delta, style: format.style, in: timeZone)
         case .full:
-            return utilityDateFull(delta: delta, style: format.style)
+            return utilityDateFull(delta: delta, style: format.style, in: timeZone)
         }
     }
-    func dnsTime(as format: Format = Format()) -> String {
+    func dnsTime(as format: Format = Format(),
+                 in timeZone: TimeZone = TimeZone.current) -> String {
         let delta = self.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityTimeShort(delta: delta, style: format.style)
+            return utilityTimeShort(delta: delta, style: format.style, in: timeZone)
         case .normal:
-            return utilityTimeNormal(delta: delta, style: format.style)
+            return utilityTimeNormal(delta: delta, style: format.style, in: timeZone)
         case .long:
-            return utilityTimeLong(delta: delta, style: format.style)
+            return utilityTimeLong(delta: delta, style: format.style, in: timeZone)
         case .full:
-            return utilityTimeFull(delta: delta, style: format.style)
+            return utilityTimeFull(delta: delta, style: format.style, in: timeZone)
         }
     }
 
-    func dnsDate(to end: Date, as format: Format = Format()) -> String {
+    func dnsDate(to end: Date, as format: Format = Format(),
+                 in timeZone: TimeZone = TimeZone.current) -> String {
         let startDelta = self.timeIntervalSinceNow
         let endDelta = end.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityDateShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .normal:
-            return utilityDateNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .long:
-            return utilityDateLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .full:
-            return utilityDateFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityDateFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         }
     }
-    func dnsTime(to end: Date, as format: Format = Format()) -> String {
+    func dnsTime(to end: Date, as format: Format = Format(),
+                 in timeZone: TimeZone = TimeZone.current) -> String {
         let startDelta = self.timeIntervalSinceNow
         let endDelta = end.timeIntervalSinceNow
 
         switch format.size {
         case .short:
-            return utilityTimeShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeShort(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .normal:
-            return utilityTimeNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .long:
-            return utilityTimeLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .full:
-            return utilityTimeFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style)
+            return utilityTimeFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         }
     }
 
