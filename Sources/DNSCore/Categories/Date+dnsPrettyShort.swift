@@ -70,9 +70,11 @@ public extension Date {
     }
     private func utilityDateShortSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        var retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: DateFormatter.Style.short,
-                                                   timeStyle: DateFormatter.Style.none)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
@@ -87,6 +89,7 @@ public extension Date {
     private func utilityDateShortSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         let yearFormatSubString = self.isSameYear(as: end) ? "" : "/yy"
         let dateFormatString = "M/d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
@@ -138,7 +141,10 @@ public extension Date {
         case 0..<Seconds.deltaSixWeeks:
             retval = String(format: C.Localizations.DatePretty.weeksShort, "3+")
         default:
-            retval = Formatters.dateShort.string(from: self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            retval = dateFormatter.string(from: self)
         }
 
         return retval
@@ -164,7 +170,10 @@ public extension Date {
         case 0..<Seconds.deltaSixWeeks:
             retval = String(format: C.Localizations.DatePretty.weeksAgoShort, "3+")
         default:
-            retval = NSLocalizedString("\(Formatters.dateShort.string(from: self))", comment: "")
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            retval = NSLocalizedString("\(dateFormatter.string(from: self))", comment: "")
         }
 
         return retval
@@ -176,6 +185,7 @@ public extension Date {
     private func utilityDateShortMilitary(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                           in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = "yyyyMMdd"
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
@@ -188,17 +198,21 @@ public extension Date {
 
     private func utilityTimeShortSimple(delta: TimeInterval,
                                         in timeZone: TimeZone) -> String {
-        let retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: DateFormatter.Style.none,
-                                                   timeStyle: DateFormatter.Style.short)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = DateFormatter.Style.none
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeShortSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
         let dateStyle = self.isSameDate(as: end) ? DateFormatter.Style.none : DateFormatter.Style.short
-        var retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: dateStyle,
-                                                   timeStyle: DateFormatter.Style.short)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
@@ -212,6 +226,7 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         let timeFormatString = "h\(self.dnsMinute() > 0 ? ":mm" : "")a"
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = timeFormatString
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
@@ -223,6 +238,7 @@ public extension Date {
         let timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
 
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
@@ -296,7 +312,10 @@ public extension Date {
         case 0..<Seconds.deltaSixWeeks:
             retval = String(format: C.Localizations.DatePretty.weeksShort, "3+")
         default:
-            retval = Formatters.dateShort.string(from: self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            retval = dateFormatter.string(from: self)
         }
 
         return retval
@@ -340,7 +359,10 @@ public extension Date {
         case 0..<Seconds.deltaSixWeeks:
             retval = String(format: C.Localizations.DatePretty.weeksAgoShort, "3+")
         default:
-            retval = Formatters.dateShort.string(from: self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            retval = dateFormatter.string(from: self)
         }
 
         return retval
@@ -348,12 +370,14 @@ public extension Date {
     private func utilityTimeShortMilitary(delta: TimeInterval,
                                           in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = "HHmm"
         return dateFormatter.string(from: self)
     }
     private func utilityTimeShortMilitary(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                           in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = "HHmm"
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }

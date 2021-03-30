@@ -43,29 +43,6 @@ public extension Date {
         }
     }
 
-    enum Formatters {
-        static var dateFull: DateFormatter {
-            let retval = DateFormatter()
-            retval.dateStyle = DateFormatter.Style.full
-            return retval
-        }
-        static var dateLong: DateFormatter {
-            let retval = DateFormatter()
-            retval.dateStyle = DateFormatter.Style.long
-            return retval
-        }
-        static var dateMedium: DateFormatter {
-            let retval = DateFormatter()
-            retval.dateStyle = DateFormatter.Style.medium
-            return retval
-        }
-        static var dateShort: DateFormatter {
-            let retval = DateFormatter()
-            retval.dateStyle = DateFormatter.Style.short
-            return retval
-        }
-    }
-
     enum Seconds {
         public static let deltaOneMinute = Double(60)
         public static let deltaTwoMinutes = Seconds.deltaOneMinute * 2

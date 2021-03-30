@@ -69,9 +69,11 @@ public extension Date {
     }
     private func utilityDateLongSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
-        var retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: DateFormatter.Style.long,
-                                                   timeStyle: DateFormatter.Style.none)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateLongSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
@@ -85,6 +87,7 @@ public extension Date {
     private func utilityDateLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         let yearFormatSubString = self.isSameYear(as: end) ? "" : ", yyyy"
         let dateFormatString = "MMMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
@@ -116,7 +119,10 @@ public extension Date {
             let weeksAgo = Int(floor(startDelta / Seconds.deltaOneWeek))
             retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
         } else {
-            retval = Formatters.dateLong.string(from: self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.long
+            retval = dateFormatter.string(from: self)
         }
         guard end != nil && end != self else { return retval }
 
@@ -127,17 +133,21 @@ public extension Date {
     }
 
     private func utilityTimeLongSimple(delta: TimeInterval, in timeZone: TimeZone) -> String {
-        let retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: DateFormatter.Style.none,
-                                                   timeStyle: DateFormatter.Style.long)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = DateFormatter.Style.none
+        dateFormatter.timeStyle = DateFormatter.Style.long
+        let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeLongSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         let dateStyle = self.isSameDate(as: end) ? DateFormatter.Style.none : DateFormatter.Style.long
-        var retval = DateFormatter.localizedString(from: self,
-                                                   dateStyle: dateStyle,
-                                                   timeStyle: DateFormatter.Style.long)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = DateFormatter.Style.long
+        var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
@@ -150,6 +160,7 @@ public extension Date {
         let timeFormatString = "h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
 
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = timeFormatString
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
@@ -161,6 +172,7 @@ public extension Date {
         let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
 
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
@@ -201,7 +213,10 @@ public extension Date {
             let weeksAgo = Int(floor(startDelta / Seconds.deltaOneWeek))
             retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
         } else {
-            retval = Formatters.dateLong.string(from: self)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateStyle = DateFormatter.Style.long
+            retval = dateFormatter.string(from: self)
         }
         guard end != nil && end != self else { return retval }
 
