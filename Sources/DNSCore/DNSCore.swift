@@ -7,10 +7,10 @@
 //
 
 import DNSCoreThreading
+import DNSError
 import Foundation
 import UIKit
 
-@objc
 public protocol DNSCoreApplicationProtocol {
     // MARK: - Base methods
 
@@ -24,7 +24,7 @@ public protocol DNSCoreApplicationProtocol {
     func networkActivity(display:Bool)
     func rootViewController() -> UIViewController
 
-    func reportError(_ nsError: NSError)
+    func reportError(_ dnsError: DNSError)
     func reportException(_ nsException: NSException)
     func reportLog(_ string: String)
     func shortenErrorPath(_ filename: String) -> String
@@ -70,8 +70,8 @@ public class DNSCore {
     public class var appBuildString: String {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
-    public class func reportError(_ nsError: NSError) {
-        DNSCore.appDelegate?.reportError(nsError)
+    public class func reportError(_ dnsError: DNSError) {
+        DNSCore.appDelegate?.reportError(dnsError)
     }
     public class func reportException(_ nsException: NSException) {
         DNSCore.appDelegate?.reportException(nsException)
