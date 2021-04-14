@@ -105,3 +105,4 @@ public enum C {
 public typealias DNSBoolBlock = (Bool) -> Void
 public typealias DNSBoolBoolBlock = (Bool, Bool) -> Void
 public typealias DNSBoolErrorBlock = (Bool, DNSError) -> Void
+public typealias DNSErrorBlock = (DNSError) -> Void
