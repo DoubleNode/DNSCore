@@ -6,6 +6,7 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import DNSError
 import Foundation
 
 public enum DNSCoreError: Error, Equatable {
@@ -103,3 +104,4 @@ public enum C {
 
 public typealias DNSBoolBlock = (Bool) -> Void
 public typealias DNSBoolBoolBlock = (Bool, Bool) -> Void
+public typealias DNSBoolErrorBlock = (Bool, DNSError) -> Void
