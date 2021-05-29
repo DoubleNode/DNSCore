@@ -216,7 +216,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeShortSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateShortSimple(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + ", " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -244,7 +246,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeShortSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateShortSmart(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " @ " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -269,7 +273,9 @@ public extension Date {
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeShortPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateShortPretty(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " @ " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -382,7 +388,9 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeShortMilitary(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateShortMilitary(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortMilitary(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " @ " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

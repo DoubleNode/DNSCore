@@ -156,7 +156,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateFullSimple(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " \(C.Localizations.DatePretty.at) " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -186,7 +188,9 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeFullSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateFullSmart(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeFullSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " \(C.Localizations.DatePretty.at) " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

@@ -14,10 +14,12 @@ class DatePrettyLongTests: XCTestCase {
     static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
     static let defaultDateYear: String = "2021"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
-    
+    static let defaultSimilarEndDateTimeIntervalSince1970: TimeInterval = 1635448038   // 2021-10-28T19:07:18+00:00
+
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
     let defaultDateYear = DatePrettyLongTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
+    let defaultSimilarEndDate = Date(timeIntervalSince1970: defaultSimilarEndDateTimeIntervalSince1970)
 
     private var sut: Date!
 
@@ -100,6 +102,12 @@ class DatePrettyLongTests: XCTestCase {
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSimple)
         XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20:41pm CDT - September 3, 2031 at 11:32:21am CDT")
+    }
+    func test_dnsTime_withDefaultAndSimilarEndDateFormatLongSmart_shouldReturnString() {
+        sut = defaultDate
+        let end = defaultSimilarEndDate
+        let result: String = sut.dnsTime(to: end, as: .longSmart)
+        XCTAssertEqual(result, "October 9 @ 1:20:41pm CDT - October 28 @ 2:07:18pm CDT")
     }
     func test_dnsTime_withDefaultAndEndDateFormatLongSmart_shouldReturnString() {
         sut = defaultDate
