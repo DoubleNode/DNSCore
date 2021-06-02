@@ -15,19 +15,23 @@ public class DNSString: Hashable, Codable {
         case en
         case es419 = "es-419"
     }
+    private let fallbackLanguage = Language.en
 
-    private var _strings: [String: String] = [:]
+    private var _strings: [String: String]
 
     public var asString: String {
-        _strings[DNSCore.languageCode] ?? ""
+        self.asString(for: DNSCore.languageCode)
     }
     public func asString(for language: DNSString.Language) -> String {
-        _strings[language.rawValue] ?? ""
+        self.asString(for: language.rawValue)
     }
     public func asString(for languageStr: String) -> String {
-        _strings[languageStr] ?? ""
+        _strings[languageStr] ?? (_strings[fallbackLanguage.rawValue] ?? "<MISSING_STRING>")
     }
-    public init(with strings: [DNSString.Language: String] = [:]) {
+    public init() {
+        _strings = [:]
+    }
+    public init(with strings: [DNSString.Language: String]) {
         var newStrings: [String: String] = [:]
         strings.keys.forEach { newStrings[$0.rawValue] = strings[$0] }
         _strings = newStrings
@@ -43,6 +47,7 @@ public class DNSString: Hashable, Codable {
         case en, es419
     }
     required public init(from decoder: Decoder) throws {
+        _strings = [:]
         let container = try decoder.container(keyedBy: CodingKeys.self)
         _strings[Language.en.rawValue] = try container.decode(String.self, forKey: .en)
         _strings[Language.es419.rawValue] = try container.decode(String.self, forKey: .es419)
