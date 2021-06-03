@@ -70,7 +70,7 @@ public class DNSString: Hashable, Codable, NSCopying {
 
     // Equatable protocol methods
     static public func == (lhs: DNSString, rhs: DNSString) -> Bool {
-        return lhs.asString == rhs.asString
+        return lhs._strings == rhs._strings
     }
 
     // Hashable protocol methods
