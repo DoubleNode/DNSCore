@@ -62,7 +62,7 @@ public class DNSString: Hashable, Codable {
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(_strings[Language.en.rawValue], forKey: .en)
-        try container.encode(_strings[Language.es419.rawValue], forKey: .es419)
+        try container.encode(_strings[Language.en.rawValue] ?? "", forKey: .en)
+        try container.encode(_strings[Language.es419.rawValue] ?? "", forKey: .es419)
     }
 }
