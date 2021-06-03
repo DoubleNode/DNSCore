@@ -50,6 +50,11 @@ public class DNSString: Hashable, Codable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(_strings)
     }
+    public func replace(for languageStr: String,
+                        with string: String) -> DNSString {
+        _strings[languageStr] = string
+        return self
+    }
 
     public enum CodingKeys: String, CodingKey {
         case en
