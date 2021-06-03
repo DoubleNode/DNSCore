@@ -36,6 +36,14 @@ public class DNSString: Hashable, Codable {
         strings.keys.forEach { newStrings[$0.rawValue] = strings[$0] }
         _strings = newStrings
     }
+    public init(with strings: [String: String]) {
+        _strings = strings
+    }
+    public init(with string: String) {
+        var newStrings: [String: String] = [:]
+        newStrings[fallbackLanguage.rawValue] = string
+        _strings = newStrings
+    }
     static public func == (lhs: DNSString, rhs: DNSString) -> Bool {
         return lhs.asString == rhs.asString
     }
