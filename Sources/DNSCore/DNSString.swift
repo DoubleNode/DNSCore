@@ -52,7 +52,8 @@ public class DNSString: Hashable, Codable {
     }
 
     public enum CodingKeys: String, CodingKey {
-        case en, es419
+        case en
+        case es419 = "es-419"
     }
     required public init(from decoder: Decoder) throws {
         _strings = [:]
