@@ -10,7 +10,7 @@ import Foundation
 import LocalAuthentication
 import UIKit
 
-public class DNSString: Hashable, Codable {
+public class DNSString: Hashable, Codable, NSCopying {
     public enum Language: String, CaseIterable {
         case en
         case es419 = "es-419"
@@ -44,12 +44,6 @@ public class DNSString: Hashable, Codable {
         newStrings[fallbackLanguage.rawValue] = string
         _strings = newStrings
     }
-    static public func == (lhs: DNSString, rhs: DNSString) -> Bool {
-        return lhs.asString == rhs.asString
-    }
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(_strings)
-    }
     @discardableResult
     public func replace(for languageStr: String,
                         with string: String) -> DNSString {
@@ -57,6 +51,7 @@ public class DNSString: Hashable, Codable {
         return self
     }
 
+    // Codable protocol methods
     public enum CodingKeys: String, CodingKey {
         case en
         case es419 = "es-419"
@@ -71,5 +66,21 @@ public class DNSString: Hashable, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_strings[Language.en.rawValue] ?? "", forKey: .en)
         try container.encode(_strings[Language.es419.rawValue] ?? "", forKey: .es419)
+    }
+
+    // Equatable protocol methods
+    static public func == (lhs: DNSString, rhs: DNSString) -> Bool {
+        return lhs.asString == rhs.asString
+    }
+
+    // Hashable protocol methods
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(_strings)
+    }
+
+    // NSCopying protocol methods
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let copy = DNSString(with: _strings)
+        return copy
     }
 }
