@@ -146,6 +146,7 @@ public class DNSCore {
     public class func setting(for key:String, withDefault defaultValue:Any = "") -> Any {
         return _setting(for: "Setting_\(key)", withDefault: defaultValue)
     }
+    @discardableResult
     public class func setting(set key:String, with value:Any?) -> Any? {
         return _setting(set: "Setting_\(key)", with: value)
     }
