@@ -194,6 +194,14 @@ public extension Date {
         return self.timeIntervalSinceNow > -Seconds.delta365Days
     }
 
+    static var today: Date {
+        Date().replaceTime() ?? Date()
+    }
+    static var yesterday: Date {
+        Date(timeIntervalSinceNow: -Seconds.deltaOneDay).replaceTime()
+        ?? Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
+    }
+
     func replaceDate(with year: Int = 0,
                      and month: Int = 0,
                      and day: Int = 0) -> Date? {
@@ -219,9 +227,9 @@ public extension Date {
                                 and: minute,
                                 and: second)
     }
-    func replaceTime(with hour: Int,
-                     and minute: Int,
-                     and second: Int) -> Date? {
+    func replaceTime(with hour: Int = 0,
+                     and minute: Int = 0,
+                     and second: Int = 0) -> Date? {
         var components = DateComponents()
         components.year = self.dnsYear()
         components.month = self.dnsMonth()

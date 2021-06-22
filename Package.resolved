@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/DoubleNode/DNSCoreThreading.git",
         "state": {
           "branch": null,
-          "revision": "fdb56495ecd4ef493711ebebf21dbcb52cc9c01f",
-          "version": "1.5.0"
+          "revision": "ce33fcdf91ceedbfdcdb6d6c456130c724c7746f",
+          "version": "1.5.1"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/DoubleNode/DNSError.git",
         "state": {
           "branch": null,
-          "revision": "b0ddca4259c9d6beb67f3430d68c04d2e4e31cd1",
-          "version": "1.5.0"
+          "revision": "9c92588ceedfeb99e00fbb09bb0756beb986fcba",
+          "version": "1.5.2"
         }
       },
       {
