@@ -160,19 +160,19 @@ public extension Date {
     func dnsWeekday() -> Int    {   return dnsComponent(component: .weekday)    }
     func dnsQuarter() -> Int    {   return dnsComponent(component: .quarter)    }
 
-    func isSameDay(as date: Date? = nil) -> Bool {
-        return self.dnsDay() == (date != nil ? date! : Date()).dnsDay()
+    func isSameDay(as date: Date = Date()) -> Bool {
+        return self.dnsDay() == date.dnsDay()
     }
-    func isSameWeekday(as date: Date? = nil) -> Bool {
-        return self.dnsWeekday() == (date != nil ? date! : Date()).dnsWeekday()
+    func isSameWeekday(as date: Date = Date()) -> Bool {
+        return self.dnsWeekday() == date.dnsWeekday()
     }
-    func isSameMonth(as date: Date? = nil) -> Bool {
-        return self.dnsMonth() == (date != nil ? date! : Date()).dnsMonth()
+    func isSameMonth(as date: Date = Date()) -> Bool {
+        return self.dnsMonth() == date.dnsMonth()
     }
-    func isSameYear(as date: Date? = nil) -> Bool {
-        return self.dnsYear() == (date != nil ? date! : Date()).dnsYear()
+    func isSameYear(as date: Date = Date()) -> Bool {
+        return self.dnsYear() == date.dnsYear()
     }
-    func isSameDate(as date: Date? = nil) -> Bool {
+    func isSameDate(as date: Date = Date()) -> Bool {
         return self.isSameDay(as: date) &&
             self.isSameMonth(as: date) &&
             self.isSameYear(as: date)
