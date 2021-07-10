@@ -9,9 +9,9 @@
 import Foundation
 
 public enum DNSPriority {
-    static let none = 0
-    static let low = 250
-    static let normal = 500
-    static let high = 750
-    static let highest = 1000
+    public static let none = 0
+    public static let low = 250
+    public static let normal = 500
+    public static let high = 750
+    public static let highest = 1000
 }
