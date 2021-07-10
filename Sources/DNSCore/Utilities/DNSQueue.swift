@@ -3,7 +3,7 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 //  Based on code from the Swift Algorithm Club
 //  Licensed under the MIT open source license

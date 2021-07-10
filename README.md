@@ -34,7 +34,7 @@ Once you have your Swift package set up, adding Alamofire as a dependency is as 
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/DoubleNode/DNSCore.git", from: "1.5.17")
+.package(url: "https://github.com/DoubleNode/DNSCore.git", from: "1.5.18")
 ]
 ```
 
@@ -51,4 +51,4 @@ DNSCore and the DNSFramework are owned and maintained by Darren Ehlers and [Doub
 
 ## License
 
-DNSCore and the DNSFramework are Copyright © 2020- 2016 Darren Ehlers and DoubleNode, LLC. All rights reserved.
+DNSCore and the DNSFramework are Copyright © 2021- 2016 Darren Ehlers and DoubleNode, LLC. All rights reserved.
