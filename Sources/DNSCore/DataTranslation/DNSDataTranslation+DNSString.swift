@@ -14,7 +14,7 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func dnsstring(from any: Any?) -> DNSString? {
         guard any != nil else { return nil }
-        if any as? [String: String] != nil {
+        if any is [String: String] {
             return self.dnsstring(from: any as? [String: String])
         }
         return self.dnsstring(from: any as? String)

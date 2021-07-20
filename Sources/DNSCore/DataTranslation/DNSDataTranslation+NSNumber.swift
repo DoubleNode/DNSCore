@@ -14,38 +14,35 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func number(from any: Any?) -> NSNumber? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
+        if any is Date {
             return self.number(from: any as? Date)
-        } else if any as? UIColor != nil {
+        } else if any is UIColor {
             return self.number(from: any as? UIColor)
-        } else if any as? URL != nil {
+        } else if any is URL {
             return self.number(from: any as? URL)
-        } else if any as? NSNumber != nil {
+        } else if any is NSNumber {
             return self.number(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
+        } else if any is Decimal {
             return self.number(from: any as? Decimal)
-        } else if any as? Double != nil {
+        } else if any is Double {
             return self.number(from: any as? Double)
-        } else if any as? Float != nil {
+        } else if any is Float {
             return self.number(from: any as? Float)
-        } else if any as? UInt != nil {
+        } else if any is UInt {
             return self.number(from: any as? UInt)
-        } else if any as? Int != nil {
+        } else if any is Int {
             return self.number(from: any as? Int)
-        } else if any as? Bool != nil {
+        } else if any is Bool {
             return self.number(from: any as? Bool)
         }
-
         return self.number(from: any as? String)
     }
     func number(from number: NSNumber?) -> NSNumber? {
         guard number != nil else { return nil }
-
         return number
     }
     func number(from string: String?, _ numberFormatter: NumberFormatter? = nil) -> NSNumber? {
         guard !(string?.isEmpty ?? true) else { return nil }
-
         let formatter = numberFormatter ?? DNSDataTranslation.defaultNumberFormatter
         return formatter.number(from: string!)
     }

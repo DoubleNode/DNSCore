@@ -14,43 +14,39 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func decimal(from any: Any?) -> Decimal? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
+        if any is Date {
             return self.decimal(from: any as? Date)
-        } else if any as? UIColor != nil {
+        } else if any is UIColor {
             return self.decimal(from: any as? UIColor)
-        } else if any as? URL != nil {
+        } else if any is URL {
             return self.decimal(from: any as? URL)
-        } else if any as? NSNumber != nil {
+        } else if any is NSNumber {
             return self.decimal(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
+        } else if any is Decimal {
             return self.decimal(from: any as? Decimal)
-        } else if any as? Double != nil {
+        } else if any is Double {
             return self.decimal(from: any as? Double)
-        } else if any as? Float != nil {
+        } else if any is Float {
             return self.decimal(from: any as? Float)
-        } else if any as? UInt != nil {
+        } else if any is UInt {
             return self.decimal(from: any as? UInt)
-        } else if any as? Int != nil {
+        } else if any is Int {
             return self.decimal(from: any as? Int)
-        } else if any as? Bool != nil {
+        } else if any is Bool {
             return self.decimal(from: any as? Bool)
         }
-
         return self.decimal(from: any as? String, nil)
     }
     func decimal(from decimal: Decimal?) -> Decimal? {
         guard decimal != nil else { return Decimal(0) }
-
         return decimal
     }
     func decimal(from number: NSNumber?) -> Decimal? {
         guard number != nil else { return Decimal(0) }
-
         return number?.decimalValue
     }
     func decimal(from string: String?, _ decimalFormatter: NumberFormatter?) -> Decimal? {
         guard !(string?.isEmpty ?? true) else { return Decimal(0) }
-
         let formatter = decimalFormatter ?? DNSDataTranslation.defaultNumberFormatter
         return decimal(from: formatter.number(from: string!))
     }

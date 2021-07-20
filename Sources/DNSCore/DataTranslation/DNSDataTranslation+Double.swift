@@ -14,43 +14,39 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func double(from any: Any?) -> Double? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
+        if any is Date {
             return self.double(from: any as? Date)
-        } else if any as? UIColor != nil {
+        } else if any is UIColor {
             return self.double(from: any as? UIColor)
-        } else if any as? URL != nil {
+        } else if any is URL {
             return self.double(from: any as? URL)
-        } else if any as? NSNumber != nil {
+        } else if any is NSNumber {
             return self.double(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
+        } else if any is Decimal {
             return self.double(from: any as? Decimal)
-        } else if any as? Double != nil {
+        } else if any is Double {
             return self.double(from: any as? Double)
-        } else if any as? Float != nil {
+        } else if any is Float {
             return self.double(from: any as? Float)
-        } else if any as? UInt != nil {
+        } else if any is UInt {
             return self.double(from: any as? UInt)
-        } else if any as? Int != nil {
+        } else if any is Int {
             return self.double(from: any as? Int)
-        } else if any as? Bool != nil {
+        } else if any is Bool {
             return self.double(from: any as? Bool)
         }
-
         return self.double(from: any as? String, nil)
     }
     func double(from double: Double?) -> Double? {
         guard double != nil else { return 0 }
-
         return double
     }
     func double(from number: NSNumber?) -> Double? {
         guard number != nil else { return 0 }
-
         return number?.doubleValue
     }
     func double(from string: String?, _ numberFormatter: NumberFormatter?) -> Double? {
         guard !(string?.isEmpty ?? true) else { return nil }
-
         return self.number(from: string, numberFormatter)?.doubleValue
     }
 }

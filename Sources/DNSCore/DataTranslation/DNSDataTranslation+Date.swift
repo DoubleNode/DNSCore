@@ -14,49 +14,44 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func date(from any: Any?) -> Date? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
+        if any is Date {
             return self.date(from: any as? Date)
-        } else if any as? UIColor != nil {
+        } else if any is UIColor {
             return self.date(from: any as? UIColor)
-        } else if any as? URL != nil {
+        } else if any is URL {
             return self.date(from: any as? URL)
-        } else if any as? NSNumber != nil {
+        } else if any is NSNumber {
             return self.date(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
+        } else if any is Decimal {
             return self.date(from: any as? Decimal)
-        } else if any as? Double != nil {
+        } else if any is Double {
             return self.date(from: any as? Double)
-        } else if any as? Float != nil {
+        } else if any is Float {
             return self.date(from: any as? Float)
-        } else if any as? UInt != nil {
+        } else if any is UInt {
             return self.date(from: any as? UInt)
-        } else if any as? Int != nil {
+        } else if any is Int {
             return self.date(from: any as? Int)
-        } else if any as? Bool != nil {
+        } else if any is Bool {
             return self.date(from: any as? Bool)
         }
-
         return self.date(from: any as? String, nil)
     }
     func date(from date: Date?) -> Date? {
         guard date != nil else { return nil }
-
         return date
     }
     func date(from dictionary: [String: String]?) -> Date? {
         guard dictionary != nil else { return nil }
-
         let string = dictionary![firebaseDateDictionaryISOKey] ?? ""
         return self.date(from: string, DNSDataTranslation.firebaseDateFormatter)
     }
     func date(from number: NSNumber?) -> Date? {
         guard number != nil else { return nil }
-
         return Date.init(timeIntervalSinceReferenceDate: number!.doubleValue)
     }
     func date(fromTimeIntervalSince1970 number: NSNumber?) -> Date? {
         guard number != nil else { return nil }
-
         return Date.init(timeIntervalSince1970: number!.doubleValue)
     }
     func date(from string: String?, _ dateFormatter: DateFormatter?) -> Date? {
@@ -68,7 +63,6 @@ public extension DNSDataTranslation {
             }
             return nil
         }
-
         return dateFormatter!.date(from: string!)
     }
 }

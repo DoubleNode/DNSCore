@@ -14,38 +14,35 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func url(from any: Any?) -> URL? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
+        if any is Date {
             return self.url(from: any as? Date)
-        } else if any as? UIColor != nil {
+        } else if any is UIColor {
             return self.url(from: any as? UIColor)
-        } else if any as? URL != nil {
+        } else if any is URL {
             return self.url(from: any as? URL)
-        } else if any as? NSNumber != nil {
+        } else if any is NSNumber {
             return self.url(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
+        } else if any is Decimal {
             return self.url(from: any as? Decimal)
-        } else if any as? Double != nil {
+        } else if any is Double {
             return self.url(from: any as? Double)
-        } else if any as? Float != nil {
+        } else if any is Float {
             return self.url(from: any as? Float)
-        } else if any as? UInt != nil {
+        } else if any is UInt {
             return self.url(from: any as? UInt)
-        } else if any as? Int != nil {
+        } else if any is Int {
             return self.url(from: any as? Int)
-        } else if any as? Bool != nil {
+        } else if any is Bool {
             return self.url(from: any as? Bool)
         }
-
         return self.url(from: any as? String)
     }
     func url(from string: String?) -> URL? {
         guard string != nil else { return nil }
-
         return URL.init(string: string!)
     }
     func url(from url: URL?) -> URL? {
         guard url != nil else { return nil }
-
         return url
     }
 }
