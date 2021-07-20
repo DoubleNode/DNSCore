@@ -14,26 +14,26 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func id(from any: Any?) -> String? {
         guard any != nil else { return nil }
-        if any as? Date != nil {
-            return self.id(from: any as? Date)
-        } else if any as? UIColor != nil {
-            return self.id(from: any as? UIColor)
-        } else if any as? URL != nil {
-            return self.id(from: any as? URL)
-        } else if any as? NSNumber != nil {
-            return self.id(from: any as? NSNumber)
-        } else if any as? Decimal != nil {
-            return self.id(from: any as? Decimal)
-        } else if any as? Double != nil {
-            return self.id(from: any as? Double)
-        } else if any as? Float != nil {
-            return self.id(from: any as? Float)
-        } else if any as? UInt != nil {
-            return self.id(from: any as? UInt)
-        } else if any as? Int != nil {
-            return self.id(from: any as? Int)
-        } else if any as? Bool != nil {
-            return self.id(from: any as? Bool)
+        if any is Date {
+            return self.string(from: any as? Date)
+        } else if any is UIColor {
+            return self.string(from: any as? UIColor)
+        } else if any is URL {
+            return self.string(from: any as? URL)
+        } else if any is NSNumber {
+            return self.string(from: any as? NSNumber)
+        } else if any is Decimal {
+            return self.string(from: any as? Decimal)
+        } else if any is Double {
+            return self.string(from: any as? Double)
+        } else if any is Float {
+            return self.string(from: any as? Float)
+        } else if any is UInt {
+            return self.string(from: any as? UInt)
+        } else if any is Int {
+            return self.string(from: any as? Int)
+        } else if any is Bool {
+            return self.string(from: any as? Bool)
         }
 
         return self.id(from: any as? String)
