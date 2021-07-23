@@ -37,6 +37,7 @@ public protocol DNSCoreApplicationProtocol {
 public class DNSCore {
     private static let translator   = DNSDataTranslation()
 
+    @available(iOSApplicationExtension, unavailable)
     public class var appDelegate: DNSCoreApplicationProtocol? {
         var retval: DNSCoreApplicationProtocol?
 
