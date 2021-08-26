@@ -201,6 +201,21 @@ public extension Date {
         Date(timeIntervalSinceNow: -Seconds.deltaOneDay).replaceTime()
         ?? Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
     }
+    static var lastWeek: Date {
+        Date(timeIntervalSinceNow: -Seconds.deltaOneWeek).replaceTime()
+        ?? Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
+    }
+
+    var previousDay: Date {
+        let newTime = self.timeIntervalSinceNow - Seconds.deltaOneDay
+        return Date(timeIntervalSinceNow: newTime).replaceTime()
+        ?? Date(timeIntervalSinceNow: newTime)
+    }
+    var previousWeek: Date {
+        let newTime = self.timeIntervalSinceNow - Seconds.deltaOneWeek
+        return Date(timeIntervalSinceNow: newTime).replaceTime()
+        ?? Date(timeIntervalSinceNow: newTime)
+    }
 
     func replaceDate(with year: Int = 0,
                      and month: Int = 0,
