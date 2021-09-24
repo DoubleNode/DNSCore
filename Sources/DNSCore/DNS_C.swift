@@ -9,8 +9,71 @@
 import DNSError
 import Foundation
 
-public enum DNSCoreError: Error, Equatable {
-    case constantNotFound(key: String, filter: String)
+public extension DNSError {
+    typealias Core = DNSCoreError
+}
+public enum DNSCoreError: DNSError {
+    case unknown(_ codeLocation: DNSCodeLocation)
+    case constantNotFound(key: String, filter: String, _ codeLocation: DNSCodeLocation)
+    case reentered(_ codeLocation: DNSCodeLocation)
+
+    public static let domain = "CORE"
+    public enum Code: Int
+    {
+        case unknown = 1001
+        case constantNotFound = 1002
+        case reentered = 1003
+    }
+    
+    public var nsError: NSError! {
+        switch self {
+        case .unknown(let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.unknown.rawValue,
+                                userInfo: userInfo)
+        case .constantNotFound(let key, let filter, let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo["Key"] = key
+            userInfo["Filter"] = filter
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.constantNotFound.rawValue,
+                                userInfo: userInfo)
+        case .reentered(let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.reentered.rawValue,
+                                userInfo: userInfo)
+        }
+    }
+    public var errorDescription: String? {
+        return self.errorString
+    }
+    public var errorString: String {
+        switch self {
+        case .unknown:
+            return String(format: NSLocalizedString("CORE-Unknown Error%@", comment: ""),
+                          " (\(Self.domain):\(Self.Code.unknown.rawValue))")
+        case .constantNotFound(let key, let filter, _):
+            return String(format: NSLocalizedString("CORE-Constant Not Found Error: %@/%@%@", comment: ""),
+                          key, filter,
+                          " (\(Self.domain):\(Self.Code.constantNotFound.rawValue))")
+        case .reentered:
+            return String(format: NSLocalizedString("CORE-Reentered Error%@", comment: ""),
+                          " (\(Self.domain):\(Self.Code.reentered.rawValue))")
+        }
+    }
+    public var failureReason: String? {
+        switch self {
+        case .unknown(let codeLocation),
+             .constantNotFound(_, _, let codeLocation),
+             .reentered(let codeLocation):
+            return codeLocation.failureReason
+        }
+    }
 }
 
 public extension Notification.Name {
