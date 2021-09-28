@@ -160,6 +160,15 @@ public extension Date {
     func dnsWeekday() -> Int    {   return dnsComponent(component: .weekday)    }
     func dnsQuarter() -> Int    {   return dnsComponent(component: .quarter)    }
 
+    func dnsAge(to toDate: Date = Date()) -> (year: Int, month: Int, day: Int) {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let fromDate = calendar.dateComponents([.year, .month, .day], from: self)
+        let toDate = calendar.dateComponents([.year, .month, .day], from: toDate)
+        let ageComponents = calendar.dateComponents([.year, .month, .day],
+                                                    from: fromDate, to: toDate)
+        return (ageComponents.year ?? -1, ageComponents.month ?? -1, ageComponents.day ?? -1)
+    }
+
     func isSameDay(as date: Date = Date()) -> Bool {
         return self.dnsDay() == date.dnsDay()
     }
