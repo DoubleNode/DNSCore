@@ -24,7 +24,7 @@ public protocol DNSCoreApplicationProtocol {
     func networkActivity(display:Bool)
     func rootViewController() -> UIViewController
 
-    func reportError(_ dnsError: DNSError)
+    func reportError(_ error: Error)
     func reportException(_ nsException: NSException)
     func reportLog(_ string: String)
     func shortenErrorPath(_ filename: String) -> String
@@ -71,8 +71,8 @@ public class DNSCore {
     public class var appBuildString: String {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
-    public class func reportError(_ dnsError: DNSError) {
-        DNSCore.appDelegate?.reportError(dnsError)
+    public class func reportError(_ error: Error) {
+        DNSCore.appDelegate?.reportError(error)
     }
     public class func reportException(_ nsException: NSException) {
         DNSCore.appDelegate?.reportException(nsException)
