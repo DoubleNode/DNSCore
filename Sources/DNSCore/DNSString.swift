@@ -68,6 +68,10 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
         try container.encode(_strings[Language.es419.rawValue] ?? "", forKey: .es419)
     }
 
+    @inlinable public var isEmpty: Bool {
+        return asString.isEmpty
+    }
+
     // Equatable protocol methods
     static public func == (lhs: DNSString, rhs: DNSString) -> Bool {
         return lhs._strings == rhs._strings
