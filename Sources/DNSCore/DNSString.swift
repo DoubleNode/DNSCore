@@ -10,7 +10,7 @@ import Foundation
 import LocalAuthentication
 import UIKit
 
-public class DNSString: Hashable, Codable, NSCopying {
+public class DNSString: Hashable, Codable, NSCopying, Comparable {
     public enum Language: String, CaseIterable {
         case en
         case es419 = "es-419"
@@ -82,5 +82,10 @@ public class DNSString: Hashable, Codable, NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
         let copy = DNSString(with: _strings)
         return copy
+    }
+    
+    // Comparable protocol methods
+    public static func < (lhs: DNSString, rhs: DNSString) -> Bool {
+        return lhs.asString < rhs.asString
     }
 }
