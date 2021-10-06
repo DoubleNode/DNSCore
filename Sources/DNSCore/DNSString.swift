@@ -19,6 +19,9 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
 
     private var _strings: [String: String]
 
+    public var asDictionary: [String: String] {
+        return _strings
+    }
     public var asString: String {
         self.asString(for: DNSCore.languageCode)
     }
