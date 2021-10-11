@@ -1,5 +1,5 @@
 //
-//  DNSDataTranslation.swift
+//  DNSDataTranslation+FirebaseKey.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
