@@ -1,5 +1,5 @@
 //
-//  UIApplication+ddnsVisibleViewController.swift
+//  UIApplication+dnsVisibleViewController.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.

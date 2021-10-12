@@ -1,5 +1,5 @@
 //
-//  Date+dnsPretty.swift
+//  Date+dnsPrettyLong.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.

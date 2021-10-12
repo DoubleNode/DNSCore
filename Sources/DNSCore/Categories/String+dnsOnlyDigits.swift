@@ -1,5 +1,5 @@
 //
-//  String+dnsUrlEncode.swift
+//  String+dnsOnlyDigits.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.

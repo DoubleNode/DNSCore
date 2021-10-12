@@ -1,5 +1,5 @@
 //
-//  UIView+dnsSize.swift
+//  UIBezierPath+dnsRoundedRect.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.

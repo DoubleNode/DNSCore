@@ -1,5 +1,5 @@
 //
-//  UIColor+dnsString.swift
+//  UIImage+dnsWithColor.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIImage {
-    convenience init?(color: UIColor, width: CGFloat, height: CGFloat) {
+    convenience init?(with color: UIColor, width: CGFloat, height: CGFloat) {
         let rect = CGRect(x: 0, y: 0, width: width, height: height)
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, 0)
         let bezierPath = UIBezierPath(roundedRect: rect, cornerRadius: height / 2)
