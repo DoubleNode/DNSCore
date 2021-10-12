@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIImage {
-    func dnsInvertColor() -> UIImage? {
+    public func dnsInvertColor() -> UIImage? {
         let filter = CIFilter(name: "CIColorInvert")
         filter?.setDefaults()
         filter?.setValue(self.ciImage, forKey: kCIInputImageKey)
