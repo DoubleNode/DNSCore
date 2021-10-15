@@ -58,12 +58,12 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsDateTime_withDefaultAndFormatLongSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsDateTime(as: .longSimple)
-        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20:41pm")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20pm")
     }
     func test_dnsDateTime_withDefaultAndFormatLongSimpleWithTimezone_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsDateTime(as: .longSimple, in: secondaryTimeZone)
-        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 2:20:41pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 2:20pm \(secondaryTimeZoneString)")
     }
     func test_dnsDateTime_withDefaultAndFormatLongSmart_shouldReturnString() {
         sut = defaultDate
@@ -83,12 +83,12 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsTime_withDefaultAndFormatLongSimple_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .longSimple)
-        XCTAssertEqual(result, "1:20:41pm")
+        XCTAssertEqual(result, "1:20pm")
     }
     func test_dnsTime_withDefaultAndFormatLongSimpleWithTimezone_shouldReturnString() {
         sut = defaultDate
         let result: String = sut.dnsTime(as: .longSimple, in: secondaryTimeZone)
-        XCTAssertEqual(result, "2:20:41pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "2:20pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withDefaultAndFormatLongSmart_shouldReturnString() {
         sut = defaultDate
@@ -127,13 +127,13 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSimple)
-        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20:41pm - September 3, 2031 at 11:32:21am")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 1:20pm - September 3, 2031 at 11:32am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatLongSimpleWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSimple, in: secondaryTimeZone)
-        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 2:20:41pm - September 3, 2031 at 12:32:21pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "October 9, \(defaultDateYear) at 2:20pm - September 3, 2031 at 12:32pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withDefaultAndSimilarEndDateFormatLongSmart_shouldReturnString() {
         sut = defaultDate

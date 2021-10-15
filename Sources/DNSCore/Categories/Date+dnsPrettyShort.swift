@@ -198,27 +198,33 @@ public extension Date {
 
     private func utilityTimeShortSimple(delta: TimeInterval,
                                         in timeZone: TimeZone) -> String {
+        var timeFormatString = "h:mma"
+        if timeZone != TimeZone.current {
+            timeFormatString += " zzz"
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = DateFormatter.Style.none
-        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = timeFormatString
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeShortSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        let dateStyle = DateFormatter.Style.short
+        let dayFormatString = "M/d/yy, "
+        var timeFormatString = "\(dayFormatString)h:mma"
+        if timeZone != TimeZone.current {
+            if end == nil || end == self {
+                timeFormatString += " zzz"
+            }
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = dateStyle
-        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endDateString = end!.utilityDateShortSimple(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeShortSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
-        let endString = endDateString + ", " + endTimeString
+        let endString = end!.utilityTimeShortSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

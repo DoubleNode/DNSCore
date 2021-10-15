@@ -138,27 +138,33 @@ public extension Date {
 
     private func utilityTimeFullSimple(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
+        var timeFormatString = "h:mm:ssa"
+        if timeZone != TimeZone.current {
+            timeFormatString += " zzzz"
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = DateFormatter.Style.none
-        dateFormatter.timeStyle = DateFormatter.Style.full
+        dateFormatter.dateFormat = timeFormatString
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeFullSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
-        let dateStyle = DateFormatter.Style.full
+        let dayFormatString = "EEEE, MMMM d, yyyy '\(C.Localizations.DatePretty.at)' "
+        var timeFormatString = "\(dayFormatString)h:mm:ssa"
+        if timeZone != TimeZone.current {
+            if end == nil || end == self {
+                timeFormatString += " zzzz"
+            }
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = dateStyle
-        dateFormatter.timeStyle = DateFormatter.Style.full
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endDateString = end!.utilityDateFullSimple(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
-        let endString = endDateString + " \(C.Localizations.DatePretty.at) " + endTimeString
+        let endString = end!.utilityTimeFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

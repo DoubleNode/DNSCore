@@ -133,27 +133,33 @@ public extension Date {
     }
 
     private func utilityTimeLongSimple(delta: TimeInterval, in timeZone: TimeZone) -> String {
+        var timeFormatString = "h:mma"
+        if timeZone != TimeZone.current {
+            timeFormatString += " zzz"
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = DateFormatter.Style.none
-        dateFormatter.timeStyle = DateFormatter.Style.long
+        dateFormatter.dateFormat = timeFormatString
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeLongSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
-        let dateStyle = DateFormatter.Style.long
+        let dayFormatString = "MMMM d, yyyy '\(C.Localizations.DatePretty.at)' "
+        var timeFormatString = "\(dayFormatString)h:mma"
+        if timeZone != TimeZone.current {
+            if end == nil || end == self {
+                timeFormatString += " zzz"
+            }
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = dateStyle
-        dateFormatter.timeStyle = DateFormatter.Style.long
+        dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endDateString = end!.utilityDateLongSimple(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeLongSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
-        let endString = endDateString + " \(C.Localizations.DatePretty.at) " + endTimeString
+        let endString = end!.utilityTimeLongSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

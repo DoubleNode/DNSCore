@@ -99,7 +99,7 @@ class DatePrettyShortTests: XCTestCase {
             TestInterval(start: 0 - Date.Seconds.deltaOneMinute,
                          result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)")),
             TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes,
-                         result: C.Localizations.DatePretty.minutesAgoShort),
+                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)+")),
             TestInterval(start: 0 - Date.Seconds.deltaOneWeek,
                          result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)")),
         ]
@@ -139,7 +139,7 @@ class DatePrettyShortTests: XCTestCase {
             TestInterval(start: 0 - Date.Seconds.deltaOneMinute,
                          result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)")),
             TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes,
-                         result: C.Localizations.DatePretty.minutesAgoShort),
+                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)+")),
             TestInterval(start: 0 - Date.Seconds.deltaOneWeek,
                          result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)")),
         ]
@@ -219,7 +219,7 @@ class DatePrettyShortTests: XCTestCase {
                          result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)") + " - " +
                             String(format: C.Localizations.DatePretty.hoursShort, "\(2)")),
             TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay,
-                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)") + " - " +
+                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)+") + " - " +
                             C.Localizations.DatePretty.tomorrowShort),
             TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes,
                          result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)") + " - " +
