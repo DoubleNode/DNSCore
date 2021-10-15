@@ -90,7 +90,7 @@ public extension Date {
                                         in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let yearFormatSubString = self.isSameYear(as: end ?? Date()) ? "" : ", yyyy"
+        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
         let dateFormatString = "MMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
@@ -190,7 +190,7 @@ public extension Date {
     }
     private func utilityTimeNormalSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                          in timeZone: TimeZone) -> String {
-        let dateStyle = self.isSameDate(as: end ?? Date()) ? DateFormatter.Style.none : DateFormatter.Style.medium
+        let dateStyle = DateFormatter.Style.medium
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         dateFormatter.dateStyle = dateStyle
@@ -221,11 +221,13 @@ public extension Date {
     }
     private func utilityTimeNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        let yearFormatSubString = self.isSameYear(as: end ?? Date()) ? "" : ", yyyy"
+        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "MMM d\(yearFormatSubString) @ "
         var timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
-            timeFormatString += " zzz"
+            if end == nil || end == self {
+                timeFormatString += " zzz"
+            }
         }
 
         let dateFormatter = DateFormatter()

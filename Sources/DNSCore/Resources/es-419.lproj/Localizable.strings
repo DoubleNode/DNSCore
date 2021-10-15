@@ -122,7 +122,7 @@
 "DNSCoreDatePrettyMinutesAgoAbbrev" = "Hace %@mins";
 
 /* DNSCoreDatePrettyMinutesAgoShort */
-"DNSCoreDatePrettyMinutesAgo" = "Hace %@m";
+"DNSCoreDatePrettyMinutesAgoShort" = "Hace %@m";
 
 /* DNSCoreDatePrettyNextWeek */
 "DNSCoreDatePrettyNextWeek" = "la próxima semana";
