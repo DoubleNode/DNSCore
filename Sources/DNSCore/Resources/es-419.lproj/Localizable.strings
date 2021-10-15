@@ -2,22 +2,28 @@
 "DNSCoreDatePrettyAt" = "a";
 
 /* DNSCoreDatePrettyDays */
-"DNSCoreDatePrettyDays" = "%@ dias";
+"DNSCoreDatePrettyDays" = "%@ días";
 
 /* DNSCoreDatePrettyDaysShort */
-"DNSCoreDatePrettyDays" = "%@dias";
+"DNSCoreDatePrettyDays" = "%@días";
 
 /* DNSCoreDatePrettyDaysAgo */
-"DNSCoreDatePrettyDaysAgo" = "hace %@ dias";
+"DNSCoreDatePrettyDaysAgo" = "hace %@ días";
 
 /* DNSCoreDatePrettyDaysAgoShort */
-"DNSCoreDatePrettyDaysAgoShort" = "hace %@dias";
+"DNSCoreDatePrettyDaysAgoShort" = "hace %@días";
 
 /* DNSCoreDatePrettyHour */
 "DNSCoreDatePrettyHour" = "%@ hora";
 
 /* DNSCoreDatePrettyHourShort */
 "DNSCoreDatePrettyHourShort" = "%@hr";
+
+/* DNSCoreDatePrettyHourAgo */
+"DNSCoreDatePrettyHourAgo" = "hace %@ hora";
+
+/* DNSCoreDatePrettyHourAgoShort */
+"DNSCoreDatePrettyHourAgo" = "hace %@hr";
 
 /* DNSCoreDatePrettyHours */
 "DNSCoreDatePrettyHours" = "%@ horas";
@@ -30,6 +36,57 @@
 
 /* DNSCoreDatePrettyHoursAgoShort */
 "DNSCoreDatePrettyHoursAgo" = "hace %@hrs";
+
+/* DNSCoreDatePrettyInDays */
+"DNSCoreDatePrettyInDays" = "en %@ días";
+
+/* DNSCoreDatePrettyInDaysShort */
+"DNSCoreDatePrettyInDaysShort" = "en %@días";
+
+/* DNSCoreDatePrettyInHour */
+"DNSCoreDatePrettyInHour" = "en %@ hora";
+
+/* DNSCoreDatePrettyInHourShort */
+"DNSCoreDatePrettyInHourShort" = "en %@hr";
+
+/* DNSCoreDatePrettyInHours */
+"DNSCoreDatePrettyInHours" = "en %@ horas";
+
+/* DNSCoreDatePrettyInHoursShort */
+"DNSCoreDatePrettyInHoursShort" = "en %@hrs";
+
+/* DNSCoreDatePrettyInMinute */
+"DNSCoreDatePrettyInMinute" = "en %@ minuto";
+
+/* DNSCoreDatePrettyInMinuteShort */
+"DNSCoreDatePrettyInMinuteShort" = "en %@m";
+
+/* DNSCoreDatePrettyInMinutes */
+"DNSCoreDatePrettyInMinutes" = "en %@ minutos";
+
+/* DNSCoreDatePrettyInMinutesAbbrev */
+"DNSCoreDatePrettyInMinutesAbbrev" = "en %@mins";
+
+/* DNSCoreDatePrettyInMinutesShort */
+"DNSCoreDatePrettyInMinutesShort" = "en %@m";
+
+/* DNSCoreDatePrettyInOneHour */
+"DNSCoreDatePrettyInOneHour" = "en una hora";
+
+/* DNSCoreDatePrettyInOneMinute */
+"DNSCoreDatePrettyInOneMinute" = "en un minuto";
+
+/* DNSCoreDatePrettyInWeek */
+"DNSCoreDatePrettyInWeek" = "en %@ semana";
+
+/* DNSCoreDatePrettyInWeekShort */
+"DNSCoreDatePrettyInWeekShort" = "en %@sm";
+
+/* DNSCoreDatePrettyInWeeks */
+"DNSCoreDatePrettyInWeeks" = "en %@ semanas";
+
+/* DNSCoreDatePrettyInWeeksShort */
+"DNSCoreDatePrettyInWeeksShort" = "en %@smn";
 
 /* DNSCoreDatePrettyJustNow */
 "DNSCoreDatePrettyJustNow" = "ahora mismo";
@@ -67,6 +124,9 @@
 /* DNSCoreDatePrettyMinutesAgoShort */
 "DNSCoreDatePrettyMinutesAgo" = "Hace %@m";
 
+/* DNSCoreDatePrettyNextWeek */
+"DNSCoreDatePrettyNextWeek" = "la próxima semana";
+
 /* DNSCoreDatePrettyNow */
 "DNSCoreDatePrettyNow" = "Ahorita";
 
@@ -98,7 +158,7 @@
 "DNSCoreDatePrettyWeekShort" = "%@sm";
 
 /* DNSCoreDatePrettyWeekAgo */
-"DNSCoreDatePrettyWeekAgo" = "hace %@ semanas";
+"DNSCoreDatePrettyWeekAgo" = "hace %@ semana";
 
 /* DNSCoreDatePrettyWeekAgoShort */
 "DNSCoreDatePrettyWeekAgoShort" = "hace %@sm";

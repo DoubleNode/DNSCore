@@ -159,7 +159,10 @@ public extension Date {
         return retval
     }
     private func utilityTimeLongSmart(delta: TimeInterval, in timeZone: TimeZone) -> String {
-        let timeFormatString = "h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
+        var timeFormatString = "h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a"
+        if timeZone != TimeZone.current {
+            timeFormatString += " zzz"
+        }
 
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
@@ -171,7 +174,10 @@ public extension Date {
                                       in timeZone: TimeZone) -> String {
         let yearFormatSubString = self.isSameYear(as: end ?? Date()) ? "" : ", yyyy"
         let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "MMMM d\(yearFormatSubString) @ "
-        let timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a zzz"
+        var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a"
+        if timeZone != TimeZone.current {
+            timeFormatString += " zzz"
+        }
 
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone

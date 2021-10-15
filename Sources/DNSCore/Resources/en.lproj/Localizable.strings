@@ -19,6 +19,12 @@
 /* DNSCoreDatePrettyHourShort */
 "DNSCoreDatePrettyHourShort" = "%@hr";
 
+/* DNSCoreDatePrettyHourAgo */
+"DNSCoreDatePrettyHourAgo" = "%@ hour ago";
+
+/* DNSCoreDatePrettyHourAgoShort */
+"DNSCoreDatePrettyHourAgo" = "%@hr ago";
+
 /* DNSCoreDatePrettyHours */
 "DNSCoreDatePrettyHours" = "%@ hours";
 
@@ -30,6 +36,57 @@
 
 /* DNSCoreDatePrettyHoursAgoShort */
 "DNSCoreDatePrettyHoursAgo" = "%@hrs ago";
+
+/* DNSCoreDatePrettyInDays */
+"DNSCoreDatePrettyInDays" = "in %@ days";
+
+/* DNSCoreDatePrettyInDaysShort */
+"DNSCoreDatePrettyInDaysShort" = "in %@days";
+
+/* DNSCoreDatePrettyInHour */
+"DNSCoreDatePrettyInHour" = "in %@ hour";
+
+/* DNSCoreDatePrettyInHourShort */
+"DNSCoreDatePrettyInHourShort" = "in %@hr";
+
+/* DNSCoreDatePrettyInHours */
+"DNSCoreDatePrettyInHours" = "in %@ hours";
+
+/* DNSCoreDatePrettyInHoursShort */
+"DNSCoreDatePrettyInHoursShort" = "in %@hrs";
+
+/* DNSCoreDatePrettyInMinute */
+"DNSCoreDatePrettyInMinute" = "in %@ minute";
+
+/* DNSCoreDatePrettyInMinuteShort */
+"DNSCoreDatePrettyInMinuteShort" = "in %@m";
+
+/* DNSCoreDatePrettyInMinutes */
+"DNSCoreDatePrettyInMinutes" = "in %@ minutes";
+
+/* DNSCoreDatePrettyInMinutesAbbrev */
+"DNSCoreDatePrettyInMinutesAbbrev" = "in %@mins";
+
+/* DNSCoreDatePrettyInMinutesShort */
+"DNSCoreDatePrettyInMinutesShort" = "in %@m";
+
+/* DNSCoreDatePrettyInOneHour */
+"DNSCoreDatePrettyInOneHour" = "in one hour";
+
+/* DNSCoreDatePrettyInOneMinute */
+"DNSCoreDatePrettyInOneMinute" = "in one minute";
+
+/* DNSCoreDatePrettyInWeek */
+"DNSCoreDatePrettyInWeek" = "in %@ week";
+
+/* DNSCoreDatePrettyInWeekShort */
+"DNSCoreDatePrettyInWeekShort" = "in %@wk";
+
+/* DNSCoreDatePrettyInWeeks */
+"DNSCoreDatePrettyInWeeks" = "in %@ weeks";
+
+/* DNSCoreDatePrettyInWeeksShort */
+"DNSCoreDatePrettyInWeeksShort" = "in %@wks";
 
 /* DNSCoreDatePrettyJustNow */
 "DNSCoreDatePrettyJustNow" = "just now";
@@ -66,6 +123,9 @@
 
 /* DNSCoreDatePrettyMinutesAgoShort */
 "DNSCoreDatePrettyMinutesAgo" = "%@m ago";
+
+/* DNSCoreDatePrettyNextWeek */
+"DNSCoreDatePrettyNextWeek" = "next week";
 
 /* DNSCoreDatePrettyNow */
 "DNSCoreDatePrettyNow" = "now";
