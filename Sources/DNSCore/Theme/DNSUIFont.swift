@@ -13,8 +13,16 @@ open class DNSUIFont {
     public var size: Double
     
     required public init(fontName: String = "System",
-                         size: Double = 0) {
+                         size: Double = 15) {
         self.fontName = fontName
         self.size = size
+    }
+}
+public extension DNSUIFont {
+    enum Base {
+        public enum Button {
+            public static var subtitle = DNSUIFont(fontName: "System", size: 12)
+            public static var title = DNSUIFont(fontName: "System", size: 15)
+        }
     }
 }

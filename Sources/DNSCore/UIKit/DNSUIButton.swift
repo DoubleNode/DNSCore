@@ -43,11 +43,11 @@ import UIKit
             self.setTitleColor(style.titleColor.highlighted, for: UIControl.State.highlighted)
             self.setTitleColor(style.titleColor.selected, for: UIControl.State.selected)
             self.titleLabel?.font = UIFont.dnsFrom(style.titleFont)
-            self.setTitleShadowColor(style.titleShadowColor.normal, for: UIControl.State.normal)
-            self.setTitleShadowColor(style.titleShadowColor.disabled, for: UIControl.State.disabled)
-            self.setTitleShadowColor(style.titleShadowColor.focused, for: UIControl.State.focused)
-            self.setTitleShadowColor(style.titleShadowColor.highlighted, for: UIControl.State.highlighted)
-            self.setTitleShadowColor(style.titleShadowColor.selected, for: UIControl.State.selected)
+            self.setTitleShadowColor(style.titleShadow.color.normal, for: UIControl.State.normal)
+            self.setTitleShadowColor(style.titleShadow.color.disabled, for: UIControl.State.disabled)
+            self.setTitleShadowColor(style.titleShadow.color.focused, for: UIControl.State.focused)
+            self.setTitleShadowColor(style.titleShadow.color.highlighted, for: UIControl.State.highlighted)
+            self.setTitleShadowColor(style.titleShadow.color.selected, for: UIControl.State.selected)
         }
     }
 
@@ -208,6 +208,7 @@ import UIKit
         self.containerImageView.layer.masksToBounds = true
         self.containerImageView.clipsToBounds = true
         self.containerImageView.contentMode = .redraw
+        self.containerImageView.isUserInteractionEnabled = false
     }
     
     private func addViewLayoutSubViews() {
@@ -221,7 +222,8 @@ import UIKit
         self.containerImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         self.containerImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         self.containerImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
+        self.containerImageView.isUserInteractionEnabled = false
+
         // add view constraints
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

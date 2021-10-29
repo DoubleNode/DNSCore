@@ -14,7 +14,7 @@ open class DNSUIShadow {
     public var opacity: Float
     public var radius: Double
     
-    required public init(color: DNSUIColor = DNSUIColor(UIColor.clear),
+    required public init(color: DNSUIColor = DNSUIColor.Base.shadow,
                          offset: CGSize = CGSize(),
                          opacity: Float = 0,
                          radius: Double = 0) {
@@ -22,5 +22,14 @@ open class DNSUIShadow {
         self.offset = offset
         self.opacity = opacity
         self.radius = radius
+    }
+}
+public extension DNSUIShadow {
+    enum Base {
+        public static var button = DNSUIShadow(color: DNSUIColor.Base.Button.shadow)
+        public enum Button {
+            public static var subtitle = DNSUIShadow(color: DNSUIColor.Base.Button.subtitleShadow)
+            public static var title = DNSUIShadow(color: DNSUIColor.Base.Button.titleShadow)
+        }
     }
 }

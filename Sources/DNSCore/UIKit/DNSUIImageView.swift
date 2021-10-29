@@ -78,24 +78,20 @@ import UIKit
         }
     }
     
-    @IBInspectable open var multiCornerRadius: Bool = false
-    
-    @IBInspectable open var topLeftRadius: CGFloat = 0 {
+    @IBInspectable open var cornerRadiusMulti: Bool = false
+    @IBInspectable open var cornerTopLeftRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-    
-    @IBInspectable open var topRightRadius: CGFloat = 0 {
+    @IBInspectable open var cornerTopRightRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-    
-    @IBInspectable open var bottomLeftRadius: CGFloat = 0 {
+    @IBInspectable open var cornerBottomLeftRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-    
-    @IBInspectable open var bottomRightRadius: CGFloat = 0 {
+    @IBInspectable open var cornerBottomRightRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-    
+
     @IBInspectable open var shadowOpacity: Float {
         get {
             return self.layer.shadowOpacity
@@ -194,6 +190,7 @@ import UIKit
         self.containerImageView.layer.masksToBounds = true
         self.containerImageView.clipsToBounds = true
         self.containerImageView.contentMode = .redraw
+        self.containerImageView.isUserInteractionEnabled = false
     }
     
     private func addViewLayoutSubViews() {
@@ -210,7 +207,8 @@ import UIKit
         self.containerImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         self.containerImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         self.containerImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
+        self.containerImageView.isUserInteractionEnabled = false
+
         // add view constraints
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -230,13 +228,13 @@ import UIKit
     //    }
     
     private func applyRadiusMaskFor() {
-        guard multiCornerRadius else { return }
+        guard cornerRadiusMulti else { return }
         
         let path = UIBezierPath(shouldRoundRect: bounds,
-                                topLeftRadius: topLeftRadius,
-                                topRightRadius: topRightRadius,
-                                bottomLeftRadius: bottomLeftRadius,
-                                bottomRightRadius: bottomRightRadius)
+                                topLeftRadius: cornerTopLeftRadius,
+                                topRightRadius: cornerTopRightRadius,
+                                bottomLeftRadius: cornerBottomLeftRadius,
+                                bottomRightRadius: cornerBottomRightRadius)
         let shape = CAShapeLayer()
         shape.path = path.cgPath
         layer.mask = shape

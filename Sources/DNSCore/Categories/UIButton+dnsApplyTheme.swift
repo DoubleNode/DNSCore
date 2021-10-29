@@ -27,10 +27,10 @@ public extension UIButton {
         self.setTitleColor(style.titleColor.highlighted, for: UIControl.State.highlighted)
         self.setTitleColor(style.titleColor.selected, for: UIControl.State.selected)
         self.titleLabel?.font = UIFont.dnsFrom(style.titleFont)
-        self.setTitleShadowColor(style.titleShadowColor.normal, for: UIControl.State.normal)
-        self.setTitleShadowColor(style.titleShadowColor.disabled, for: UIControl.State.disabled)
-        self.setTitleShadowColor(style.titleShadowColor.focused, for: UIControl.State.focused)
-        self.setTitleShadowColor(style.titleShadowColor.highlighted, for: UIControl.State.highlighted)
-        self.setTitleShadowColor(style.titleShadowColor.selected, for: UIControl.State.selected)
+        self.setTitleShadowColor(style.titleShadow.color.normal, for: UIControl.State.normal)
+        self.setTitleShadowColor(style.titleShadow.color.disabled, for: UIControl.State.disabled)
+        self.setTitleShadowColor(style.titleShadow.color.focused, for: UIControl.State.focused)
+        self.setTitleShadowColor(style.titleShadow.color.highlighted, for: UIControl.State.highlighted)
+        self.setTitleShadowColor(style.titleShadow.color.selected, for: UIControl.State.selected)
     }
 }

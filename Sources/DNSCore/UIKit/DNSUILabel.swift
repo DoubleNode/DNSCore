@@ -213,6 +213,7 @@ import UIKit
         self.containerImageView.layer.masksToBounds = true
         self.containerImageView.clipsToBounds = true
         self.containerImageView.contentMode = .redraw
+        self.containerImageView.isUserInteractionEnabled = false
     }
     
     private func addViewLayoutSubViews() {
@@ -226,7 +227,8 @@ import UIKit
         self.containerImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         self.containerImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         self.containerImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
+        self.containerImageView.isUserInteractionEnabled = false
+
         // add view constraints
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

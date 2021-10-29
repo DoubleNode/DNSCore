@@ -18,7 +18,7 @@ open class DNSUIBorder {
     public var cornerBottomRightRadius: Double
     public var width: Double
     
-    required public init(color: DNSUIColor = DNSUIColor(UIColor.clear),
+    required public init(color: DNSUIColor = DNSUIColor.Base.border,
                          cornerRadius: Double = 0,
                          cornerRadiusMulti: Bool = false,
                          cornerTopLeftRadius: Double = 0,
@@ -34,5 +34,10 @@ open class DNSUIBorder {
         self.cornerBottomLeftRadius = cornerBottomLeftRadius
         self.cornerBottomRightRadius = cornerBottomRightRadius
         self.width = width
+    }
+}
+public extension DNSUIBorder {
+    enum Base {
+        public static var button = DNSUIBorder(color: DNSUIColor.Base.Button.border)
     }
 }
