@@ -12,42 +12,60 @@
 import UIKit
 
 @IBDesignable open class DNSUIView: UIView {
+    public var style: DNSThemeStyle? {
+        didSet {
+            guard let style = style else { return }
+            self.utilityApply(style)
+        }
+    }
+    // MARK: - Utility Methods -
+    open func utilityApply(_ style: DNSThemeStyle) {
+        if let style = style as? DNSThemeViewStyle {
+            self.backgroundColor = style.backgroundColor.normal
+            self.borderColor = style.border.color.normal
+            self.borderWidth = CGFloat(style.border.width)
+            self.cornerRadius = CGFloat(style.border.cornerRadius)
+            self.cornerTopLeftRadius = CGFloat(style.border.cornerTopLeftRadius)
+            self.cornerTopRightRadius = CGFloat(style.border.cornerTopRightRadius)
+            self.cornerBottomLeftRadius = CGFloat(style.border.cornerBottomLeftRadius)
+            self.cornerBottomRightRadius = CGFloat(style.border.cornerBottomRightRadius)
+            self.cornerRadiusMulti = style.border.cornerRadiusMulti
+            self.shadowColor = style.shadow.color.normal
+            self.shadowOffset = style.shadow.offset
+            self.shadowOpacity = Float(style.shadow.opacity)
+            self.shadowRadius = style.shadow.radius
+            self.tintColor = style.tintColor.normal
+        }
+    }
 
     // MARK: - Private Variables -
-
     private let containerView = UIView()
     private var containerImageView = UIImageView()
 
     // MARK: - Public Attributes -
-
-    /*
-    @IBInspectable public var backgroundImage: UIImage? {
-        get {
-            return self.containerImageView.image
-        }
-        set {
-//            addShadowColorFromBackgroundImage()
-            self.containerImageView.image = newValue
-        }
-    }
-     */
-
+//    @IBInspectable public var backgroundImage: UIImage? {
+//        get {
+//            return self.containerImageView.image
+//        }
+//        set {
+////            addShadowColorFromBackgroundImage()
+//            self.containerImageView.image = newValue
+//        }
+//    }
     override open var backgroundColor: UIColor? {
-        didSet(new) {
-            if let color = new {
-                containerView.backgroundColor = color
+        didSet(newBackgroundColor) {
+            if let newBackgroundColor = newBackgroundColor {
+                containerView.backgroundColor = newBackgroundColor
             }
             if backgroundColor != UIColor.clear { backgroundColor = UIColor.clear }
         }
     }
-
     override open var clipsToBounds: Bool {
         didSet(new) {
             containerView.clipsToBounds = new
             containerImageView.clipsToBounds = new
         }
     }
-
     @IBInspectable open var borderColor: UIColor {
         get {
             return UIColor(cgColor: self.containerView.layer.borderColor!)
@@ -57,7 +75,6 @@ import UIKit
             self.containerView.layer.borderColor = newValue.cgColor
         }
     }
-
     @IBInspectable open var borderWidth: CGFloat {
         get {
             return self.containerView.layer.borderWidth
@@ -67,7 +84,6 @@ import UIKit
             self.containerView.layer.borderWidth = newValue
         }
     }
-
     @IBInspectable open var cornerRadius: CGFloat {
         get {
             return self.containerView.layer.cornerRadius
@@ -77,25 +93,19 @@ import UIKit
             self.containerView.layer.cornerRadius = newValue
         }
     }
-
-    @IBInspectable open var multiCornerRadius: Bool = false
-
-    @IBInspectable open var topLeftRadius: CGFloat = 0 {
+    @IBInspectable open var cornerRadiusMulti: Bool = false
+    @IBInspectable open var cornerTopLeftRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-
-    @IBInspectable open var topRightRadius: CGFloat = 0 {
+    @IBInspectable open var cornerTopRightRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-
-    @IBInspectable open var bottomLeftRadius: CGFloat = 0 {
+    @IBInspectable open var cornerBottomLeftRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-
-    @IBInspectable open var bottomRightRadius: CGFloat = 0 {
+    @IBInspectable open var cornerBottomRightRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
-
     @IBInspectable open var shadowOpacity: Float {
         get {
             return self.layer.shadowOpacity
@@ -105,7 +115,6 @@ import UIKit
             self.containerView.layer.shadowOpacity = newValue
         }
     }
-
     @IBInspectable open var shadowRadius: CGFloat {
         get {
             return self.layer.shadowRadius
@@ -115,7 +124,6 @@ import UIKit
             self.containerView.layer.shadowRadius = newValue
         }
     }
-
     @IBInspectable open var shadowOffset: CGSize {
         get {
             return self.layer.shadowOffset
@@ -125,7 +133,6 @@ import UIKit
             self.containerView.layer.shadowOffset = newValue
         }
     }
-
     @IBInspectable open var shadowColor: UIColor {
         get {
             return UIColor(cgColor: self.layer.shadowColor!)
@@ -135,7 +142,6 @@ import UIKit
             self.containerView.layer.shadowColor = newValue.cgColor
         }
     }
-
 //    @IBInspectable var shadowColorFromImage: Bool = false {
 //        didSet {
 //            addShadowColorFromBackgroundImage()
@@ -143,25 +149,21 @@ import UIKit
 //    }
 
     // MARK: - Life Cycle -
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViewLayoutSubViews()
         refreshViewLayout()
     }
-
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addViewLayoutSubViews()
         refreshViewLayout()
     }
-
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
         refreshViewLayout()
 //        addShadowColorFromBackgroundImage()
     }
-
     override open func layoutSubviews() {
         super.layoutSubviews()
         refreshViewLayout()
@@ -170,7 +172,6 @@ import UIKit
     }
 
     // MARK: - Private Methods -
-
     private func refreshViewLayout() {
         // View
         self.clipsToBounds = true
@@ -227,13 +228,13 @@ import UIKit
 //    }
 
     private func applyRadiusMaskFor() {
-        guard multiCornerRadius else { return }
+        guard cornerRadiusMulti else { return }
 
         let path = UIBezierPath(shouldRoundRect: bounds,
-                                topLeftRadius: topLeftRadius,
-                                topRightRadius: topRightRadius,
-                                bottomLeftRadius: bottomLeftRadius,
-                                bottomRightRadius: bottomRightRadius)
+                                topLeftRadius: cornerTopLeftRadius,
+                                topRightRadius: cornerTopRightRadius,
+                                bottomLeftRadius: cornerBottomLeftRadius,
+                                bottomRightRadius: cornerBottomRightRadius)
         let shape = CAShapeLayer()
         shape.path = path.cgPath
         layer.mask = shape
