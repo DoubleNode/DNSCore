@@ -133,6 +133,8 @@ open class DNSDataTranslation: NSObject {
         defaultDateFormatter5,
     ]
 
+    var tokenReplacements: [String: String] = [:]
+    
     public override init() {
     }
 
@@ -141,5 +143,16 @@ open class DNSDataTranslation: NSObject {
             return object as Any
         }
         return (dictionary[DNSCore.languageCode] ?? dictionary["en"]) ?? object as Any
+    }
+    
+    public func addTokenReplacement(token: String,
+                                    replacement: String) {
+        tokenReplacements[token] = replacement
+    }
+    public func clearTokenReplacements() {
+        tokenReplacements = [:]
+    }
+    public func removeTokenReplacement(token: String) {
+        tokenReplacements.removeValue(forKey: token)
     }
 }

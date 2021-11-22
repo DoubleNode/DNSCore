@@ -21,7 +21,7 @@ open class DNSAppConstants: NSObject {
     static public var shared = DNSAppConstants()
     static public var translator = DNSDataTranslation()
 
-    public enum BuildType {
+    public enum BuildType: String {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
 
