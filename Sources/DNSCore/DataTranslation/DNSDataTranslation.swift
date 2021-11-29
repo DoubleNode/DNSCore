@@ -85,6 +85,12 @@ open class DNSDataTranslation: NSObject {
         retval.dateFormat   = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ"
         return retval
     }
+    static var localTimeAltFormatter: DateFormatter {
+        let retval = DateFormatter.init()
+        retval.timeZone     = NSTimeZone.local
+        retval.dateFormat   = "MM/dd/yyyy' 'HH':'mm' 'a' 'Z"
+        return retval
+    }
     static var localTimeFormatterWithoutTimezone: DateFormatter {
         let retval = DateFormatter.init()
         retval.timeZone     = NSTimeZone.local
@@ -124,6 +130,8 @@ open class DNSDataTranslation: NSObject {
         firebaseTimeFormatter,
         defaultDateFormatter1,
         defaultDateFormatter2,
+        localTimeFormatter,
+        localTimeAltFormatter,
         localTimeFormatterWithoutTimezone,
         localTimeFormatterMillisecondsWithoutTimezone,
         localTimeFormatterMilliseconds2WithoutTimezone,
