@@ -11,6 +11,12 @@ import XCTest
 @testable import DNSCore
 
 class DNSDataTranslationTimeTests: XCTestCase {
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803600      // 2021-10-09T18:20:41+00:00
+    static let defaultDateTimeString: String = "10/09/2021 06:20 PM CST"
+    
+    let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
+    let defaultString = defaultDateTimeString
+
     private var sut: DNSDataTranslation!
 
     override func setUp() {
@@ -22,7 +28,9 @@ class DNSDataTranslationTimeTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_zero() {
-        XCTFail("Tests not yet implemented in DNSDataTranslationDecimalTests")
+    func test_dnsDataTranslationTime_withDefaultAndFormatFullSimple_shouldReturnString() {
+        let testString = self.defaultString
+        let result = self.sut.time(from: testString)
+        XCTAssertEqual(result, self.defaultDate)
     }
 }

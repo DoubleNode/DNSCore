@@ -47,11 +47,14 @@ public extension DNSDataTranslation {
         if let number = self.number(from: string) {
             return self.date(fromTimeIntervalSince1970: number)
         }
-        for formatter in DNSDataTranslation.defaultTimeFormatters {
-            let retval = self.date(from: string, formatter)
-            guard retval == nil else {  return retval   }
+        guard timeFormatter != nil else {
+            for formatter in DNSDataTranslation.defaultTimeFormatters {
+                let retval = self.date(from: string, formatter)
+                guard retval == nil else {  return retval   }
+            }
+            return nil
         }
-        return nil
+        return timeFormatter!.date(from: string!)
     }
     func time(from time: Date?) -> Date? {
         guard time != nil else { return nil }

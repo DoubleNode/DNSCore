@@ -88,7 +88,7 @@ open class DNSDataTranslation: NSObject {
     static var localTimeAltFormatter: DateFormatter {
         let retval = DateFormatter.init()
         retval.timeZone     = NSTimeZone.local
-        retval.dateFormat   = "MM/dd/yyyy' 'HH':'mm' 'a' 'Z"
+        retval.dateFormat   = "MM/dd/yyyy HH:mma z"
         return retval
     }
     static var localTimeFormatterWithoutTimezone: DateFormatter {
