@@ -14,6 +14,10 @@ public class DNSDevice {
     public class var osVersion: String {
         return UIDevice.current.systemVersion
     }
+    public class var safeAreaInsets: UIEdgeInsets {
+        let window = UIApplication.shared.windows.first
+        return window?.safeAreaInsets ?? UIEdgeInsets.zero
+    }
     public class var screenHeight: CGFloat {
         return UIScreen.main.bounds.height * UIScreen.main.scale
     }
