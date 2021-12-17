@@ -16,6 +16,12 @@ class DatePrettyLongTests: XCTestCase {
     static let defaultDateYear: String = "2021"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let defaultSimilarEndDateTimeIntervalSince1970: TimeInterval = 1635448038   // 2021-10-28T19:07:18+00:00
+    static let nowTenMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaTenMinutes
+    static let nowFortyFiveMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaFourtyFiveMinutes
+    static let nowThreeHoursAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaThreeHours
+    static let nowTenMinutesInTimeIntervalSinceNow: TimeInterval = Date.Seconds.deltaTenMinutes
+    static let nowFortyFiveMinutesInTimeIntervalSinceNow: TimeInterval = Date.Seconds.deltaFourtyFiveMinutes
+    static let nowThreeHoursInTimeIntervalSinceNow: TimeInterval = Date.Seconds.deltaThreeHours
     static let secondaryTimeZone = TimeZone(abbreviation: "EDT")!
     static let secondaryTimeZoneString: String = "EDT"
 
@@ -24,6 +30,12 @@ class DatePrettyLongTests: XCTestCase {
     let defaultDateYear = DatePrettyLongTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
     let defaultSimilarEndDate = Date(timeIntervalSince1970: defaultSimilarEndDateTimeIntervalSince1970)
+    let nowTenMinutesAgo = Date(timeIntervalSinceNow: nowTenMinutesAgoTimeIntervalSinceNow)
+    let nowFortyFiveMinutesAgo = Date(timeIntervalSinceNow: nowFortyFiveMinutesAgoTimeIntervalSinceNow)
+    let nowThreeHoursAgo = Date(timeIntervalSinceNow: nowThreeHoursAgoTimeIntervalSinceNow)
+    let nowTenMinutesIn = Date(timeIntervalSinceNow: nowTenMinutesInTimeIntervalSinceNow)
+    let nowFortyFiveMinutesIn = Date(timeIntervalSinceNow: nowFortyFiveMinutesInTimeIntervalSinceNow)
+    let nowThreeHoursIn = Date(timeIntervalSinceNow: nowThreeHoursInTimeIntervalSinceNow)
     let secondaryTimeZone = DatePrettyLongTests.secondaryTimeZone
     let secondaryTimeZoneString = DatePrettyLongTests.secondaryTimeZoneString
 
@@ -50,7 +62,33 @@ class DatePrettyLongTests: XCTestCase {
         let result: String = sut.dnsDate(as: .longSmart)
         XCTAssertEqual(result, "October 9")
     }
-    func test_dnsDate_withNowAndFormatLongPretty_shouldReturnString() {
+    func test_dnsDate_withNowTenMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesAgo
+        let result: String = sut.dnsDate(as: .longPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
+    }
+    func test_dnsDate_withNowFortyFiveMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesAgo
+        let result: String = sut.dnsDate(as: .longPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
+    }
+    func test_dnsDate_withNowThreeHoursAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursAgo
+        let result: String = sut.dnsDate(as: .longPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
+    }
+    func test_dnsDate_withNowTenMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesIn
+        let result: String = sut.dnsDate(as: .longPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
+    }
+    func test_dnsDate_withNowFortyFiveMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesIn
+        let result: String = sut.dnsDate(as: .longPretty)
+        XCTAssertEqual(result, C.Localizations.DatePretty.today)
+    }
+    func test_dnsDate_withNowThreeHoursInAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursIn
         let result: String = sut.dnsDate(as: .longPretty)
         XCTAssertEqual(result, C.Localizations.DatePretty.today)
     }
@@ -75,9 +113,44 @@ class DatePrettyLongTests: XCTestCase {
         let result: String = sut.dnsDateTime(as: .longSmart, in: secondaryTimeZone)
         XCTAssertEqual(result, "October 9 @ 2:20:41pm \(secondaryTimeZoneString)")
     }
+    func test_dnsDateTime_withDefaultAndFormatLongPretty_shouldReturnString() {
+        sut = defaultDate
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, "October 9, 2021 at 1:20PM")
+    }
     func test_dnsDateTime_withNowAndFormatLongPretty_shouldReturnString() {
         let result: String = sut.dnsDateTime(as: .longPretty)
         XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
+    }
+    func test_dnsDateTime_withNowTenMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesAgo
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "10"))
+    }
+    func test_dnsDateTime_withNowFortyFiveMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesAgo
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "45"))
+    }
+    func test_dnsDateTime_withNowThreeHoursAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursAgo
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.hoursAgo, "3"))
+    }
+    func test_dnsDateTime_withNowTenMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesIn
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "9"))
+    }
+    func test_dnsDateTime_withNowFortyFiveMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesIn
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "44"))
+    }
+    func test_dnsDateTime_withNowThreeHoursInAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursIn
+        let result: String = sut.dnsDateTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inHours, "2"))
     }
 
     func test_dnsTime_withDefaultAndFormatLongSimple_shouldReturnString() {
@@ -103,6 +176,36 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsTime_withNowAndFormatLongPretty_shouldReturnString() {
         let result: String = sut.dnsTime(as: .longPretty)
         XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
+    }
+    func test_dnsTime_withNowTenMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesAgo
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "10"))
+    }
+    func test_dnsTime_withNowFortyFiveMinutesAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesAgo
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "45"))
+    }
+    func test_dnsTime_withNowThreeHoursAgoAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursAgo
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.hoursAgo, "3"))
+    }
+    func test_dnsTime_withNowTenMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowTenMinutesIn
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "9"))
+    }
+    func test_dnsTime_withNowFortyFiveMinutesInAndFormatLongPretty_shouldReturnString() {
+        sut = nowFortyFiveMinutesIn
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "44"))
+    }
+    func test_dnsTime_withNowThreeHoursInAndFormatLongPretty_shouldReturnString() {
+        sut = nowThreeHoursIn
+        let result: String = sut.dnsTime(as: .longPretty)
+        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inHours, "2"))
     }
 
     func test_dnsDate_withDefaultAndEndDateFormatLongSimple_shouldReturnString() {
@@ -162,6 +265,6 @@ class DatePrettyLongTests: XCTestCase {
     func test_dnsTime_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longPretty)
-        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) \(C.Localizations.DatePretty.to) September 3, 2031")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) \(C.Localizations.DatePretty.to) September 3, 2031 at 11:32AM")
     }
 }

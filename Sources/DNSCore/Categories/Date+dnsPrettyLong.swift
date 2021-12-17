@@ -106,23 +106,44 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         var retval = ""
 
-        if startDelta < Seconds.deltaOneDay {
-            retval = C.Localizations.DatePretty.today
-        } else if startDelta < Seconds.deltaTwoDays {
-            retval = C.Localizations.DatePretty.yesterday
-        } else if startDelta < Seconds.deltaOneWeek {
-            let daysAgo = Int(floor(startDelta / Seconds.deltaOneDay))
-            retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
-        } else if startDelta < Seconds.deltaTwoWeeks {
-            retval = C.Localizations.DatePretty.lastWeek
-        } else if startDelta < Seconds.deltaSixWeeks {
-            let weeksAgo = Int(floor(startDelta / Seconds.deltaOneWeek))
-            retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
+        if startDelta > 0 {
+            if startDelta < Seconds.deltaOneDay {
+                retval = C.Localizations.DatePretty.today
+            } else if startDelta < Seconds.deltaTwoDays {
+                retval = C.Localizations.DatePretty.tomorrow
+            } else if startDelta < Seconds.deltaOneWeek {
+                let inDays = Int(floor(startDelta / Seconds.deltaOneDay))
+                retval = String(format: C.Localizations.DatePretty.inDays, "\(inDays)")
+            } else if startDelta < Seconds.deltaTwoWeeks {
+                retval = C.Localizations.DatePretty.nextWeek
+            } else if startDelta < Seconds.deltaSixWeeks {
+                let inWeeks = Int(floor(startDelta / Seconds.deltaOneWeek))
+                retval = String(format: C.Localizations.DatePretty.inWeeks, "\(inWeeks)")
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = timeZone
+                dateFormatter.dateStyle = DateFormatter.Style.long
+                retval = dateFormatter.string(from: self)
+            }
         } else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = timeZone
-            dateFormatter.dateStyle = DateFormatter.Style.long
-            retval = dateFormatter.string(from: self)
+            if -startDelta < Seconds.deltaOneDay {
+                retval = C.Localizations.DatePretty.today
+            } else if -startDelta < Seconds.deltaTwoDays {
+                retval = C.Localizations.DatePretty.yesterday
+            } else if -startDelta < Seconds.deltaOneWeek {
+                let daysAgo = Int(floor(-startDelta / Seconds.deltaOneDay))
+                retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
+            } else if -startDelta < Seconds.deltaTwoWeeks {
+                retval = C.Localizations.DatePretty.lastWeek
+            } else if -startDelta < Seconds.deltaSixWeeks {
+                let weeksAgo = Int(floor(-startDelta / Seconds.deltaOneWeek))
+                retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
+            } else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = timeZone
+                dateFormatter.dateStyle = DateFormatter.Style.long
+                retval = dateFormatter.string(from: self)
+            }
         }
         guard end != nil && end != self else { return retval }
 
@@ -208,32 +229,68 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         var retval = ""
 
-        if startDelta < Seconds.deltaOneMinute {
-            retval = C.Localizations.DatePretty.justNow
-        } else if startDelta < Seconds.deltaTwoMinutes {
-            retval = C.Localizations.DatePretty.oneMinuteAgo
-        } else if startDelta < Seconds.deltaOneHour {
-            let minutesAgo = Int(floor(startDelta / Seconds.deltaOneMinute))
-            retval = String(format: C.Localizations.DatePretty.minutesAgo, "\(minutesAgo)")
-        } else if startDelta < Seconds.deltaTwoHours {
-            retval = C.Localizations.DatePretty.oneHourAgo
-        } else if startDelta < Seconds.deltaOneDay {
-            let hoursAgo = Int(floor(startDelta / Seconds.deltaOneHour))
-            retval = String(format: C.Localizations.DatePretty.hoursAgo, "\(hoursAgo)")
-        } else if startDelta < Seconds.deltaTwoDays {
-            retval = C.Localizations.DatePretty.yesterday
-        } else if startDelta < Seconds.deltaOneWeek {
-            let daysAgo = Int(floor(startDelta / Seconds.deltaOneDay))
-            retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
-        } else if startDelta < Seconds.deltaTwoWeeks {
-            retval = C.Localizations.DatePretty.lastWeek
-        } else if startDelta < Seconds.deltaSixWeeks {
-            let weeksAgo = Int(floor(startDelta / Seconds.deltaOneWeek))
-            retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
+        if startDelta > 0 {
+            if startDelta < Seconds.deltaOneMinute {
+                retval = C.Localizations.DatePretty.justNow
+            } else if startDelta < Seconds.deltaTwoMinutes {
+                retval = C.Localizations.DatePretty.inOneMinute
+            } else if startDelta < Seconds.deltaOneHour {
+                let inMinutes = Int(floor(startDelta / Seconds.deltaOneMinute))
+                retval = String(format: C.Localizations.DatePretty.inMinutes, "\(inMinutes)")
+            } else if startDelta < Seconds.deltaTwoHours {
+                retval = C.Localizations.DatePretty.inOneHour
+            } else if startDelta < Seconds.deltaOneDay {
+                let inHours = Int(floor(startDelta / Seconds.deltaOneHour))
+                retval = String(format: C.Localizations.DatePretty.inHours, "\(inHours)")
+            } else if startDelta < Seconds.deltaTwoDays {
+                retval = C.Localizations.DatePretty.today
+            } else if startDelta < Seconds.deltaOneWeek {
+                let inDays = Int(floor(startDelta / Seconds.deltaOneDay))
+                retval = String(format: C.Localizations.DatePretty.inDays, "\(inDays)")
+            } else if startDelta < Seconds.deltaTwoWeeks {
+                retval = C.Localizations.DatePretty.nextWeek
+            } else if startDelta < Seconds.deltaSixWeeks {
+                let inWeeks = Int(floor(startDelta / Seconds.deltaOneWeek))
+                retval = String(format: C.Localizations.DatePretty.inWeeks, "\(inWeeks)")
+            } else {
+            }
         } else {
+            if -startDelta < Seconds.deltaOneMinute {
+                retval = C.Localizations.DatePretty.justNow
+            } else if -startDelta < Seconds.deltaTwoMinutes {
+                retval = C.Localizations.DatePretty.oneMinuteAgo
+            } else if -startDelta < Seconds.deltaOneHour {
+                let minutesAgo = Int(floor(-startDelta / Seconds.deltaOneMinute))
+                retval = String(format: C.Localizations.DatePretty.minutesAgo, "\(minutesAgo)")
+            } else if -startDelta < Seconds.deltaTwoHours {
+                retval = C.Localizations.DatePretty.oneHourAgo
+            } else if -startDelta < Seconds.deltaOneDay {
+                let hoursAgo = Int(floor(-startDelta / Seconds.deltaOneHour))
+                retval = String(format: C.Localizations.DatePretty.hoursAgo, "\(hoursAgo)")
+            } else if -startDelta < Seconds.deltaTwoDays {
+                retval = C.Localizations.DatePretty.yesterday
+            } else if -startDelta < Seconds.deltaOneWeek {
+                let daysAgo = Int(floor(-startDelta / Seconds.deltaOneDay))
+                retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")
+            } else if -startDelta < Seconds.deltaTwoWeeks {
+                retval = C.Localizations.DatePretty.lastWeek
+            } else if -startDelta < Seconds.deltaSixWeeks {
+                let weeksAgo = Int(floor(-startDelta / Seconds.deltaOneWeek))
+                retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
+            } else {
+            }
+        }
+        if retval.isEmpty {
+            let dayFormatString = "MMMM d, yyyy '\(C.Localizations.DatePretty.at)' "
+            var timeFormatString = "\(dayFormatString)h:mma"
+            if timeZone != TimeZone.current {
+                if end == nil || end == self {
+                    timeFormatString += " zzz"
+                }
+            }
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = timeZone
-            dateFormatter.dateStyle = DateFormatter.Style.long
+            dateFormatter.dateFormat = timeFormatString
             retval = dateFormatter.string(from: self)
         }
         guard end != nil && end != self else { return retval }

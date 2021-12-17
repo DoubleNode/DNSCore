@@ -131,15 +131,15 @@ public extension Date {
         case 0..<Seconds.deltaTwoDays:
             retval = C.Localizations.DatePretty.tomorrowShort
         case 0..<Seconds.deltaThreeDays:
-            retval = String(format: C.Localizations.DatePretty.daysShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inDaysShort, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = String(format: C.Localizations.DatePretty.daysShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inDaysShort, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = String(format: C.Localizations.DatePretty.weekShort, "1")
+            retval = String(format: C.Localizations.DatePretty.inWeekShort, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = String(format: C.Localizations.DatePretty.weeksShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inWeeksShort, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = String(format: C.Localizations.DatePretty.weeksShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inWeeksShort, "3+")
         default:
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = timeZone
@@ -304,34 +304,34 @@ public extension Date {
         case 0..<Seconds.deltaOneMinute:
             retval = C.Localizations.DatePretty.now
         case 0..<Seconds.deltaTwoMinutes:
-            retval = String(format: C.Localizations.DatePretty.minuteShort, "1")
+            retval = String(format: C.Localizations.DatePretty.inMinuteShort, "1")
         case 0..<Seconds.deltaThreeMinutes:
-            retval = String(format: C.Localizations.DatePretty.minutesShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inMinutesShort, "2")
         case 0..<Seconds.deltaSixMinutes:
-            retval = String(format: C.Localizations.DatePretty.minutesShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inMinutesShort, "3+")
         case 0..<Seconds.deltaOneHour:
             let minutes = Int(floor(delta / Seconds.deltaOneMinute))
-            retval = String(format: C.Localizations.DatePretty.minutesAbbrev, "\(minutes)")
+            retval = String(format: C.Localizations.DatePretty.inMinutesShort, "\(minutes)")
         case 0..<Seconds.deltaTwoHours:
-            retval = String(format: C.Localizations.DatePretty.hourShort, "1")
+            retval = String(format: C.Localizations.DatePretty.inHourShort, "1")
         case 0..<Seconds.deltaThreeHours:
-            retval = String(format: C.Localizations.DatePretty.hoursShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inHoursShort, "2")
         case 0..<Seconds.deltaSixHours:
-            retval = String(format: C.Localizations.DatePretty.hoursShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inHoursShort, "3+")
         case 0..<Seconds.deltaOneDay:
             retval = C.Localizations.DatePretty.todayShort
         case 0..<Seconds.deltaTwoDays:
             retval = C.Localizations.DatePretty.tomorrowShort
         case 0..<Seconds.deltaThreeDays:
-            retval = String(format: C.Localizations.DatePretty.daysShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inDaysShort, "2")
         case 0..<Seconds.deltaOneWeek:
-            retval = String(format: C.Localizations.DatePretty.daysShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inDaysShort, "3+")
         case 0..<Seconds.deltaTwoWeeks:
-            retval = String(format: C.Localizations.DatePretty.weekShort, "1")
+            retval = String(format: C.Localizations.DatePretty.inWeekShort, "1")
         case 0..<Seconds.deltaThreeWeeks:
-            retval = String(format: C.Localizations.DatePretty.weeksShort, "2")
+            retval = String(format: C.Localizations.DatePretty.inWeeksShort, "2")
         case 0..<Seconds.deltaSixWeeks:
-            retval = String(format: C.Localizations.DatePretty.weeksShort, "3+")
+            retval = String(format: C.Localizations.DatePretty.inWeeksShort, "3+")
         default:
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = timeZone
@@ -357,8 +357,8 @@ public extension Date {
         case 0..<Seconds.deltaSixMinutes:
             retval = String(format: C.Localizations.DatePretty.minutesAgoShort, "3+")
         case 0..<Seconds.deltaOneHour:
-            let minutes = Int(floor(delta / Seconds.deltaOneMinute))
-            retval = String(format: C.Localizations.DatePretty.minutesAgoAbbrev, "\(minutes)")
+            let minutes = Int(floor(deltaPast / Seconds.deltaOneMinute))
+            retval = String(format: C.Localizations.DatePretty.minutesAgoShort, "\(minutes)")
         case 0..<Seconds.deltaTwoHours:
             retval = String(format: C.Localizations.DatePretty.hourAgoShort, "1")
         case 0..<Seconds.deltaThreeHours:
