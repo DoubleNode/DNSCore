@@ -8,7 +8,9 @@
 
 import DNSCoreThreading
 import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 extension DNSAppConstants {
     class func dictionaryLookup(fromConstant constant: String, for key: String) -> String? {
@@ -32,6 +34,9 @@ extension DNSAppConstants {
     class func dictionaryLookup(fromOptions optionsData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
+#if os(macOS)
+        return dictionaryLookupWithoutUI(fromOptions: optionsData, for: key)
+#else
         if !noUI && DNSCore.appDelegate == nil {
             noUI = true
         }
@@ -77,8 +82,8 @@ extension DNSAppConstants {
         }
 
         _ = semaphore.wait()
-
         return self.plistConfigValue(replace: key, with: retval!)
+#endif
     }
     private class func dictionaryLookupWithoutUI(fromOptions optionsData: [String: Any], for key: String) -> Any {
         let defaultKey  = translator.string(from: optionsData[C.AppConstants.default]) ?? ""
@@ -97,6 +102,7 @@ extension DNSAppConstants {
         return self.plistConfigValue(replace: key, with: retval!)
     }
 
+#if !os(macOS)
     private class func dictionaryLookupCreateCheckbox(forState state: Bool) -> UIButton {
         let targetController: DNSAppConstantsRootProtocol? =
             DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol
@@ -118,7 +124,6 @@ extension DNSAppConstants {
 
         return checkbox
     }
-
     private class func dictionaryLookupDisplayToggles(fromToggles togglesData: [String: Any],
                                                       for key: String,
                                                       completionBlock: @escaping DNSBlock)
@@ -175,10 +180,14 @@ extension DNSAppConstants {
 
         return retval
     }
+#endif
 
     private class func dictionaryLookup(fromToggles togglesData: [String: Any], for key: String) -> Any {
         var noUI = translator.bool(from: DNSCore.appSetting(for: C.AppConstants.appConstantsNoUI,
                                                             withDefault: false)) ?? false
+#if os(macOS)
+        return dictionaryLookupWithoutUI(fromToggles: togglesData, for: key)
+#else
         if !noUI && DNSCore.appDelegate == nil {
             noUI = true
         }
@@ -219,6 +228,7 @@ extension DNSAppConstants {
         }
 
         return self.plistConfigValue(replace: key, with: retval)
+#endif
     }
     private class func dictionaryLookupWithoutUI(fromToggles togglesData: [String: Any], for key: String) -> Any {
         let toggles     = togglesData[C.AppConstants.toggles] as? [[String: Any]] ?? []

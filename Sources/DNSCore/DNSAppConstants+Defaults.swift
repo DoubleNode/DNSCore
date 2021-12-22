@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 @objc
 extension DNSAppConstants {

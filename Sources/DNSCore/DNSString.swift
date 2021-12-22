@@ -8,7 +8,9 @@
 
 import Foundation
 import LocalAuthentication
+#if !os(macOS)
 import UIKit
+#endif
 
 public class DNSString: Hashable, Codable, NSCopying, Comparable {
     public enum Language: String, CaseIterable {

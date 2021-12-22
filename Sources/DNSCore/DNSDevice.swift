@@ -8,12 +8,19 @@
 
 import Foundation
 import LocalAuthentication
+#if !os(macOS)
 import UIKit
+#endif
 
 public class DNSDevice {
     public class var osVersion: String {
+#if !os(macOS)
         return UIDevice.current.systemVersion
+#else
+        return ProcessInfo.processInfo.operatingSystemVersionString
+#endif
     }
+#if !os(macOS)
     public class var safeAreaInsets: UIEdgeInsets {
         let window = UIApplication.shared.windows.first
         return window?.safeAreaInsets ?? UIEdgeInsets.zero
@@ -36,23 +43,36 @@ public class DNSDevice {
     public class var screenWidthUnits: CGFloat {
         return UIScreen.main.bounds.width
     }
+#endif
 
     public class var iPad: Bool {
+#if !os(macOS)
         return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+#else
+        return false
+#endif
     }
     public class var iPhone: Bool {
+#if !os(macOS)
         return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+#else
+        return false
+#endif
     }
+#if !os(macOS)
     public class var tallPhone: Bool {
         return self.iPhone && self.screenHeight >= 1136
     }
+#endif
 
+#if !os(macOS)
     public class var activeWindowScene: UIWindowScene? {
         return UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
     }
     public class var activeWindow: UIWindow? {
         return self.activeWindowScene?.windows.first
     }
+#endif
 
     public class var landscape: Bool {
         #if os(tvOS)
@@ -62,9 +82,8 @@ public class DNSDevice {
                 self.activeWindowScene?.interfaceOrientation == .landscapeRight {
                 return true
             }
-        
-            return false
         #endif
+        return false
     }
     public class var portrait: Bool {
         #if os(tvOS)
@@ -74,11 +93,9 @@ public class DNSDevice {
                 self.activeWindowScene?.interfaceOrientation == .portraitUpsideDown {
                 return true
             }
-        
-            return false
         #endif
+        return false
     }
-
     public class var biometricIdAvailable: Bool {
         if #available(iOS 13, *) {
             guard NSClassFromString("LAContext") != nil else { return false }
@@ -103,6 +120,8 @@ public class DNSDevice {
             guard LAContext.init().biometryType == LABiometryType.faceID else { return false }
         
             return true
+        #else
+            return false
         #endif
     }
     public class var touchIdAvailable: Bool {
@@ -118,9 +137,10 @@ public class DNSDevice {
             }
 
             return true
+        #else
+            return false
         #endif
     }
-
     public class var applicationDocumentsDirectory: String {
         return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory,
                                                    FileManager.SearchPathDomainMask.allDomainsMask, true).last!

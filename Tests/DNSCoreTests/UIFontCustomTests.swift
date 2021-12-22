@@ -10,6 +10,7 @@ import XCTest
 
 @testable import DNSCore
 
+#if !os(macOS)
 class UIFontCustomTests: XCTestCase {
     private var sut: UIFont!
 
@@ -32,3 +33,4 @@ class UIFontCustomTests: XCTestCase {
         XCTAssertNoThrow(UIFont.dnsDumpFonts())
     }
 }
+#endif

@@ -10,6 +10,7 @@ import XCTest
 
 @testable import DNSCore
 
+#if !os(macOS)
 class UIColorStringTests: XCTestCase {
     private var sut: UIColor!
 
@@ -34,3 +35,4 @@ class UIColorStringTests: XCTestCase {
         XCTAssertEqual(result, UIColor.purple)
     }
 }
+#endif

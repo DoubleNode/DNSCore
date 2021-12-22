@@ -6,6 +6,7 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if !os(macOS)
 import DNSCoreThreading
 import UIKit
 
@@ -46,3 +47,4 @@ public extension DNSDataTranslation {
         return UIColor.init(with: string!)
     }
 }
+#endif

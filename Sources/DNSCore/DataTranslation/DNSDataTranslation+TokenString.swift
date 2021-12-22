@@ -7,7 +7,10 @@
 //
 
 import DNSCoreThreading
+import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 public extension DNSDataTranslation {
     // MARK: - tokenString...

@@ -43,7 +43,8 @@ let package = Package(
             ]),
         .testTarget(
             name: "DNSCoreTests",
-            dependencies: ["DNSCore"]
+            dependencies: ["DNSCore"],
+            exclude: ["TestViewController.xib"]
         ),
     ],
     swiftLanguageVersions: [.v5]

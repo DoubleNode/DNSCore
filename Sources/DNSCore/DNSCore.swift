@@ -9,7 +9,9 @@
 import DNSCoreThreading
 import DNSError
 import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 public protocol DNSCoreApplicationProtocol {
     // MARK: - Base methods
@@ -22,8 +24,9 @@ public protocol DNSCoreApplicationProtocol {
 
     func isReachable() -> Bool
     func networkActivity(display:Bool)
+#if !os(macOS)
     func rootViewController() -> UIViewController
-
+#endif
     func reportError(_ error: Error)
     func reportException(_ nsException: NSException)
     func reportLog(_ string: String)
@@ -42,7 +45,11 @@ public class DNSCore {
         var retval: DNSCoreApplicationProtocol?
 
         DNSUIThread.run {
+#if !os(macOS)
             retval = UIApplication.shared.delegate as? DNSCoreApplicationProtocol
+#else
+//            retval = NSApplication.shared.delegate as? DNSCoreApplicationProtocol
+#endif
         }
 
         return retval

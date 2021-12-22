@@ -7,17 +7,23 @@
 //
 
 import DNSCoreThreading
+import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 public extension DNSDataTranslation {
     // MARK: - float...
     // swiftlint:disable:next cyclomatic_complexity
     func float(from any: Any?) -> Float? {
         guard any != nil else { return nil }
+#if !os(macOS)
+        if any is UIColor {
+            return self.float(from: any as? UIColor)
+        }
+#endif
         if any is Date {
             return self.float(from: any as? Date)
-        } else if any is UIColor {
-            return self.float(from: any as? UIColor)
         } else if any is URL {
             return self.float(from: any as? URL)
         } else if any is NSNumber {

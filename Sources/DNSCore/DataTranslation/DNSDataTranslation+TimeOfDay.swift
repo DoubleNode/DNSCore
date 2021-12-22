@@ -7,17 +7,23 @@
 //
 
 import DNSCoreThreading
+import Foundation
+#if !os(macOS)
 import UIKit
+#endif
 
 public extension DNSDataTranslation {
     // MARK: - timeOfDay...
     // swiftlint:disable:next cyclomatic_complexity
     func timeOfDay(from any: Any?) -> DNSTimeOfDay? {
         guard any != nil else { return nil }
+#if !os(macOS)
+        if any is UIColor {
+            return self.timeOfDay(from: any as? UIColor)
+        }
+#endif
         if any is Date {
             return self.timeOfDay(from: any as? Date)
-        } else if any is UIColor {
-            return self.timeOfDay(from: any as? UIColor)
         } else if any is DNSTimeOfDay {
             return self.timeOfDay(from: any as? DNSTimeOfDay)
         } else if any is URL {

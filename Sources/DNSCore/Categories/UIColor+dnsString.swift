@@ -6,6 +6,7 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if !os(macOS)
 import UIKit
 
 public extension UIColor {
@@ -165,3 +166,4 @@ public extension UIColor {
                   alpha: CGFloat(aValue) / 255)
     }
 }
+#endif

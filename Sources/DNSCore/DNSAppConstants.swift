@@ -9,6 +9,7 @@
 import DNSCoreThreading
 import DNSError
 import Foundation
+#if !os(macOS)
 import UIKit
 
 @objc
@@ -16,6 +17,7 @@ public protocol DNSAppConstantsRootProtocol: UITextFieldDelegate {
     @objc
     func checkBoxPressed(sender: UIButton)
 }
+#endif
 
 open class DNSAppConstants: NSObject {
     static public var shared = DNSAppConstants()
@@ -80,6 +82,7 @@ open class DNSAppConstants: NSObject {
                                   DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
         return translator.string(from: value)!
     }
+#if !os(macOS)
     public class func constant(from key: String, and filter: String = "") throws -> UIColor {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
@@ -87,6 +90,7 @@ open class DNSAppConstants: NSObject {
                                   DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
         return translator.color(from: value)!
     }
+#endif
     public class func constant(from key: String, and filter: String = "") throws -> UInt {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
@@ -116,6 +120,7 @@ open class DNSAppConstants: NSObject {
 
     // MARK: - Compound Constant plist to object functions
 
+#if !os(macOS)
     // key + Name is the generated key for loading the font postscript name.
     // key + Scale is the appFontScaling override for @2x, @3x (ie: 1.0, 2.0, 3.0)
     // key + Size is the generated key for loading the font size in points. (divided by appFontScaling)
@@ -126,7 +131,7 @@ open class DNSAppConstants: NSObject {
 
         return UIFont.dnsCustom(with: fontName, and: CGFloat(fontSize / fontScale))
     }
-
+#endif
     // key + Height is the generated key for loading the height.
     // key + Width is the generated key for loading the width.
     public class func constant(from key: String, and filter: String = "") throws -> CGSize {

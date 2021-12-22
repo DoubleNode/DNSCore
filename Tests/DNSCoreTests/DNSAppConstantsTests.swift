@@ -181,6 +181,7 @@ class DNSAppConstantsTests: XCTestCase {
         XCTAssertEqual(result, "Test String")
     }
 
+#if !os(macOS)
     // MARK: - constantUIColor tests
     func test_constantUIColor_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as UIColor) { error in
@@ -214,7 +215,7 @@ class DNSAppConstantsTests: XCTestCase {
         XCTAssertEqual(resultBlue, blue)
         XCTAssertEqual(resultAlpha, alpha)
     }
-
+#endif
     // MARK: - constantUInt tests
     func test_constantUInt_withTestValueNotThereAndNoFilter_shouldThrow() {
         XCTAssertThrowsError(try DNSAppConstants.constant(from: "TestValueNotThere") as UInt) { error in

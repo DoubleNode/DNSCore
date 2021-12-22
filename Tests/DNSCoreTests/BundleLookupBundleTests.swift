@@ -11,6 +11,7 @@ import XCTest
 
 @testable import DNSCore
 
+#if !os(macOS)
 class BundleLookupBundleTests: XCTestCase {
     func test_dnsLookupNibBundleForClasstype_withNil_shouldReturnNil() {
         let result: Bundle? = Bundle.dnsLookupNibBundle(for: nil)
@@ -48,3 +49,4 @@ class BundleLookupBundleTests: XCTestCase {
         XCTAssertNotEqual(result, Bundle.main)
     }
 }
+#endif
