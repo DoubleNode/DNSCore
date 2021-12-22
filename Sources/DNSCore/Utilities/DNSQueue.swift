@@ -15,22 +15,21 @@ import Foundation
 
 public struct DNSQueue<T> {
     @Atomic
-    public var array = [T?]()
+    fileprivate var array = [T?]()
     @Atomic
-    public var head = 0
+    fileprivate var head = 0
+
+    public init() {}
 
     public var isEmpty: Bool {
         return array.isEmpty
     }
-
     public var count: Int {
         return array.count - head
     }
-
     public mutating func enqueue(_ element: T) {
         array.append(element)
     }
-
     public mutating func dequeue() -> T? {
         guard head < array.count, let element = array[head] else { return nil }
 
@@ -45,7 +44,6 @@ public struct DNSQueue<T> {
 
         return element
     }
-
     public var front: T? {
         if isEmpty {
             return nil
