@@ -15,9 +15,9 @@ import Foundation
 
 public struct DNSQueue<T> {
     @Atomic
-    fileprivate var array = [T?]()
+    public var array = [T?]()
     @Atomic
-    fileprivate var head = 0
+    public var head = 0
 
     public var isEmpty: Bool {
         return array.isEmpty
