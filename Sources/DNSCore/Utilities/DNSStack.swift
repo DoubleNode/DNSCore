@@ -25,9 +25,13 @@ public struct DNSStack<T> {
     public var count: Int {
         return array.count
     }
+    public var items: [T] {
+        return array
+    }
     public mutating func push(_ element: T) {
         array.append(element)
     }
+    @discardableResult
     public mutating func pop() -> T? {
         return array.popLast()
     }
