@@ -27,6 +27,10 @@ public struct DNSQueue<T> {
     public var count: Int {
         return array.count - head
     }
+    public mutating func empty() {
+        array = [T?]()
+        head = 0
+    }
     public mutating func enqueue(_ element: T) {
         array.append(element)
     }

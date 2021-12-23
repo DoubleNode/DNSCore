@@ -28,6 +28,9 @@ public struct DNSStack<T> {
     public var items: [T] {
         return array
     }
+    public mutating func empty() {
+        array = [T]()
+    }
     public mutating func push(_ element: T) {
         array.append(element)
     }
