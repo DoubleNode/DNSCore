@@ -67,19 +67,20 @@ public extension Date {
         public static let delta365Days = Seconds.deltaOneDay * 365
     }
 
-    func dnsDateTime(as format: Format = Format(),
+    func dnsDateTime(as dateFormat: Format = Format(),
+                     and timeFormat: Format = Format(),
                      in timeZone: TimeZone = TimeZone.current) -> String {
         let startDelta = self.timeIntervalSinceNow
         
-        switch format.size {
+        switch dateFormat.size {
         case .short:
-            return utilityTimeShort(startDelta: startDelta, style: format.style, in: timeZone)
+            return utilityTimeShort(startDelta: startDelta, style: dateFormat.style, in: timeZone)
         case .normal:
-            return utilityTimeNormal(startDelta: startDelta, style: format.style, in: timeZone)
+            return utilityTimeNormal(startDelta: startDelta, style: dateFormat.style, in: timeZone)
         case .long:
-            return utilityTimeLong(startDelta: startDelta, style: format.style, in: timeZone)
+            return utilityTimeLong(startDelta: startDelta, style: dateFormat.style, in: timeZone)
         case .full:
-            return utilityTimeFull(startDelta: startDelta, style: format.style, in: timeZone)
+            return utilityTimeFull(startDelta: startDelta, style: dateFormat.style, in: timeZone)
         }
     }
     func dnsDate(as format: Format = Format(),
