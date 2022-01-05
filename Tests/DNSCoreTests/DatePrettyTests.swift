@@ -11,8 +11,8 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
-    static let defaultDateYear: String = "2021"
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
+    static let defaultDateYear: String = "2022"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)

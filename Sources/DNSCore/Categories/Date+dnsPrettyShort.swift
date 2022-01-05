@@ -9,6 +9,18 @@
 import Foundation
 
 public extension Date {
+    func utilityAtShort(style: Format.Style) -> String {
+        switch style {
+        case .simple:
+            return ", "
+        case .smart:
+            return ", "
+        case .pretty:
+            return ", "
+        case .military:
+            return " "
+        }
+    }
     func utilityDateShort(delta: TimeInterval, style: Format.Style,
                           in timeZone: TimeZone) -> String {
         switch style {

@@ -9,6 +9,18 @@
 import Foundation
 
 public extension Date {
+    func utilityAtLong(style: Format.Style) -> String {
+        switch style {
+        case .simple:
+            return " \(C.Localizations.DatePretty.at) "
+        case .smart:
+            return " @ "
+        case .pretty:
+            return ", "
+        case .military:
+            return " "
+        }
+    }
     func utilityDateLong(delta: TimeInterval, style: Format.Style,
                          in timeZone: TimeZone) -> String {
         switch style {
@@ -166,7 +178,7 @@ public extension Date {
     }
     private func utilityTimeLongSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
-        let dayFormatString = "MMMM d, yyyy '\(C.Localizations.DatePretty.at)' "
+        let dayFormatString = "MMMM d, yyyy'\(self.utilityAtLong(style: .simple))'"
         var timeFormatString = "\(dayFormatString)h:mma"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
@@ -200,7 +212,7 @@ public extension Date {
     private func utilityTimeLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
         let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
-        let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "MMMM d\(yearFormatSubString) @ "
+        let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "MMMM d\(yearFormatSubString)\(self.utilityAtLong(style: .smart))"
         var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond() > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
@@ -217,7 +229,7 @@ public extension Date {
 
         let endDateString = end!.utilityDateLongSmart(delta: endDelta!, in: timeZone)
         let endTimeString = end!.utilityTimeLongSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
-        let endString = endDateString + " @ " + endTimeString
+        let endString = endDateString + self.utilityAtLong(style: .smart) + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -253,6 +265,20 @@ public extension Date {
                 let inWeeks = Int(floor(startDelta / Seconds.deltaOneWeek))
                 retval = String(format: C.Localizations.DatePretty.inWeeks, "\(inWeeks)")
             } else {
+                if end == nil || end == self {
+                    var timeFormatString = "h:mma"
+                    if timeZone != TimeZone.current {
+                        if end == nil || end == self {
+                            timeFormatString += " zzz"
+                        }
+                    }
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.timeZone = timeZone
+                    dateFormatter.dateFormat = timeFormatString
+                    retval = dateFormatter.string(from: self)
+                        .replacingOccurrences(of: "AM", with: "am")
+                        .replacingOccurrences(of: "PM", with: "pm")
+                }
             }
         } else {
             if -startDelta < Seconds.deltaOneMinute {
@@ -278,26 +304,29 @@ public extension Date {
                 let weeksAgo = Int(floor(-startDelta / Seconds.deltaOneWeek))
                 retval = String(format: C.Localizations.DatePretty.weeksAgo, "\(weeksAgo)")
             } else {
-            }
-        }
-        if retval.isEmpty {
-            let dayFormatString = "MMMM d, yyyy '\(C.Localizations.DatePretty.at)' "
-            var timeFormatString = "\(dayFormatString)h:mma"
-            if timeZone != TimeZone.current {
                 if end == nil || end == self {
-                    timeFormatString += " zzz"
+                    var timeFormatString = "h:mma"
+                    if timeZone != TimeZone.current {
+                        if end == nil || end == self {
+                            timeFormatString += " zzz"
+                        }
+                    }
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.timeZone = timeZone
+                    dateFormatter.dateFormat = timeFormatString
+                    retval = dateFormatter.string(from: self)
+                        .replacingOccurrences(of: "AM", with: "am")
+                        .replacingOccurrences(of: "PM", with: "pm")
                 }
             }
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = timeZone
-            dateFormatter.dateFormat = timeFormatString
-            retval = dateFormatter.string(from: self)
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeLongPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endDateString = end!.utilityDateLongPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endTimeString = end!.utilityTimeLongPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + self.utilityAtLong(style: .pretty) + endTimeString
         guard retval != endString else { return retval }
-        retval += " \(C.Localizations.DatePretty.to) " + endString
+        retval += " " + C.Localizations.DatePretty.to + " " + endString
         return retval
     }
 }

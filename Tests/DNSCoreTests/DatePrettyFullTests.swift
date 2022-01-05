@@ -11,11 +11,11 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyFullTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1633803641      // 2021-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "Central Daylight Time"
-    static let defaultDateDay: String = "Saturday"
+    static let defaultDateDay: String = "Sunday"
     static let defaultDateMonth: String = "October"
-    static let defaultDateYear: String = "2021"
+    static let defaultDateYear: String = "2022"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let nowTenMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaTenMinutes
     static let nowFortyFiveMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaFourtyFiveMinutes
@@ -121,37 +121,37 @@ class DatePrettyFullTests: XCTestCase {
     }
     func test_dnsDateTime_withNowAndFormatFullPretty_shouldReturnString() {
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, C.Localizations.DatePretty.justNow)
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(C.Localizations.DatePretty.justNow)")
     }
     func test_dnsDateTime_withNowTenMinutesAgoAndFormatFullPretty_shouldReturnString() {
         sut = nowTenMinutesAgo
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "10"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.minutesAgo, "10"))")
     }
     func test_dnsDateTime_withNowFortyFiveMinutesAgoAndFormatFullPretty_shouldReturnString() {
         sut = nowFortyFiveMinutesAgo
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.minutesAgo, "45"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.minutesAgo, "45"))")
     }
     func test_dnsDateTime_withNowThreeHoursAgoAndFormatFullPretty_shouldReturnString() {
         sut = nowThreeHoursAgo
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.hoursAgo, "3"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.hoursAgo, "3"))")
     }
     func test_dnsDateTime_withNowTenMinutesInAndFormatFullPretty_shouldReturnString() {
         sut = nowTenMinutesIn
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "9"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.inMinutes, "9"))")
     }
     func test_dnsDateTime_withNowFortyFiveMinutesInAndFormatFullPretty_shouldReturnString() {
         sut = nowFortyFiveMinutesIn
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inMinutes, "44"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.inMinutes, "44"))")
     }
     func test_dnsDateTime_withNowThreeHoursInAndFormatFullPretty_shouldReturnString() {
         sut = nowThreeHoursIn
         let result: String = sut.dnsDateTime(as: .fullPretty)
-        XCTAssertEqual(result, String(format: C.Localizations.DatePretty.inHours, "2"))
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today), \(String(format: C.Localizations.DatePretty.inHours, "2"))")
     }
 
     func test_dnsTime_withDefaultAndFormatFullSimple_shouldReturnString() {

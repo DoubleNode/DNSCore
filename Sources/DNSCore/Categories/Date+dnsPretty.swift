@@ -68,19 +68,21 @@ public extension Date {
     }
 
     func dnsDateTime(as dateFormat: Format = Format(),
-                     and timeFormat: Format = Format(),
+                     and timeFormat: Format? = nil,
                      in timeZone: TimeZone = TimeZone.current) -> String {
-        let startDelta = self.timeIntervalSinceNow
-        
+        let timeFormat: Format = timeFormat ?? dateFormat
+        let dateString = dnsDate(as: dateFormat, in: timeZone)
+        let timeString = dnsTime(as: timeFormat, in: timeZone)
+
         switch dateFormat.size {
         case .short:
-            return utilityTimeShort(startDelta: startDelta, style: dateFormat.style, in: timeZone)
+            return dateString + self.utilityAtShort(style: timeFormat.style) + timeString
         case .normal:
-            return utilityTimeNormal(startDelta: startDelta, style: dateFormat.style, in: timeZone)
+            return dateString + self.utilityAtNormal(style: timeFormat.style) + timeString
         case .long:
-            return utilityTimeLong(startDelta: startDelta, style: dateFormat.style, in: timeZone)
+            return dateString + self.utilityAtLong(style: timeFormat.style) + timeString
         case .full:
-            return utilityTimeFull(startDelta: startDelta, style: dateFormat.style, in: timeZone)
+            return dateString + self.utilityAtFull(style: timeFormat.style) + timeString
         }
     }
     func dnsDate(as format: Format = Format(),
