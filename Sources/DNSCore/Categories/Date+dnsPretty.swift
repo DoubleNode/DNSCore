@@ -42,6 +42,16 @@ public extension Date {
             self.style = style
         }
     }
+    enum Weekday: Int {
+        case unknown = 0
+        case sunday = 1
+        case monday
+        case tuesday
+        case wednesday
+        case thursday
+        case friday
+        case saturday
+    }
 
     enum Seconds {
         public static let deltaOneMinute = Double(60)
@@ -163,6 +173,10 @@ public extension Date {
     func dnsSecond() -> Int     {   return dnsComponent(component: .second)     }
     func dnsWeekday() -> Int    {   return dnsComponent(component: .weekday)    }
     func dnsQuarter() -> Int    {   return dnsComponent(component: .quarter)    }
+
+    func dnsWeekday() -> Weekday {
+        return Weekday(rawValue: dnsComponent(component: .weekday)) ?? .unknown
+    }
 
     func dnsAge(to toDate: Date = Date()) -> (year: Int, month: Int, day: Int) {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
