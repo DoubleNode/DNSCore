@@ -15,7 +15,7 @@ public class DNSTimeOfDay: Hashable, Codable {
         case evening
     }
     public var period: Period {
-        switch hour {
+        switch hour % 24 {
         case ..<12:
             return .morning
         case 12..<17:
@@ -33,7 +33,6 @@ public class DNSTimeOfDay: Hashable, Codable {
     public var minute: Int {
         return Int((value - Float(Int(value))) * 60)
     }
-    
     public var totalSeconds: Int {
         return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
     }
@@ -47,6 +46,7 @@ public class DNSTimeOfDay: Hashable, Codable {
     }
 
     public func timeOnDate(date: Date) -> Date {
+        let date = self.hour < 24 ? date : date.nextDay
         var components = DateComponents()
         components.year = date.dnsYear
         components.month = date.dnsMonth
@@ -58,7 +58,6 @@ public class DNSTimeOfDay: Hashable, Codable {
         let retDate = calendar.date(from: components)
         return retDate ?? date
     }
-
     public func asMilitary() -> String {
         return String(format: "%02d%02d", self.hour % 24, self.minute)
     }
@@ -81,13 +80,11 @@ public class DNSTimeOfDay: Hashable, Codable {
     }
 
     // MARK: - Comparable methods
-
     public static func <(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value < rhs.value
     }
 
     // MARK: - Hashable methods
-
     public static func ==(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value == rhs.value
     }

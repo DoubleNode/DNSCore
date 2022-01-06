@@ -42,7 +42,7 @@ public extension Date {
             self.style = style
         }
     }
-    enum Weekday: Int {
+    enum Weekday: Int, CaseIterable, Codable {
         case unknown = 0
         case sunday = 1
         case monday
@@ -228,6 +228,10 @@ public extension Date {
     var isToday: Bool {
         return isSameDate()
     }
+    var isTomorrow: Bool {
+        let tomorrow = Date(timeIntervalSinceNow: Seconds.deltaOneDay)
+        return isSameDate(as: tomorrow)
+    }
     var isYesterday: Bool {
         let yesterday = Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
         return isSameDate(as: yesterday)
@@ -245,6 +249,10 @@ public extension Date {
     static var today: Date {
         Date().replaceTime() ?? Date()
     }
+    static var tomorrow: Date {
+        Date(timeIntervalSinceNow: Seconds.deltaOneDay).replaceTime()
+        ?? Date(timeIntervalSinceNow: Seconds.deltaOneDay)
+    }
     static var yesterday: Date {
         Date(timeIntervalSinceNow: -Seconds.deltaOneDay).replaceTime()
         ?? Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
@@ -254,6 +262,16 @@ public extension Date {
         ?? Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
     }
 
+    var nextDay: Date {
+        let newTime = self.timeIntervalSinceNow + Seconds.deltaOneDay
+        return Date(timeIntervalSinceNow: newTime).replaceTime()
+        ?? Date(timeIntervalSinceNow: newTime)
+    }
+    var nextWeek: Date {
+        let newTime = self.timeIntervalSinceNow + Seconds.deltaOneWeek
+        return Date(timeIntervalSinceNow: newTime).replaceTime()
+        ?? Date(timeIntervalSinceNow: newTime)
+    }
     var previousDay: Date {
         let newTime = self.timeIntervalSinceNow - Seconds.deltaOneDay
         return Date(timeIntervalSinceNow: newTime).replaceTime()
