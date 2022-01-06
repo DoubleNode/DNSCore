@@ -244,7 +244,7 @@ public extension Date {
 
     private func utilityTimeShortSmart(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
-        var timeFormatString = "h\(self.dnsMinute() > 0 ? ":mm" : "")a"
+        var timeFormatString = "h\(self.dnsMinute > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
             timeFormatString += " zzz"
         }
@@ -259,7 +259,7 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : "/yy"
         let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "M/d\(yearFormatSubString) '@' "
-        var timeFormatString = "\(dayFormatString)h\(self.dnsMinute() > 0 ? ":mm" : "")a"
+        var timeFormatString = "\(dayFormatString)h\(self.dnsMinute > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
                 timeFormatString += " zzz"

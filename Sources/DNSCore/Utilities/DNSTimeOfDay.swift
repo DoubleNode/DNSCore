@@ -48,9 +48,9 @@ public class DNSTimeOfDay: Hashable, Codable {
 
     public func timeOnDate(date: Date) -> Date {
         var components = DateComponents()
-        components.year = date.dnsYear()
-        components.month = date.dnsMonth()
-        components.day = date.dnsDay()
+        components.year = date.dnsYear
+        components.month = date.dnsMonth
+        components.day = date.dnsDay
         components.hour = self.hour
         components.minute = self.minute
 

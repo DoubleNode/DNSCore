@@ -164,17 +164,18 @@ public extension Date {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.component(component, from: self)
     }
-    func dnsEra() -> Int        {   return dnsComponent(component: .era)        }
-    func dnsYear() -> Int       {   return dnsComponent(component: .year)       }
-    func dnsMonth() -> Int      {   return dnsComponent(component: .month)      }
-    func dnsDay() -> Int        {   return dnsComponent(component: .day)        }
-    func dnsHour() -> Int       {   return dnsComponent(component: .hour)       }
-    func dnsMinute() -> Int     {   return dnsComponent(component: .minute)     }
-    func dnsSecond() -> Int     {   return dnsComponent(component: .second)     }
-    func dnsWeekday() -> Int    {   return dnsComponent(component: .weekday)    }
-    func dnsQuarter() -> Int    {   return dnsComponent(component: .quarter)    }
+    
+    var dnsEra: Int { return dnsComponent(component: .era) }
+    var dnsYear: Int { return dnsComponent(component: .year) }
+    var dnsMonth: Int { return dnsComponent(component: .month) }
+    var dnsDay: Int { return dnsComponent(component: .day) }
+    var dnsHour: Int { return dnsComponent(component: .hour) }
+    var dnsMinute: Int { return dnsComponent(component: .minute) }
+    var dnsSecond: Int { return dnsComponent(component: .second) }
+    var dnsWeekday: Int { return dnsComponent(component: .weekday) }
+    var dnsQuarter: Int { return dnsComponent(component: .quarter) }
 
-    func dnsWeekday() -> Weekday {
+    var dnsDayOfWeek: Weekday {
         return Weekday(rawValue: dnsComponent(component: .weekday)) ?? .unknown
     }
 
@@ -208,16 +209,16 @@ public extension Date {
     }
 
     func isSameDay(as date: Date = Date()) -> Bool {
-        return self.dnsDay() == date.dnsDay()
+        return self.dnsDay == date.dnsDay
     }
     func isSameWeekday(as date: Date = Date()) -> Bool {
-        return self.dnsWeekday() == date.dnsWeekday()
+        return self.dnsWeekday == date.dnsWeekday
     }
     func isSameMonth(as date: Date = Date()) -> Bool {
-        return self.dnsMonth() == date.dnsMonth()
+        return self.dnsMonth == date.dnsMonth
     }
     func isSameYear(as date: Date = Date()) -> Bool {
-        return self.dnsYear() == date.dnsYear()
+        return self.dnsYear == date.dnsYear
     }
     func isSameDate(as date: Date = Date()) -> Bool {
         return self.isSameDay(as: date) &&
@@ -271,9 +272,9 @@ public extension Date {
         components.year = year
         components.month = month
         components.day = day
-        components.hour = self.dnsHour()
-        components.minute = self.dnsMinute()
-        components.second = self.dnsSecond()
+        components.hour = self.dnsHour
+        components.minute = self.dnsMinute
+        components.second = self.dnsSecond
 
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
@@ -293,9 +294,9 @@ public extension Date {
                      and minute: Int = 0,
                      and second: Int = 0) -> Date? {
         var components = DateComponents()
-        components.year = self.dnsYear()
-        components.month = self.dnsMonth()
-        components.day = self.dnsDay()
+        components.year = self.dnsYear
+        components.month = self.dnsMonth
+        components.day = self.dnsDay
         components.hour = hour
         components.minute = minute
         components.second = second
@@ -304,8 +305,8 @@ public extension Date {
         return calendar.date(from: components)
     }
     func timeOfDay() -> DNSTimeOfDay {
-        return DNSTimeOfDay(hour: self.dnsHour(),
-                            minute: self.dnsMinute())
+        return DNSTimeOfDay(hour: self.dnsHour,
+                            minute: self.dnsMinute)
     }
 
     // MARK: - Utility methods
