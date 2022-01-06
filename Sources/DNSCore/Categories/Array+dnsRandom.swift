@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Array {
-    @inlinable public var dnsRandom: Element? {
+    @inlinable var dnsRandom: Element? {
         guard !self.isEmpty else { return nil }
         return self[Int.random(in: 0..<self.count)]
     }

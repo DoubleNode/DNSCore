@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DNSTimeOfDay: Hashable, Codable {
+public class DNSTimeOfDay: Hashable, Comparable, Codable {
     public enum Period: Int, CaseIterable, Codable {
         case morning
         case afternoon
@@ -51,7 +51,7 @@ public class DNSTimeOfDay: Hashable, Codable {
         components.year = date.dnsYear
         components.month = date.dnsMonth
         components.day = date.dnsDay
-        components.hour = self.hour
+        components.hour = self.hour % 24
         components.minute = self.minute
 
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
