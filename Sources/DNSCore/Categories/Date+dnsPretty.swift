@@ -62,9 +62,10 @@ public extension Date {
         public static let deltaOneWeek = Seconds.deltaOneDay * 7
         public static let deltaTwoWeeks = Seconds.deltaOneWeek * 2
         public static let deltaThreeWeeks = Seconds.deltaOneWeek * 3
+        public static let deltaFourWeeks = Seconds.deltaOneWeek * 4
         public static let deltaThirtyDays = Seconds.deltaOneDay * 30
         public static let deltaSixWeeks = Seconds.deltaOneWeek * 6
-        public static let delta365Days = Seconds.deltaOneDay * 365
+        public static let deltaOneYear = Seconds.deltaOneDay * 365.25
     }
 
     func dnsDateTime(as dateFormat: Format = Format(),
@@ -171,6 +172,26 @@ public extension Date {
                                                     from: fromDate, to: toDate)
         return (ageComponents.year ?? -1, ageComponents.month ?? -1, ageComponents.day ?? -1)
     }
+    func dnsSeconds(to toDate: Date = Date()) -> Int {
+        let fromSeconds = self.timeIntervalSinceReferenceDate
+        let toSeconds = toDate.timeIntervalSinceReferenceDate
+        return Int(toSeconds - fromSeconds)
+    }
+    func dnsMinutes(to toDate: Date = Date()) -> Int {
+        return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneMinute)
+    }
+    func dnsHours(to toDate: Date = Date()) -> Int {
+        return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneHour)
+    }
+    func dnsDays(to toDate: Date = Date()) -> Int {
+        return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneDay)
+    }
+    func dnsWeeks(to toDate: Date = Date()) -> Int {
+        return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneWeek)
+    }
+    func dnsYears(to toDate: Date = Date()) -> Int {
+        return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneYear)
+    }
 
     func isSameDay(as date: Date = Date()) -> Bool {
         return self.dnsDay() == date.dnsDay()
@@ -202,8 +223,8 @@ public extension Date {
     var isLast30Days: Bool {
         return self.timeIntervalSinceNow > -Seconds.deltaThirtyDays
     }
-    var isLast365Days: Bool {
-        return self.timeIntervalSinceNow > -Seconds.delta365Days
+    var isLastYear: Bool {
+        return self.timeIntervalSinceNow > -Seconds.deltaOneYear
     }
 
     static var today: Date {
