@@ -58,8 +58,9 @@ public enum DNSCoreError: DNSError {
             return String(format: NSLocalizedString("CORE-Unknown Error%@", comment: ""),
                           " (\(Self.domain):\(Self.Code.unknown.rawValue))")
         case .constantNotFound(let key, let filter, _):
-            return String(format: NSLocalizedString("CORE-Constant Not Found Error: %@/%@%@", comment: ""),
-                          key, filter,
+            return String(format: NSLocalizedString("CORE-Constant Not Found Error%@%@%@", comment: ""),
+                          "\(key)",
+                          "\(filter)",
                           " (\(Self.domain):\(Self.Code.constantNotFound.rawValue))")
         case .reentered:
             return String(format: NSLocalizedString("CORE-Reentered Error%@", comment: ""),
