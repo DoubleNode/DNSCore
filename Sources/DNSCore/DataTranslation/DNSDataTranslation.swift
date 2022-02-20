@@ -57,7 +57,7 @@ open class DNSDataTranslation: NSObject {
     }
     static var defaultTimeFormatter1: DateFormatter {
         let retval = DateFormatter.init()
-        retval.timeZone     = NSTimeZone.local
+        retval.timeZone     = TimeZone(secondsFromGMT: 0)
         retval.dateFormat   = "yyyyMMddHHmm"
         return retval
     }
