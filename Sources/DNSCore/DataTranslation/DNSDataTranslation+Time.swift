@@ -48,6 +48,10 @@ public extension DNSDataTranslation {
         let string = dictionary![firebaseDateDictionaryISOKey] ?? ""
         return self.time(from: string, DNSDataTranslation.firebaseTimeFormatterMilliseconds)
     }
+    func time(from time: NSNumber?) -> Date? {
+        guard let number = self.number(from: string) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
     func time(from string: String?, _ timeFormatter: DateFormatter? = nil) -> Date? {
         guard string != nil else { return nil }
         guard let timeFormatter = timeFormatter else {
