@@ -13,6 +13,7 @@ open class DNSDataTranslation: NSObject {
     let boolTrueCharacters = "YyTt1+"
     let firebaseDateDictionaryISOKey = "iso"
     let firebaseKeyInvalidCharacterSet = CharacterSet.init(charactersIn: "[].#$/")
+    let firebaseTimestampDictionarySecondsKey = "_seconds"
 
     // MARK: - Static Formatters
     static var defaultNumberFormatter: NumberFormatter {

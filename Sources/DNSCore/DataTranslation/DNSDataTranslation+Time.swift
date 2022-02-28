@@ -40,12 +40,22 @@ public extension DNSDataTranslation {
             return self.time(from: any as? Int)
         } else if any is Bool {
             return self.time(from: any as? Bool)
+        } else if any is [String: String] {
+            return self.time(from: any as? [String: Int])
+        } else if any is [String: Int] {
+            return self.time(from: any as? [String: Int])
         }
         return self.time(from: any as? String)
     }
+    func time(from dictionary: [String: Int]?) -> Date? {
+        guard let dictionary = dictionary else { return nil }
+        let number = dictionary[firebaseTimestampDictionarySecondsKey]
+        guard let number = self.number(from: number) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
     func time(from dictionary: [String: String]?) -> Date? {
-        guard dictionary != nil else { return nil }
-        let string = dictionary![firebaseDateDictionaryISOKey] ?? ""
+        guard let dictionary = dictionary else { return nil }
+        let string = dictionary[firebaseDateDictionaryISOKey] ?? ""
         return self.time(from: string, DNSDataTranslation.firebaseTimeFormatterMilliseconds)
     }
     func time(from number: NSNumber?) -> Date? {
