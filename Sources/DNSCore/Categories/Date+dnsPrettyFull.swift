@@ -124,9 +124,11 @@ public extension Date {
 
         if startDelta > 0 {
             if startDelta < Seconds.deltaOneDay {
-                retval = C.Localizations.DatePretty.today
+                retval = self.isToday ? C.Localizations.DatePretty.today :
+                    C.Localizations.DatePretty.tomorrow
             } else if startDelta < Seconds.deltaTwoDays {
-                retval = C.Localizations.DatePretty.tomorrow
+                retval = self.isTomorrow ? C.Localizations.DatePretty.tomorrow :
+                    String(format: C.Localizations.DatePretty.inDays, "2")
             } else if startDelta < Seconds.deltaOneWeek {
                 let inDays = Int(floor(startDelta / Seconds.deltaOneDay))
                 retval = String(format: C.Localizations.DatePretty.inDays, "\(inDays)")
@@ -143,9 +145,11 @@ public extension Date {
             }
         } else {
             if -startDelta < Seconds.deltaOneDay {
-                retval = C.Localizations.DatePretty.today
+                retval = self.isToday ? C.Localizations.DatePretty.today :
+                    C.Localizations.DatePretty.yesterday
             } else if -startDelta < Seconds.deltaTwoDays {
-                retval = C.Localizations.DatePretty.yesterday
+                retval = self.isTomorrow ? C.Localizations.DatePretty.yesterday :
+                    String(format: C.Localizations.DatePretty.daysAgo, "2")
             } else if -startDelta < Seconds.deltaOneWeek {
                 let daysAgo = Int(floor(-startDelta / Seconds.deltaOneDay))
                 retval = String(format: C.Localizations.DatePretty.daysAgo, "\(daysAgo)")

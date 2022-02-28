@@ -139,9 +139,11 @@ public extension Date {
 
         switch delta {
         case 0..<Seconds.deltaOneDay:
-            retval = C.Localizations.DatePretty.todayShort
+            retval = self.isToday ? C.Localizations.DatePretty.todayShort :
+                C.Localizations.DatePretty.tomorrowShort
         case 0..<Seconds.deltaTwoDays:
-            retval = C.Localizations.DatePretty.tomorrowShort
+            retval = self.isToday ? C.Localizations.DatePretty.tomorrowShort :
+                String(format: C.Localizations.DatePretty.inDaysShort, "2")
         case 0..<Seconds.deltaThreeDays:
             retval = String(format: C.Localizations.DatePretty.inDaysShort, "2")
         case 0..<Seconds.deltaOneWeek:
@@ -168,9 +170,11 @@ public extension Date {
 
         switch deltaPast {
         case 0..<Seconds.deltaOneDay:
-            retval = C.Localizations.DatePretty.todayShort
+            retval = self.isToday ? C.Localizations.DatePretty.todayShort :
+                C.Localizations.DatePretty.yesterdayShort
         case 0..<Seconds.deltaTwoDays:
-            retval = C.Localizations.DatePretty.yesterdayShort
+            retval = self.isToday ? C.Localizations.DatePretty.yesterdayShort :
+                String(format: C.Localizations.DatePretty.daysAgoShort, "2")
         case 0..<Seconds.deltaThreeDays:
             retval = String(format: C.Localizations.DatePretty.daysAgoShort, "2")
         case 0..<Seconds.deltaOneWeek:
