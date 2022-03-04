@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - tokenString...
     // swiftlint:disable:next cyclomatic_complexity
     func tokenString(from any: Any?) -> String? {
-        guard any != nil else { return nil }
+        guard let any = any else { return nil }
         return self.tokenString(from: any as? String)
     }
     func tokenString(from string: String?) -> String? {

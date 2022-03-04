@@ -32,33 +32,33 @@ public extension DNSDataTranslation {
         }
         return self.timeZone(from: any as? String)
     }
-    func timeZone(from value: TimeZone?) -> TimeZone? {
-        guard value != nil else { return TimeZone.current }
-        return value
+    func timeZone(from timezone: TimeZone?) -> TimeZone? {
+        guard let timezone = timezone else { return TimeZone.current }
+        return timezone
     }
-    func timeZone(from value: NSNumber?) -> TimeZone? {
-        guard let value = value else { return TimeZone.current }
-        return TimeZone(secondsFromGMT: Int(value.doubleValue * Date.Seconds.deltaOneHour))
+    func timeZone(from number: NSNumber?) -> TimeZone? {
+        guard let number = number else { return TimeZone.current }
+        return TimeZone(secondsFromGMT: Int(number.doubleValue * Date.Seconds.deltaOneHour))
     }
-    func timeZone(from value: Decimal?) -> TimeZone? {
-        guard let value = value as NSDecimalNumber? else { return TimeZone.current }
-        return TimeZone(secondsFromGMT: Int(value.doubleValue * Date.Seconds.deltaOneHour))
+    func timeZone(from decimal: Decimal?) -> TimeZone? {
+        guard let decimal = decimal as NSDecimalNumber? else { return TimeZone.current }
+        return TimeZone(secondsFromGMT: Int(decimal.doubleValue * Date.Seconds.deltaOneHour))
     }
-    func timeZone(from value: Double?) -> TimeZone? {
-        guard let value = value else { return TimeZone.current }
-        return TimeZone(secondsFromGMT: Int(value * Date.Seconds.deltaOneHour))
+    func timeZone(from double: Double?) -> TimeZone? {
+        guard let double = double else { return TimeZone.current }
+        return TimeZone(secondsFromGMT: Int(double * Date.Seconds.deltaOneHour))
     }
-    func timeZone(from value: Float?) -> TimeZone? {
-        guard let value = value else { return TimeZone.current }
-        return TimeZone(secondsFromGMT: Int(Double(value) * Date.Seconds.deltaOneHour))
+    func timeZone(from float: Float?) -> TimeZone? {
+        guard let float = float else { return TimeZone.current }
+        return TimeZone(secondsFromGMT: Int(Double(float) * Date.Seconds.deltaOneHour))
     }
-    func timeZone(from value: Int?) -> TimeZone? {
-        guard let value = value else { return TimeZone.current }
-        return TimeZone(secondsFromGMT: Int(Double(value) * Date.Seconds.deltaOneHour))
+    func timeZone(from int: Int?) -> TimeZone? {
+        guard let int = int else { return TimeZone.current }
+        return TimeZone(secondsFromGMT: Int(Double(int) * Date.Seconds.deltaOneHour))
     }
-    func timeZone(from value: String?) -> TimeZone? {
-        guard let value = value else { return TimeZone.current }
-        guard !value.isEmpty else { return nil }
-        return TimeZone(identifier: value)
+    func timeZone(from string: String?) -> TimeZone? {
+        guard let string = string else { return TimeZone.current }
+        guard !string.isEmpty else { return TimeZone.current }
+        return TimeZone(identifier: string)
     }
 }

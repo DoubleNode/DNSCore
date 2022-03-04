@@ -45,15 +45,16 @@ public extension DNSDataTranslation {
         return self.bool(from: any as? String)
     }
     func bool(from bool: Bool?) -> Bool? {
-        guard bool != nil else { return nil }
+        guard let bool = bool else { return nil }
         return bool
     }
     func bool(from number: NSNumber?) -> Bool? {
-        guard number != nil else { return nil }
-        return bool(from: "\(number!)")
+        guard let number = number else { return nil }
+        return bool(from: "\(number)")
     }
     func bool(from string: String?) -> Bool? {
-        guard !(string?.isEmpty ?? true) else { return nil }
-        return boolTrueCharacters.contains(string![string!.startIndex])
+        guard let string = string else { return nil }
+        guard !string.isEmpty else { return nil }
+        return boolTrueCharacters.contains(string[string.startIndex])
     }
 }

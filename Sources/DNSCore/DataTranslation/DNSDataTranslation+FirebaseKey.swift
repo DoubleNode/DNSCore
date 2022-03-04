@@ -44,7 +44,9 @@ public extension DNSDataTranslation {
         return self.firebaseKey(from: any as? String)
     }
     func firebaseKey(from string: String?) -> String? {
-        guard !(string?.isEmpty ?? true) else { return nil }
-        return string!.components(separatedBy: firebaseKeyInvalidCharacterSet).joined(separator: "_")
+        guard let string = string else { return nil }
+        guard !string.isEmpty else { return nil }
+        return string.components(separatedBy: firebaseKeyInvalidCharacterSet)
+            .joined(separator: "_")
     }
 }
