@@ -48,13 +48,13 @@ public extension DNSDataTranslation {
         return self.string(from: any as? String)
     }
     func string(from number: NSNumber?) -> String? {
-        guard number != nil else { return nil }
-        return number!.stringValue
+        guard let number = number else { return nil }
+        return number.stringValue
     }
     func string(from array: [Any]?) -> String? {
-        guard array != nil else { return nil }
+        guard let array = array else { return nil }
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: array!,
+            let jsonData = try JSONSerialization.data(withJSONObject: array,
                                                       options: [.withoutEscapingSlashes])
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
@@ -62,9 +62,9 @@ public extension DNSDataTranslation {
         }
     }
     func string(from dictionary: [String: Any]?) -> String? {
-        guard dictionary != nil else { return nil }
+        guard let dictionary = dictionary else { return nil }
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dictionary!,
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary,
                                                       options: [.withoutEscapingSlashes])
             return String.init(data: jsonData, encoding: String.Encoding.utf8)
         } catch {
@@ -72,23 +72,23 @@ public extension DNSDataTranslation {
         }
     }
     func string(fromFirebaseDate date: Date?) -> String? {
-        guard date != nil else { return nil }
-        return DNSDataTranslation.firebaseDateFormatter.string(from: date!)
+        guard let date = date else { return nil }
+        return DNSDataTranslation.firebaseDateFormatter.string(from: date)
     }
     func string(fromFirebaseTime time: Date?) -> String? {
-        guard time != nil else { return nil }
-        return DNSDataTranslation.firebaseTimeFormatterMilliseconds.string(from: time!)
+        guard let time = time else { return nil }
+        return DNSDataTranslation.firebaseTimeFormatterMilliseconds.string(from: time)
     }
     func string(from localTime: Date?, _ timezone: Bool = false) -> String? {
-        guard localTime != nil else { return nil }
+        guard let localTime = localTime else { return nil }
         if timezone {
-            return DNSDataTranslation.localTimeFormatterMilliseconds.string(from: localTime!)
+            return DNSDataTranslation.localTimeFormatterMilliseconds.string(from: localTime)
         } else {
-            return DNSDataTranslation.localTimeFormatterWithoutTimezone.string(from: localTime!)
+            return DNSDataTranslation.localTimeFormatterWithoutTimezone.string(from: localTime)
         }
     }
     func string(from string: String?) -> String? {
-        guard string != nil else { return nil }
-        return string!
+        guard let string = string else { return nil }
+        return string
     }
 }

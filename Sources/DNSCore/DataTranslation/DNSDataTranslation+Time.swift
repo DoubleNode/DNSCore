@@ -63,7 +63,8 @@ public extension DNSDataTranslation {
         return self.date(fromTimeIntervalSince1970: number)
     }
     func time(from string: String?, _ timeFormatter: DateFormatter? = nil) -> Date? {
-        guard string != nil else { return nil }
+        guard let string = string else { return nil }
+        guard !string.isEmpty else { return nil }
         guard let timeFormatter = timeFormatter else {
             for formatter in DNSDataTranslation.defaultTimeFormatters {
                 if let retval = self.date(from: string, formatter) {
@@ -75,10 +76,10 @@ public extension DNSDataTranslation {
             }
             return nil
         }
-        return timeFormatter.date(from: string!)
+        return timeFormatter.date(from: string)
     }
     func time(from time: Date?) -> Date? {
-        guard time != nil else { return nil }
+        guard let time = time else { return nil }
         return time
     }
 }

@@ -46,19 +46,20 @@ public extension DNSDataTranslation {
         return self.timeOfDay(from: any as? String)
     }
     func timeOfDay(from timeOfDay: DNSTimeOfDay?) -> DNSTimeOfDay? {
-        guard timeOfDay != nil else { return DNSTimeOfDay() }
+        guard let timeOfDay = timeOfDay else { return DNSTimeOfDay() }
         return timeOfDay
     }
     func timeOfDay(from number: NSNumber?) -> DNSTimeOfDay? {
-        guard number != nil else { return DNSTimeOfDay() }
-        return DNSTimeOfDay(timeValue: number?.floatValue ?? 0)
+        guard let number = number else { return DNSTimeOfDay() }
+        return DNSTimeOfDay(timeValue: number.floatValue)
     }
     func timeOfDay(from string: String?) -> DNSTimeOfDay? {
-        guard !(string?.isEmpty ?? true) else { return nil }
-        let strings = string?.components(separatedBy: [":", " "]) ?? []
+        guard let string = string else { return nil }
+        guard !string.isEmpty else { return nil }
+        let strings = string.components(separatedBy: [":", " "]) ?? []
         var hourValue = Float(0.0)
         var minuteValue = Float(0.0)
-        if !strings.isEmpty {
+        if strings.isEmpty {
             hourValue = self.number(from: strings[0],
                                     DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
 //            if hourValue == 12 {
