@@ -18,7 +18,7 @@ public extension Date {
         case .pretty:
             return ", "
         case .military:
-            return " "
+            return ""
         }
     }
     func utilityDateShort(delta: TimeInterval, style: Format.Style,
