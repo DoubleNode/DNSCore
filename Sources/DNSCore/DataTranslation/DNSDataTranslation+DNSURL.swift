@@ -17,12 +17,12 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func dnsurl(from any: Any?) -> DNSURL? {
         guard let any = any else { return nil }
-        if any is [String: URL] {
-            return self.dnsurl(from: any as? [String: URL])
+        if any is [String: URL?] {
+            return self.dnsurl(from: any as? [String: URL?])
         }
         return self.dnsurl(from: any as? URL)
     }
-    func dnsurl(from dictionary: [String: URL]?) -> DNSURL? {
+    func dnsurl(from dictionary: [String: URL?]?) -> DNSURL? {
         guard let dictionary = dictionary else { return nil }
         return DNSURL(with: dictionary)
     }

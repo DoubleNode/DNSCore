@@ -19,39 +19,39 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     }
     private let fallbackLanguage = Language.en
 
-    private var _urls: [String: URL]
+    private var _urls: [String: URL?]
 
-    public var asDictionary: [String: URL] {
+    public var asDictionary: [String: URL?] {
         return _urls
     }
-    public var asURL: URL {
+    public var asURL: URL? {
         self.asURL(for: DNSCore.languageCode)
     }
-    public func asURL(for language: DNSString.Language) -> URL {
+    public func asURL(for language: DNSString.Language) -> URL? {
         self.asURL(for: language.rawValue)
     }
-    public func asURL(for languageStr: String) -> URL {
-        _urls[languageStr] ?? (_urls[fallbackLanguage.rawValue] ?? URL(string: "https://")!)
+    public func asURL(for languageStr: String) -> URL? {
+        _urls[languageStr] ?? _urls[fallbackLanguage.rawValue] ?? nil
     }
     public init() {
         _urls = [:]
     }
-    public init(with urls: [DNSURL.Language: URL]) {
-        var newURLs: [String: URL] = [:]
+    public init(with urls: [DNSURL.Language: URL?]) {
+        var newURLs: [String: URL?] = [:]
         urls.keys.forEach { newURLs[$0.rawValue] = urls[$0] }
         _urls = newURLs
     }
-    public init(with urls: [String: URL]) {
+    public init(with urls: [String: URL?]) {
         _urls = urls
     }
-    public init(with url: URL) {
-        var newURLs: [String: URL] = [:]
+    public init(with url: URL?) {
+        var newURLs: [String: URL?] = [:]
         newURLs[fallbackLanguage.rawValue] = url
         _urls = newURLs
     }
     @discardableResult
     public func replace(for languageStr: String,
-                        with url: URL) -> DNSURL {
+                        with url: URL?) -> DNSURL {
         _urls[languageStr] = url
         return self
     }
@@ -74,7 +74,7 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     }
 
     @inlinable public var isEmpty: Bool {
-        return asURL.absoluteString.isEmpty
+        return asURL?.absoluteString.isEmpty ?? true
     }
 
     // Equatable protocol methods
@@ -95,6 +95,6 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     
     // Comparable protocol methods
     public static func < (lhs: DNSURL, rhs: DNSURL) -> Bool {
-        return lhs.asURL.absoluteString < rhs.asURL.absoluteString
+        return (lhs.asURL?.absoluteString ?? "") < (rhs.asURL?.absoluteString ?? "")
     }
 }
