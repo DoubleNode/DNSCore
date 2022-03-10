@@ -30,4 +30,8 @@ public extension DNSDataTranslation {
         guard let url = url else { return nil }
         return DNSURL(with: url)
     }
+    func dnsurl(from string: String?) -> DNSURL? {
+        guard let string = string else { return nil }
+        return dnsurl(from: URL(string: string))
+    }
 }
