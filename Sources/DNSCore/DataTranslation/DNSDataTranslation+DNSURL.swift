@@ -20,6 +20,9 @@ public extension DNSDataTranslation {
         if any is [String: URL?] {
             return self.dnsurl(from: any as? [String: URL?])
         }
+        if any is String {
+            return self.dnsurl(from: any as? String)
+        }
         return self.dnsurl(from: any as? URL)
     }
     func dnsurl(from dictionary: [String: URL?]?) -> DNSURL? {
@@ -29,5 +32,9 @@ public extension DNSDataTranslation {
     func dnsurl(from url: URL?) -> DNSURL? {
         guard let url = url else { return nil }
         return DNSURL(with: url)
+    }
+    func dnsurl(from string: String?) -> DNSURL? {
+        guard let string = string else { return nil }
+        return dnsurl(from: URL(string: string))
     }
 }
