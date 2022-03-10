@@ -37,12 +37,19 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
         _urls = [:]
     }
     public init(with urls: [DNSURL.Language: URL?]) {
-        var newURLs: [String: URL?] = [:]
-        urls.keys.forEach { newURLs[$0.rawValue] = urls[$0] }
-        _urls = newURLs
+        _urls = [:]
+        urls.keys.forEach { _urls[$0.rawValue] = urls[$0] }
     }
     public init(with urls: [String: URL?]) {
         _urls = urls
+    }
+    public init(with strings: [DNSURL.Language: String]) {
+        _urls = [:]
+        strings.keys.forEach { _urls[$0.rawValue] = URL(string: strings[$0] ?? "") }
+    }
+    public init(with strings: [String: String]) {
+        _urls = [:]
+        strings.keys.forEach { _urls[$0] = URL(string: strings[$0] ?? "") }
     }
     public init(with url: URL?) {
         var newURLs: [String: URL?] = [:]
