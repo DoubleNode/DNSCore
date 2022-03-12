@@ -96,7 +96,8 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
 
     // NSCopying protocol methods
     public func copy(with zone: NSZone? = nil) -> Any {
-        let copy = DNSURL(with: _urls)
+        let newUrls = _urls
+        let copy = DNSURL(with: newUrls)
         return copy
     }
     

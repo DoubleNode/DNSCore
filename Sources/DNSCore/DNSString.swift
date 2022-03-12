@@ -89,7 +89,8 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
 
     // NSCopying protocol methods
     public func copy(with zone: NSZone? = nil) -> Any {
-        let copy = DNSString(with: _strings)
+        let newStrings = _strings
+        let copy = DNSString(with: newStrings)
         return copy
     }
     
