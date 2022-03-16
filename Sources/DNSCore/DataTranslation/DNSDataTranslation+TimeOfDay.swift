@@ -59,12 +59,9 @@ public extension DNSDataTranslation {
         let strings = string.components(separatedBy: [":", " "]) ?? []
         var hourValue = Float(0.0)
         var minuteValue = Float(0.0)
-        if strings.isEmpty {
+        if !strings.isEmpty {
             hourValue = self.number(from: strings[0],
                                     DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
-//            if hourValue == 12 {
-//                hourValue = 0
-//            }
         }
         if strings.count > 1 {
             minuteValue = self.number(from: strings[1],
