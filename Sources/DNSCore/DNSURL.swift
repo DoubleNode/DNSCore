@@ -71,13 +71,15 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     required public init(from decoder: Decoder) throws {
         _urls = [:]
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        _urls[Language.en.rawValue] = try container.decode(URL.self, forKey: .en)
-        _urls[Language.es419.rawValue] = try container.decode(URL.self, forKey: .es419)
+        _urls[Language.en.rawValue] = URL(string: try container.decode(String.self, forKey: .en))
+        _urls[Language.es419.rawValue] = URL(string: try container.decode(String.self, forKey: .es419))
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(_urls[Language.en.rawValue] ?? URL(string: "https://")!, forKey: .en)
-        try container.encode(_urls[Language.es419.rawValue] ?? URL(string: "https://")!, forKey: .es419)
+        let stringEn = _urls[Language.en.rawValue]??.absoluteString
+        try container.encode(stringEn ?? "", forKey: .en)
+        let stringEs419 = _urls[Language.es419.rawValue]??.absoluteString
+        try container.encode(stringEs419 ?? "", forKey: .es419)
     }
 
     @inlinable public var isEmpty: Bool {
