@@ -38,21 +38,27 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     }
     public init(with strings: [DNSString.Language: String]) {
         var newStrings: [String: String] = [:]
-        strings.keys.forEach { newStrings[$0.rawValue] = strings[$0] }
+        strings.keys.forEach {
+            newStrings[$0.rawValue] = DNSString.utilityCleanupString(strings[$0])
+        }
         _strings = newStrings
     }
     public init(with strings: [String: String]) {
-        _strings = strings
+        var newStrings: [String: String] = [:]
+        strings.keys.forEach {
+            newStrings[$0] = DNSString.utilityCleanupString(strings[$0])
+        }
+        _strings = newStrings
     }
     public init(with string: String) {
         var newStrings: [String: String] = [:]
-        newStrings[fallbackLanguage.rawValue] = string
+        newStrings[fallbackLanguage.rawValue] = DNSString.utilityCleanupString(string)
         _strings = newStrings
     }
     @discardableResult
     public func replace(for languageStr: String,
                         with string: String) -> DNSString {
-        _strings[languageStr] = string
+        _strings[languageStr] = DNSString.utilityCleanupString(string)
         return self
     }
 
@@ -97,5 +103,12 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     // Comparable protocol methods
     public static func < (lhs: DNSString, rhs: DNSString) -> Bool {
         return lhs.asString < rhs.asString
+    }
+    
+    // Utility Methods
+    static func utilityCleanupString(_ string: String?) -> String? {
+        guard let string = string else { return nil }
+        return string.replacingOccurrences(of: "\\r", with: "\r")
+            .replacingOccurrences(of: "\\n", with: "\n")
     }
 }
