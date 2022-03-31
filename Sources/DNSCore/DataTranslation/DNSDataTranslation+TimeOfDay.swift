@@ -56,13 +56,11 @@ public extension DNSDataTranslation {
     func timeOfDay(from string: String?) -> DNSTimeOfDay? {
         guard let string = string else { return nil }
         guard !string.isEmpty else { return nil }
-        let strings = string.components(separatedBy: [":", " "]) ?? []
+        let strings = string.components(separatedBy: [":", " "])
         var hourValue = Float(0.0)
         var minuteValue = Float(0.0)
-        if !strings.isEmpty {
-            hourValue = self.number(from: strings[0],
-                                    DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
-        }
+        hourValue = self.number(from: strings[0],
+                                DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
         if strings.count > 1 {
             minuteValue = self.number(from: strings[1],
                                       DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
