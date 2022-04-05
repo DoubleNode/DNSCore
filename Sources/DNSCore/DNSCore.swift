@@ -20,6 +20,7 @@ public protocol DNSCoreApplicationProtocol {
 
     func buildString() -> String
     func bundleName() -> String
+    func userAgentString() -> String
     func versionString() -> String
 
     func isReachable() -> Bool
@@ -33,7 +34,6 @@ public protocol DNSCoreApplicationProtocol {
     func shortenErrorPath(_ filename: String) -> String
 
     // MARK: - CoreData methods
-
     func disableUrlCache()
 }
 
@@ -71,6 +71,9 @@ public class DNSCore {
     }
     public class var bundleName: String {
         return DNSCore.appDelegate?.bundleName() ?? ""
+    }
+    public class var userAgentString: String {
+        return DNSCore.appDelegate?.userAgentString() ?? ""
     }
     public class var versionString: String {
         return DNSCore.appDelegate?.versionString() ?? ""
