@@ -31,7 +31,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
         return Int(value)
     }
     public var minute: Int {
-        return Int((value - Float(Int(value))) * 60)
+        return Int((value - Float(hour)) * 60)
     }
     public var totalSeconds: Int {
         return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
@@ -42,7 +42,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     }
     public required init(hour: Int,
                          minute: Int) {
-        value = Float(hour) + (Float(minute) / 60)
+        value = Float(hour) + ((Float(minute) + 0.5) / 60)
     }
 
     public func timeOnDate(date: Date) -> Date {
