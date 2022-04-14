@@ -45,8 +45,9 @@ public extension DNSDataTranslation {
         return self.id(from: any as? String)
     }
     func id(from string: String?) -> String? {
-        guard let string = string else { return nil }
+        guard var string = string else { return nil }
         guard !string.isEmpty else { return nil }
+        string = string.replacingOccurrences(of: "/", with: "")
         return string
     }
 }
