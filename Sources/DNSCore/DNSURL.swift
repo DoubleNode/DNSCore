@@ -57,6 +57,12 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
         _urls = newURLs
     }
     @discardableResult
+    public func replace(for language: DNSString.Language,
+                        with url: URL?) -> DNSURL {
+        _urls[language.rawValue] = url
+        return self
+    }
+    @discardableResult
     public func replace(for languageStr: String,
                         with url: URL?) -> DNSURL {
         _urls[languageStr] = url

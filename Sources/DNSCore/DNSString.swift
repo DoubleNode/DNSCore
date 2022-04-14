@@ -61,6 +61,12 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
         _strings[languageStr] = DNSString.utilityCleanupString(string)
         return self
     }
+    @discardableResult
+    public func replace(for language: DNSString.Language,
+                        with string: String) -> DNSString {
+        _strings[language.rawValue] = DNSString.utilityCleanupString(string)
+        return self
+    }
 
     // Codable protocol methods
     public enum CodingKeys: String, CodingKey {
