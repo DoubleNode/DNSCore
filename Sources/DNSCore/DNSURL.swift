@@ -33,6 +33,12 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     public func asURL(for languageStr: String) -> URL? {
         _urls[languageStr] ?? _urls[fallbackLanguage.rawValue] ?? nil
     }
+    public func rawValue(for language: DNSString.Language) -> URL? {
+        self.rawValue(for: language.rawValue)
+    }
+    public func rawValue(for languageStr: String) -> URL? {
+        _urls[languageStr] ?? nil
+    }
     public init() {
         _urls = [:]
     }
