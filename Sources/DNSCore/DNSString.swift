@@ -33,6 +33,9 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     public func asString(for languageStr: String) -> String {
         _strings[languageStr] ?? (_strings[fallbackLanguage.rawValue] ?? "")
     }
+    public func rawValue(for languageStr: String) -> String {
+        _strings[languageStr] ?? ""
+    }
     public init() {
         _strings = [:]
     }
