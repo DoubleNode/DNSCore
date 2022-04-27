@@ -55,14 +55,18 @@ public class DNSCore {
         return retval
     }
 
-    public static var languageCode: String = {
+    public static var languageCode: String {
+        if !languageCodeOverride.isEmpty {
+            return languageCodeOverride
+        }
         let currentLocale = NSLocale.current
         var languageCode = currentLocale.languageCode ?? "en"
         if languageCode == "es" {
             languageCode = "es-419"
         }
         return languageCode
-    }()
+    }
+    public static var languageCodeOverride: String = ""
 
     // MARK: - Base methods
 
