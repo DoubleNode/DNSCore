@@ -56,6 +56,9 @@ public class DNSCore {
     }
 
     public static var languageCode: String = {
+        if !languageCodeOverride.isEmpty {
+            return languageCodeOverride
+        }
         let currentLocale = NSLocale.current
         var languageCode = currentLocale.languageCode ?? "en"
         if languageCode == "es" {
@@ -63,6 +66,7 @@ public class DNSCore {
         }
         return languageCode
     }()
+    public static var languageCodeOverride: String = ""
 
     // MARK: - Base methods
 
