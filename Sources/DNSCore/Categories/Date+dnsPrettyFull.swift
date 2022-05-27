@@ -102,8 +102,8 @@ public extension Date {
                                       in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let weekdayFormatSubString = (self.isSameDay(as: end ?? Date()) && (end != self)) ? "" : "EEEE, "
-        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
+        let weekdayFormatSubString = (self.isSameDay(as: end ?? Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
+        let yearFormatSubString = (self.isSameYear(as: end ?? Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dateFormatString = "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
@@ -221,10 +221,10 @@ public extension Date {
     }
     private func utilityTimeFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let weekdayFormatSubString = (self.isSameDay(as: end ?? Date()) && (end != self)) ? "" : "EEEE, "
-        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
-        let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" :
-        "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)'\(self.utilityAtFull(style: .smart))'"
+        let weekdayFormatSubString = (self.isSameDay(as: end ?? Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
+        let yearFormatSubString = (self.isSameYear(as: end ?? Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
+        let dayFormatString = self.isSameDate(as: end ?? Date(), in: timeZone) ? "" :
+            "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)'\(self.utilityAtFull(style: .smart))'"
         var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
