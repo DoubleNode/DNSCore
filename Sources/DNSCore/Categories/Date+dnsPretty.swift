@@ -160,27 +160,59 @@ public extension Date {
         }
     }
 
-    func dnsComponent(component: Calendar.Component) -> Int {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    func dnsComponent(component: Calendar.Component,
+                      in timeZone: TimeZone = TimeZone.current) -> Int {
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.timeZone = timeZone
         return calendar.component(component, from: self)
     }
     
-    var dnsEra: Int { return dnsComponent(component: .era) }
-    var dnsYear: Int { return dnsComponent(component: .year) }
-    var dnsMonth: Int { return dnsComponent(component: .month) }
-    var dnsDay: Int { return dnsComponent(component: .day) }
-    var dnsHour: Int { return dnsComponent(component: .hour) }
-    var dnsMinute: Int { return dnsComponent(component: .minute) }
-    var dnsSecond: Int { return dnsComponent(component: .second) }
-    var dnsWeekday: Int { return dnsComponent(component: .weekday) }
-    var dnsQuarter: Int { return dnsComponent(component: .quarter) }
+    var dnsEra: Int { dnsEra() }
+    var dnsYear: Int { dnsYear() }
+    var dnsMonth: Int { dnsMonth() }
+    var dnsDay: Int { dnsDay() }
+    var dnsHour: Int { dnsHour() }
+    var dnsMinute: Int { dnsMinute() }
+    var dnsSecond: Int { dnsSecond() }
+    var dnsWeekday: Int { dnsWeekday() }
+    var dnsQuarter: Int { dnsQuarter() }
+    var dnsDayOfWeek: Weekday { dnsDayOfWeek() }
 
-    var dnsDayOfWeek: Weekday {
-        return Weekday(rawValue: dnsComponent(component: .weekday)) ?? .unknown
+    func dnsEra(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .era, in: timeZone)
+    }
+    func dnsYear(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .year, in: timeZone)
+    }
+    func dnsMonth(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .month, in: timeZone)
+    }
+    func dnsDay(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .day, in: timeZone)
+    }
+    func dnsHour(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .hour, in: timeZone)
+    }
+    func dnsMinute(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .minute, in: timeZone)
+    }
+    func dnsSecond(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .second, in: timeZone)
+    }
+    func dnsWeekday(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .weekday, in: timeZone)
+    }
+    func dnsQuarter(in timeZone: TimeZone = TimeZone.current) -> Int {
+        return dnsComponent(component: .quarter, in: timeZone)
+    }
+    func dnsDayOfWeek(in timeZone: TimeZone = TimeZone.current) -> Weekday {
+        return Weekday(rawValue: dnsComponent(component: .weekday, in: timeZone)) ?? .unknown
     }
 
-    func dnsAge(to toDate: Date = Date()) -> (year: Int, month: Int, day: Int) {
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    func dnsAge(to toDate: Date = Date(),
+                in timeZone: TimeZone = TimeZone.current) -> (year: Int, month: Int, day: Int) {
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.timeZone = timeZone
         let fromDate = calendar.dateComponents([.year, .month, .day], from: self)
         let toDate = calendar.dateComponents([.year, .month, .day], from: toDate)
         let ageComponents = calendar.dateComponents([.year, .month, .day],
@@ -208,22 +240,27 @@ public extension Date {
         return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneYear)
     }
 
-    func isSameDay(as date: Date = Date()) -> Bool {
-        return self.dnsDay == date.dnsDay
+    func isSameDay(as date: Date = Date(),
+                   in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.dnsDay(in: timeZone) == date.dnsDay(in: timeZone)
     }
-    func isSameWeekday(as date: Date = Date()) -> Bool {
-        return self.dnsWeekday == date.dnsWeekday
+    func isSameWeekday(as date: Date = Date(),
+                       in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.dnsWeekday(in: timeZone) == date.dnsWeekday(in: timeZone)
     }
-    func isSameMonth(as date: Date = Date()) -> Bool {
-        return self.dnsMonth == date.dnsMonth
+    func isSameMonth(as date: Date = Date(),
+                     in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.dnsMonth(in: timeZone) == date.dnsMonth(in: timeZone)
     }
-    func isSameYear(as date: Date = Date()) -> Bool {
-        return self.dnsYear == date.dnsYear
+    func isSameYear(as date: Date = Date(),
+                    in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.dnsYear(in: timeZone) == date.dnsYear(in: timeZone)
     }
-    func isSameDate(as date: Date = Date()) -> Bool {
-        return self.isSameDay(as: date) &&
-            self.isSameMonth(as: date) &&
-            self.isSameYear(as: date)
+    func isSameDate(as date: Date = Date(),
+                    in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.isSameDay(as: date, in: timeZone) &&
+            self.isSameMonth(as: date, in: timeZone) &&
+            self.isSameYear(as: date, in: timeZone)
     }
     var isToday: Bool {
         return isSameDate()
@@ -328,7 +365,6 @@ public extension Date {
     }
 
     // MARK: - Utility methods
-
     static func utilityMinimizeAmPm(of string: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
