@@ -102,7 +102,7 @@ public extension Date {
                                         in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
+        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dateFormatString = "MMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
@@ -243,8 +243,8 @@ public extension Date {
     }
     private func utilityTimeNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        let yearFormatSubString = (self.isSameYear(as: end ?? Date()) && (end != self)) ? "" : ", yyyy"
-        let dayFormatString = self.isSameDate(as: end ?? Date()) ? "" : "MMM d\(yearFormatSubString) @ "
+        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
+        let dayFormatString = self.isSameDate(as: /*end ?? */Date(), in: timeZone) ? "" : "MMM d\(yearFormatSubString) @ "
         var timeFormatString = "\(dayFormatString)h\(self.dnsMinute > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
@@ -259,9 +259,10 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endDateString = end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
+        let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
+            end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
         let endTimeString = end!.utilityTimeNormalSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
-        let endString = endDateString + " @ " + endTimeString
+        let endString = endDateString + (endDateString.isEmpty ? "" : " @ ") + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
