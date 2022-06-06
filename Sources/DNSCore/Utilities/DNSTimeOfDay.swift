@@ -36,7 +36,10 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     public var totalSeconds: Int {
         return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
     }
-
+    public var today: Date {
+        return self.time()
+    }
+    
     public required init(timeValue: Float = 0) {
         value = timeValue
     }
@@ -45,7 +48,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
         value = Float(hour) + ((Float(minute) + 0.5) / 60)
     }
 
-    public func timeOnDate(date: Date) -> Date {
+    public func time(on date: Date = Date()) -> Date {
         let date = self.hour < 24 ? date : date.nextDay
         var components = DateComponents()
         components.year = date.dnsYear
