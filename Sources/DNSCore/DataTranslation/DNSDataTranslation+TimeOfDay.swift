@@ -57,20 +57,19 @@ public extension DNSDataTranslation {
         guard let string = string else { return nil }
         guard !string.isEmpty else { return nil }
         let strings = string.components(separatedBy: [":", " "])
-        var hourValue = Float(0.0)
-        var minuteValue = Float(0.0)
+        var hourValue = 0
+        var minuteValue = 0
         hourValue = self.number(from: strings[0],
-                                DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
+                                DNSDataTranslation.defaultNumberFormatter)?.intValue ?? 0
         if strings.count > 1 {
             minuteValue = self.number(from: strings[1],
-                                      DNSDataTranslation.defaultNumberFormatter)?.floatValue ?? 0
+                                      DNSDataTranslation.defaultNumberFormatter)?.intValue ?? 0
         }
         if strings.count > 2 {
             if strings[2].uppercased() == "PM" {
                 hourValue += 12
             }
         }
-        let timeValue = hourValue + (minuteValue / 60)
-        return DNSTimeOfDay(timeValue: timeValue)
+        return DNSTimeOfDay(hour: hourValue, minute: minuteValue)
     }
 }
