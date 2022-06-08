@@ -61,8 +61,8 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
         let retDate = calendar.date(from: components)
         return retDate ?? date
     }
-    public func asMilitary() -> String {
-        return String(format: "%02d%02d", self.hour % 24, self.minute)
+    public func asMilitary(with colon: Bool = false) -> String {
+        return String(format: "%02d%@%02d", self.hour % 24, (colon ? ":" : ""), self.minute)
     }
     public func timeAsString(forceMinutes: Bool = false) -> String {
         let dateFormatter = DateFormatter()
