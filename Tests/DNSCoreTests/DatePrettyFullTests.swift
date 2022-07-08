@@ -219,7 +219,7 @@ class DatePrettyFullTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .fullSmart)
-        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9, \(defaultDateYear) - Wednesday, September 3, 2031")
+        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9 - Wednesday, September 3, 2031")
     }
     func test_dnsDate_withNowAndEndDateFormatFullPretty_shouldReturnString() {
         let end = defaultEndDate
@@ -245,14 +245,14 @@ class DatePrettyFullTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .fullSmart)
-        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9, \(defaultDateYear) \(C.Localizations.DatePretty.at) 1:20:41pm - " +
+        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9 \(C.Localizations.DatePretty.at) 1:20:41pm - " +
             "Wednesday, September 3, 2031 \(C.Localizations.DatePretty.at) 11:32:21am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatFullSmartWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .fullSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9, \(defaultDateYear) \(C.Localizations.DatePretty.at) 2:20:41pm - " +
+        XCTAssertEqual(result, "\(defaultDateDay), \(defaultDateMonth) 9 \(C.Localizations.DatePretty.at) 2:20:41pm - " +
                        "Wednesday, September 3, 2031 \(C.Localizations.DatePretty.at) 12:32:21pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withNowAndEndDateFormatFullPretty_shouldReturnString() {

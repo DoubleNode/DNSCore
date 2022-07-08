@@ -13,6 +13,8 @@ import XCTest
 class DatePrettyShortTests: XCTestCase {
     static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "CDT"
+    static let defaultDateDay: String = "\(Date().dnsDay())"
+    static let defaultDateMonth: String = "\(Date().dnsMonth())"
     static let defaultDateYear: String = "22"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let defaultEndFromNowDateTimeIntervalSinceNow: TimeInterval = Date.Seconds.deltaOneDay * 5
@@ -28,6 +30,8 @@ class DatePrettyShortTests: XCTestCase {
     static let secondaryTimeZoneString: String = "EDT"
 
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
+    let defaultDateDay = DatePrettyShortTests.defaultDateDay
+    let defaultDateMonth = DatePrettyShortTests.defaultDateMonth
     let defaultDateTimezone = DatePrettyShortTests.defaultDateTimezone
     let defaultDateYear = DatePrettyShortTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
@@ -143,9 +147,11 @@ class DatePrettyShortTests: XCTestCase {
         }
         let testIntervals: [TestInterval] = [
             TestInterval(start: 0 - Date.Seconds.deltaOneMinute,
-                         result: String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)")),
+                         result: C.Localizations.DatePretty.todayShort + ", " +
+                            String(format: C.Localizations.DatePretty.minuteAgoShort, "\(1)")),
             TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes,
-                         result: String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)+")),
+                         result: C.Localizations.DatePretty.todayShort + ", " +
+                            String(format: C.Localizations.DatePretty.minutesAgoShort, "\(3)+")),
             TestInterval(start: 0 - Date.Seconds.deltaOneWeek,
                          result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)")),
         ]
@@ -266,7 +272,7 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) - 9/3/31")
+        XCTAssertEqual(result, "10/9 - 9/3/31")
     }
     func test_dnsDate_withNowAndEndDateFormatShortPretty_shouldReturnString() {
         struct TestInterval {
@@ -306,13 +312,13 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 1:20pm - 9/3/31 @ 11:32am")
+        XCTAssertEqual(result, "10/9 @ 1:20pm - 9/3/31 @ 11:32am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatShortSmartWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 2:20pm - 9/3/31 @ 12:32pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "10/9 @ 2:20pm - 9/3/31 @ 12:32pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withEndDateFormatShortPretty_shouldReturnString() {
         struct TestInterval {
@@ -355,33 +361,33 @@ class DatePrettyShortTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndFromSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 1:20pm - 3:20pm")
+        XCTAssertEqual(result, "10/9 @ 1:20pm - 3:20pm")
     }
     func test_dnsTime_withDefaultAndEndDateSameDayFormatShortSmartWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndFromSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 2:20pm - 4:20pm\(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "10/9 @ 2:20pm - 4:20pm \(secondaryTimeZoneString)")
     }
 
     func test_dnTime_withNowAndEndDateSameDayFormatShortSimple_shouldReturnString() {
         let end = nowEndFromNowSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSimple)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear), 1:20pm - 10/9/\(defaultDateYear), 3:20pm")
+        XCTAssertEqual(result, "\(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear), 1:20pm - \(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear), 3:20pm")
     }
     func test_dnTime_withNowAndEndDateSameDayFormatShortSimpleWithTimezone_shouldReturnString() {
         let end = nowEndFromNowSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSimple, in: secondaryTimeZone)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear), 2:20pm - 10/9/\(defaultDateYear), 4:20pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "\(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear), 2:20pm - \(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear), 4:20pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withNowAndEndDateSameDayFormatShortSmart_shouldReturnString() {
         let end = nowEndFromNowSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 1:20pm - 3:20pm")
+        XCTAssertEqual(result, "\(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear) @ 1:20pm - 3:20pm")
     }
     func test_dnsTime_withNowAndEndDateSameDayFormatShortSmartWithTimezone_shouldReturnString() {
         let end = nowEndFromNowSameDayDate
         let result: String = sut.dnsTime(to: end, as: .shortSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "10/9/\(defaultDateYear) @ 2:20pm - 4:20pm\(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "\(defaultDateMonth)/\(defaultDateDay)/\(defaultDateYear) @ 2:20pm - 4:20pm\(secondaryTimeZoneString)")
     }
 }

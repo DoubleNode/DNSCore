@@ -11,7 +11,7 @@ import Foundation
 public extension Date {
     struct Format {
         public enum Size {
-            case short, normal, long, full
+            case short, normal, long, longer, full
         }
         public enum Style {
             case simple, smart, pretty, military
@@ -29,6 +29,10 @@ public extension Date {
         public static let longSimple: Format = Format(size: .long, style: .simple)
         public static let longSmart: Format = Format(size: .long, style: .smart)
         public static let longPretty: Format = Format(size: .long, style: .pretty)
+
+        public static let longerSimple: Format = Format(size: .longer, style: .simple)
+        public static let longerSmart: Format = Format(size: .longer, style: .smart)
+        public static let longerPretty: Format = Format(size: .longer, style: .pretty)
 
         public static let fullSimple: Format = Format(size: .full, style: .simple)
         public static let fullSmart: Format = Format(size: .full, style: .smart)
@@ -84,6 +88,9 @@ public extension Date {
         let timeFormat: Format = timeFormat ?? dateFormat
         let dateString = dnsDate(as: dateFormat, in: timeZone)
         let timeString = dnsTime(as: timeFormat, in: timeZone)
+        guard dateString != timeString else {
+            return dateString
+        }
 
         switch dateFormat.size {
         case .short:
@@ -92,6 +99,8 @@ public extension Date {
             return dateString + self.utilityAtNormal(style: timeFormat.style) + timeString
         case .long:
             return dateString + self.utilityAtLong(style: timeFormat.style) + timeString
+        case .longer:
+            return dateString + self.utilityAtLonger(style: timeFormat.style) + timeString
         case .full:
             return dateString + self.utilityAtFull(style: timeFormat.style) + timeString
         }
@@ -107,6 +116,8 @@ public extension Date {
             return utilityDateNormal(delta: delta, style: format.style, in: timeZone)
         case .long:
             return utilityDateLong(delta: delta, style: format.style, in: timeZone)
+        case .longer:
+            return utilityDateLonger(delta: delta, style: format.style, in: timeZone)
         case .full:
             return utilityDateFull(delta: delta, style: format.style, in: timeZone)
         }
@@ -122,6 +133,8 @@ public extension Date {
             return utilityTimeNormal(delta: delta, style: format.style, in: timeZone)
         case .long:
             return utilityTimeLong(delta: delta, style: format.style, in: timeZone)
+        case .longer:
+            return utilityTimeLonger(delta: delta, style: format.style, in: timeZone)
         case .full:
             return utilityTimeFull(delta: delta, style: format.style, in: timeZone)
         }
@@ -139,6 +152,8 @@ public extension Date {
             return utilityDateNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .long:
             return utilityDateLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
+        case .longer:
+            return utilityDateLonger(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .full:
             return utilityDateFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         }
@@ -155,6 +170,8 @@ public extension Date {
             return utilityTimeNormal(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .long:
             return utilityTimeLong(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
+        case .longer:
+            return utilityTimeLonger(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         case .full:
             return utilityTimeFull(startDelta: startDelta, to: end, endDelta: endDelta, style: format.style, in: timeZone)
         }

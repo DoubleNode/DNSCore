@@ -1,5 +1,5 @@
 //
-//  Date+dnsPrettyFull.swift
+//  Date+dnsPrettyLonger.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Date {
-    func utilityAtFull(style: Format.Style) -> String {
+    func utilityAtLonger(style: Format.Style) -> String {
         switch style {
         case .simple:
             return " \(C.Localizations.DatePretty.at) "
@@ -21,104 +21,104 @@ public extension Date {
             return " "
         }
     }
-    func utilityDateFull(delta: TimeInterval, style: Format.Style,
+    func utilityDateLonger(delta: TimeInterval, style: Format.Style,
                          in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
-            return utilityDateFullSimple(delta: delta, in: timeZone)
+            return utilityDateLongerSimple(delta: delta, in: timeZone)
         case .smart:
-            return utilityDateFullSmart(delta: delta, in: timeZone)
+            return utilityDateLongerSmart(delta: delta, in: timeZone)
         case .pretty:
-            return utilityDateFullPretty(delta: delta, in: timeZone)
+            return utilityDateLongerPretty(delta: delta, in: timeZone)
         case .military:
             return ""
         }
     }
-    func utilityTimeFull(delta: TimeInterval, style: Format.Style,
+    func utilityTimeLonger(delta: TimeInterval, style: Format.Style,
                          in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
-            return utilityTimeFullSimple(delta: delta, in: timeZone)
+            return utilityTimeLongerSimple(delta: delta, in: timeZone)
         case .smart:
-            return utilityTimeFullSmart(delta: delta, in: timeZone)
+            return utilityTimeLongerSmart(delta: delta, in: timeZone)
         case .pretty:
-            return utilityTimeFullPretty(delta: delta, in: timeZone)
+            return utilityTimeLongerPretty(delta: delta, in: timeZone)
         case .military:
             return ""
         }
     }
-    func utilityDateFull(startDelta: TimeInterval, to end: Date? = nil,
+    func utilityDateLonger(startDelta: TimeInterval, to end: Date? = nil,
                          endDelta: TimeInterval? = nil, style: Format.Style,
                          in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
-            return utilityDateFullSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityDateLongerSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .smart:
-            return utilityDateFullSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityDateLongerSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .pretty:
-            return utilityDateFullPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityDateLongerPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .military:
             return ""
         }
     }
-    func utilityTimeFull(startDelta: TimeInterval, to end: Date? = nil,
+    func utilityTimeLonger(startDelta: TimeInterval, to end: Date? = nil,
                          endDelta: TimeInterval? = nil, style: Format.Style,
                          in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
-            return utilityTimeFullSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityTimeLongerSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .smart:
-            return utilityTimeFullSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityTimeLongerSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .pretty:
-            return utilityTimeFullPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+            return utilityTimeLongerPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .military:
             return ""
         }
     }
 
-    private func utilityDateFullSimple(delta: TimeInterval,
+    private func utilityDateLongerSimple(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
-        return self.utilityDateFullSimple(startDelta: delta, in: timeZone)
+        return self.utilityDateLongerSimple(startDelta: delta, in: timeZone)
     }
-    private func utilityDateFullSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityDateLongerSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        dateFormatter.dateStyle = DateFormatter.Style.full
-        dateFormatter.timeStyle = DateFormatter.Style.none
+        let dateFormatString = "E, MMMM d, yyyy"
+        dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityDateLongerSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityDateFullSmart(delta: TimeInterval,
+    private func utilityDateLongerSmart(delta: TimeInterval,
                                       in timeZone: TimeZone) -> String {
-        return self.utilityDateFullSmart(startDelta: delta, in: timeZone)
+        return self.utilityDateLongerSmart(startDelta: delta, in: timeZone)
     }
-    private func utilityDateFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityDateLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
+        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "E, "
         let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dateFormatString = "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateFullSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityDateLongerSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityDateFullPretty(delta: TimeInterval,
+    private func utilityDateLongerPretty(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
-        return self.utilityDateFullPretty(startDelta: delta, in: timeZone)
+        return self.utilityDateLongerPretty(startDelta: delta, in: timeZone)
     }
-    private func utilityDateFullPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityDateLongerPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""
 
@@ -140,7 +140,7 @@ public extension Date {
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = timeZone
-                dateFormatter.dateStyle = DateFormatter.Style.full
+                dateFormatter.dateStyle = DateFormatter.Style.long
                 retval = dateFormatter.string(from: self)
             }
         } else {
@@ -161,21 +161,21 @@ public extension Date {
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = timeZone
-                dateFormatter.dateStyle = DateFormatter.Style.full
+                dateFormatter.dateStyle = DateFormatter.Style.long
                 retval = dateFormatter.string(from: self)
             }
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateFullPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityDateLongerPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " \(C.Localizations.DatePretty.to) " + endString
         return retval
     }
 
-    private func utilityTimeFullSimple(delta: TimeInterval,
+    private func utilityTimeLongerSimple(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
-        var timeFormatString = "h:mm:ssa"
+        var timeFormatString = "h:mma"
         if timeZone != TimeZone.current {
             timeFormatString += " zzzz"
         }
@@ -185,10 +185,10 @@ public extension Date {
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
-    private func utilityTimeFullSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityTimeLongerSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
-        let dayFormatString = "EEEE, MMMM d, yyyy'\(self.utilityAtFull(style: .simple))'"
-        var timeFormatString = "\(dayFormatString)h:mm:ssa"
+        let dayFormatString = "E, MMMM d, yyyy'\(self.utilityAtLonger(style: .simple))'"
+        var timeFormatString = "\(dayFormatString)h:mma"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
                 timeFormatString += " zzzz"
@@ -201,12 +201,12 @@ public extension Date {
         retval = Date.utilityMinimizeAmPm(of: retval)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeFullSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityTimeLongerSimple(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityTimeFullSmart(delta: TimeInterval,
+    private func utilityTimeLongerSmart(delta: TimeInterval,
                                       in timeZone: TimeZone) -> String {
         var timeFormatString = "h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
@@ -219,12 +219,12 @@ public extension Date {
         let retval = dateFormatter.string(from: self)
         return Date.utilityMinimizeAmPm(of: retval)
     }
-    private func utilityTimeFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityTimeLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
+        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "E, "
         let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dayFormatString = (self.isSameDate(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" :
-            "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)'\(self.utilityAtFull(style: .smart))'"
+            "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)'\(self.utilityAtLonger(style: .smart))'"
         var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
             if end == nil || end == self {
@@ -240,18 +240,18 @@ public extension Date {
         guard end != nil && end != self else { return retval }
 
         let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
-            end!.utilityDateFullSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeFullSmart(delta: endDelta!, in: timeZone)
-        let endString = endDateString + (endDateString.isEmpty ? "" : self.utilityAtFull(style: .smart)) + endTimeString
+            end!.utilityDateLongerSmart(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeLongerSmart(delta: endDelta!, in: timeZone)
+        let endString = endDateString + (endDateString.isEmpty ? "" : self.utilityAtLonger(style: .smart)) + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
     }
-    private func utilityTimeFullPretty(delta: TimeInterval,
+    private func utilityTimeLongerPretty(delta: TimeInterval,
                                        in timeZone: TimeZone) -> String {
-        return self.utilityTimeFullPretty(startDelta: delta, in: timeZone)
+        return self.utilityTimeLongerPretty(startDelta: delta, in: timeZone)
     }
-    private func utilityTimeFullPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+    private func utilityTimeLongerPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""
 
@@ -281,7 +281,7 @@ public extension Date {
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = timeZone
-                dateFormatter.dateStyle = DateFormatter.Style.full
+                dateFormatter.dateStyle = DateFormatter.Style.long
                 retval = dateFormatter.string(from: self)
             }
         } else {
@@ -310,13 +310,13 @@ public extension Date {
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeZone = timeZone
-                dateFormatter.dateStyle = DateFormatter.Style.full
+                dateFormatter.dateStyle = DateFormatter.Style.long
                 retval = dateFormatter.string(from: self)
             }
         }
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityTimeFullPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityTimeLongerPretty(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " " + C.Localizations.DatePretty.to + " " + endString
         return retval

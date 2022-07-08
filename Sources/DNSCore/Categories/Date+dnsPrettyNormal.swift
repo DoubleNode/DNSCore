@@ -108,7 +108,7 @@ public extension Date {
         var retval = dateFormatter.string(from: self)
         guard end != nil && end != self else { return retval }
 
-        let endString = end!.utilityDateNormalSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -261,7 +261,7 @@ public extension Date {
 
         let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
             end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeNormalSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endTimeString = end!.utilityTimeNormalSmart(delta: endDelta!, in: timeZone)
         let endString = endDateString + (endDateString.isEmpty ? "" : " @ ") + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString

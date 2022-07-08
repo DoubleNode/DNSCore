@@ -217,7 +217,7 @@ class DatePrettyNormalTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .normalSmart)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) - Sep 3, 2031")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 - Sep 3, 2031")
     }
     func test_dnsDate_withNowAndEndDateFormatNormalPretty_shouldReturnString() {
         let end = defaultEndDate
@@ -241,13 +241,13 @@ class DatePrettyNormalTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .normalSmart)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) @ 1:20pm - Sep 3, 2031 @ 11:32am")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 @ 1:20pm - Sep 3, 2031 @ 11:32am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatNormalSmartWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .normalSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) @ 2:20pm - Sep 3, 2031 @ 12:32pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 @ 2:20pm - Sep 3, 2031 @ 12:32pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withNowAndEndDateFormatNormalPretty_shouldReturnString() {
         let end = defaultEndDate

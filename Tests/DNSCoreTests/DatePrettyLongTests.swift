@@ -220,7 +220,7 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .longSmart)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) - September 3, 2031")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 - September 3, 2031")
     }
     func test_dnsDate_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate
@@ -256,13 +256,13 @@ class DatePrettyLongTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSmart)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) @ 1:20:41pm - September 3, 2031 @ 11:32:21am")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 @ 1:20:41pm - September 3, 2031 @ 11:32:21am")
     }
     func test_dnsTime_withDefaultAndEndDateFormatLongSmartWithTimezone_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longSmart, in: secondaryTimeZone)
-        XCTAssertEqual(result, "\(defaultDateMonth) 9, \(defaultDateYear) @ 2:20:41pm - September 3, 2031 @ 12:32:21pm \(secondaryTimeZoneString)")
+        XCTAssertEqual(result, "\(defaultDateMonth) 9 @ 2:20:41pm - September 3, 2031 @ 12:32:21pm \(secondaryTimeZoneString)")
     }
     func test_dnsTime_withNowAndEndDateFormatLongPretty_shouldReturnString() {
         let end = defaultEndDate

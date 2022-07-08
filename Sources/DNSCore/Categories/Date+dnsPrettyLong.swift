@@ -234,7 +234,7 @@ public extension Date {
 
         let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
             end!.utilityDateLongSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeLongSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endTimeString = end!.utilityTimeLongSmart(delta: endDelta!, in: timeZone)
         let endString = endDateString + (endDateString.isEmpty ? "" : self.utilityAtLong(style: .smart)) + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
