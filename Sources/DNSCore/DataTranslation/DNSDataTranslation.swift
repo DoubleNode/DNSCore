@@ -9,6 +9,8 @@
 import AtomicSwift
 import Foundation
 
+public typealias DNSDataDictionary = [String: Any?]
+
 open class DNSDataTranslation: NSObject {
     let boolTrueCharacters = "YyTt1+"
     let firebaseDateDictionaryISOKey = "iso"
