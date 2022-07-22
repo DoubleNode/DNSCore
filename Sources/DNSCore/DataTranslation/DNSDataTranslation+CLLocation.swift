@@ -19,6 +19,6 @@ public extension DNSDataTranslation {
     }
     func location(from dictionary: [String: Double]?) -> CLLocation? {
         guard let dictionary = dictionary else { return nil }
-        return CLLocation(with: dictionary)
+        return CLLocation(from: dictionary)
     }
 }

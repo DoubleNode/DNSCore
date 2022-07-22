@@ -16,7 +16,7 @@ public extension CLLocation {
     enum ExtensionCodingKeys: String, CodingKey {
         case latitude, longitude
     }
-    convenience init(with data: DNSDataDictionary) {
+    convenience init(from data: DNSDataDictionary) {
         let latitude = Self.translation.double(from: data[Self.xfield(.latitude)] as Any?) ?? 0.0
         let longitude = Self.translation.double(from: data[Self.xfield(.longitude)] as Any?) ?? 0.0
         self.init(latitude: latitude, longitude: longitude)
