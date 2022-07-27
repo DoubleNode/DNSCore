@@ -13,6 +13,8 @@ import UIKit
 #endif
 
 public class DNSURL: Hashable, Codable, NSCopying, Comparable {
+    static let xlt = DNSDataTranslation()
+
     public enum Language: String, CaseIterable {
         case en
         case es419 = "es-419"
@@ -53,9 +55,9 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
         _urls = [:]
         strings.keys.forEach { _urls[$0.rawValue] = URL(string: strings[$0] ?? "") }
     }
-    public init(with strings: [String: String]) {
+    public init(with data: DNSDataDictionary) {
         _urls = [:]
-        strings.keys.forEach { _urls[$0] = URL(string: strings[$0] ?? "") }
+        data.keys.forEach { _urls[$0] = URL(string: DNSURL.utilityCleanupAny(data[$0] as Any?)) }
     }
     public init(with url: URL?) {
         var newURLs: [String: URL?] = [:]
@@ -118,5 +120,12 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     // Comparable protocol methods
     public static func < (lhs: DNSURL, rhs: DNSURL) -> Bool {
         return (lhs.asURL?.absoluteString ?? "") < (rhs.asURL?.absoluteString ?? "")
+    }
+
+    // Utility Methods
+    static func utilityCleanupAny(_ any: Any?) -> String {
+        guard let any else { return "" }
+        guard let string = Self.xlt.string(from: any as Any?) else { return "" }
+        return string
     }
 }
