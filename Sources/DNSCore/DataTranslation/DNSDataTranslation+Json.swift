@@ -22,14 +22,14 @@ public extension DNSDataTranslation {
             return []
         }
     }
-    func dictionary(from jsonString: String?) -> [String: Any]? {
-        guard let jsonString = jsonString else { return nil }
-        guard !jsonString.isEmpty else { return nil }
+    func dictionary(from jsonString: String?) -> DNSDataDictionary {
+        guard let jsonString = jsonString else { return [:] }
+        guard !jsonString.isEmpty else { return [:] }
         do {
             let jsonData    = Data.init(base64Encoded: jsonString) ?? Data(jsonString.utf8)
             let jsonObject  = try JSONSerialization.jsonObject(with: jsonData)
-            guard jsonObject is [String: Any] else { return ["array": jsonObject] }
-            return jsonObject as? [String: Any]
+            guard jsonObject is DNSDataDictionary else { return ["array": jsonObject] }
+            return jsonObject as? DNSDataDictionary ?? [:]
         } catch {
             return [:]
         }
