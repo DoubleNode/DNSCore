@@ -13,6 +13,8 @@ import UIKit
 #endif
 
 public class DNSString: Hashable, Codable, NSCopying, Comparable {
+    static let xlt = DNSDataTranslation()
+
     public enum Language: String, CaseIterable {
         case en
         case es419 = "es-419"
@@ -53,6 +55,13 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
         var newStrings: [String: String] = [:]
         strings.keys.forEach {
             newStrings[$0] = DNSString.utilityCleanupString(strings[$0])
+        }
+        _strings = newStrings
+    }
+    public init(with data: DNSDataDictionary) {
+        var newStrings: [String: String] = [:]
+        data.keys.forEach {
+            newStrings[$0] = DNSString.utilityCleanupAny(data[$0] as Any?)
         }
         _strings = newStrings
     }
@@ -118,8 +127,14 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     }
     
     // Utility Methods
+    static func utilityCleanupAny(_ any: Any?) -> String? {
+        guard let any else { return nil }
+        guard let string = Self.xlt.string(from: any as Any?) else { return nil }
+        return string.replacingOccurrences(of: "\\r", with: "\r")
+            .replacingOccurrences(of: "\\n", with: "\n")
+    }
     static func utilityCleanupString(_ string: String?) -> String? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         return string.replacingOccurrences(of: "\\r", with: "\r")
             .replacingOccurrences(of: "\\n", with: "\n")
     }
