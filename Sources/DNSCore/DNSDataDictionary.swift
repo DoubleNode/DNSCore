@@ -9,3 +9,7 @@
 import Foundation
 
 public typealias DNSDataDictionary = [String: Any?]
+
+public extension DNSDataDictionary {
+    static let empty: DNSDataDictionary = [:]
+}
