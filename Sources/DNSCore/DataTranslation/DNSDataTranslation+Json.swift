@@ -27,4 +27,24 @@ public extension DNSDataTranslation {
             return []
         }
     }
+    func jsonString(from array: DNSDataArray?) -> String {
+        guard let array else { return "" }
+        guard !array.isEmpty else { return "" }
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: array)
+            return String(decoding: jsonData, as: UTF8.self)
+        } catch {
+            return ""
+        }
+    }
+    func jsonString(from dictionary: DNSDataDictionary?) -> String {
+        guard let dictionary else { return "" }
+        guard !dictionary.isEmpty else { return "" }
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary)
+            return String(decoding: jsonData, as: UTF8.self)
+        } catch {
+            return ""
+        }
+    }
 }
