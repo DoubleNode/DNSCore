@@ -26,6 +26,13 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     public var asDictionary: [String: URL?] {
         return _urls
     }
+    public var asJsonDictionary: [String: Any?] {
+        var jsonDictionary: DNSDataDictionary = [:]
+        _urls.forEach { (language, url) in
+            jsonDictionary[language] = url?.absoluteString ?? ""
+        }
+        return jsonDictionary
+    }
     public var asURL: URL? {
         self.asURL(for: DNSCore.languageCode)
     }
