@@ -13,7 +13,7 @@ public extension DNSDataTranslation {
     // MARK: - data...
     // swiftlint:disable:next cyclomatic_complexity
     func data(from any: Any?) -> Data? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         return self.data(from: any as? Data)
     }
     func data(from data: Data?) -> Data? {

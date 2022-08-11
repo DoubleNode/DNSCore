@@ -44,15 +44,15 @@ public extension DNSDataTranslation {
         return self.decimal(from: any as? String, nil)
     }
     func decimal(from decimal: Decimal?) -> Decimal? {
-        guard let decimal = decimal else { return Decimal(0) }
+        guard let decimal else { return Decimal(0) }
         return decimal
     }
     func decimal(from number: NSNumber?) -> Decimal? {
-        guard let number = number else { return Decimal(0) }
+        guard let number else { return Decimal(0) }
         return number.decimalValue
     }
     func decimal(from string: String?, _ decimalFormatter: NumberFormatter?) -> Decimal? {
-        guard let string = string else { return Decimal(0) }
+        guard let string else { return Decimal(0) }
         guard !string.isEmpty else { return Decimal(0) }
         let formatter = decimalFormatter ?? DNSDataTranslation.defaultNumberFormatter
         return decimal(from: formatter.number(from: string))

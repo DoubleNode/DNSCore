@@ -23,11 +23,11 @@ public extension DNSDataTranslation {
         return self.dnsstring(from: any as? String)
     }
     func dnsstring(from dictionary: [String: String]?) -> DNSString? {
-        guard let dictionary = dictionary else { return nil }
-        return DNSString(with: dictionary)
+        guard let dictionary else { return nil }
+        return DNSString(from: dictionary)
     }
     func dnsstring(from string: String?) -> DNSString? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         return DNSString(with: string)
     }
 }

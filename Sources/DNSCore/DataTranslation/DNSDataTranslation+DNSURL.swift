@@ -31,27 +31,27 @@ public extension DNSDataTranslation {
         return self.dnsurl(from: any as? URL)
     }
     func dnsurl(from dictionary: [DNSURL.Language: URL?]?) -> DNSURL? {
-        guard let dictionary = dictionary else { return nil }
-        return DNSURL(with: dictionary)
+        guard let dictionary else { return nil }
+        return DNSURL(from: dictionary)
     }
     func dnsurl(from dictionary: [String: URL?]?) -> DNSURL? {
-        guard let dictionary = dictionary else { return nil }
-        return DNSURL(with: dictionary)
+        guard let dictionary else { return nil }
+        return DNSURL(from: dictionary)
     }
     func dnsurl(from dictionary: [DNSURL.Language: String]?) -> DNSURL? {
-        guard let dictionary = dictionary else { return nil }
-        return DNSURL(with: dictionary)
+        guard let dictionary else { return nil }
+        return DNSURL(from: dictionary)
     }
     func dnsurl(from dictionary: [String: String]?) -> DNSURL? {
-        guard let dictionary = dictionary else { return nil }
-        return DNSURL(with: dictionary)
+        guard let dictionary else { return nil }
+        return DNSURL(from: dictionary)
     }
     func dnsurl(from url: URL?) -> DNSURL? {
-        guard let url = url else { return nil }
+        guard let url else { return nil }
         return DNSURL(with: url)
     }
     func dnsurl(from string: String?) -> DNSURL? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         return dnsurl(from: URL(string: string))
     }
 }

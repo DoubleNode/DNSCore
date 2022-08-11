@@ -125,9 +125,9 @@ open class DNSAppConstants: NSObject {
     // key + Scale is the appFontScaling override for @2x, @3x (ie: 1.0, 2.0, 3.0)
     // key + Size is the generated key for loading the font size in points. (divided by appFontScaling)
     public class func constant(from key: String, and filter: String = "") throws -> UIFont {
-        let fontName: String    = try self.constant(from: "\(key)Name", and: filter)
-        let fontScale: Double   = try self.constant(from: "\(key)Size", and: filter)
-        let fontSize: Double    = try self.constant(from: "\(key)Size", and: filter)
+        let fontName: String = try self.constant(from: "\(key)Name", and: filter)
+        let fontScale: Double = try self.constant(from: "\(key)Size", and: filter)
+        let fontSize: Double = try self.constant(from: "\(key)Size", and: filter)
 
         return UIFont.dnsCustom(with: fontName, and: CGFloat(fontSize / fontScale))
     }
@@ -135,8 +135,8 @@ open class DNSAppConstants: NSObject {
     // key + Height is the generated key for loading the height.
     // key + Width is the generated key for loading the width.
     public class func constant(from key: String, and filter: String = "") throws -> CGSize {
-        let height: Double  = try self.constant(from: "\(key)Height", and: filter)
-        let width: Double   = try self.constant(from: "\(key)Width", and: filter)
+        let height: Double = try self.constant(from: "\(key)Height", and: filter)
+        let width: Double = try self.constant(from: "\(key)Width", and: filter)
 
         return CGSize.init(width: width, height: height)
     }

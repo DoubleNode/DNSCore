@@ -44,24 +44,24 @@ public extension DNSDataTranslation {
         return self.date(from: any as? String, nil)
     }
     func date(from date: Date?) -> Date? {
-        guard let date = date else { return nil }
+        guard let date else { return nil }
         return date
     }
     func date(from dictionary: [String: String]?) -> Date? {
-        guard let dictionary = dictionary else { return nil }
+        guard let dictionary else { return nil }
         let string = dictionary[firebaseDateDictionaryISOKey] ?? ""
         return self.date(from: string, DNSDataTranslation.firebaseDateFormatter)
     }
     func date(from number: NSNumber?) -> Date? {
-        guard let number = number else { return nil }
+        guard let number else { return nil }
         return Date.init(timeIntervalSinceReferenceDate: number.doubleValue)
     }
     func date(fromTimeIntervalSince1970 number: NSNumber?) -> Date? {
-        guard let number = number else { return nil }
+        guard let number else { return nil }
         return Date.init(timeIntervalSince1970: number.doubleValue)
     }
     func date(from string: String?, _ dateFormatter: DateFormatter?) -> Date? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         guard !string.isEmpty else { return nil }
         guard let dateFormatter = dateFormatter else {
             for formatter in DNSDataTranslation.defaultDateFormatters {

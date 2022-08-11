@@ -44,12 +44,12 @@ public extension DNSDataTranslation {
         return self.url(from: any as? String)
     }
     func url(from string: String?) -> URL? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         guard !string.isEmpty else { return nil }
         return URL.init(string: string)
     }
     func url(from url: URL?) -> URL? {
-        guard let url = url else { return nil }
+        guard let url else { return nil }
         return url
     }
 }

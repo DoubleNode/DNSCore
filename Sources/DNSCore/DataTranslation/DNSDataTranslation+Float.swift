@@ -44,15 +44,15 @@ public extension DNSDataTranslation {
         return self.float(from: any as? String, nil)
     }
     func float(from float: Float?) -> Float? {
-        guard let float = float else { return 0 }
+        guard let float else { return 0 }
         return float
     }
     func float(from number: NSNumber?) -> Float? {
-        guard let number = number else { return 0 }
+        guard let number else { return 0 }
         return number.floatValue
     }
     func float(from string: String?, _ numberFormatter: NumberFormatter?) -> Float? {
-        guard let string = string else { return 0 }
+        guard let string else { return 0 }
         guard !string.isEmpty else { return 0 }
         return self.number(from: string, numberFormatter)?.floatValue
     }

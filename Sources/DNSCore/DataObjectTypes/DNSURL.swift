@@ -21,18 +21,8 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     }
     private let fallbackLanguage = Language.en
 
-    private var _urls: [String: URL?]
+    internal var _urls: [String: URL?]
 
-    public var asDictionary: [String: URL?] {
-        return _urls
-    }
-    public var asJsonDictionary: [String: Any?] {
-        var jsonDictionary: DNSDataDictionary = [:]
-        _urls.forEach { (language, url) in
-            jsonDictionary[language] = url?.absoluteString ?? ""
-        }
-        return jsonDictionary
-    }
     public var asURL: URL? {
         self.asURL(for: DNSCore.languageCode)
     }
@@ -50,21 +40,6 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     }
     public init() {
         _urls = [:]
-    }
-    public init(with urls: [DNSURL.Language: URL?]) {
-        _urls = [:]
-        urls.keys.forEach { _urls[$0.rawValue] = urls[$0] }
-    }
-    public init(with urls: [String: URL?]) {
-        _urls = urls
-    }
-    public init(with strings: [DNSURL.Language: String]) {
-        _urls = [:]
-        strings.keys.forEach { _urls[$0.rawValue] = URL(string: strings[$0] ?? "") }
-    }
-    public init(with data: DNSDataDictionary) {
-        _urls = [:]
-        data.keys.forEach { _urls[$0] = URL(string: DNSURL.utilityCleanupAny(data[$0] as Any?)) }
     }
     public init(with url: URL?) {
         var newURLs: [String: URL?] = [:]
@@ -120,7 +95,7 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     // NSCopying protocol methods
     public func copy(with zone: NSZone? = nil) -> Any {
         let newUrls = _urls
-        let copy = DNSURL(with: newUrls)
+        let copy = DNSURL(from: newUrls)
         return copy
     }
     

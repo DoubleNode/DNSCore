@@ -21,11 +21,8 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     }
     private let fallbackLanguage = Language.en
 
-    private var _strings: [String: String]
+    internal var _strings: [String: String]
 
-    public var asDictionary: [String: String] {
-        return _strings
-    }
     public var asString: String {
         self.asString(for: DNSCore.languageCode)
     }
@@ -43,27 +40,6 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     }
     public init() {
         _strings = [:]
-    }
-    public init(with strings: [DNSString.Language: String]) {
-        var newStrings: [String: String] = [:]
-        strings.keys.forEach {
-            newStrings[$0.rawValue] = DNSString.utilityCleanupString(strings[$0])
-        }
-        _strings = newStrings
-    }
-    public init(with strings: [String: String]) {
-        var newStrings: [String: String] = [:]
-        strings.keys.forEach {
-            newStrings[$0] = DNSString.utilityCleanupString(strings[$0])
-        }
-        _strings = newStrings
-    }
-    public init(with data: DNSDataDictionary) {
-        var newStrings: [String: String] = [:]
-        data.keys.forEach {
-            newStrings[$0] = DNSString.utilityCleanupAny(data[$0] as Any?)
-        }
-        _strings = newStrings
     }
     public init(with string: String) {
         var newStrings: [String: String] = [:]
@@ -117,7 +93,7 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     // NSCopying protocol methods
     public func copy(with zone: NSZone? = nil) -> Any {
         let newStrings = _strings
-        let copy = DNSString(with: newStrings)
+        let copy = DNSString(from: newStrings)
         return copy
     }
     

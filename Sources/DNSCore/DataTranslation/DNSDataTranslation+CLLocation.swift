@@ -14,11 +14,11 @@ public extension DNSDataTranslation {
     // MARK: - location...
     // swiftlint:disable:next cyclomatic_complexity
     func location(from any: Any?) -> CLLocation? {
-        guard let any = any else { return nil }
+        guard let any else { return nil }
         return self.location(from: any as? [String: Double])
     }
     func location(from dictionary: [String: Double]?) -> CLLocation? {
-        guard let dictionary = dictionary else { return nil }
+        guard let dictionary else { return nil }
         return CLLocation(from: dictionary)
     }
 }

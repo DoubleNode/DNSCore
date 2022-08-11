@@ -48,13 +48,13 @@ public extension DNSDataTranslation {
         return self.time(from: any as? String)
     }
     func time(from dictionary: [String: Int]?) -> Date? {
-        guard let dictionary = dictionary else { return nil }
+        guard let dictionary else { return nil }
         let number = dictionary[firebaseTimestampDictionarySecondsKey]
         guard let number = self.number(from: number) else { return nil }
         return self.date(fromTimeIntervalSince1970: number)
     }
     func time(from dictionary: [String: String]?) -> Date? {
-        guard let dictionary = dictionary else { return nil }
+        guard let dictionary else { return nil }
         let string = dictionary[firebaseDateDictionaryISOKey] ?? ""
         return self.time(from: string, DNSDataTranslation.firebaseTimeFormatterMilliseconds)
     }
@@ -63,7 +63,7 @@ public extension DNSDataTranslation {
         return self.date(fromTimeIntervalSince1970: number)
     }
     func time(from string: String?, _ timeFormatter: DateFormatter? = nil) -> Date? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         guard !string.isEmpty else { return nil }
         guard let timeFormatter = timeFormatter else {
             for formatter in DNSDataTranslation.defaultTimeFormatters {
@@ -79,7 +79,7 @@ public extension DNSDataTranslation {
         return timeFormatter.date(from: string)
     }
     func time(from time: Date?) -> Date? {
-        guard let time = time else { return nil }
+        guard let time else { return nil }
         return time
     }
 }

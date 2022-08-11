@@ -45,11 +45,11 @@ public extension DNSDataTranslation {
         return self.number(from: any as? String)
     }
     func number(from number: NSNumber?) -> NSNumber? {
-        guard let number = number else { return nil }
+        guard let number else { return nil }
         return number
     }
     func number(from string: String?, _ numberFormatter: NumberFormatter? = nil) -> NSNumber? {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         guard !string.isEmpty else { return nil }
         let formatter = numberFormatter ?? DNSDataTranslation.defaultNumberFormatter
         return formatter.number(from: string)
