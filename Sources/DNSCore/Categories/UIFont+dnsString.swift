@@ -13,8 +13,8 @@ public extension UIFont {
     convenience init(with string: String) {
         var name = string.isEmpty ? "System" : string
         var size = Double(12)
-        if string.contains("#") {
-            let strings = string.components(separatedBy: "#")
+        if string.contains(",") {
+            let strings = string.components(separatedBy: ",")
             if strings.count > 1 {
                 name = Self.xlt.string(from: strings[0]) ?? "System"
                 size = Self.xlt.double(from: strings[1]) ?? 12

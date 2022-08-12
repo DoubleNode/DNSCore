@@ -14,9 +14,11 @@ public extension DNSDataTranslation {
     // MARK: - dnsuishadow...
     // swiftlint:disable:next cyclomatic_complexity
     func dnsshadow(from any: Any?) -> DNSUIShadow? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         if any is DNSUIShadow {
             return self.dnsshadow(from: any as? DNSUIShadow)
+        } else if any is String {
+            return self.dnsshadow(from: any as? String)
         }
         return self.dnsshadow(from: any as? DNSDataDictionary)
     }
@@ -27,6 +29,10 @@ public extension DNSDataTranslation {
     func dnsshadow(from dictionary: DNSDataDictionary?) -> DNSUIShadow? {
         guard let dictionary else { return nil }
         return DNSUIShadow.init(from: dictionary)
+    }
+    func dnsshadow(from string: String?) -> DNSUIShadow? {
+        guard let string else { return nil }
+        return DNSUIShadow(with: string)
     }
 }
 #endif

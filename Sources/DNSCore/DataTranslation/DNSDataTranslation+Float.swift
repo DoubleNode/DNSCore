@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - float...
     // swiftlint:disable:next cyclomatic_complexity
     func float(from any: Any?) -> Float? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.float(from: any as? UIColor)

@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - bool...
     // swiftlint:disable:next cyclomatic_complexity
     func bool(from any: Any?) -> Bool? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.bool(from: any as? UIColor)

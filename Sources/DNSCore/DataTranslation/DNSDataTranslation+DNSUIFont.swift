@@ -14,9 +14,11 @@ public extension DNSDataTranslation {
     // MARK: - dnsuifont...
     // swiftlint:disable:next cyclomatic_complexity
     func dnsfont(from any: Any?) -> DNSUIFont? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         if any is DNSUIFont {
             return self.dnsfont(from: any as? DNSUIFont)
+        } else if any is String {
+            return self.dnsfont(from: any as? String)
         }
         return self.dnsfont(from: any as? DNSDataDictionary)
     }
@@ -27,6 +29,10 @@ public extension DNSDataTranslation {
     func dnsfont(from dictionary: DNSDataDictionary?) -> DNSUIFont? {
         guard let dictionary else { return nil }
         return DNSUIFont.init(from: dictionary)
+    }
+    func dnsfont(from string: String?) -> DNSUIFont? {
+        guard let string else { return nil }
+        return DNSUIFont(with: string)
     }
 }
 #endif

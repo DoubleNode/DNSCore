@@ -14,9 +14,11 @@ public extension DNSDataTranslation {
     // MARK: - dnsuicolor...
     // swiftlint:disable:next cyclomatic_complexity
     func dnscolor(from any: Any?) -> DNSUIColor? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         if any is DNSUIColor {
             return self.dnscolor(from: any as? DNSUIColor)
+        } else if any is String {
+            return self.dnscolor(from: any as? String)
         }
         return self.dnscolor(from: any as? DNSDataDictionary)
     }
@@ -27,6 +29,10 @@ public extension DNSDataTranslation {
     func dnscolor(from dictionary: DNSDataDictionary?) -> DNSUIColor? {
         guard let dictionary else { return nil }
         return DNSUIColor.init(from: dictionary)
+    }
+    func dnscolor(from string: String?) -> DNSUIColor? {
+        guard let string else { return nil }
+        return DNSUIColor(with: string)
     }
 }
 #endif

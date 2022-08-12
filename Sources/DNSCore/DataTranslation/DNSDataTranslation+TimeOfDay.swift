@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - timeOfDay...
     // swiftlint:disable:next cyclomatic_complexity
     func timeOfDay(from any: Any?) -> DNSTimeOfDay? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.timeOfDay(from: any as? UIColor)

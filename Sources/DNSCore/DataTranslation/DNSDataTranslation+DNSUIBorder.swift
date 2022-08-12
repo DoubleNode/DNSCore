@@ -14,7 +14,7 @@ public extension DNSDataTranslation {
     // MARK: - color...
     // swiftlint:disable:next cyclomatic_complexity
     func dnsborder(from any: Any?) -> DNSUIBorder? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         if any is DNSUIBorder {
             return self.dnsborder(from: any as? DNSUIBorder)
         }
@@ -27,6 +27,10 @@ public extension DNSDataTranslation {
     func dnsborder(from dictionary: DNSDataDictionary?) -> DNSUIBorder? {
         guard let dictionary else { return nil }
         return DNSUIBorder.init(from: dictionary)
+    }
+    func dnsborder(from string: String?) -> DNSUIBorder? {
+        guard let string else { return nil }
+        return DNSUIBorder.init(with: string)
     }
 }
 #endif

@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - date...
     // swiftlint:disable:next cyclomatic_complexity
     func date(from any: Any?) -> Date? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.date(from: any as? UIColor)

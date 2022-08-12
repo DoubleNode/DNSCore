@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - timeOfDay...
     // swiftlint:disable:next cyclomatic_complexity
     func timeZone(from any: Any?) -> TimeZone? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
         if any is TimeZone {
             return self.timeZone(from: any as? TimeZone)
         } else if any is NSNumber {

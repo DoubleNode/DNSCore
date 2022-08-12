@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - int...
     // swiftlint:disable:next cyclomatic_complexity
     func int(from any: Any?) -> Int? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.int(from: any as? UIColor)

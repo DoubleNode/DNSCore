@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - firebaseKeyFrom...
     // swiftlint:disable:next cyclomatic_complexity
     func firebaseKey(from any: Any?) -> String? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.firebaseKey(from: any as? UIColor)

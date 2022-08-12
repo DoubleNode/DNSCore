@@ -16,7 +16,7 @@ public extension DNSDataTranslation {
     // MARK: - url...
     // swiftlint:disable:next cyclomatic_complexity
     func url(from any: Any?) -> URL? {
-        guard any != nil else { return nil }
+        guard let any else { return nil }
 #if !os(macOS)
         if any is UIColor {
             return self.url(from: any as? UIColor)
