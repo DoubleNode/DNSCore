@@ -14,7 +14,7 @@ public extension UIColor {
     // MARK: - Properties -
     private static func xfield(_ from: ExtensionCodingKeys) -> String { return from.rawValue }
     enum ExtensionCodingKeys: String, CodingKey {
-        case alpha, blue, brightness, green, hue, red, saturation, white
+        case alpha, blue, brightness, green, hue, red, saturation, white, colorSpace
     }
     convenience init(from data: DNSDataDictionary) {
         let keys = data.keys
