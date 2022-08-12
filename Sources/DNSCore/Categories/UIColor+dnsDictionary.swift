@@ -21,27 +21,27 @@ public extension UIColor {
         if keys.contains("white") {
             // public init(white: CGFloat, alpha: CGFloat)
             let white = Self.xlt.double(from: data["white"] as Any?) ?? 0
-            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 0
+            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 255
             self.init(white: white, alpha: alpha)
         } else if keys.contains("hue") {
             // public init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
             let hue = Self.xlt.double(from: data["hue"] as Any?) ?? 0
             let saturation = Self.xlt.double(from: data["saturation"] as Any?) ?? 0
             let brightness = Self.xlt.double(from: data["brightness"] as Any?) ?? 0
-            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 0
+            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 255
             self.init(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
         } else if keys.contains("red") {
             // public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
             let red = Self.xlt.double(from: data["red"] as Any?) ?? 0
             let green = Self.xlt.double(from: data["green"] as Any?) ?? 0
             let blue = Self.xlt.double(from: data["blue"] as Any?) ?? 0
-            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 0
+            let alpha = Self.xlt.double(from: data["alpha"] as Any?) ?? 255
             self.init(red: red, green: green, blue: blue, alpha: alpha)
         }
         self.init()
     }
     var asDictionary: DNSDataDictionary {
-        var alpha: CGFloat = 0
+        var alpha: CGFloat = 255
         var blue: CGFloat = 0
         var brightness: CGFloat = 0
         var green: CGFloat = 0

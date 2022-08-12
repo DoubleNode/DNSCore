@@ -10,15 +10,25 @@ import UIKit
 
 public extension DNSUIColor {
     convenience init(from data: DNSDataDictionary) {
-        let normal = Self.xlt.color(from: data[Self.field(.normal)] as Any?) ?? UIColor()
-        let disabled = Self.xlt.color(from: data[Self.field(.disabled)] as Any?) ?? UIColor()
-        let focused = Self.xlt.color(from: data[Self.field(.focused)] as Any?) ?? UIColor()
-        let highlighted = Self.xlt.color(from: data[Self.field(.highlighted)] as Any?) ?? UIColor()
-        let selected = Self.xlt.color(from: data[Self.field(.selected)] as Any?) ?? UIColor()
-        self.init(normal, disabled: disabled, focused: focused,
-                  highlighted: highlighted, selected: selected)
+        if let normal = Self.xlt.color(from: data[Self.field(.normal)] as Any?) {
+            let disabled = Self.xlt.color(from: data[Self.field(.disabled)] as Any?) ?? UIColor()
+            let focused = Self.xlt.color(from: data[Self.field(.focused)] as Any?) ?? UIColor()
+            let highlighted = Self.xlt.color(from: data[Self.field(.highlighted)] as Any?) ?? UIColor()
+            let selected = Self.xlt.color(from: data[Self.field(.selected)] as Any?) ?? UIColor()
+            self.init(normal, disabled: disabled, focused: focused,
+                      highlighted: highlighted, selected: selected)
+        } else {
+            let normal = Self.xlt.color(from: data as Any?) ?? UIColor()
+            self.init(normal)
+        }
     }
     var asDictionary: DNSDataDictionary {
+        if self.disabled == self.normal &&
+            self.focused == self.normal &&
+            self.highlighted == self.normal &&
+            self.selected == self.normal {
+            return self.normal.asDictionary
+        }
         let retval: DNSDataDictionary = [
             Self.field(.normal): self.normal.asDictionary,
             Self.field(.disabled): self.disabled.asDictionary,
