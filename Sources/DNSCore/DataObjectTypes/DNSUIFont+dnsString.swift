@@ -9,8 +9,8 @@
 import UIKit
 
 public extension DNSUIFont {
-    convenience init(with string: String) {
-        let font = UIFont(with: string)
+    convenience init?(with string: String) {
+        guard let font = UIFont(with: string) else { return nil }
         self.init(font)
     }
 }

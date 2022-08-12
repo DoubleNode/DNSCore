@@ -9,8 +9,8 @@
 import UIKit
 
 public extension DNSUIColor {
-    convenience init(with string: String) {
-        let normal = UIColor(with: string)
+    convenience init?(with string: String) {
+        guard let normal = UIColor(with: string) else { return nil }
         self.init(normal)
     }
 }

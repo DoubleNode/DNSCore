@@ -10,16 +10,17 @@
 import UIKit
 
 public extension UIFont {
-    convenience init(with string: String) {
-        var name = string.isEmpty ? "System" : string
-        var size = Double(12)
+    convenience init?(with string: String) {
+        var name: String?
+        var size: Double?
         if string.contains(",") {
             let strings = string.components(separatedBy: ",")
             if strings.count > 1 {
-                name = Self.xlt.string(from: strings[0]) ?? "System"
-                size = Self.xlt.double(from: strings[1]) ?? 12
+                name = Self.xlt.string(from: strings[0])
+                size = Self.xlt.double(from: strings[1])
             }
         }
+        guard let name, let size else { return nil }
         self.init(descriptor: UIFontDescriptor(name: name, size: size), size: size)
     }
 }

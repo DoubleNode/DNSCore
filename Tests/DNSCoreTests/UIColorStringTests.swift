@@ -24,13 +24,13 @@ class UIColorStringTests: XCTestCase {
     }
 
     func test_initWithString_withHexString_shouldReturnColor() {
-        let result: UIColor = UIColor.init(with: "#757575")
+        let result: UIColor? = UIColor.init(with: "#757575")
         XCTAssertNotNil(result)
         XCTAssertEqual(result, UIColor.init(red: 117/255, green: 117/255, blue: 117/255, alpha: 1))
     }
 
     func test_initWithString_withTextName_shouldReturnColor() {
-        let result: UIColor = UIColor.init(with: "purple")
+        let result: UIColor? = UIColor.init(with: "purple")
         XCTAssertNotNil(result)
         XCTAssertEqual(result, UIColor.purple)
     }

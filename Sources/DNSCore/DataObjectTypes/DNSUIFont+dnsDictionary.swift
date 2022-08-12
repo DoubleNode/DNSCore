@@ -9,18 +9,18 @@
 import UIKit
 
 public extension DNSUIFont {
-    convenience init(from data: DNSDataDictionary) {
-        if let normal = Self.xlt.font(from: data[Self.field(.normal)] as Any?) {
-            let disabled = Self.xlt.font(from: data[Self.field(.disabled)] as Any?) ?? UIFont()
-            let focused = Self.xlt.font(from: data[Self.field(.focused)] as Any?) ?? UIFont()
-            let highlighted = Self.xlt.font(from: data[Self.field(.highlighted)] as Any?) ?? UIFont()
-            let selected = Self.xlt.font(from: data[Self.field(.selected)] as Any?) ?? UIFont()
-            self.init(normal, disabled: disabled, focused: focused,
-                      highlighted: highlighted, selected: selected)
-        } else {
-            let normal = Self.xlt.font(from: data as Any?) ?? UIFont()
+    convenience init?(from data: DNSDataDictionary) {
+        let disabled = Self.xlt.font(from: data[Self.field(.disabled)] as Any?)
+        let focused = Self.xlt.font(from: data[Self.field(.focused)] as Any?)
+        let highlighted = Self.xlt.font(from: data[Self.field(.highlighted)] as Any?)
+        let selected = Self.xlt.font(from: data[Self.field(.selected)] as Any?)
+        guard let normal = Self.xlt.font(from: data[Self.field(.normal)] as Any?) else {
+            guard let normal = Self.xlt.font(from: data as Any?) else { return nil }
             self.init(normal)
+            return
         }
+        self.init(normal, disabled: disabled, focused: focused,
+                  highlighted: highlighted, selected: selected)
     }
     var asDictionary: DNSDataDictionary {
         let retval: DNSDataDictionary = [

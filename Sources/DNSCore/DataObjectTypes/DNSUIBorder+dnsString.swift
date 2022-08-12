@@ -9,21 +9,30 @@
 import UIKit
 
 public extension DNSUIBorder {
-    convenience init(with string: String) {
-        var color = DNSUIColor(with: string)
-        var width = Double(0)
-        var cornerRadius = Double(0)
-        if string.contains("|") {
-            let strings = string.components(separatedBy: "|")
-            if strings.count > 0 {
-                color = Self.xlt.dnscolor(from: strings[0]) ?? color
-            }
-            if strings.count > 1 {
-                width = Self.xlt.double(from: strings[1]) ?? width
-            }
-            if strings.count > 2 {
-                cornerRadius = Self.xlt.double(from: strings[2]) ?? cornerRadius
-            }
+    convenience init?(with string: String) {
+        var color: DNSUIColor?
+        var width: Double?
+        var cornerRadius: Double?
+        guard string.contains("|") else { return nil }
+        let strings = string.components(separatedBy: "|")
+        if strings.isEmpty { return nil }
+        if strings.count >= 1 {
+            color = Self.xlt.dnscolor(from: strings[0])
+        }
+        guard let color else { return nil }
+        if strings.count >= 2 {
+            width = Self.xlt.double(from: strings[1])
+        }
+        guard let width else {
+            self.init(color: color)
+            return
+        }
+        if strings.count >= 3 {
+            cornerRadius = Self.xlt.double(from: strings[2])
+        }
+        guard let cornerRadius else {
+            self.init(color: color, width: width)
+            return
         }
         self.init(color: color, cornerRadius: cornerRadius, width: width)
     }

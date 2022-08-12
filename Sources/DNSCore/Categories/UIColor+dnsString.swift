@@ -118,7 +118,7 @@ public extension UIColor {
     ]
     #endif
 
-    convenience init(with string: String) {
+    convenience init?(with string: String) {
         let match = UIColor.dnsColorStrings.first(where: { string == $0.key })?.value
         if match != nil {
             var red: CGFloat = 0
@@ -157,7 +157,7 @@ public extension UIColor {
                                                 UInt32(int >> 8 & 0xFF),
                                                 UInt32(int & 0xFF))
         default:
-            (aValue, rValue, gValue, bValue) = (255, 0, 0, 0)
+            return nil
         }
 
         self.init(red: CGFloat(rValue) / 255,

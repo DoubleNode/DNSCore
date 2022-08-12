@@ -16,9 +16,10 @@ public extension UIFont {
     enum ExtensionCodingKeys: String, CodingKey {
         case name, size
     }
-    convenience init(from data: DNSDataDictionary) {
-        let name = Self.xlt.string(from: data[Self.xfield(.name)] as Any?) ?? "System"
-        let size = Self.xlt.double(from: data[Self.xfield(.size)] as Any?) ?? 12
+    convenience init?(from data: DNSDataDictionary) {
+        let name = Self.xlt.string(from: data[Self.xfield(.name)] as Any?)
+        let size = Self.xlt.double(from: data[Self.xfield(.size)] as Any?)
+        guard let name, let size else { return nil }
         self.init(descriptor: UIFontDescriptor(name: name, size: size), size: size)
     }
     var asDictionary: DNSDataDictionary {
