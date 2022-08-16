@@ -13,40 +13,64 @@ public extension DNSError {
     typealias Core = DNSCoreError
 }
 public enum DNSCoreError: DNSError {
+    // Common Errors
     case unknown(_ codeLocation: DNSCodeLocation)
-    case constantNotFound(key: String, filter: String, _ codeLocation: DNSCodeLocation)
-    case reentered(_ codeLocation: DNSCodeLocation)
+    case notImplemented(_ codeLocation: DNSCodeLocation)
+    case notFound(field: String, value: String, _ codeLocation: DNSCodeLocation)
+    case invalidParameters(parameters: [String], _ codeLocation: DNSCodeLocation)
+    case lowerError(error: Error, _ codeLocation: DNSCodeLocation)
+    // Domain-Specific Errors
 
     public static let domain = "CORE"
     public enum Code: Int
     {
+        // Common Errors
         case unknown = 1001
-        case constantNotFound = 1002
-        case reentered = 1003
+        case notImplemented = 1002
+        case notFound = 1003
+        case invalidParameters = 1004
+        case lowerError = 1005
+        // Domain-Specific Errors
     }
     
     public var nsError: NSError! {
         switch self {
+            // Common Errors
         case .unknown(let codeLocation):
             var userInfo = codeLocation.userInfo
             userInfo[NSLocalizedDescriptionKey] = self.errorString
             return NSError.init(domain: Self.domain,
                                 code: Self.Code.unknown.rawValue,
                                 userInfo: userInfo)
-        case .constantNotFound(let key, let filter, let codeLocation):
-            var userInfo = codeLocation.userInfo
-            userInfo["Key"] = key
-            userInfo["Filter"] = filter
-            userInfo[NSLocalizedDescriptionKey] = self.errorString
-            return NSError.init(domain: Self.domain,
-                                code: Self.Code.constantNotFound.rawValue,
-                                userInfo: userInfo)
-        case .reentered(let codeLocation):
+        case .notImplemented(let codeLocation):
             var userInfo = codeLocation.userInfo
             userInfo[NSLocalizedDescriptionKey] = self.errorString
             return NSError.init(domain: Self.domain,
-                                code: Self.Code.reentered.rawValue,
+                                code: Self.Code.notImplemented.rawValue,
                                 userInfo: userInfo)
+        case .notFound(let field, let value, let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo["field"] = field
+            userInfo["value"] = value
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.notFound.rawValue,
+                                userInfo: userInfo)
+        case .invalidParameters(let parameters, let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            userInfo["Parameters"] = parameters
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.invalidParameters.rawValue,
+                                userInfo: userInfo)
+        case .lowerError(let error, let codeLocation):
+            var userInfo = codeLocation.userInfo
+            userInfo["Error"] = error
+            userInfo[NSLocalizedDescriptionKey] = self.errorString
+            return NSError.init(domain: Self.domain,
+                                code: Self.Code.lowerError.rawValue,
+                                userInfo: userInfo)
+            // Domain-Specific Errors
         }
     }
     public var errorDescription: String? {
@@ -54,24 +78,38 @@ public enum DNSCoreError: DNSError {
     }
     public var errorString: String {
         switch self {
+            // Common Errors
         case .unknown:
             return String(format: NSLocalizedString("CORE-Unknown Error%@", comment: ""),
                           " (\(Self.domain):\(Self.Code.unknown.rawValue))")
-        case .constantNotFound(let key, let filter, _):
-            return String(format: NSLocalizedString("CORE-Constant Not Found Error%@%@%@", comment: ""),
-                          "\(key)",
-                          "\(filter)",
-                          " (\(Self.domain):\(Self.Code.constantNotFound.rawValue))")
-        case .reentered:
-            return String(format: NSLocalizedString("CORE-Reentered Error%@", comment: ""),
-                          " (\(Self.domain):\(Self.Code.reentered.rawValue))")
+        case .notImplemented:
+            return String(format: NSLocalizedString("CORE-Not Implemented%@", comment: ""),
+                          " (\(Self.domain):\(Self.Code.notImplemented.rawValue))")
+        case .notFound(let field, let value, _):
+            return String(format: NSLocalizedString("CORE-Not Found%@%@%@", comment: ""),
+                          "\(field)", "\(value)",
+                          "(\(Self.domain):\(Self.Code.notFound.rawValue))")
+        case .invalidParameters(let parameters, _):
+            let parametersString = parameters.reduce("") { $0 + ($0.isEmpty ? "" : ", ") + $1 }
+            return String(format: NSLocalizedString("CORE-Invalid Parameters%@%@", comment: ""),
+                          "\(parametersString)",
+                          " (\(Self.domain):\(Self.Code.invalidParameters.rawValue))")
+        case .lowerError(let error, _):
+            return String(format: NSLocalizedString("CORE-Lower Error%@%@", comment: ""),
+                          error.localizedDescription,
+                          " (\(Self.domain):\(Self.Code.lowerError.rawValue))")
+            // Domain-Specific Errors
         }
     }
     public var failureReason: String? {
         switch self {
+            // Common Errors
         case .unknown(let codeLocation),
-             .constantNotFound(_, _, let codeLocation),
-             .reentered(let codeLocation):
+             .notImplemented(let codeLocation),
+             .notFound(_, _, let codeLocation),
+             .invalidParameters(_, let codeLocation),
+             .lowerError(_, let codeLocation):
+            // Domain-Specific Errors
             return codeLocation.failureReason
         }
     }

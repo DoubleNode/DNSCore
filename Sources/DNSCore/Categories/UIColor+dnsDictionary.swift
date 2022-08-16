@@ -23,8 +23,8 @@ public extension UIColor {
             let white = Self.xlt.double(from: data["white"] as Any?)
             let alpha = Self.xlt.double(from: data["alpha"] as Any?)
             guard var white, var alpha else { return nil }
-            if white > 1 { white /= 256 }
-            if alpha > 1 { alpha /= 256 }
+            if white > 1 { white /= 255 }
+            if alpha > 1 { alpha /= 255 }
             self.init(white: white, alpha: alpha)
         } else if keys.contains("hue") {
             // public init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
@@ -33,10 +33,10 @@ public extension UIColor {
             let brightness = Self.xlt.double(from: data["brightness"] as Any?)
             let alpha = Self.xlt.double(from: data["alpha"] as Any?)
             guard var hue, var saturation, var brightness, var alpha else { return nil }
-            if hue > 1 { hue /= 256 }
-            if saturation > 1 { saturation /= 256 }
-            if brightness > 1 { brightness /= 256 }
-            if alpha > 1 { alpha /= 256 }
+            if hue > 1 { hue /= 255 }
+            if saturation > 1 { saturation /= 255 }
+            if brightness > 1 { brightness /= 255 }
+            if alpha > 1 { alpha /= 255 }
             self.init(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
         } else if keys.contains("red") {
             // public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
@@ -45,10 +45,10 @@ public extension UIColor {
             let blue = Self.xlt.double(from: data["blue"] as Any?)
             let alpha = Self.xlt.double(from: data["alpha"] as Any?)
             guard var red, var green, var blue, var alpha else { return nil }
-            if red > 1 { red /= 256 }
-            if green > 1 { green /= 256 }
-            if blue > 1 { blue /= 256 }
-            if alpha > 1 { alpha /= 256 }
+            if red > 1 { red /= 255 }
+            if green > 1 { green /= 255 }
+            if blue > 1 { blue /= 255 }
+            if alpha > 1 { alpha /= 255 }
             self.init(red: red, green: green, blue: blue, alpha: alpha)
         } else {
             return nil

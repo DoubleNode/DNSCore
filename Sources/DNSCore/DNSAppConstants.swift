@@ -43,66 +43,57 @@ open class DNSAppConstants: NSObject {
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-            .constantNotFound(key: key, filter: filter,
-                              DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.bool(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") throws -> CGFloat {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return CGFloat(translator.double(from: value)!)
     }
     public class func constant(from key: String, and filter: String = "") throws -> Date {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.date(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") throws -> Double {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.double(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") throws -> Int {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.int(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") throws -> String {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.string(from: value)!
     }
 #if !os(macOS)
     public class func constant(from key: String, and filter: String = "") throws -> UIColor {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.color(from: value)!
     }
 #endif
     public class func constant(from key: String, and filter: String = "") throws -> UInt {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.uint(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") throws -> URL {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
-                .constantNotFound(key: key, filter: filter,
-                                  DNSCodeLocation.core(self, "\(#file),\(#line),\(#function)")) }
+            .notFound(field: key, value: filter, .core(self)) }
         return translator.url(from: value)!
     }
     public class func constant(from key: String, and filter: String = "") -> [Any] {
