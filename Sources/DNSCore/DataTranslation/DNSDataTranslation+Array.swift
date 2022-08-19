@@ -17,6 +17,8 @@ public extension DNSDataTranslation {
             return self.array(from: any as? Data)
         } else if any is DNSDataArray {
             return self.array(from: any as? DNSDataArray)
+        } else if any is [Any] {
+            return self.array(from: any as! [Any]?)
         } else if any is DNSDataDictionary {
             return self.array(from: any as? DNSDataDictionary)
         } else if any is DNSString {
@@ -46,6 +48,10 @@ public extension DNSDataTranslation {
     }
     func array(from array: DNSDataArray?) -> DNSDataArray {
         guard let array else { return DNSDataArray.empty }
+        return array
+    }
+    func array(from array: [Any]?) -> [Any] {
+        guard let array else { return [] }
         return array
     }
     func array(from dictionary: DNSDataDictionary?) -> DNSDataArray {
