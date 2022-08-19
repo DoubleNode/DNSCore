@@ -11,8 +11,8 @@ import Foundation
 public extension DNSDataTranslation {
     // MARK: - array...
     // swiftlint:disable:next cyclomatic_complexity
-    func array(from any: Any?) -> DNSDataArray {
-        guard any != nil else { return DNSDataArray.empty }
+    func array(from any: Any?) -> [Any] {
+        guard any != nil else { return [] }
         if any is Data {
             return self.array(from: any as? Data)
         } else if any is DNSDataArray {
@@ -26,9 +26,13 @@ public extension DNSDataTranslation {
         } else if any is String {
             return self.array(from: any as? String)
         }
-        return self.array(from: any as? Data)
+        return self.array(from: any as? [Any])
     }
-    func array(from data: Data?) -> DNSDataArray {
+    func array(from array: [Any]?) -> [Any] {
+        guard let array else { return [] }
+        return array
+    }
+    func array(from data: Data?) -> [Any] {
         guard let data else { return DNSDataArray.empty }
         guard !data.isEmpty else { return DNSDataArray.empty }
         do {
@@ -41,28 +45,28 @@ public extension DNSDataTranslation {
             }
             return [["array": jsonObject]]
         } catch {
-            return DNSDataArray.empty
+            return []
         }
     }
-    func array(from array: DNSDataArray?) -> DNSDataArray {
-        guard let array else { return DNSDataArray.empty }
+    func array(from array: DNSDataArray?) -> [Any] {
+        guard let array else { return [] }
         return array
     }
-    func array(from dictionary: DNSDataDictionary?) -> DNSDataArray {
-        guard let dictionary else { return DNSDataArray.empty }
+    func array(from dictionary: DNSDataDictionary?) -> [Any] {
+        guard let dictionary else { return [] }
         return [dictionary]
     }
-    func array(from dnsstring: DNSString?) -> DNSDataArray {
-        guard let dnsstring else { return DNSDataArray.empty }
+    func array(from dnsstring: DNSString?) -> [Any] {
+        guard let dnsstring else { return [] }
         return [dnsstring.asDictionary]
     }
-    func array(from dnsurl: DNSURL?) -> DNSDataArray {
-        guard let dnsurl else { return DNSDataArray.empty }
+    func array(from dnsurl: DNSURL?) -> [Any] {
+        guard let dnsurl else { return [] }
         return [dnsurl.asDictionary]
     }
-    func array(from string: String?) -> DNSDataArray {
-        guard let string else { return DNSDataArray.empty }
-        guard !string.isEmpty else { return DNSDataArray.empty }
+    func array(from string: String?) -> [Any] {
+        guard let string else { return [] }
+        guard !string.isEmpty else { return [] }
         let jsonData = Data.init(base64Encoded: string) ?? Data(string.utf8)
         return self.array(from: jsonData)
     }
