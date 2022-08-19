@@ -11,7 +11,7 @@ import Foundation
 public extension DNSDataTranslation {
     // MARK: - array...
     // swiftlint:disable:next cyclomatic_complexity
-    func array(from any: Any?) -> DNSDataArray {
+    func array(from any: Any?) -> [Any] {
         guard any != nil else { return DNSDataArray.empty }
         if any is Data {
             return self.array(from: any as? Data)
@@ -26,7 +26,11 @@ public extension DNSDataTranslation {
         } else if any is String {
             return self.array(from: any as? String)
         }
-        return self.array(from: any as? Data)
+        return self.array(from: any as? [Any])
+    }
+    func array(from array: [Any]?) -> [Any] {
+        guard let array else { return [] }
+        return array
     }
     func array(from data: Data?) -> DNSDataArray {
         guard let data else { return DNSDataArray.empty }
