@@ -23,6 +23,29 @@ open class DNSAppConstants: NSObject {
     static public var shared = DNSAppConstants()
     static public var translator = DNSDataTranslation()
 
+    // class formatter functions
+    public var asCurrency: NumberFormatter { Self.currencyFormatter() }
+    public var asCurrencyInt: NumberFormatter { Self.currencyIntFormatter() }
+    public var asDistance: MeasurementFormatter { Self.distanceFormatter() }
+    public var asInt: NumberFormatter { Self.intFormatter() }
+    public var asPercentage: NumberFormatter { Self.percentageFormatter() }
+
+    open class func currencyFormatter() -> NumberFormatter {
+        DNSAppConstants.defaultCurrencyFormatter
+    }
+    open class func currencyIntFormatter() -> NumberFormatter {
+        DNSAppConstants.defaultCurrencyIntFormatter
+    }
+    open class func distanceFormatter() -> MeasurementFormatter {
+        DNSAppConstants.defaultDistanceFormatter
+    }
+    open class func intFormatter() -> NumberFormatter {
+        DNSAppConstants.defaultIntFormatter
+    }
+    open class func percentageFormatter() -> NumberFormatter {
+        DNSAppConstants.defaultPercentageFormatter
+    }
+    
     public enum BuildType: String {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
@@ -30,6 +53,7 @@ open class DNSAppConstants: NSObject {
     static public var appBuildType: BuildType {
         DNSAppConstants.shared.appBuildTypeRead()
     }
+
     open func appBuildTypeRead() -> BuildType {
         return .unknown
     }
@@ -38,7 +62,7 @@ open class DNSAppConstants: NSObject {
         super.init()
         DNSAppConstants.resetPlistDictionary()
     }
-
+    
     // MARK: - Constant plist to object functions
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)
