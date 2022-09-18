@@ -20,6 +20,7 @@ public protocol DNSCoreApplicationProtocol {
 
     func buildString() -> String
     func bundleName() -> String
+    func targetType() -> String
     func userAgentString() -> String
     func versionString() -> String
 
@@ -85,6 +86,9 @@ public class DNSCore {
     }
     public class var bundleName: String {
         return DNSCore.appDelegate?.bundleName() ?? ""
+    }
+    public class var targetType: String {
+        return DNSCore.appDelegate?.targetType() ?? ""
     }
     public class var userAgentString: String {
         return DNSCore.appDelegate?.userAgentString() ?? ""

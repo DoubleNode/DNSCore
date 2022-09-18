@@ -23,6 +23,30 @@ open class DNSAppConstants: NSObject {
     static public var shared = DNSAppConstants()
     static public var translator = DNSDataTranslation()
 
+    static var uniqueDeviceId: String = {
+        return "iOS-" + DNSAppConstants.targetType + "-" +
+            (UIDevice.current.identifierForVendor?.uuidString ?? "")
+    }()
+    static var targetType: String = {
+        return DNSCore.targetType
+    }()
+    public enum BuildType: String {
+        case unknown, dev, qa, alpha, beta, gamma, prod
+    }
+
+    static public var appBuildType: BuildType {
+        DNSAppConstants.shared.appBuildTypeRead()
+    }
+
+    open func appBuildTypeRead() -> BuildType {
+        return .unknown
+    }
+
+    override public required init() {
+        super.init()
+        DNSAppConstants.resetPlistDictionary()
+    }
+    
     // class formatter functions
     public var asCurrency: NumberFormatter { Self.currencyFormatter() }
     public var asCurrencyInt: NumberFormatter { Self.currencyIntFormatter() }
@@ -44,23 +68,6 @@ open class DNSAppConstants: NSObject {
     }
     open class func percentageFormatter() -> NumberFormatter {
         DNSAppConstants.defaultPercentageFormatter
-    }
-    
-    public enum BuildType: String {
-        case unknown, dev, qa, alpha, beta, gamma, prod
-    }
-
-    static public var appBuildType: BuildType {
-        DNSAppConstants.shared.appBuildTypeRead()
-    }
-
-    open func appBuildTypeRead() -> BuildType {
-        return .unknown
-    }
-
-    override public required init() {
-        super.init()
-        DNSAppConstants.resetPlistDictionary()
     }
     
     // MARK: - Constant plist to object functions
