@@ -225,7 +225,18 @@ public extension Date {
     func dnsDayOfWeek(in timeZone: TimeZone = TimeZone.current) -> Weekday {
         return Weekday(rawValue: dnsComponent(component: .weekday, in: timeZone)) ?? .unknown
     }
-
+    
+    var dnsDatePart: Date? { dnsDatePart() }
+    var dnsTimePart: DNSTimeOfDay { dnsTimePart() }
+    func dnsDatePart(in timeZone: TimeZone = TimeZone.current) -> Date? {
+        self.replaceTime(with: 0, in: timeZone)
+    }
+    func dnsTimePart(in timeZone: TimeZone = TimeZone.current) -> DNSTimeOfDay {
+        DNSTimeOfDay(hour: self.dnsHour(in: timeZone),
+                     minute: self.dnsMinute(in: timeZone))
+    }
+    func timeOfDay(in timeZone: TimeZone = TimeZone.current) -> DNSTimeOfDay { dnsTimePart(in: timeZone) }
+    
     func dnsAge(to toDate: Date = Date(),
                 in timeZone: TimeZone = TimeZone.current) -> (year: Int, month: Int, day: Int) {
         var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
@@ -279,24 +290,40 @@ public extension Date {
             self.isSameMonth(as: date, in: timeZone) &&
             self.isSameYear(as: date, in: timeZone)
     }
-    var isToday: Bool {
-        return isSameDate()
+    var isMidnight: Bool { self.isMidnight() }
+    var isZeroTime: Bool { self.isZeroTime() }
+    var isToday: Bool { self.isToday() }
+    var isTomorrow: Bool { self.isTomorrow() }
+    var isYesterday: Bool { self.isYesterday() }
+    var isLast7Days: Bool { self.isLast7Days() }
+    var isLast30Days: Bool { self.isLast30Days() }
+    var isLastYear: Bool { self.isLastYear() }
+    
+    static var zeroTime: DNSTimeOfDay = DNSTimeOfDay(hour: 0, minute: 0)
+    func isMidnight(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        self == self.dnsDatePart(in: timeZone)
     }
-    var isTomorrow: Bool {
+    func isZeroTime(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        self.dnsTimePart(in: timeZone) == Self.zeroTime
+    }
+    func isToday(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return isSameDate(in: timeZone)
+    }
+    func isTomorrow(in timeZone: TimeZone = TimeZone.current) -> Bool {
         let tomorrow = Date(timeIntervalSinceNow: Seconds.deltaOneDay)
-        return isSameDate(as: tomorrow)
+        return isSameDate(as: tomorrow, in: timeZone)
     }
-    var isYesterday: Bool {
+    func isYesterday(in timeZone: TimeZone = TimeZone.current) -> Bool {
         let yesterday = Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
-        return isSameDate(as: yesterday)
+        return isSameDate(as: yesterday, in: timeZone)
     }
-    var isLast7Days: Bool {
+    func isLast7Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
         return self.timeIntervalSinceNow > -Seconds.deltaOneWeek
     }
-    var isLast30Days: Bool {
+    func isLast30Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
         return self.timeIntervalSinceNow > -Seconds.deltaThirtyDays
     }
-    var isLastYear: Bool {
+    func isLastYear(in timeZone: TimeZone = TimeZone.current) -> Bool {
         return self.timeIntervalSinceNow > -Seconds.deltaOneYear
     }
 
@@ -339,19 +366,22 @@ public extension Date {
 
     func replaceDate(with year: Int = 0,
                      and month: Int = 0,
-                     and day: Int = 0) -> Date? {
+                     and day: Int = 0,
+                     in timeZone: TimeZone = TimeZone.current) -> Date? {
         var components = DateComponents()
+        components.timeZone = timeZone
         components.year = year
         components.month = month
         components.day = day
-        components.hour = self.dnsHour
-        components.minute = self.dnsMinute
-        components.second = self.dnsSecond
+        components.hour = self.dnsHour(in: timeZone)
+        components.minute = self.dnsMinute(in: timeZone)
+        components.second = self.dnsSecond(in: timeZone)
 
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
     }
-    func replaceTime(with seconds: TimeInterval) -> Date? {
+    func replaceTime(with seconds: TimeInterval,
+                     in timeZone: TimeZone = TimeZone.current) -> Date? {
         var remainingSeconds = seconds
         let hour = Int(remainingSeconds / Seconds.deltaOneHour)
         remainingSeconds -= Double(hour) * Seconds.deltaOneHour
@@ -360,25 +390,24 @@ public extension Date {
         let second = Int(remainingSeconds)
         return self.replaceTime(with: hour,
                                 and: minute,
-                                and: second)
+                                and: second,
+                                in: timeZone)
     }
     func replaceTime(with hour: Int = 0,
                      and minute: Int = 0,
-                     and second: Int = 0) -> Date? {
+                     and second: Int = 0,
+                     in timeZone: TimeZone = TimeZone.current) -> Date? {
         var components = DateComponents()
-        components.year = self.dnsYear
-        components.month = self.dnsMonth
-        components.day = self.dnsDay
+        components.timeZone = timeZone
+        components.year = self.dnsYear(in: timeZone)
+        components.month = self.dnsMonth(in: timeZone)
+        components.day = self.dnsDay(in: timeZone)
         components.hour = hour
         components.minute = minute
         components.second = second
 
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
-    }
-    func timeOfDay() -> DNSTimeOfDay {
-        return DNSTimeOfDay(hour: self.dnsHour,
-                            minute: self.dnsMinute)
     }
 
     // MARK: - Utility methods
