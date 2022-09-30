@@ -98,6 +98,7 @@ public extension Date {
     }
     private func utilityDateLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
@@ -215,6 +216,7 @@ public extension Date {
     }
     private func utilityTimeLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dayFormatString = (self.isSameDate(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" :
             "MMMM d\(yearFormatSubString)\(self.utilityAtLong(style: .smart))"

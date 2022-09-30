@@ -100,6 +100,7 @@ public extension Date {
     }
     private func utilityDateLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "E, "
@@ -221,6 +222,7 @@ public extension Date {
     }
     private func utilityTimeLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "E, "
         let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
         let dayFormatString = (self.isSameDate(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" :

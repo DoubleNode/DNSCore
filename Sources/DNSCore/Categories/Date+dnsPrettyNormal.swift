@@ -100,6 +100,7 @@ public extension Date {
     }
     private func utilityDateNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (end == self)) ? "" : ", yyyy"
@@ -243,6 +244,7 @@ public extension Date {
     }
     private func utilityTimeNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
+        let end = end?.zeroDate(in: timeZone)
         let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (end == self)) ? "" : ", yyyy"
         let dayFormatString = (self.isSameDate(as: Date(), in: timeZone) || (end == self)) ? "" : "MMM d\(yearFormatSubString) @ "
         var timeFormatString = "\(dayFormatString)h\(self.dnsMinute > 0 ? ":mm" : "")a"
