@@ -98,16 +98,16 @@ public extension Date {
     }
     private func utilityDateLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
+        let endTime = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
+        let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
         let dateFormatString = "MMMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
-        guard end != nil && end != self else { return retval }
+        guard let endTime, let endDelta, endTime != self else { return retval }
 
-        let endString = end!.utilityDateLongSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endTime.utilityDateLongSmart(startDelta: endDelta, to: endTime, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -202,10 +202,14 @@ public extension Date {
         retval += " - " + endString
         return retval
     }
-    private func utilityTimeLongSmart(delta: TimeInterval, in timeZone: TimeZone) -> String {
+    private func utilityTimeLongSmart(delta: TimeInterval,
+                                      in timeZone: TimeZone) -> String {
         var timeFormatString = "h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
             timeFormatString += " zzz"
+        }
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = ""
         }
 
         let dateFormatter = DateFormatter()
@@ -216,15 +220,18 @@ public extension Date {
     }
     private func utilityTimeLongSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
-        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
-        let dayFormatString = (self.isSameDate(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" :
-            "MMMM d\(yearFormatSubString)\(self.utilityAtLong(style: .smart))"
-        var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
+        let endTime = end?.zeroDate(in: timeZone)
+        let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
+        let dayFormatString = (self.isSameDate(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" :
+            "MMMM d\(yearFormatSubString)"
+        var timeFormatString = "\(dayFormatString)'\(self.utilityAtLong(style: .smart))'h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
-            if end == nil || end == self {
+            if endTime == nil || endTime == self {
                 timeFormatString += " zzz"
             }
+        }
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = dayFormatString
         }
 
         let dateFormatter = DateFormatter()
@@ -232,12 +239,13 @@ public extension Date {
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
-        guard end != nil && end != self else { return retval }
+        guard let end, let endTime, let endDelta, endTime != self else { return retval }
 
-        let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
-            end!.utilityDateLongSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeLongSmart(delta: endDelta!, in: timeZone)
-        let endString = endDateString + (endDateString.isEmpty ? "" : self.utilityAtLong(style: .smart)) + endTimeString
+        let endDateString = self.isSameDate(as: endTime, in: timeZone) ? "" :
+            endTime.utilityDateLongSmart(delta: endDelta, in: timeZone)
+        let endTimeString = end.utilityTimeLongSmart(delta: endDelta, in: timeZone)
+        let endAtString = (endDateString.isEmpty || endTimeString.isEmpty) ? "" : self.utilityAtLong(style: .smart)
+        let endString = endDateString + endAtString + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval

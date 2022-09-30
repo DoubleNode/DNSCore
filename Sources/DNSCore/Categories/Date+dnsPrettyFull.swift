@@ -100,17 +100,17 @@ public extension Date {
     }
     private func utilityDateFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
+        let endTime = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
-        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
+        let weekdayFormatSubString = (self.isSameDay(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "EEEE, "
+        let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
         let dateFormatString = "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
-        guard end != nil && end != self else { return retval }
+        guard let endTime, let endDelta, endTime != self else { return retval }
 
-        let endString = end!.utilityDateFullSmart(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endTime.utilityDateFullSmart(startDelta: endDelta, to: endTime, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -213,7 +213,10 @@ public extension Date {
         if timeZone != TimeZone.current {
             timeFormatString += " zzzz"
         }
-        
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = ""
+        }
+
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = timeFormatString
@@ -222,16 +225,19 @@ public extension Date {
     }
     private func utilityTimeFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
-        let weekdayFormatSubString = (self.isSameDay(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : "EEEE, "
-        let yearFormatSubString = (self.isSameYear(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" : ", yyyy"
-        let dayFormatString = (self.isSameDate(as: /*end ?? */Date(), in: timeZone) && (end != self)) ? "" :
-            "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)'\(self.utilityAtFull(style: .smart))'"
-        var timeFormatString = "\(dayFormatString)h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
+        let endTime = end?.zeroDate(in: timeZone)
+        let weekdayFormatSubString = (self.isSameDay(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "EEEE, "
+        let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
+        let dayFormatString = (self.isSameDate(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" :
+            "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)"
+        var timeFormatString = "\(dayFormatString)'\(self.utilityAtFull(style: .smart))'h:mm\(self.dnsSecond > 0 ? ":ss" : "")a"
         if timeZone != TimeZone.current {
-            if end == nil || end == self {
+            if endTime == nil || endTime == self {
                 timeFormatString += " zzzz"
             }
+        }
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = dayFormatString
         }
 
         let dateFormatter = DateFormatter()
@@ -239,12 +245,13 @@ public extension Date {
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
-        guard end != nil && end != self else { return retval }
+        guard let end, let endTime, let endDelta, endTime != self else { return retval }
 
-        let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
-            end!.utilityDateFullSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeFullSmart(delta: endDelta!, in: timeZone)
-        let endString = endDateString + (endDateString.isEmpty ? "" : self.utilityAtFull(style: .smart)) + endTimeString
+        let endDateString = self.isSameDate(as: endTime, in: timeZone) ? "" :
+            endTime.utilityDateFullSmart(delta: endDelta, in: timeZone)
+        let endTimeString = end.utilityTimeFullSmart(delta: endDelta, in: timeZone)
+        let endAtString = (endDateString.isEmpty || endTimeString.isEmpty) ? "" : self.utilityAtFull(style: .smart)
+        let endString = endDateString + endAtString + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
