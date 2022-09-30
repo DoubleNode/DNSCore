@@ -100,16 +100,16 @@ public extension Date {
     }
     private func utilityDateNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
+        let endTime = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
-        let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (end == self)) ? "" : ", yyyy"
+        let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (endTime == self)) ? "" : ", yyyy"
         let dateFormatString = "MMM d\(yearFormatSubString)"
         dateFormatter.dateFormat = dateFormatString
         var retval = dateFormatter.string(from: self)
-        guard end != nil && end != self else { return retval }
+        guard let endTime, let endDelta, endTime != self else { return retval }
 
-        let endString = end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
+        let endString = endTime.utilityDateNormalSmart(delta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -232,6 +232,9 @@ public extension Date {
     private func utilityTimeNormalSmart(delta: TimeInterval,
                                         in timeZone: TimeZone) -> String {
         var timeFormatString = "h\(self.dnsMinute > 0 ? ":mm" : "")a"
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = ""
+        }
         if timeZone != TimeZone.current {
             timeFormatString += " zzz"
         }
@@ -244,14 +247,17 @@ public extension Date {
     }
     private func utilityTimeNormalSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                         in timeZone: TimeZone) -> String {
-        let end = end?.zeroDate(in: timeZone)
-        let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (end == self)) ? "" : ", yyyy"
-        let dayFormatString = (self.isSameDate(as: Date(), in: timeZone) || (end == self)) ? "" : "MMM d\(yearFormatSubString) @ "
-        var timeFormatString = "\(dayFormatString)h\(self.dnsMinute > 0 ? ":mm" : "")a"
+        let endTime = end?.zeroDate(in: timeZone)
+        let yearFormatSubString = (self.isSameYear(as: Date(), in: timeZone) || (endTime == self)) ? "" : ", yyyy"
+        let dayFormatString = (self.isSameDate(as: Date(), in: timeZone) || (endTime == self)) ? "" : "MMM d\(yearFormatSubString)"
+        var timeFormatString = "\(dayFormatString) @ h\(self.dnsMinute > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
-            if end == nil || end == self {
+            if endTime == nil || endTime == self {
                 timeFormatString += " zzz"
             }
+        }
+        if self.isZeroTime(in: timeZone) {
+            timeFormatString = dayFormatString
         }
 
         let dateFormatter = DateFormatter()
@@ -259,11 +265,11 @@ public extension Date {
         dateFormatter.dateFormat = timeFormatString
         var retval = dateFormatter.string(from: self)
         retval = Date.utilityMinimizeAmPm(of: retval)
-        guard end != nil && end != self else { return retval }
+        guard let end, let endTime, let endDelta, endTime != self else { return retval }
 
-        let endDateString = self.isSameDate(as: end!, in: timeZone) ? "" :
-            end!.utilityDateNormalSmart(delta: endDelta!, in: timeZone)
-        let endTimeString = end!.utilityTimeNormalSmart(delta: endDelta!, in: timeZone)
+        let endDateString = self.isSameDate(as: endTime, in: timeZone) ? "" :
+            endTime.utilityDateNormalSmart(delta: endDelta, in: timeZone)
+        let endTimeString = end.utilityTimeNormalSmart(delta: endDelta, in: timeZone)
         let endString = endDateString + (endDateString.isEmpty ? "" : " @ ") + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
