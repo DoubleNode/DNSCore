@@ -9,6 +9,8 @@
 import Foundation
 
 public extension Date {
+    static var zeroTime: DNSTimeOfDay = DNSTimeOfDay(hour: 0, minute: 0)
+
     struct Format {
         public enum Size {
             case short, normal, long, longer, full
@@ -58,6 +60,9 @@ public extension Date {
     }
 
     enum Seconds {
+        public static var deltaZeroTime: Double {
+            (Double(zeroTime.hour) * deltaOneHour) + (Double(zeroTime.minute) * deltaOneMinute)
+        }
         public static let deltaOneMinute = Double(60)
         public static let deltaTwoMinutes = Seconds.deltaOneMinute * 2
         public static let deltaThreeMinutes = Seconds.deltaOneMinute * 3
@@ -268,6 +273,21 @@ public extension Date {
         return Int(Double(dnsSeconds(to: toDate)) / Date.Seconds.deltaOneYear)
     }
 
+    var zeroDate: Date {
+        guard self.isZeroTime else { return self }
+        return self - (Seconds.deltaZeroTime + 1)
+    }
+    var zeroTime: Date { self.replaceTime(with: Self.zeroTime) ?? Date() }
+
+    func zeroDate(in timeZone: TimeZone = TimeZone.current) -> Date {
+        guard self.isZeroTime(in: timeZone) else { return self }
+        return self - (Seconds.deltaZeroTime + 1)
+    }
+    func zeroTime(in timeZone: TimeZone = TimeZone.current) -> Date {
+        self.replaceTime(with: Self.zeroTime,
+                         in: timeZone) ?? Date()
+    }
+
     func isSameDay(as date: Date = Date(),
                    in timeZone: TimeZone = TimeZone.current) -> Bool {
         return self.dnsDay(in: timeZone) == date.dnsDay(in: timeZone)
@@ -299,7 +319,6 @@ public extension Date {
     var isLast30Days: Bool { self.isLast30Days() }
     var isLastYear: Bool { self.isLastYear() }
     
-    static var zeroTime: DNSTimeOfDay = DNSTimeOfDay(hour: 0, minute: 0)
     func isMidnight(in timeZone: TimeZone = TimeZone.current) -> Bool {
         self == self.dnsDatePart(in: timeZone)
     }
@@ -343,16 +362,8 @@ public extension Date {
         ?? Date(timeIntervalSinceNow: -Seconds.deltaOneWeek)
     }
 
-    var nextDay: Date {
-        let newTime = self.timeIntervalSinceNow + Seconds.deltaOneDay
-        return Date(timeIntervalSinceNow: newTime).replaceTime()
-        ?? Date(timeIntervalSinceNow: newTime)
-    }
-    var nextWeek: Date {
-        let newTime = self.timeIntervalSinceNow + Seconds.deltaOneWeek
-        return Date(timeIntervalSinceNow: newTime).replaceTime()
-        ?? Date(timeIntervalSinceNow: newTime)
-    }
+    var nextDay: Date { self + Seconds.deltaOneDay }
+    var nextWeek: Date { self + Seconds.deltaOneWeek }
     var previousDay: Date {
         let newTime = self.timeIntervalSinceNow - Seconds.deltaOneDay
         return Date(timeIntervalSinceNow: newTime).replaceTime()
@@ -393,6 +404,12 @@ public extension Date {
                                 and: second,
                                 in: timeZone)
     }
+    func replaceTime(with timeOfDay: DNSTimeOfDay,
+                     in timeZone: TimeZone = TimeZone.current) -> Date? {
+        replaceTime(with: timeOfDay.hour,
+                    and: timeOfDay.minute,
+                    in: timeZone)
+    }
     func replaceTime(with hour: Int = 0,
                      and minute: Int = 0,
                      and second: Int = 0,
@@ -409,6 +426,13 @@ public extension Date {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         return calendar.date(from: components)
     }
+
+    // MARK: - Custom Operator methods
+    static func + (lhs: Date, rhs: Double) -> Date { Date(timeInterval: rhs, since: lhs) }
+    static func - (lhs: Date, rhs: Double) -> Date { Date(timeInterval: -rhs, since: lhs) }
+
+    static func += (lhs: Date, rhs: Double) -> Date { lhs + rhs }
+    static func -= (lhs: Date, rhs: Double) -> Date { lhs - rhs }
 
     // MARK: - Utility methods
     static func utilityMinimizeAmPm(of string: String) -> String {
