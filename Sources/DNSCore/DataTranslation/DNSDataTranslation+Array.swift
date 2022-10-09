@@ -10,6 +10,14 @@ import Foundation
 
 public extension DNSDataTranslation {
     // MARK: - array...
+    func array<K>(from container: KeyedDecodingContainer<K>,
+                  forKey key: KeyedDecodingContainer<K>.Key) -> [Any] where K: CodingKey {
+        do { return array(from: try container.decodeIfPresent(Data.self, forKey: key)) } catch { }
+        do { return array(from: try container.decodeIfPresent(DNSString.self, forKey: key)) } catch { }
+        do { return array(from: try container.decodeIfPresent(DNSURL.self, forKey: key)) } catch { }
+        do { return array(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return []
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func array(from any: Any?) -> [Any] {
         guard any != nil else { return [] }

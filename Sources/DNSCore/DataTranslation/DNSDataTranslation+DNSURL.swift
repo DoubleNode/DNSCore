@@ -14,6 +14,15 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - dnsstring...
+    func dnsurl<K>(from container: KeyedDecodingContainer<K>,
+                   forKey key: KeyedDecodingContainer<K>.Key) -> DNSURL? where K: CodingKey {
+        do { return dnsurl(from: try container.decodeIfPresent(DNSURL.self, forKey: key)) } catch { }
+        do { return dnsurl(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return dnsurl(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        do { return dnsurl(from: try container.decodeIfPresent([String: URL?].self, forKey: key)) } catch { }
+        do { return dnsurl(from: try container.decodeIfPresent([String: String].self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func dnsurl(from any: Any?) -> DNSURL? {
         guard let any = any else { return nil }

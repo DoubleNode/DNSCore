@@ -12,6 +12,12 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - color...
+    func dnsenabled<K>(from container: KeyedDecodingContainer<K>,
+                       forKey key: KeyedDecodingContainer<K>.Key) -> DNSUIEnabled? where K: CodingKey {
+        do { return dnsenabled(from: try container.decodeIfPresent(DNSUIEnabled.self, forKey: key)) } catch { }
+        do { return dnsenabled(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func dnsenabled(from any: Any?) -> DNSUIEnabled? {
         guard let any else { return nil }

@@ -14,6 +14,19 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - url...
+    func url<K>(from container: KeyedDecodingContainer<K>,
+                forKey key: KeyedDecodingContainer<K>.Key) -> URL? where K: CodingKey {
+        do { return url(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return url(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func url(from any: Any?) -> URL? {
         guard let any else { return nil }

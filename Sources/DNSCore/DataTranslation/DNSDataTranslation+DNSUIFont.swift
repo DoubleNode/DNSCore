@@ -12,6 +12,12 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - dnsuifont...
+    func dnsfont<K>(from container: KeyedDecodingContainer<K>,
+                    forKey key: KeyedDecodingContainer<K>.Key) -> DNSUIFont? where K: CodingKey {
+        do { return dnsfont(from: try container.decodeIfPresent(DNSUIFont.self, forKey: key)) } catch { }
+        do { return dnsfont(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func dnsfont(from any: Any?) -> DNSUIFont? {
         guard let any else { return nil }

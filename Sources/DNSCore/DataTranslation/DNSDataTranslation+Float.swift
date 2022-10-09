@@ -14,6 +14,18 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - float...
+    func float<K>(from container: KeyedDecodingContainer<K>,
+                  forKey key: KeyedDecodingContainer<K>.Key) -> Float? where K: CodingKey {
+        do { return float(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return float(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func float(from any: Any?) -> Float? {
         guard let any else { return nil }

@@ -14,6 +14,18 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - double...
+    func double<K>(from container: KeyedDecodingContainer<K>,
+                   forKey key: KeyedDecodingContainer<K>.Key) -> Double? where K: CodingKey {
+        do { return double(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return double(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func double(from any: Any?) -> Double? {
         guard let any else { return nil }

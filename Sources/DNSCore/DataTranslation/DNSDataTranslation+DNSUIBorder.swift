@@ -12,6 +12,12 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - color...
+    func dnsborder<K>(from container: KeyedDecodingContainer<K>,
+                      forKey key: KeyedDecodingContainer<K>.Key) -> DNSUIBorder? where K: CodingKey {
+        do { return dnsborder(from: try container.decodeIfPresent(DNSUIBorder.self, forKey: key)) } catch { }
+        do { return dnsborder(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func dnsborder(from any: Any?) -> DNSUIBorder? {
         guard let any else { return nil }

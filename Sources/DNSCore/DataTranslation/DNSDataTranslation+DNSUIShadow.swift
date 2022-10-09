@@ -12,6 +12,12 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - dnsuishadow...
+    func dnsshadow<K>(from container: KeyedDecodingContainer<K>,
+                      forKey key: KeyedDecodingContainer<K>.Key) -> DNSUIShadow? where K: CodingKey {
+        do { return dnsshadow(from: try container.decodeIfPresent(DNSUIShadow.self, forKey: key)) } catch { }
+        do { return dnsshadow(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func dnsshadow(from any: Any?) -> DNSUIShadow? {
         guard let any else { return nil }

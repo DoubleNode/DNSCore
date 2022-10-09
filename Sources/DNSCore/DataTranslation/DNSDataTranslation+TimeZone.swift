@@ -14,6 +14,18 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - timeOfDay...
+    func timeZone<K>(from container: KeyedDecodingContainer<K>,
+                     forKey key: KeyedDecodingContainer<K>.Key) -> TimeZone? where K: CodingKey {
+        do { return timeZone(from: try container.decodeIfPresent(TimeZone.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return timeZone(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func timeZone(from any: Any?) -> TimeZone? {
         guard let any else { return nil }
@@ -27,6 +39,8 @@ public extension DNSDataTranslation {
             return self.timeZone(from: any as? Double)
         } else if any is Float {
             return self.timeZone(from: any as? Float)
+        } else if any is UInt {
+            return self.timeZone(from: any as? UInt)
         } else if any is Int {
             return self.timeZone(from: any as? Int)
         }

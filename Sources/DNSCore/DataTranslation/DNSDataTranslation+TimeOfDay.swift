@@ -14,6 +14,20 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - timeOfDay...
+    func timeOfDay<K>(from container: KeyedDecodingContainer<K>,
+                      forKey key: KeyedDecodingContainer<K>.Key) -> DNSTimeOfDay? where K: CodingKey {
+        do { return timeOfDay(from: try container.decodeIfPresent(DNSTimeOfDay.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return timeOfDay(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func timeOfDay(from any: Any?) -> DNSTimeOfDay? {
         guard let any else { return nil }

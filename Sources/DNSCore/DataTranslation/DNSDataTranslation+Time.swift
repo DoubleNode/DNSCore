@@ -14,6 +14,21 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - time...
+    func time<K>(from container: KeyedDecodingContainer<K>,
+                 forKey key: KeyedDecodingContainer<K>.Key) -> Date? where K: CodingKey {
+        do { return time(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent([String: String].self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent([String: Int].self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func time(from any: Any?) -> Date? {
         guard let any else { return nil }
@@ -41,7 +56,7 @@ public extension DNSDataTranslation {
         } else if any is Bool {
             return self.time(from: any as? Bool)
         } else if any is [String: String] {
-            return self.time(from: any as? [String: Int])
+            return self.time(from: any as? [String: String])
         } else if any is [String: Int] {
             return self.time(from: any as? [String: Int])
         }
