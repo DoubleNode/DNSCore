@@ -85,4 +85,8 @@ public extension DNSDataTranslation {
         }
         return dateFormatter.date(from: string)
     }
+    func date(from url: URL?) -> Date? {
+        guard let url else { return nil }
+        return self.date(from: url.absoluteString, nil)
+    }
 }

@@ -26,12 +26,12 @@ public extension DNSDataTranslation {
         return self.uuid(from: any as? String)
     }
     func uuid(from string: String?) -> UUID? {
-        guard var string else { return nil }
+        guard let string else { return nil }
         guard !string.isEmpty else { return nil }
         return UUID(uuidString: string)
     }
     func uuid(from uuid: UUID?) -> UUID? {
-        guard var uuid else { return nil }
+        guard let uuid else { return nil }
         return uuid
     }
 }
