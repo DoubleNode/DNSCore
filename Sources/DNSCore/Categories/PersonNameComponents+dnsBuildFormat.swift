@@ -30,23 +30,12 @@ public extension PersonNameComponents {
                              and nickname: String? = nil) -> PersonNameComponents? {
         var retval = PersonNameComponents()
         do {
-            if #available(iOS 15.0, *) {
-                retval = try PersonNameComponents(name)
-            } else {
-                let formatter = PersonNameComponentsFormatter()
-                retval = formatter.personNameComponents(from: name) ?? retval
-            }
+            retval = try PersonNameComponents(name)
         } catch { }
         retval.nickname = nickname
         return retval
     }
-    @available(iOS 15.0, *)
     func dnsFormatName(style: PersonNameComponents.FormatStyle.Style = .long) -> String {
         self.formatted(.name(style: style))
-    }
-    func dnsFormatName(style: PersonNameComponentsFormatter.Style = .default) -> String {
-        let formatter = PersonNameComponentsFormatter()
-        formatter.style = style
-        return formatter.string(from: self)
     }
 }

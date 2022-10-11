@@ -120,7 +120,7 @@ extension DNSAppConstants {
         checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOff), for: UIControl.State.normal)
         checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOn), for: UIControl.State.selected)
         checkbox.setImage(UIImage.init(named: C.AppConstants.dnsCheckmarkOn), for: UIControl.State.highlighted)
-        checkbox.adjustsImageWhenHighlighted = true
+//        checkbox.adjustsImageWhenHighlighted = true
 
         return checkbox
     }
