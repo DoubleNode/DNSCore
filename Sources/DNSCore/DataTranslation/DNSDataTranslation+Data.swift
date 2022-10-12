@@ -11,6 +11,11 @@ import Foundation
 
 public extension DNSDataTranslation {
     // MARK: - data...
+    func data<K>(from container: KeyedDecodingContainer<K>,
+                 forKey key: KeyedDecodingContainer<K>.Key) -> Data? where K: CodingKey {
+        do { return data(from: try container.decodeIfPresent(Data.self, forKey: key)) } catch { }
+        return nil
+    }
     // swiftlint:disable:next cyclomatic_complexity
     func data(from any: Any?) -> Data? {
         guard let any else { return nil }
