@@ -26,6 +26,25 @@ public extension PersonNameComponents {
         return retval
     }
 
+    var dnsSortableName: String {
+        var retval = self.familyName ?? ""
+        if retval.isEmpty {
+            return self.dnsFormatName(style: .long)
+        }
+        if let givenName = self.givenName {
+            retval += ", \(givenName)"
+            if let middleName = self.middleName {
+                retval += " \(middleName)"
+            }
+            if let nickname = self.nickname {
+                retval += " (\(nickname))"
+            }
+        } else if let nickname = self.nickname {
+            retval += ", \(nickname)"
+        }
+        return retval
+    }
+    
     static func dnsBuildName(with name: String = "",
                              and nickname: String? = nil) -> PersonNameComponents? {
         var retval = PersonNameComponents()
