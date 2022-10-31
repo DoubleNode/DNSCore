@@ -17,14 +17,12 @@ public extension DNSDataTranslation {
     func date<K>(from container: KeyedDecodingContainer<K>,
                  forKey key: KeyedDecodingContainer<K>.Key) -> Date? where K: CodingKey {
         do { return date(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
-        do { return date(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return date(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         do { return date(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
         do { return date(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
         do { return date(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
         do { return date(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
         do { return date(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
-        do { return date(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
-        do { return date(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
     // swiftlint:disable:next cyclomatic_complexity
@@ -64,6 +62,26 @@ public extension DNSDataTranslation {
         guard let dictionary else { return nil }
         let string = dictionary[firebaseDateDictionaryISOKey] ?? ""
         return self.date(from: string, DNSDataTranslation.firebaseDateFormatter)
+    }
+    func date(from decimal: Decimal?) -> Date? {
+        guard let decimal else { return nil }
+        return Date.init(timeIntervalSinceReferenceDate: Double(truncating: decimal as NSNumber))
+    }
+    func date(from double: Double?) -> Date? {
+        guard let double else { return nil }
+        return Date.init(timeIntervalSinceReferenceDate: double)
+    }
+    func date(from float: Float?) -> Date? {
+        guard let float else { return nil }
+        return Date.init(timeIntervalSinceReferenceDate: Double(float))
+    }
+    func date(from uint: UInt?) -> Date? {
+        guard let uint else { return nil }
+        return Date.init(timeIntervalSinceReferenceDate: Double(uint))
+    }
+    func date(from int: Int?) -> Date? {
+        guard let int else { return nil }
+        return Date.init(timeIntervalSinceReferenceDate: Double(int))
     }
     func date(from number: NSNumber?) -> Date? {
         guard let number else { return nil }

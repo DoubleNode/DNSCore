@@ -17,16 +17,14 @@ public extension DNSDataTranslation {
     func time<K>(from container: KeyedDecodingContainer<K>,
                  forKey key: KeyedDecodingContainer<K>.Key) -> Date? where K: CodingKey {
         do { return time(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
-        do { return time(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
+        do { return time(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent(UInt.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent(Int.self, forKey: key)) } catch { }
-        do { return time(from: try container.decodeIfPresent(Bool.self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent([String: String].self, forKey: key)) } catch { }
         do { return time(from: try container.decodeIfPresent([String: Int].self, forKey: key)) } catch { }
-        do { return time(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
     // swiftlint:disable:next cyclomatic_complexity
@@ -72,6 +70,31 @@ public extension DNSDataTranslation {
         guard let dictionary else { return nil }
         let string = dictionary[firebaseDateDictionaryISOKey] ?? ""
         return self.time(from: string, DNSDataTranslation.firebaseTimeFormatterMilliseconds)
+    }
+    func time(from decimal: Decimal?) -> Date? {
+        guard let decimal else { return nil }
+        guard let number = self.number(from: decimal) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
+    func time(from double: Double?) -> Date? {
+        guard let double else { return nil }
+        guard let number = self.number(from: double) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
+    func time(from float: Float?) -> Date? {
+        guard let float else { return nil }
+        guard let number = self.number(from: float) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
+    func time(from uint: UInt?) -> Date? {
+        guard let uint else { return nil }
+        guard let number = self.number(from: uint) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
+    }
+    func time(from int: Int?) -> Date? {
+        guard let int else { return nil }
+        guard let number = self.number(from: int) else { return nil }
+        return self.date(fromTimeIntervalSince1970: number)
     }
     func time(from number: NSNumber?) -> Date? {
         guard let number = self.number(from: number) else { return nil }
