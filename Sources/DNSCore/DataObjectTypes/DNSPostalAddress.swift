@@ -11,10 +11,18 @@ import Foundation
 
 open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     static let xlt = DNSDataTranslation()
+    static let formatter = CNPostalAddressFormatter()
     // MARK: - Properties -
     internal static func field(_ from: CodingKeys) -> String { return from.rawValue }
     enum CodingKeys: String, CodingKey {
         case city, country, isoCountryCode, postalCode, state, street, subAdministrativeArea, subLocality
+    }
+
+    // name formatted output
+    public var mailingAddress: String { self.dnsFormatAddress(style: .mailingAddress) }
+
+    public func dnsFormatAddress(style: CNPostalAddressFormatterStyle = .mailingAddress) -> String {
+        Self.formatter.string(from: self)
     }
 
     required public init(_ street: String = "",
