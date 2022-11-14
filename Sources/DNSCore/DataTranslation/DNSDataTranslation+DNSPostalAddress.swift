@@ -34,7 +34,7 @@ public extension DNSDataTranslation {
     }
     func dnsPostalAddress(from string: String?) -> DNSPostalAddress? {
         guard let string else { return nil }
-        return DNSPostalAddress(string)
+        return DNSPostalAddress(with: string)
     }
     func dnsPostalAddress(from postalAddress: DNSPostalAddress?) -> DNSPostalAddress? {
         guard let postalAddress else { return nil }
