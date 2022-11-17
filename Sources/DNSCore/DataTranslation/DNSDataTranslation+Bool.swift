@@ -30,6 +30,9 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func bool(from any: Any?) -> Bool? {
         guard let any else { return nil }
+        if any is Bool {
+            return any as? Bool
+        }
 #if !os(macOS)
         if any is UIColor {
             return self.bool(from: any as? UIColor)

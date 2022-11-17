@@ -24,7 +24,9 @@ public extension DNSDataTranslation {
     // swiftlint:disable:next cyclomatic_complexity
     func dnsstring(from any: Any?) -> DNSString? {
         guard let any = any else { return nil }
-        if any is [String: String] {
+        if any is DNSString {
+            return self.dnsstring(from: any as? DNSString)
+        } else if any is [String: String] {
             return self.dnsstring(from: any as? [String: String])
         }
         return self.dnsstring(from: any as? String)
@@ -32,6 +34,10 @@ public extension DNSDataTranslation {
     func dnsstring(from dictionary: [String: String]?) -> DNSString? {
         guard let dictionary else { return nil }
         return DNSString(from: dictionary)
+    }
+    func dnsstring(from dnsstring: DNSString?) -> DNSString? {
+        guard let dnsstring else { return nil }
+        return dnsstring
     }
     func dnsstring(from string: String?) -> DNSString? {
         guard let string else { return nil }
