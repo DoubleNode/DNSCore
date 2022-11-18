@@ -43,7 +43,23 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         self.country = country
         self.isoCountryCode = isoCountryCode
     }
-    
+
+    // MARK: - Object copy methods -
+    required public init(from object: DNSPostalAddress) {
+        super.init()
+        self.update(from: object)
+    }
+    open func update(from object: DNSPostalAddress) {
+        self.street = object.street
+        self.subLocality = object.subLocality
+        self.city = object.city
+        self.subAdministrativeArea = object.subAdministrativeArea
+        self.state = object.state
+        self.postalCode = object.postalCode
+        self.country = object.country
+        self.isoCountryCode = object.isoCountryCode
+    }
+
     // MARK: - Codable protocol methods -
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -70,7 +86,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         try container.encode(self.country, forKey: .country)
         try container.encode(self.isoCountryCode, forKey: .isoCountryCode)
     }
-    
+
     // Equatable protocol methods
     public static func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
         lhs.street == rhs.street &&
@@ -81,5 +97,11 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         lhs.postalCode == rhs.postalCode &&
         lhs.country == rhs.country &&
         lhs.isoCountryCode == rhs.isoCountryCode
+    }
+
+    // NSCopying protocol methods
+    override public func copy(with zone: NSZone? = nil) -> Any {
+        let copy = DNSPostalAddress(from: self)
+        return copy
     }
 }
