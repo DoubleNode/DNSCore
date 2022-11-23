@@ -6,12 +6,12 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import AtomicSwift
 import Contacts
 import Foundation
 
 open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     static let xlt = DNSDataTranslation()
-    static let formatter = CNPostalAddressFormatter()
     // MARK: - Properties -
     internal static func field(_ from: CodingKeys) -> String { return from.rawValue }
     enum CodingKeys: String, CodingKey {
@@ -22,7 +22,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     public var mailingAddress: String { self.dnsFormatAddress(style: .mailingAddress) }
 
     public func dnsFormatAddress(style: CNPostalAddressFormatterStyle = .mailingAddress) -> String {
-        Self.formatter.string(from: self)
+        CNPostalAddressFormatter.string(from: self, style: style)
     }
 
     required public init(_ street: String = "",
