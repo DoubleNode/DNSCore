@@ -364,6 +364,14 @@ public extension Date {
 
     var nextDay: Date { self + Seconds.deltaOneDay }
     var nextWeek: Date { self + Seconds.deltaOneWeek }
+    var nextMonth: Date {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(byAdding: .month, value: 1, to: self) ?? self
+    }
+    var nextYear: Date {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(byAdding: .year, value: 1, to: self) ?? self
+    }
     var previousDay: Date {
         let newTime = self.timeIntervalSinceNow - Seconds.deltaOneDay
         return Date(timeIntervalSinceNow: newTime).replaceTime()
@@ -373,6 +381,14 @@ public extension Date {
         let newTime = self.timeIntervalSinceNow - Seconds.deltaOneWeek
         return Date(timeIntervalSinceNow: newTime).replaceTime()
         ?? Date(timeIntervalSinceNow: newTime)
+    }
+    var previousMonth: Date {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(byAdding: .month, value: -1, to: self) ?? self
+    }
+    var previousYear: Date {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        return calendar.date(byAdding: .year, value: -1, to: self) ?? self
     }
 
     func replaceDate(with year: Int = 0,
