@@ -1,5 +1,5 @@
 //
-//  Float+dnsAsFractionString.swift
+//  Double+dnsAsFractionString.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-public extension Float {
+public extension Double {
     var fractionString: String { self.asFractionString() }
     func asFractionString() -> String {
         var wholeStr = "\(Int(self))"
         var fractionStr = ""
-        let fractionValue = self - Float(Int(self))
+        let fractionValue = self - Double(Int(self))
         switch fractionValue {
         case 0.25..<0.5:
             fractionStr = "¼"
