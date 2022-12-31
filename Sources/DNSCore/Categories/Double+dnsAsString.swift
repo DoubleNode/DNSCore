@@ -9,13 +9,14 @@
 import Foundation
 
 public extension Double {
-    var prettyString: String { self.asPrettyString() }
-    func asPrettyString() -> String {
+    var prettyString: String { self.asPrettyString(filled: false) }
+    var prettyFilledString: String { self.asPrettyString(filled: true) }
+    func asPrettyString(filled: Bool = false) -> String {
         let value = self
         let absValue = (value < 0) ? (0 - value) : value
         var countFormat = ""
         if absValue < 1000 {
-            countFormat = "%03"
+            countFormat = filled ? "%03" : "%"
         } else if absValue < 10000 {
             countFormat = "%"
         } else {

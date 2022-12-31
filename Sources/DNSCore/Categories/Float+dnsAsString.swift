@@ -9,8 +9,9 @@
 import Foundation
 
 public extension Float {
-    var prettyString: String { self.asPrettyString() }
-    func asPrettyString() -> String {
-        Double(self).asPrettyString()
+    var prettyString: String { self.asPrettyString(filled: false) }
+    var prettyFilledString: String { self.asPrettyString(filled: true) }
+    func asPrettyString(filled: Bool = false) -> String {
+        Double(self).asPrettyString(filled: filled)
     }
 }

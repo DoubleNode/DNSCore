@@ -9,8 +9,9 @@
 import Foundation
 
 public extension UInt {
-    var prettyString: String { self.asPrettyString() }
-    func asPrettyString() -> String {
-        Int(self).asPrettyString()
+    var prettyString: String { self.asPrettyString(filled: false) }
+    var prettyFilledString: String { self.asPrettyString(filled: true) }
+    func asPrettyString(filled: Bool = false) -> String {
+        Int(self).asPrettyString(filled: filled)
     }
 }
