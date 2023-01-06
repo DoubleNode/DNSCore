@@ -413,6 +413,15 @@ public extension Date {
         return calendar.date(byAdding: components, to: self) ?? self
     }
 
+    static func create(year: Int, month: Int = 1, day: Int = 1,
+                       hour: Int = 0, minute: Int = 0, second: Int = 0,
+                       in timeZone: TimeZone = TimeZone.current) -> Date {
+        var date = Date()
+        date = date.replaceDate(with: year, and: month, and: day, in: timeZone) ?? date
+        date = date.replaceTime(with: hour, and: minute, and: second, in: timeZone) ?? date
+        return date
+    }
+
     func replaceDate(with year: Int = 0,
                      and month: Int = 0,
                      and day: Int = 0,
