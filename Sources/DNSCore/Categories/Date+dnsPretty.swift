@@ -413,6 +413,16 @@ public extension Date {
         return calendar.date(byAdding: components, to: self) ?? self
     }
 
+    func next(weekday: Weekday,
+              from date: Date = Date(),
+              in timeZone: TimeZone = TimeZone.current) -> Date {
+        var deltaDays = Double(weekday.rawValue) - Double(date.dnsDayOfWeek(in: timeZone).rawValue)
+        if deltaDays < 0 {
+            deltaDays += 7
+        }
+        return date + (deltaDays * Date.Seconds.deltaOneDay)
+    }
+    
     static func create(year: Int, month: Int = 1, day: Int = 1,
                        hour: Int = 0, minute: Int = 0, second: Int = 0,
                        in timeZone: TimeZone = TimeZone.current) -> Date {
