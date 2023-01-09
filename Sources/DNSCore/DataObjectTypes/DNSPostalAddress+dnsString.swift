@@ -14,10 +14,17 @@ public extension DNSPostalAddress {
         var city = ""
         var state = ""
         var postalCode = ""
-        let stringsByCommas = string.components(separatedBy: ",")
+        let stringsByCommas = string
+            .replacingOccurrences(of: "\n", with: ",")
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
         let skip = stringsByCommas.count - 2
         if skip >= 0 {
-            let stringsBySpaces = stringsByCommas.last!.components(separatedBy: " ")
+            let stringsBySpaces = stringsByCommas.last!
+                .components(separatedBy: " ")
+                .map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
             if !stringsBySpaces.isEmpty {
                 postalCode = stringsBySpaces.last ?? ""
             }
