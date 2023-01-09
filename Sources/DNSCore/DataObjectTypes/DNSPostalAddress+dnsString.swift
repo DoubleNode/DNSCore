@@ -14,10 +14,17 @@ public extension DNSPostalAddress {
         var city = ""
         var state = ""
         var postalCode = ""
-        let stringsByCommas = string.components(separatedBy: ",")
+        let stringsByCommas = string
+            .replacingOccurrences(of: "\n", with: ",")
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
         let skip = stringsByCommas.count - 2
         if skip >= 0 {
-            let stringsBySpaces = stringsByCommas.last!.components(separatedBy: " ")
+            let stringsBySpaces = stringsByCommas.last!
+                .components(separatedBy: " ")
+                .map { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
             if !stringsBySpaces.isEmpty {
                 postalCode = stringsBySpaces.last ?? ""
             }
@@ -25,8 +32,9 @@ public extension DNSPostalAddress {
                 state = stringsBySpaces[stringsBySpaces.count - 2]
             }
             var cityCount = stringsBySpaces.count - 2
-            while cityCount >= 0 {
-                city = stringsBySpaces[cityCount] + " " + city
+            while cityCount >= 1 {
+                city = stringsBySpaces[cityCount - 1] + " " + city
+                city = city.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                 cityCount -= 1
             }
             street = stringsByCommas[skip]
