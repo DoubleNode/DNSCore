@@ -200,6 +200,17 @@ public extension Date {
     var dnsQuarter: Int { dnsQuarter() }
     var dnsDayOfWeek: Weekday { dnsDayOfWeek() }
 
+    var dnsDayOfWeekName: String { dnsDayOfWeekName() }
+    func dnsDayOfWeekName(as format: Format = Format(),
+                          in timeZone: TimeZone = TimeZone.current) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        switch format.size {
+        default:
+            dateFormatter.dateFormat = "EEEE"
+        }
+        return dateFormatter.string(from: self)
+    }
     var dnsMonthName: String { dnsMonthName() }
     func dnsMonthName(as format: Format = Format(),
                       in timeZone: TimeZone = TimeZone.current) -> String {
