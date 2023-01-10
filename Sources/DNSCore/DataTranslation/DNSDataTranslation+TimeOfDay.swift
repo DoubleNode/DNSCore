@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
                       forKey key: KeyedDecodingContainer<K>.Key) -> DNSTimeOfDay? where K: CodingKey {
         do { return timeOfDay(from: try container.decodeIfPresent(DNSTimeOfDay.self, forKey: key)) } catch { }
         do { return timeOfDay(from: try container.decodeIfPresent(Date.self, forKey: key)) } catch { }
-        do { return timeOfDay(from: try container.decodeIfPresent(URL.self, forKey: key)) } catch { }
         do { return timeOfDay(from: try container.decodeIfPresent(Decimal.self, forKey: key)) } catch { }
         do { return timeOfDay(from: try container.decodeIfPresent(Double.self, forKey: key)) } catch { }
         do { return timeOfDay(from: try container.decodeIfPresent(Float.self, forKey: key)) } catch { }
@@ -40,8 +39,6 @@ public extension DNSDataTranslation {
             return self.timeOfDay(from: any as? Date)
         } else if any is DNSTimeOfDay {
             return self.timeOfDay(from: any as? DNSTimeOfDay)
-        } else if any is URL {
-            return self.timeOfDay(from: any as? URL)
         } else if any is NSNumber {
             return self.timeOfDay(from: any as? NSNumber)
         } else if any is Decimal {
