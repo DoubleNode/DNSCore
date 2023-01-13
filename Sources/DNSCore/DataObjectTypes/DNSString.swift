@@ -115,3 +115,11 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
             .replacingOccurrences(of: "\\n", with: "\n")
     }
 }
+public extension Optional where Wrapped == DNSString {
+    var isNilOrEmpty: Bool {
+        self == nil || self == DNSString()
+    }
+    var orEmpty: DNSString {
+        self ?? DNSString()
+    }
+}
