@@ -9,18 +9,21 @@
 import Foundation
 
 public class DNSTimeOfDay: Hashable, Comparable, Codable {
+    static public var afternoonStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 12, minute: 0)
+    static public var eveningStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 17, minute: 0)
+
     public enum Period: Int, CaseIterable, Codable {
         case morning
         case afternoon
         case evening
     }
     public var period: Period {
-        switch hour % 24 {
-        case ..<12:
+        let tempToD = DNSTimeOfDay(hour: self.hour % 24, minute: self.minute)
+        if tempToD < Self.afternoonStarts {
             return .morning
-        case 12..<17:
+        } else if tempToD < Self.eveningStarts {
             return .afternoon
-        default:
+        } else {
             return .evening
         }
     }
@@ -95,4 +98,10 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(value)
     }
+
+    // MARK: - Operator methods
+    static func - (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Int {
+        lhs.totalSeconds - rhs.totalSeconds
+    }
+    static func -= (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Int { lhs - rhs }
 }
