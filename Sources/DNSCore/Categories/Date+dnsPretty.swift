@@ -335,20 +335,46 @@ public extension Date {
             self.isSameMonth(as: date, in: timeZone) &&
             self.isSameYear(as: date, in: timeZone)
     }
-    var isMidnight: Bool { self.isMidnight() }
-    var isZeroTime: Bool { self.isZeroTime() }
-    var isToday: Bool { self.isToday() }
-    var isTomorrow: Bool { self.isTomorrow() }
-    var isYesterday: Bool { self.isYesterday() }
+    var isFuture: Bool { self.isFuture() }
+    var isFutureDate: Bool { self.isFutureDate() }
     var isLast7Days: Bool { self.isLast7Days() }
     var isLast30Days: Bool { self.isLast30Days() }
     var isLastYear: Bool { self.isLastYear() }
-    
+    var isMidnight: Bool { self.isMidnight() }
+    var isPast: Bool { self.isPast() }
+    var isPastDate: Bool { self.isPastDate() }
+    var isToday: Bool { self.isToday() }
+    var isTomorrow: Bool { self.isTomorrow() }
+    var isYesterday: Bool { self.isYesterday() }
+    var isZeroTime: Bool { self.isZeroTime() }
+
+    func isFuture(from date: Date = Date(),
+                  in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.timeIntervalSince(date) > 0
+    }
+    func isFutureDate(from date: Date = Date(),
+                      in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return !self.isSameDate(as: date, in: timeZone) && self.timeIntervalSince(date) > 0
+    }
+    func isLast7Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.timeIntervalSinceNow > -Seconds.deltaOneWeek
+    }
+    func isLast30Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.timeIntervalSinceNow > -Seconds.deltaThirtyDays
+    }
+    func isLastYear(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.timeIntervalSinceNow > -Seconds.deltaOneYear
+    }
     func isMidnight(in timeZone: TimeZone = TimeZone.current) -> Bool {
         self == self.dnsDatePart(in: timeZone)
     }
-    func isZeroTime(in timeZone: TimeZone = TimeZone.current) -> Bool {
-        self.dnsTimePart(in: timeZone) == Self.zeroTime
+    func isPast(from date: Date = Date(),
+                in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return self.timeIntervalSince(date) < 0
+    }
+    func isPastDate(from date: Date = Date(),
+                    in timeZone: TimeZone = TimeZone.current) -> Bool {
+        return !self.isSameDate(as: date, in: timeZone) && self.timeIntervalSince(date) < 0
     }
     func isToday(in timeZone: TimeZone = TimeZone.current) -> Bool {
         return isSameDate(in: timeZone)
@@ -361,14 +387,8 @@ public extension Date {
         let yesterday = Date(timeIntervalSinceNow: -Seconds.deltaOneDay)
         return isSameDate(as: yesterday, in: timeZone)
     }
-    func isLast7Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
-        return self.timeIntervalSinceNow > -Seconds.deltaOneWeek
-    }
-    func isLast30Days(in timeZone: TimeZone = TimeZone.current) -> Bool {
-        return self.timeIntervalSinceNow > -Seconds.deltaThirtyDays
-    }
-    func isLastYear(in timeZone: TimeZone = TimeZone.current) -> Bool {
-        return self.timeIntervalSinceNow > -Seconds.deltaOneYear
+    func isZeroTime(in timeZone: TimeZone = TimeZone.current) -> Bool {
+        self.dnsTimePart(in: timeZone) == Self.zeroTime
     }
 
     static var today: Date {
