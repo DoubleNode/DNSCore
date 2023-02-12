@@ -56,6 +56,10 @@ public extension DNSDataTranslation {
         }
         return self.timeOfDay(from: any as? String)
     }
+    func timeOfDay(from date: Date?) -> DNSTimeOfDay? {
+        guard let date else { return DNSTimeOfDay() }
+        return DNSTimeOfDay(hour: date.dnsHour, minute: date.dnsMinute)
+    }
     func timeOfDay(from timeOfDay: DNSTimeOfDay?) -> DNSTimeOfDay? {
         guard let timeOfDay else { return DNSTimeOfDay() }
         return timeOfDay
