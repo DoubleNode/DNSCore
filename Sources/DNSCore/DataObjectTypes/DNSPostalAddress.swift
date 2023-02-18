@@ -19,6 +19,10 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     }
 
     // name formatted output
+    public var asString: String {
+        self.dnsFormatAddress(style: .mailingAddress)
+            .replacingOccurrences(of: "\n", with: ", ")
+    }
     public var mailingAddress: String { self.dnsFormatAddress(style: .mailingAddress) }
 
     public func dnsFormatAddress(style: CNPostalAddressFormatterStyle = .mailingAddress) -> String {
