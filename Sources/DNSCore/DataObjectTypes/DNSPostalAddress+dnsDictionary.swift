@@ -11,6 +11,7 @@ import UIKit
 public extension DNSPostalAddress {
     convenience init?(from data: DNSDataDictionary) {
         guard !data.isEmpty else { return nil }
+        let nickname = Self.xlt.string(from: data[Self.field(.nickname)] as Any?) ?? ""
         let street = Self.xlt.string(from: data[Self.field(.street)] as Any?) ?? ""
         let subLocality = Self.xlt.string(from: data[Self.field(.subLocality)] as Any?) ?? ""
         let city = Self.xlt.string(from: data[Self.field(.city)] as Any?) ?? ""
@@ -25,6 +26,7 @@ public extension DNSPostalAddress {
     var asDictionary: DNSDataDictionary {
         var retval = DNSDataDictionary()
         retval.merge([
+            Self.field(.nickname): self.nickname,
             Self.field(.street): self.street,
             Self.field(.subLocality): self.subLocality,
             Self.field(.city): self.city,

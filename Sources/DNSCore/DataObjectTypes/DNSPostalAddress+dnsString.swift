@@ -10,6 +10,7 @@ import UIKit
 
 public extension DNSPostalAddress {
     convenience init(with string: String) {
+        var nickname = ""
         var street = ""
         var city = ""
         var state = ""
@@ -38,7 +39,10 @@ public extension DNSPostalAddress {
                 cityCount -= 1
             }
             street = stringsByCommas[skip]
+            if skip > 0 {
+                nickname = stringsByCommas.first ?? ""
+            }
         }
-        self.init(street, city: city, state: state, postalCode: postalCode)
+        self.init(nickname, street: street, city: city, state: state, postalCode: postalCode)
     }
 }
