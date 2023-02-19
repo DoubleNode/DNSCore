@@ -15,9 +15,11 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     // MARK: - Properties -
     internal static func field(_ from: CodingKeys) -> String { return from.rawValue }
     enum CodingKeys: String, CodingKey {
-        case city, country, isoCountryCode, postalCode, state, street, subAdministrativeArea, subLocality
+        case city, country, isoCountryCode, nickname, postalCode, state, street, subAdministrativeArea, subLocality
     }
 
+    public var nickname: String = ""
+    
     public var isEmpty: Bool { self == DNSPostalAddress() }
 
     // name formatted output
@@ -28,10 +30,22 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     public var mailingAddress: String { self.dnsFormatAddress(style: .mailingAddress) }
 
     public func dnsFormatAddress(style: CNPostalAddressFormatterStyle = .mailingAddress) -> String {
-        CNPostalAddressFormatter.string(from: self, style: style)
+        var retval = CNPostalAddressFormatter.string(from: self, style: style)
+        switch style {
+        case .mailingAddress:
+            if !nickname.isEmpty {
+                retval = "\(nickname)\n\(retval)"
+            }
+        default:
+            if !nickname.isEmpty {
+                retval = "\(nickname), \(retval)"
+            }
+        }
+        return retval
     }
 
-    required public init(_ street: String = "",
+    required public init(_ nickname: String = "",
+                         street: String = "",
                          subLocality: String = "",
                          city: String = "",
                          subAdministrativeArea: String = "",
@@ -40,6 +54,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
                          country: String = "",
                          isoCountryCode: String = "") {
         super.init()
+        self.nickname = nickname
         self.street = street
         self.subLocality = subLocality
         self.city = city
@@ -56,6 +71,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         self.update(from: object)
     }
     open func update(from object: DNSPostalAddress) {
+        self.nickname = object.nickname
         self.street = object.street
         self.subLocality = object.subLocality
         self.city = object.city
@@ -73,6 +89,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     required public init(from decoder: Decoder) throws {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.nickname = try container.decodeIfPresent(String.self, forKey: .nickname) ?? ""
         self.street = try container.decodeIfPresent(String.self, forKey: .street) ?? ""
         self.subLocality = try container.decodeIfPresent(String.self, forKey: .subLocality) ?? ""
         self.city = try container.decodeIfPresent(String.self, forKey: .city) ?? ""
@@ -84,6 +101,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.nickname, forKey: .nickname)
         try container.encode(self.street, forKey: .street)
         try container.encode(self.subLocality, forKey: .subLocality)
         try container.encode(self.city, forKey: .city)
@@ -95,6 +113,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
 
     // Equatable protocol methods
     public static func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+        lhs.nickname == rhs.nickname &&
         lhs.street == rhs.street &&
         lhs.subLocality == rhs.subLocality &&
         lhs.city == rhs.city &&
