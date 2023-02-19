@@ -18,6 +18,8 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         case city, country, isoCountryCode, postalCode, state, street, subAdministrativeArea, subLocality
     }
 
+    public var isEmpty: Bool { self == DNSPostalAddress() }
+
     // name formatted output
     public var asString: String {
         self.dnsFormatAddress(style: .mailingAddress)
