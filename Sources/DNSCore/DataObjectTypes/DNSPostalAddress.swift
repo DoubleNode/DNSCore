@@ -111,22 +111,31 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         try container.encode(self.isoCountryCode, forKey: .isoCountryCode)
     }
 
-    // Equatable protocol methods
-    public static func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
-        lhs.nickname == rhs.nickname &&
-        lhs.street == rhs.street &&
-        lhs.subLocality == rhs.subLocality &&
-        lhs.city == rhs.city &&
-        lhs.subAdministrativeArea == rhs.subAdministrativeArea &&
-        lhs.state == rhs.state &&
-        lhs.postalCode == rhs.postalCode &&
-        lhs.country == rhs.country &&
-        lhs.isoCountryCode == rhs.isoCountryCode
-    }
-
     // NSCopying protocol methods
     override public func copy(with zone: NSZone? = nil) -> Any {
         let copy = DNSPostalAddress(from: self)
         return copy
+    }
+    open func isDiffFrom(_ rhs: Any?) -> Bool {
+        guard let rhs = rhs as? DNSPostalAddress else { return true }
+        let lhs = self
+        return
+            lhs.nickname != rhs.nickname ||
+            lhs.street != rhs.street ||
+            lhs.subLocality != rhs.subLocality ||
+            lhs.city != rhs.city ||
+            lhs.subAdministrativeArea != rhs.subAdministrativeArea ||
+            lhs.state != rhs.state ||
+            lhs.postalCode != rhs.postalCode ||
+            lhs.country != rhs.country ||
+            lhs.isoCountryCode != rhs.isoCountryCode
+    }
+
+    // MARK: - Equatable protocol methods -
+    static public func !=(lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+        lhs.isDiffFrom(rhs)
+    }
+    public static func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+        !lhs.isDiffFrom(rhs)
     }
 }
