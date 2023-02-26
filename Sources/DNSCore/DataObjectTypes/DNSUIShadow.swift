@@ -52,7 +52,7 @@ open class DNSUIShadow: Hashable, Codable, NSCopying {
     }
 
     // Equatable protocol methods
-    public static func == (lhs: DNSUIShadow, rhs: DNSUIShadow) -> Bool {
+    static public func ==(lhs: DNSUIShadow, rhs: DNSUIShadow) -> Bool {
         guard lhs.color == rhs.color else { return false }
         guard lhs.offset == rhs.offset else { return false }
         guard lhs.opacity == rhs.opacity else { return false }

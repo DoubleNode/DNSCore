@@ -47,7 +47,7 @@ public extension DNSUIColor {
 //        hasher.combine(normal)
 //        hasher.combine(selected)
 //    }
-//    public static func == (lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
+//    static public func ==(lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
 //        guard lhs.disabled == rhs.disabled else { return false }
 //        guard lhs.focused == rhs.focused else { return false }
 //        guard lhs.highlighted == rhs.highlighted else { return false }

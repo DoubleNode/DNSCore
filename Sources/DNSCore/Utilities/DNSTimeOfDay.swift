@@ -91,7 +91,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     }
 
     // MARK: - Hashable methods
-    public static func ==(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+    static public func ==(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value == rhs.value
     }
 

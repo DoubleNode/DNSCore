@@ -53,7 +53,7 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
     }
     
     // Equatable protocol methods
-    public static func == (lhs: DNSUIEnabled, rhs: DNSUIEnabled) -> Bool {
+    static public func ==(lhs: DNSUIEnabled, rhs: DNSUIEnabled) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }

@@ -75,7 +75,7 @@ open class DNSUIFont: Hashable, Codable, NSCopying {
     }
 
     // Equatable protocol methods
-    public static func == (lhs: DNSUIFont, rhs: DNSUIFont) -> Bool {
+    static public func ==(lhs: DNSUIFont, rhs: DNSUIFont) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }

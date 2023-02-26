@@ -135,7 +135,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     static public func !=(lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
         lhs.isDiffFrom(rhs)
     }
-    public static func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+    static public func ==(lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
         !lhs.isDiffFrom(rhs)
     }
 }

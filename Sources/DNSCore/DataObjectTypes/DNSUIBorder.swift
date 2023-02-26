@@ -72,7 +72,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
     }
     
     // Equatable protocol methods
-    public static func == (lhs: DNSUIBorder, rhs: DNSUIBorder) -> Bool {
+    static public func ==(lhs: DNSUIBorder, rhs: DNSUIBorder) -> Bool {
         guard lhs.color == rhs.color else { return false }
         guard lhs.cornerRadius == rhs.cornerRadius else { return false }
         guard lhs.cornerRadiusMulti == rhs.cornerRadiusMulti else { return false }

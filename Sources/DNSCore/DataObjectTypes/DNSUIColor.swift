@@ -75,7 +75,7 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
     }
     
     // Equatable protocol methods
-    public static func == (lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
+    static public func ==(lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }
