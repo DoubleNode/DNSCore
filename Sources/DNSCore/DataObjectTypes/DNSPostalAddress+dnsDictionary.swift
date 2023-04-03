@@ -22,6 +22,7 @@ public extension DNSPostalAddress {
         let isoCountryCode = Self.xlt.string(from: data[Self.field(.isoCountryCode)] as Any?) ?? ""
         self.init(street, subLocality: subLocality, city: city, subAdministrativeArea: subAdministrativeArea,
                   state: state, postalCode: postalCode, country: country, isoCountryCode: isoCountryCode)
+        self.nickname = nickname
     }
     var asDictionary: DNSDataDictionary {
         var retval = DNSDataDictionary()
