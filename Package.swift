@@ -30,7 +30,7 @@ let package = Package(
         .package(url: "https://github.com/DoubleNodeOpen/AtomicSwift.git", from: "1.2.2"),
         .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.10.1"),
         .package(url: "https://github.com/DoubleNode/DNSError.git", from: "1.10.0"),
-        .package(url: "https://github.com/Nirma/SFSymbol", from: "2.0.0"),
+        .package(url: "https://github.com/Nirma/SFSymbol", from: "2.2.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
