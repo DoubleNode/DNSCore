@@ -9,12 +9,13 @@
 import Foundation
 
 public extension Sequence where Element: Hashable {
-    mutating func dnsUniqued() -> Self {
+    @discardableResult
+    @inlinable mutating func dnsUniqued() -> Self {
         var set = Set<Element>()
         self = filter { set.insert($0).inserted } as! Self
         return self
     }
-    func dnsUnique() -> [Element] {
+    @inlinable func dnsUnique() -> [Element] {
         var set = Set<Element>()
         return filter { set.insert($0).inserted }
     }
