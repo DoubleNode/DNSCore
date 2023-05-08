@@ -30,14 +30,23 @@ open class DNSAppConstants: NSObject {
     static public var targetType: String = {
         return DNSCore.targetType
     }()
+    public enum APIType: String {
+        case unknown, dev, qa, alpha, beta, gamma, prod
+    }
     public enum BuildType: String {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
 
+    static public var appAPIType: APIType {
+        DNSAppConstants.shared.appAPITypeRead()
+    }
     static public var appBuildType: BuildType {
         DNSAppConstants.shared.appBuildTypeRead()
     }
 
+    open func appAPITypeRead() -> APIType {
+        return .unknown
+    }
     open func appBuildTypeRead() -> BuildType {
         return .unknown
     }
