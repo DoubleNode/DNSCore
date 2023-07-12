@@ -17,7 +17,7 @@ public extension Date {
             return " \(C.Localizations.DatePretty.at) "
         case .pretty:
             return ", "
-        case .military:
+        case .military, .militaryPlus:
             return " "
         }
     }
@@ -30,7 +30,7 @@ public extension Date {
             return utilityDateLongerSmart(delta: delta, in: timeZone)
         case .pretty:
             return utilityDateLongerPretty(delta: delta, in: timeZone)
-        case .military:
+        case .military, .militaryPlus:
             return ""
         }
     }
@@ -43,7 +43,7 @@ public extension Date {
             return utilityTimeLongerSmart(delta: delta, in: timeZone)
         case .pretty:
             return utilityTimeLongerPretty(delta: delta, in: timeZone)
-        case .military:
+        case .military, .militaryPlus:
             return ""
         }
     }
@@ -57,7 +57,7 @@ public extension Date {
             return utilityDateLongerSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .pretty:
             return utilityDateLongerPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
-        case .military:
+        case .military, .militaryPlus:
             return ""
         }
     }
@@ -71,7 +71,7 @@ public extension Date {
             return utilityTimeLongerSmart(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .pretty:
             return utilityTimeLongerPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
-        case .military:
+        case .military, .militaryPlus:
             return ""
         }
     }

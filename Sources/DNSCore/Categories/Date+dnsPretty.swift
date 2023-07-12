@@ -16,13 +16,14 @@ public extension Date {
             case short, normal, long, longer, full
         }
         public enum Style {
-            case simple, smart, pretty, military
+            case simple, smart, pretty, military, militaryPlus
         }
 
         public static let shortSimple: Format = Format(size: .short, style: .simple)
         public static let shortSmart: Format = Format(size: .short, style: .smart)
         public static let shortPretty: Format = Format(size: .short, style: .pretty)
         public static let shortMilitary: Format = Format(size: .short, style: .military)
+        public static let shortMilitaryPlus: Format = Format(size: .short, style: .militaryPlus)
 
         public static let normalSimple: Format = Format(size: .normal, style: .simple)
         public static let normalSmart: Format = Format(size: .normal, style: .smart)

@@ -19,6 +19,8 @@ public extension Date {
             return ", "
         case .military:
             return ""
+        case .militaryPlus:
+            return " "
         }
     }
     func utilityDateShort(delta: TimeInterval, style: Format.Style,
@@ -32,6 +34,8 @@ public extension Date {
             return utilityDateShortPretty(delta: delta, in: timeZone)
         case .military:
             return utilityDateShortMilitary(delta: delta, in: timeZone)
+        case .militaryPlus:
+            return utilityDateShortMilitaryPlus(delta: delta, in: timeZone)
         }
     }
     func utilityTimeShort(delta: TimeInterval, style: Format.Style,
@@ -45,6 +49,8 @@ public extension Date {
             return utilityTimeShortPretty(delta: delta, in: timeZone)
         case .military:
             return utilityTimeShortMilitary(delta: delta, in: timeZone)
+        case .militaryPlus:
+            return utilityTimeShortMilitaryPlus(delta: delta, in: timeZone)
         }
     }
     func utilityDateShort(startDelta: TimeInterval, to end: Date? = nil,
@@ -59,6 +65,8 @@ public extension Date {
             return utilityDateShortPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .military:
             return utilityDateShortMilitary(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+        case .militaryPlus:
+            return utilityDateShortMilitaryPlus(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         }
     }
     func utilityTimeShort(startDelta: TimeInterval, to end: Date? = nil,
@@ -73,6 +81,8 @@ public extension Date {
             return utilityTimeShortPretty(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .military:
             return utilityTimeShortMilitary(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
+        case .militaryPlus:
+            return utilityTimeShortMilitaryPlus(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         }
     }
 
@@ -208,6 +218,23 @@ public extension Date {
         guard end != nil && end != self else { return retval }
 
         let endString = end!.utilityDateShortMilitary(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
+        return retval
+    }
+    private func utilityDateShortMilitaryPlus(delta: TimeInterval,
+                                              in timeZone: TimeZone) -> String {
+        return self.utilityDateShortMilitaryPlus(startDelta: delta, in: timeZone)
+    }
+    private func utilityDateShortMilitaryPlus(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+                                              in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        var retval = dateFormatter.string(from: self)
+        guard end != nil && end != self else { return retval }
+
+        let endString = end!.utilityDateShortMilitaryPlus(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         guard retval != endString else { return retval }
         retval += " - " + endString
         return retval
@@ -431,6 +458,28 @@ public extension Date {
 
         let endDateString = end!.utilityDateShortMilitary(delta: endDelta!, in: timeZone)
         let endTimeString = end!.utilityTimeShortMilitary(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " @ " + endTimeString
+        guard retval != endString else { return retval }
+        retval += " - " + endString
+        return retval
+    }
+    private func utilityTimeShortMilitaryPlus(delta: TimeInterval,
+                                              in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "HH:mm:zzz"
+        return dateFormatter.string(from: self)
+    }
+    private func utilityTimeShortMilitaryPlus(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+                                              in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "HH:mm:zzz"
+        var retval = dateFormatter.string(from: self)
+        guard end != nil && end != self else { return retval }
+
+        let endDateString = end!.utilityDateShortMilitaryPlus(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortMilitaryPlus(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
         let endString = endDateString + " @ " + endTimeString
         guard retval != endString else { return retval }
         retval += " - " + endString
