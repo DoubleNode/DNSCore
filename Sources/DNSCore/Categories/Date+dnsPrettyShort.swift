@@ -11,6 +11,8 @@ import Foundation
 public extension Date {
     func utilityAtShort(style: Format.Style) -> String {
         switch style {
+        case .iso:
+            return "T"
         case .simple:
             return ", "
         case .smart:
@@ -26,6 +28,8 @@ public extension Date {
     func utilityDateShort(delta: TimeInterval, style: Format.Style,
                           in timeZone: TimeZone) -> String {
         switch style {
+        case .iso:
+            return utilityDateShortISO(delta: delta, in: timeZone)
         case .simple:
             return utilityDateShortSimple(delta: delta, in: timeZone)
         case .smart:
@@ -41,6 +45,8 @@ public extension Date {
     func utilityTimeShort(delta: TimeInterval, style: Format.Style,
                           in timeZone: TimeZone) -> String {
         switch style {
+        case .iso:
+            return utilityTimeShortISO(delta: delta, in: timeZone)
         case .simple:
             return utilityTimeShortSimple(delta: delta, in: timeZone)
         case .smart:
@@ -57,6 +63,8 @@ public extension Date {
                           endDelta: TimeInterval? = nil, style: Format.Style,
                           in timeZone: TimeZone) -> String {
         switch style {
+        case .iso:
+            return utilityDateShortISO(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .simple:
             return utilityDateShortSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .smart:
@@ -73,6 +81,8 @@ public extension Date {
                           endDelta: TimeInterval? = nil, style: Format.Style,
                           in timeZone: TimeZone) -> String {
         switch style {
+        case .iso:
+            return utilityTimeShortISO(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .simple:
             return utilityTimeShortSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
         case .smart:
@@ -86,6 +96,23 @@ public extension Date {
         }
     }
 
+    private func utilityDateShortISO(delta: TimeInterval,
+                                     in timeZone: TimeZone) -> String {
+        return self.utilityDateShortISO(startDelta: delta, in: timeZone)
+    }
+    private func utilityDateShortISO(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+                                     in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        var retval = dateFormatter.string(from: self)
+        guard end != nil && end != self else { return retval }
+
+        let endString = end!.utilityDateShortISO(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        guard retval != endString else { return retval }
+        retval += " - " + endString
+        return retval
+    }
     private func utilityDateShortSimple(delta: TimeInterval,
                                         in timeZone: TimeZone) -> String {
         return self.utilityDateShortSimple(startDelta: delta, in: timeZone)
@@ -240,6 +267,28 @@ public extension Date {
         return retval
     }
 
+    private func utilityTimeShortISO(delta: TimeInterval,
+                                     in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "HH:mm:ss"
+        return dateFormatter.string(from: self)
+    }
+    private func utilityTimeShortISO(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
+                                     in timeZone: TimeZone) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "HH:mm:ss"
+        var retval = dateFormatter.string(from: self)
+        guard end != nil && end != self else { return retval }
+
+        let endDateString = end!.utilityDateShortISO(delta: endDelta!, in: timeZone)
+        let endTimeString = end!.utilityTimeShortISO(startDelta: endDelta!, to: end, endDelta: endDelta, in: timeZone)
+        let endString = endDateString + " @ " + endTimeString
+        guard retval != endString else { return retval }
+        retval += " - " + endString
+        return retval
+    }
     private func utilityTimeShortSimple(delta: TimeInterval,
                                         in timeZone: TimeZone) -> String {
         var timeFormatString = "h:mma"
