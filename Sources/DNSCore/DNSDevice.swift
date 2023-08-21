@@ -40,8 +40,7 @@ public class DNSDevice {
     }
 #if !os(macOS)
     public class var safeAreaInsets: UIEdgeInsets {
-        let window = UIApplication.shared.windows.first
-        return window?.safeAreaInsets ?? UIEdgeInsets.zero
+        return (UIApplication.dnsCurrentScene() as? UIWindowScene)?.windows.first?.safeAreaInsets ?? UIEdgeInsets.zero
     }
     public class var screenHeight: CGFloat {
         return UIScreen.main.bounds.height * UIScreen.main.scale
