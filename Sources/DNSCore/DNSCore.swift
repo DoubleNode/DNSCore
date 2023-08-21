@@ -58,7 +58,7 @@ public class DNSCore {
 
     public static var languageCode: String = {
         let currentLocale = NSLocale.current
-        var languageCode = currentLocale.languageCode ?? "en"
+        var languageCode = currentLocale.language.languageCode?.identifier ?? "en"
         if languageCode == "es" {
             languageCode = "es-419"
         }
@@ -68,7 +68,7 @@ public class DNSCore {
         didSet {
             if languageCodeOverride.isEmpty {
                 let currentLocale = NSLocale.current
-                var retval = currentLocale.languageCode ?? "en"
+                var retval = currentLocale.language.languageCode?.identifier ?? "en"
                 if retval == "es" {
                     retval = "es-419"
                 }

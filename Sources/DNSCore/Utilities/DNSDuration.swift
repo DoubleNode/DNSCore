@@ -45,7 +45,7 @@ public class DNSDuration: Hashable, Comparable, Codable {
             timeFormatString = "h:mm"
         }
         dateFormatter.dateFormat = timeFormatString
-        var retval = dateFormatter.string(from: date!)
+        let retval = dateFormatter.string(from: date!)
         return retval
     }
 

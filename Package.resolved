@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DoubleNode/DNSCoreThreading.git",
       "state" : {
-        "revision" : "6652e0ef7a5f69c6a01b7d85a1b53b8c013f65ad",
-        "version" : "1.10.1"
+        "revision" : "0cca4d7c93f6f2000eae9033b02b6d87d73bfd99",
+        "version" : "1.11.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DoubleNode/DNSError.git",
       "state" : {
-        "revision" : "e26f6b4d5855c49801e8d9b20d6304e93294c2cc",
-        "version" : "1.10.0"
+        "revision" : "351479999b4bf4e11977ee1432185e4ee6d7e6c7",
+        "version" : "1.11.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyBeaver/SwiftyBeaver.git",
       "state" : {
-        "revision" : "12b5acf96d98f91d50de447369bd18df74600f1a",
-        "version" : "1.9.6"
+        "revision" : "1080914828ef1c9ca9cd2bad50667b3d847dabff",
+        "version" : "2.0.0"
       }
     }
   ],
