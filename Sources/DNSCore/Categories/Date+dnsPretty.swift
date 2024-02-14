@@ -61,6 +61,22 @@ public extension Date {
         case saturday
     }
 
+    enum Minutes {
+        public static let deltaOneHour = Double(60)
+        public static let deltaTwoHours = Minutes.deltaOneHour * 2
+        public static let deltaThreeHours = Minutes.deltaOneHour * 3
+        public static let deltaSixHours = Minutes.deltaOneHour * 6
+        public static let deltaOneDay = Minutes.deltaOneHour * 24
+        public static let deltaTwoDays = Minutes.deltaOneDay * 2
+        public static let deltaThreeDays = Minutes.deltaOneDay * 3
+        public static let deltaOneWeek = Minutes.deltaOneDay * 7
+        public static let deltaTwoWeeks = Minutes.deltaOneWeek * 2
+        public static let deltaThreeWeeks = Minutes.deltaOneWeek * 3
+        public static let deltaFourWeeks = Minutes.deltaOneWeek * 4
+        public static let deltaThirtyDays = Minutes.deltaOneDay * 30
+        public static let deltaSixWeeks = Minutes.deltaOneWeek * 6
+        public static let deltaOneYear = Minutes.deltaOneDay * 365.25
+    }
     enum Seconds {
         public static var deltaZeroTime: Double {
             (Double(zeroTime.hour) * deltaOneHour) + (Double(zeroTime.minute) * deltaOneMinute)
@@ -88,6 +104,7 @@ public extension Date {
         public static let deltaSixWeeks = Seconds.deltaOneWeek * 6
         public static let deltaOneYear = Seconds.deltaOneDay * 365.25
     }
+
 
     func dnsDateTime(as dateFormat: Format = Format(),
                      and timeFormat: Format? = nil,

@@ -20,7 +20,7 @@ public extension DNSPostalAddress {
         let postalCode = Self.xlt.string(from: data[Self.field(.postalCode)] as Any?) ?? ""
         let country = Self.xlt.string(from: data[Self.field(.country)] as Any?) ?? ""
         let isoCountryCode = Self.xlt.string(from: data[Self.field(.isoCountryCode)] as Any?) ?? ""
-        self.init(street, subLocality: subLocality, city: city, subAdministrativeArea: subAdministrativeArea,
+        self.init(nickname, street: street, subLocality: subLocality, city: city, subAdministrativeArea: subAdministrativeArea,
                   state: state, postalCode: postalCode, country: country, isoCountryCode: isoCountryCode)
         self.nickname = nickname
     }

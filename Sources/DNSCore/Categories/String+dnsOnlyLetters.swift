@@ -1,5 +1,5 @@
 //
-//  String+dnsOnlyLetters.swift
+//  String+dnsOnlyDigits.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
@@ -9,8 +9,8 @@
 import Foundation
 
 public extension String {
-    func dnsOnlyLetters() -> String {
-        let filtredUnicodeScalars = unicodeScalars.filter { CharacterSet.letters.contains($0) }
+    func dnsOnlyDigits() -> String {
+        let filtredUnicodeScalars = unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) }
         return String(String.UnicodeScalarView(filtredUnicodeScalars))
     }
 }
