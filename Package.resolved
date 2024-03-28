@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Nirma/SFSymbol",
       "state" : {
-        "revision" : "c18f260b9b69d1c24e40ad367e8a589563fb8f3d",
-        "version" : "2.2.0"
+        "revision" : "1b127194b976a58ea460a2cbe10f00fa994b1ece",
+        "version" : "2.3.0"
       }
     },
     {
