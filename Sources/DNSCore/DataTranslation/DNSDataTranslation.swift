@@ -130,6 +130,16 @@ open class DNSDataTranslation: NSObject {
         firebaseDateFormatter,
         defaultDateFormatter4,
         defaultDateFormatter5,
+        // defaultTimeFormatters
+        firebaseTimeFormatterMilliseconds,
+        firebaseTimeFormatterMilliseconds2,
+        firebaseTimeFormatter,
+        defaultTimeFormatter1,
+        localTimeFormatter,
+        localTimeAltFormatter,
+        localTimeFormatterWithoutTimezone,
+        localTimeFormatterMillisecondsWithoutTimezone,
+        localTimeFormatterMilliseconds2WithoutTimezone,
     ]
     static var defaultTimeFormatters = [
         firebaseTimeFormatterMilliseconds,
