@@ -10,6 +10,7 @@ import Foundation
 
 public extension Double {
     var fractionString: String { self.asFractionString() }
+    // swiftlint:disable:next cyclomatic_complexity
     func asFractionString() -> String {
         var wholeStr = "\(Int(self))"
         var fractionStr = ""

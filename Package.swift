@@ -31,6 +31,7 @@ let package = Package(
         .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.11.1"),
         .package(url: "https://github.com/DoubleNode/DNSError.git", from: "1.11.1"),
         .package(url: "https://github.com/Nirma/SFSymbol", from: "2.3.0"),
+        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.57.0") ,
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -40,6 +41,9 @@ let package = Package(
             dependencies: ["AtomicSwift", "DNSCoreThreading", "DNSError", "SFSymbol"],
             resources: [
                 .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
             ]),
         .testTarget(
             name: "DNSCoreTests",

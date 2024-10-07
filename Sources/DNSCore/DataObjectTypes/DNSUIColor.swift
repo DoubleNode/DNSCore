@@ -15,13 +15,13 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
     enum CodingKeys: String, CodingKey {
         case disabled, focused, highlighted, normal, selected
     }
-    
+
     public var disabled: UIColor
     public var focused: UIColor
     public var highlighted: UIColor
     public var normal: UIColor
     public var selected: UIColor
-    
+
     required public init(_ normal: UIColor,
                          disabled: UIColor? = nil,
                          focused: UIColor? = nil,
@@ -33,7 +33,7 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
         self.highlighted = highlighted ?? normal
         self.selected = selected ?? normal
     }
-    
+
     // Codable protocol methods
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -73,9 +73,9 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
         try self.highlighted.encode(to: highlightedContainer)
         try self.selected.encode(to: selectedContainer)
     }
-    
+
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
+    static public func == (lhs: DNSUIColor, rhs: DNSUIColor) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }
@@ -83,7 +83,7 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
         guard lhs.selected == rhs.selected else { return false }
         return true
     }
-    
+
     // Hashable protocol methods
     public func hash(into hasher: inout Hasher) {
         hasher.combine(disabled)
@@ -91,7 +91,7 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
         hasher.combine(highlighted)
         hasher.combine(normal)
         hasher.combine(selected)
-    }    
+    }
 
     // NSCopying protocol methods
     public func copy(with zone: NSZone? = nil) -> Any {

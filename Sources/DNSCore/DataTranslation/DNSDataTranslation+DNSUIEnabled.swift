@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnsenabled(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsenabled(from any: Any?) -> DNSUIEnabled? {
         guard let any else { return nil }
         if any is DNSUIEnabled {

@@ -140,7 +140,6 @@ public class DNSDevice {
             guard LAContext.init().canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil) else {
                 return false
             }
-            
             return true
         } else {
             return false
@@ -156,7 +155,6 @@ public class DNSDevice {
             }
             guard #available(iOS 11, *) else { return false }
             guard LAContext.init().biometryType == LABiometryType.faceID else { return false }
-        
             return true
         #else
             return false
@@ -187,20 +185,20 @@ public class DNSDevice {
 extension DNSDevice {
     public class func utilityModelName(from model: String) -> String {
         return Self.deviceModels
-            .first { (key, value) in value == model }
+            .first { (_/* key */, value) in value == model }
             .map { $0.key } ?? "Unknown Device"
     }
     public class func utilityModelCode() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
         let modelCode = withUnsafePointer(to: &systemInfo.machine) {
-            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
-                ptr in String.init(validatingUTF8: ptr)
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) { ptr in
+                String.init(validatingUTF8: ptr)
             }
         }
         return modelCode ?? "Unknown"
     }
-    
+
     static var deviceModels: [String: String] = [
         "AirPods (1st generation)": "AirPods1,1",
         "AirPods (2nd generation)": "AirPods2,1",
@@ -509,4 +507,4 @@ extension DNSDevice {
         "Mac Studio (2022, M1 Max)": "Mac13,1",
         "Mac Studio (2022, M1 Ultra)": "Mac13,2",
     ]
-}
+} // swiftlint:disable:this file_length

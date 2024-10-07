@@ -343,6 +343,7 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         let endTime = end?.zeroDate(in: timeZone)
         let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "/yy"
+        // swiftlint:disable:next line_length
         let dayFormatString = (self.isSameDate(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "M/d\(yearFormatSubString)"
         var timeFormatString = "\(dayFormatString) '@' h\(self.dnsMinute > 0 ? ":mm" : "")a"
         if timeZone != TimeZone.current {
@@ -534,4 +535,4 @@ public extension Date {
         retval += " - " + endString
         return retval
     }
-}
+} // swiftlint:disable:this file_length

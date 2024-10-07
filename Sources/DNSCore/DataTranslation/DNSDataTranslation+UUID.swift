@@ -17,7 +17,6 @@ public extension DNSDataTranslation {
         do { return uuid(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func uuid(from any: Any?) -> UUID? {
         guard let any else { return nil }
         if any is UUID {

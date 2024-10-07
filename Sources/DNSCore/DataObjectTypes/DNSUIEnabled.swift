@@ -15,13 +15,13 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
     enum CodingKeys: String, CodingKey {
         case disabled, focused, highlighted, normal, selected
     }
-    
+
     public var disabled: Bool
     public var focused: Bool
     public var highlighted: Bool
     public var normal: Bool
     public var selected: Bool
-    
+
     required public init(_ normal: Bool,
                          disabled: Bool? = nil,
                          focused: Bool? = nil,
@@ -33,7 +33,7 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
         self.highlighted = highlighted ?? normal
         self.selected = selected ?? normal
     }
-    
+
     // Codable protocol methods
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -51,9 +51,9 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
         try container.encode(self.highlighted, forKey: .highlighted)
         try container.encode(self.selected, forKey: .selected)
     }
-    
+
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIEnabled, rhs: DNSUIEnabled) -> Bool {
+    static public func == (lhs: DNSUIEnabled, rhs: DNSUIEnabled) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }
@@ -61,7 +61,7 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
         guard lhs.selected == rhs.selected else { return false }
         return true
     }
-    
+
     // Hashable protocol methods
     public func hash(into hasher: inout Hasher) {
         hasher.combine(disabled)

@@ -26,7 +26,6 @@ public extension DNSDataTranslation {
         do { return timeZone(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func timeZone(from any: Any?) -> TimeZone? {
         guard let any else { return nil }
         if any is TimeZone {

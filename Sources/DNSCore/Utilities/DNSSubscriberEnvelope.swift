@@ -12,7 +12,7 @@ import Combine
 public class DNSSubscriberEnvelope {
     @Atomic
     public static var subscribers: [AnyCancellable] = []
-    
+
     var subscriber: AnyCancellable? {
         willSet {
             guard newValue != subscriber else { return }

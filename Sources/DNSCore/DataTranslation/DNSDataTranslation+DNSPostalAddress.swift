@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnsPostalAddress(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsPostalAddress(from any: Any?) -> DNSPostalAddress? {
         guard let any else { return nil }
         if any is DNSPostalAddress {

@@ -32,7 +32,7 @@ public enum DNSCoreError: DNSError {
         case lowerError = 1005
         // Domain-Specific Errors
     }
-    
+
     public var nsError: NSError! {
         switch self {
             // Common Errors

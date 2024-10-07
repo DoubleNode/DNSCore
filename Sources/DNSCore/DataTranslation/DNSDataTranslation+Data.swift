@@ -16,7 +16,6 @@ public extension DNSDataTranslation {
         do { return data(from: try container.decodeIfPresent(Data.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func data(from any: Any?) -> Data? {
         guard let any else { return nil }
         return self.data(from: any as? Data)

@@ -71,7 +71,7 @@ public extension PersonNameComponents {
         }
         return retval
     }
-    
+
     var dnsSortableName: String {
         var retval = self.familyName ?? ""
         if retval.isEmpty {
@@ -90,7 +90,7 @@ public extension PersonNameComponents {
         }
         return retval
     }
-    
+
     static func dnsBuildName(with name: String = "",
                              and nickname: String? = nil) -> PersonNameComponents? {
         var retval = PersonNameComponents()
@@ -103,7 +103,7 @@ public extension PersonNameComponents {
     func dnsFormatName(style: PersonNameComponents.FormatStyle.Style = .long) -> String {
         self.formatted(.name(style: style))
     }
-    
+
     // Equatable protocol methods
     static func == (lhs: PersonNameComponents, rhs: PersonNameComponents) -> Bool {
         (lhs.namePrefix ?? "") == (rhs.namePrefix ?? "") &&

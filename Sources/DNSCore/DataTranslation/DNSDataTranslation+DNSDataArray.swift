@@ -10,7 +10,6 @@ import Foundation
 
 public extension DNSDataTranslation {
     // MARK: - array...
-    // swiftlint:disable:next cyclomatic_complexity
     func dataarray(from any: Any?) -> DNSDataArray {
         guard any != nil else { return .empty }
         if any is Data {

@@ -16,7 +16,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
         case color, cornerRadius, cornerRadiusMulti, cornerTopLeftRadius, cornerTopRightRadius
         case cornerBottomLeftRadius, cornerBottomRightRadius, width
     }
-    
+
     public var color: DNSUIColor
     public var cornerRadius: Double
     public var cornerRadiusMulti: Bool
@@ -25,7 +25,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
     public var cornerBottomLeftRadius: Double
     public var cornerBottomRightRadius: Double
     public var width: Double
-    
+
     open class func baseBorderColor() -> DNSUIColor {
         return DNSUIColor(UIColor.clear)
     }
@@ -46,7 +46,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
         self.cornerBottomRightRadius = cornerBottomRightRadius
         self.width = width
     }
-    
+
     // Codable protocol methods
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -70,9 +70,9 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
         try container.encode(self.cornerBottomRightRadius, forKey: .cornerBottomRightRadius)
         try container.encode(self.width, forKey: .width)
     }
-    
+
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIBorder, rhs: DNSUIBorder) -> Bool {
+    static public func == (lhs: DNSUIBorder, rhs: DNSUIBorder) -> Bool {
         guard lhs.color == rhs.color else { return false }
         guard lhs.cornerRadius == rhs.cornerRadius else { return false }
         guard lhs.cornerRadiusMulti == rhs.cornerRadiusMulti else { return false }

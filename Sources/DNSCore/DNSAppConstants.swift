@@ -55,7 +55,7 @@ open class DNSAppConstants: NSObject {
         super.init()
         DNSAppConstants.resetPlistDictionary()
     }
-    
+
     // class formatter functions
     public var asCurrency: NumberFormatter { Self.currencyFormatter() }
     public var asCurrencyInt: NumberFormatter { Self.currencyIntFormatter() }
@@ -78,7 +78,7 @@ open class DNSAppConstants: NSObject {
     open class func percentageFormatter() -> NumberFormatter {
         DNSAppConstants.defaultPercentageFormatter
     }
-    
+
     // MARK: - Constant plist to object functions
     public class func constant(from key: String, and filter: String = "") throws -> Bool {
         let value = self._constant(from: key, and: filter)

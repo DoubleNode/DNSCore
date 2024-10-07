@@ -23,7 +23,6 @@ public extension DNSDataTranslation {
         do { return dnsurl(from: try container.decodeIfPresent([String: String].self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsurl(from any: Any?) -> DNSURL? {
         guard let any = any else { return nil }
         if any is DNSURL {

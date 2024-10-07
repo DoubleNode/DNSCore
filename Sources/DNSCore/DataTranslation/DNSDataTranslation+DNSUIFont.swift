@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnsfont(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsfont(from any: Any?) -> DNSUIFont? {
         guard let any else { return nil }
         if any is DNSUIFont {

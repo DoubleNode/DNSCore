@@ -12,7 +12,6 @@ import Foundation
 
 public extension DNSDataTranslation {
     // MARK: - location...
-    // swiftlint:disable:next cyclomatic_complexity
     func location(from any: Any?) -> CLLocation? {
         guard let any else { return nil }
         if any is CLLocation {

@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return array(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return []
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func array(from any: Any?) -> [Any] {
         guard any != nil else { return [] }
         if any is Data {

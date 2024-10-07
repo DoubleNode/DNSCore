@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnsborder(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsborder(from any: Any?) -> DNSUIBorder? {
         guard let any else { return nil }
         if any is DNSUIBorder {

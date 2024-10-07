@@ -28,7 +28,7 @@ public extension UIView {
         contentView.fixConstraintsInView(self)
         return contentView
     }
-    func fixConstraintsInView(_ container: UIView!) -> Void {
+    func fixConstraintsInView(_ container: UIView!) {
         NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal,
                            toItem: container, attribute: .leading, multiplier: 1.0,
                            constant: 0).isActive = true

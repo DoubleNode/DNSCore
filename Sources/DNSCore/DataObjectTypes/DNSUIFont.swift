@@ -15,13 +15,13 @@ open class DNSUIFont: Hashable, Codable, NSCopying {
     enum CodingKeys: String, CodingKey {
         case disabled, focused, highlighted, normal, selected
     }
-    
+
     public var disabled: UIFont
     public var focused: UIFont
     public var highlighted: UIFont
     public var normal: UIFont
     public var selected: UIFont
-    
+
     required public init(_ normal: UIFont,
                          disabled: UIFont? = nil,
                          focused: UIFont? = nil,
@@ -75,7 +75,7 @@ open class DNSUIFont: Hashable, Codable, NSCopying {
     }
 
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIFont, rhs: DNSUIFont) -> Bool {
+    static public func == (lhs: DNSUIFont, rhs: DNSUIFont) -> Bool {
         guard lhs.disabled == rhs.disabled else { return false }
         guard lhs.focused == rhs.focused else { return false }
         guard lhs.highlighted == rhs.highlighted else { return false }

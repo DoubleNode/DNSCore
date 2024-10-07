@@ -19,7 +19,7 @@ open class DNSUIStrikeThru: Hashable, Codable, NSCopying {
     public var color: DNSUIColor
     public var enabled: DNSUIEnabled
     public var style: NSUnderlineStyle
-    
+
     open class func baseColor() -> DNSUIColor {
         return DNSUIColor(UIColor.clear)
     }
@@ -48,7 +48,7 @@ open class DNSUIStrikeThru: Hashable, Codable, NSCopying {
     }
 
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIStrikeThru, rhs: DNSUIStrikeThru) -> Bool {
+    static public func == (lhs: DNSUIStrikeThru, rhs: DNSUIStrikeThru) -> Bool {
         guard lhs.color == rhs.color else { return false }
         guard lhs.enabled == rhs.enabled else { return false }
         guard lhs.style == rhs.style else { return false }

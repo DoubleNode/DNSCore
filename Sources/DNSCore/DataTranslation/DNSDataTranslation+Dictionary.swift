@@ -10,7 +10,6 @@ import Foundation
 
 public extension DNSDataTranslation {
     // MARK: - dictionary...
-    // swiftlint:disable:next cyclomatic_complexity
     func dictionary(from any: Any?) -> DNSDataDictionary {
         guard any != nil else { return DNSDataDictionary.empty }
         if any is Data {
@@ -34,7 +33,7 @@ public extension DNSDataTranslation {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data)
             guard jsonObject is DNSDataDictionary else { return ["array": jsonObject] }
-            return jsonObject as! DNSDataDictionary
+            return jsonObject as! DNSDataDictionary // swiftlint:disable:this force_cast
         } catch {
             return DNSDataDictionary.empty
         }

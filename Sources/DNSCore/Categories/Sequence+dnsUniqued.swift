@@ -12,6 +12,7 @@ public extension Sequence where Element: Hashable {
     @discardableResult
     @inlinable mutating func dnsUniqued() -> Self {
         var set = Set<Element>()
+        // swiftlint:disable:next force_cast
         self = filter { set.insert($0).inserted } as! Self
         return self
     }

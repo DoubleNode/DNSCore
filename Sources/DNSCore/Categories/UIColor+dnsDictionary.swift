@@ -16,6 +16,7 @@ public extension UIColor {
     enum ExtensionCodingKeys: String, CodingKey {
         case alpha, blue, brightness, green, hue, red, saturation, white, colorSpace
     }
+    // swiftlint:disable:next cyclomatic_complexity
     convenience init?(from data: DNSDataDictionary) {
         let keys = data.keys
         if keys.contains("white") {

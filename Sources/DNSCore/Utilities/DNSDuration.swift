@@ -20,7 +20,7 @@ public class DNSDuration: Hashable, Comparable, Codable {
     public var totalSeconds: Int {
         return hour * Int(Date.Seconds.deltaOneHour) + minute * Int(Date.Seconds.deltaOneMinute)
     }
-    
+
     public required init(timeValue: Float = 0) {
         value = timeValue
     }
@@ -50,12 +50,12 @@ public class DNSDuration: Hashable, Comparable, Codable {
     }
 
     // MARK: - Comparable methods
-    public static func <(lhs: DNSDuration, rhs: DNSDuration) -> Bool {
+    public static func < (lhs: DNSDuration, rhs: DNSDuration) -> Bool {
         return lhs.value < rhs.value
     }
 
     // MARK: - Hashable methods
-    static public func ==(lhs: DNSDuration, rhs: DNSDuration) -> Bool {
+    static public func == (lhs: DNSDuration, rhs: DNSDuration) -> Bool {
         return lhs.value == rhs.value
     }
 

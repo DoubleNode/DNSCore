@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnsstrikethru(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnsstrikethru(from any: Any?) -> DNSUIStrikeThru? {
         guard let any else { return nil }
         if any is DNSUIStrikeThru {

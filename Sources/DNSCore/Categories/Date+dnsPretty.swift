@@ -105,7 +105,6 @@ public extension Date {
         public static let deltaOneYear = Seconds.deltaOneDay * 365.25
     }
 
-
     func dnsDateTime(as dateFormat: Format = Format(),
                      and timeFormat: Format? = nil,
                      in timeZone: TimeZone = TimeZone.current) -> String {
@@ -207,7 +206,7 @@ public extension Date {
         calendar.timeZone = timeZone
         return calendar.component(component, from: self)
     }
-    
+
     var dnsEra: Int { dnsEra() }
     var dnsYear: Int { dnsYear() }
     var dnsMonth: Int { dnsMonth() }
@@ -274,7 +273,7 @@ public extension Date {
     func dnsDayOfWeek(in timeZone: TimeZone = TimeZone.current) -> Weekday {
         return Weekday(rawValue: dnsComponent(component: .weekday, in: timeZone)) ?? .unknown
     }
-    
+
     var dnsDatePart: Date? { dnsDatePart() }
     var dnsTimePart: DNSTimeOfDay { dnsTimePart() }
     func dnsDatePart(in timeZone: TimeZone = TimeZone.current) -> Date? {
@@ -285,7 +284,7 @@ public extension Date {
                      minute: self.dnsMinute(in: timeZone))
     }
     func timeOfDay(in timeZone: TimeZone = TimeZone.current) -> DNSTimeOfDay { dnsTimePart(in: timeZone) }
-    
+
     func dnsAge(to toDate: Date = Date(),
                 in timeZone: TimeZone = TimeZone.current) -> (year: Int, month: Int, day: Int) {
         var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
@@ -472,7 +471,7 @@ public extension Date {
         }
         return date + (deltaDays * Date.Seconds.deltaOneDay)
     }
-    
+
     static func create(year: Int, month: Int = 1, day: Int = 1,
                        hour: Int = 0, minute: Int = 0, second: Int = 0,
                        in timeZone: TimeZone = TimeZone.current) -> Date {
@@ -546,7 +545,7 @@ public extension Date {
         dateFormatter.locale = Locale.current
         let amSymbol = dateFormatter.amSymbol.replacingOccurrences(of: "a. m.", with: "a.m.").lowercased()
         let pmSymbol = dateFormatter.pmSymbol.replacingOccurrences(of: "p. m.", with: "p.m.").lowercased()
-        
+
         var retval = string
         retval = retval.replacingOccurrences(of: " \(dateFormatter.amSymbol ?? "")", with: amSymbol)
         retval = retval.replacingOccurrences(of: " \(dateFormatter.pmSymbol ?? "")", with: pmSymbol)
@@ -555,3 +554,4 @@ public extension Date {
         return retval
     }
 }
+// swiftlint:disable:this file_length

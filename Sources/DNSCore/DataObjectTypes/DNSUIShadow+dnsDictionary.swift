@@ -11,7 +11,7 @@ import UIKit
 public extension DNSUIShadow {
     convenience init(from data: DNSDataDictionary) {
         let color = Self.xlt.dnscolor(from: data[Self.field(.color)] as Any?) ?? DNSUIBorder.baseBorderColor()
-        let offset = Self.xlt.cgsize(from: data[Self.field(.offset)] as Any?) ?? CGSizeZero
+        let offset = Self.xlt.cgsize(from: data[Self.field(.offset)] as Any?) ?? .zero
         let opacity = Self.xlt.float(from: data[Self.field(.opacity)] as Any?) ?? 0
         let radius = Self.xlt.double(from: data[Self.field(.radius)] as Any?) ?? 0
         self.init(color: color, offset: offset, opacity: opacity, radius: radius)

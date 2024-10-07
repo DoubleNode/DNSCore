@@ -9,7 +9,7 @@
 import DNSError
 
 public extension DNSCodeLocation {
-    typealias core = DNSCoreCodeLocation
+    typealias core = DNSCoreCodeLocation // swiftlint:disable:this type_name
 }
 open class DNSCoreCodeLocation: DNSCodeLocation {
     override open class var domainPreface: String { "com.doublenode.core." }

@@ -20,7 +20,7 @@ open class DNSUIShadow: Hashable, Codable, NSCopying {
     public var offset: CGSize
     public var opacity: Float
     public var radius: Double
-    
+
     open class func baseShadowColor() -> DNSUIColor {
         return DNSUIColor(UIColor.clear)
     }
@@ -52,7 +52,7 @@ open class DNSUIShadow: Hashable, Codable, NSCopying {
     }
 
     // Equatable protocol methods
-    static public func ==(lhs: DNSUIShadow, rhs: DNSUIShadow) -> Bool {
+    static public func == (lhs: DNSUIShadow, rhs: DNSUIShadow) -> Bool {
         guard lhs.color == rhs.color else { return false }
         guard lhs.offset == rhs.offset else { return false }
         guard lhs.opacity == rhs.opacity else { return false }

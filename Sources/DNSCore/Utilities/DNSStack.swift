@@ -18,7 +18,7 @@ public struct DNSStack<T> {
     fileprivate var array = [T]()
 
     public init() {}
-    
+
     public var isEmpty: Bool {
         return array.isEmpty
     }

@@ -160,9 +160,8 @@ open class DNSDataTranslation: NSObject {
     ]
 
     var tokenReplacements: [String: String] = [:]
-    
-    public override init() {
-    }
+
+    public override init() { }
 
     public func localized(_ object: Any??) -> Any {
         guard let dictionary = object as? [String: Any] else {
@@ -170,7 +169,7 @@ open class DNSDataTranslation: NSObject {
         }
         return (dictionary[DNSCore.languageCode] ?? dictionary["en"]) ?? object as Any
     }
-    
+
     public func addTokenReplacement(token: String,
                                     replacement: String) {
         tokenReplacements[token] = replacement

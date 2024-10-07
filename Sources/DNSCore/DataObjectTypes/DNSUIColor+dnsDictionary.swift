@@ -39,7 +39,7 @@ public extension DNSUIColor {
         return retval
     }
 }
-//open class DNSUIColor: Hashable {
+// open class DNSUIColor: Hashable {
 //    public func hash(into hasher: inout Hasher) {
 //        hasher.combine(disabled)
 //        hasher.combine(focused)
@@ -73,4 +73,4 @@ public extension DNSUIColor {
 //        self.highlighted = highlighted ?? normal
 //        self.selected = selected ?? normal
 //    }
-//}
+// }

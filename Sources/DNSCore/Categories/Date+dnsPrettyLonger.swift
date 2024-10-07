@@ -22,7 +22,7 @@ public extension Date {
         }
     }
     func utilityDateLonger(delta: TimeInterval, style: Format.Style,
-                         in timeZone: TimeZone) -> String {
+                           in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
             return utilityDateLongerSimple(delta: delta, in: timeZone)
@@ -35,7 +35,7 @@ public extension Date {
         }
     }
     func utilityTimeLonger(delta: TimeInterval, style: Format.Style,
-                         in timeZone: TimeZone) -> String {
+                           in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
             return utilityTimeLongerSimple(delta: delta, in: timeZone)
@@ -48,8 +48,8 @@ public extension Date {
         }
     }
     func utilityDateLonger(startDelta: TimeInterval, to end: Date? = nil,
-                         endDelta: TimeInterval? = nil, style: Format.Style,
-                         in timeZone: TimeZone) -> String {
+                           endDelta: TimeInterval? = nil, style: Format.Style,
+                           in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
             return utilityDateLongerSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
@@ -62,8 +62,8 @@ public extension Date {
         }
     }
     func utilityTimeLonger(startDelta: TimeInterval, to end: Date? = nil,
-                         endDelta: TimeInterval? = nil, style: Format.Style,
-                         in timeZone: TimeZone) -> String {
+                           endDelta: TimeInterval? = nil, style: Format.Style,
+                           in timeZone: TimeZone) -> String {
         switch style {
         case .simple:
             return utilityTimeLongerSimple(startDelta: startDelta, to: end, endDelta: endDelta, in: timeZone)
@@ -77,11 +77,11 @@ public extension Date {
     }
 
     private func utilityDateLongerSimple(delta: TimeInterval,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         return self.utilityDateLongerSimple(startDelta: delta, in: timeZone)
     }
     private func utilityDateLongerSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
         let dateFormatString = "E, MMMM d, yyyy"
@@ -95,11 +95,11 @@ public extension Date {
         return retval
     }
     private func utilityDateLongerSmart(delta: TimeInterval,
-                                      in timeZone: TimeZone) -> String {
+                                        in timeZone: TimeZone) -> String {
         return self.utilityDateLongerSmart(startDelta: delta, in: timeZone)
     }
     private func utilityDateLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                      in timeZone: TimeZone) -> String {
+                                        in timeZone: TimeZone) -> String {
         let endTime = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
@@ -116,11 +116,12 @@ public extension Date {
         return retval
     }
     private func utilityDateLongerPretty(delta: TimeInterval,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         return self.utilityDateLongerPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity
     private func utilityDateLongerPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         var retval = ""
 
         if startDelta > 0 {
@@ -175,7 +176,7 @@ public extension Date {
     }
 
     private func utilityTimeLongerSimple(delta: TimeInterval,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         var timeFormatString = "h:mma"
         if timeZone != TimeZone.current {
             timeFormatString += " zzzz"
@@ -187,7 +188,7 @@ public extension Date {
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeLongerSimple(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         let dayFormatString = "E, MMMM d, yyyy'\(self.utilityAtLonger(style: .simple))'"
         var timeFormatString = "\(dayFormatString)h:mma"
         if timeZone != TimeZone.current {
@@ -224,7 +225,7 @@ public extension Date {
         return Date.utilityMinimizeAmPm(of: retval)
     }
     private func utilityTimeLongerSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                      in timeZone: TimeZone) -> String {
+                                        in timeZone: TimeZone) -> String {
         let endTime = end?.zeroDate(in: timeZone)
         let weekdayFormatSubString = (self.isSameDay(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "E, "
         let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
@@ -257,11 +258,12 @@ public extension Date {
         return retval
     }
     private func utilityTimeLongerPretty(delta: TimeInterval,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         return self.utilityTimeLongerPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     private func utilityTimeLongerPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
-                                       in timeZone: TimeZone) -> String {
+                                         in timeZone: TimeZone) -> String {
         var retval = ""
 
         if startDelta > 0 {

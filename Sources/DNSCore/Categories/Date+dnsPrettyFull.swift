@@ -103,6 +103,7 @@ public extension Date {
         let endTime = end?.zeroDate(in: timeZone)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = timeZone
+        // swiftlint:disable:next line_length
         let weekdayFormatSubString = (self.isSameDay(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "EEEE, "
         let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
         let dateFormatString = "\(weekdayFormatSubString)MMMM d\(yearFormatSubString)"
@@ -119,6 +120,7 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         return self.utilityDateFullPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity
     private func utilityDateFullPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""
@@ -226,6 +228,7 @@ public extension Date {
     private func utilityTimeFullSmart(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                       in timeZone: TimeZone) -> String {
         let endTime = end?.zeroDate(in: timeZone)
+        // swiftlint:disable:next line_length
         let weekdayFormatSubString = (self.isSameDay(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : "EEEE, "
         let yearFormatSubString = (self.isSameYear(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" : ", yyyy"
         let dayFormatString = (self.isSameDate(as: /*endTime ?? */Date(), in: timeZone) && (endTime != self)) ? "" :
@@ -260,6 +263,7 @@ public extension Date {
                                        in timeZone: TimeZone) -> String {
         return self.utilityTimeFullPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     private func utilityTimeFullPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""

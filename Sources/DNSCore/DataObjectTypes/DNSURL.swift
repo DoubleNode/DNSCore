@@ -21,7 +21,7 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
     }
     private let fallbackLanguage = Language.en
 
-    internal var _urls: [String: URL?]
+    internal var _urls: [String: URL?]  // swiftlint:disable:this identifier_name
 
     public var asURL: URL? {
         self.asURL(for: DNSCore.languageCode)
@@ -98,7 +98,7 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
         let copy = DNSURL(from: newUrls)
         return copy
     }
-    
+
     // Comparable protocol methods
     public static func < (lhs: DNSURL, rhs: DNSURL) -> Bool {
         return (lhs.asURL?.absoluteString ?? "") < (rhs.asURL?.absoluteString ?? "")

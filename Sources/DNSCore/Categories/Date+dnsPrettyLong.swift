@@ -115,6 +115,7 @@ public extension Date {
     private func utilityDateLongPretty(delta: TimeInterval, in timeZone: TimeZone) -> String {
         return self.utilityDateLongPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity
     private func utilityDateLongPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""
@@ -253,6 +254,7 @@ public extension Date {
     private func utilityTimeLongPretty(delta: TimeInterval, in timeZone: TimeZone) -> String {
         return utilityTimeLongPretty(startDelta: delta, in: timeZone)
     }
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     private func utilityTimeLongPretty(startDelta: TimeInterval, to end: Date? = nil, endDelta: TimeInterval? = nil,
                                        in timeZone: TimeZone) -> String {
         var retval = ""

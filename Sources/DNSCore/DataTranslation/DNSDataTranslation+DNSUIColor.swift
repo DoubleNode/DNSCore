@@ -18,7 +18,6 @@ public extension DNSDataTranslation {
         do { return dnscolor(from: try container.decodeIfPresent(String.self, forKey: key)) } catch { }
         return nil
     }
-    // swiftlint:disable:next cyclomatic_complexity
     func dnscolor(from any: Any?) -> DNSUIColor? {
         guard let any else { return nil }
         if any is DNSUIColor {

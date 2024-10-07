@@ -12,7 +12,6 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - cgsize...
-    // swiftlint:disable:next cyclomatic_complexity
     func cgsize(from any: Any?) -> CGSize? {
         guard let any else { return nil }
         if any is CGSize {

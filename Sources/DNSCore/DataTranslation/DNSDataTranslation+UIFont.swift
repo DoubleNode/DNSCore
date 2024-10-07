@@ -12,7 +12,6 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - font...
-    // swiftlint:disable:next cyclomatic_complexity
     func font(from any: Any?) -> UIFont? {
         guard let any else { return nil }
         if any is UIFont {

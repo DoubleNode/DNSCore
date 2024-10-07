@@ -12,7 +12,6 @@ import UIKit
 
 public extension DNSDataTranslation {
     // MARK: - color...
-    // swiftlint:disable:next cyclomatic_complexity
     func color(from any: Any?) -> UIColor? {
         guard let any else { return nil }
         if any is UIColor {

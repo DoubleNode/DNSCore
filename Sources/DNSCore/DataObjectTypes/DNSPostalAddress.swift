@@ -19,7 +19,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     }
 
     public var nickname: String = ""
-    
+
     public var isEmpty: Bool { self == DNSPostalAddress() }
 
     // name formatted output
@@ -132,10 +132,10 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     }
 
     // MARK: - Equatable protocol methods -
-    static public func !=(lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+    static public func != (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
         lhs.isDiffFrom(rhs)
     }
-    static public func ==(lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
+    static public func == (lhs: DNSPostalAddress, rhs: DNSPostalAddress) -> Bool {
         !lhs.isDiffFrom(rhs)
     }
 }

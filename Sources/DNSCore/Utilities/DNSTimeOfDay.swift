@@ -42,7 +42,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     public var today: Date {
         return self.time()
     }
-    
+
     public required init(timeValue: Float = 0) {
         value = timeValue
     }
@@ -86,12 +86,12 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
     }
 
     // MARK: - Comparable methods
-    public static func <(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+    public static func < (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value < rhs.value
     }
 
     // MARK: - Hashable methods
-    static public func ==(lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
+    static public func == (lhs: DNSTimeOfDay, rhs: DNSTimeOfDay) -> Bool {
         return lhs.value == rhs.value
     }
 

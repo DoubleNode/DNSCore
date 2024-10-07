@@ -22,7 +22,7 @@ public extension DNSDataTranslation {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: jsonData)
             guard jsonObject is [Any] else { return [jsonObject] }
-            return jsonObject as! [Any]
+            return jsonObject as! [Any] // swiftlint:disable:this force_cast
         } catch {
             return []
         }
@@ -32,7 +32,7 @@ public extension DNSDataTranslation {
         guard !array.isEmpty else { return "" }
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: array)
-            return String(decoding: jsonData, as: UTF8.self)
+            return String(data: jsonData, encoding: .utf8) ?? ""
         } catch {
             return ""
         }
@@ -42,7 +42,7 @@ public extension DNSDataTranslation {
         guard !dictionary.isEmpty else { return "" }
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: dictionary)
-            return String(decoding: jsonData, as: UTF8.self)
+            return String(data: jsonData, encoding: .utf8) ?? ""
         } catch {
             return ""
         }

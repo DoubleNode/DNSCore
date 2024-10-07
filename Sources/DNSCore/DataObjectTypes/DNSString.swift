@@ -21,7 +21,7 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     }
     private let fallbackLanguage = Language.en
 
-    internal var _strings: [String: String]
+    internal var _strings: [String: String] // swiftlint:disable:this identifier_name
 
     public var asString: String {
         self.asString(for: DNSCore.languageCode)
@@ -96,12 +96,12 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
         let copy = DNSString(from: newStrings)
         return copy
     }
-    
+
     // Comparable protocol methods
     public static func < (lhs: DNSString, rhs: DNSString) -> Bool {
         return lhs.asString < rhs.asString
     }
-    
+
     // Utility Methods
     static func utilityCleanupAny(_ any: Any?) -> String? {
         guard let any else { return nil }
