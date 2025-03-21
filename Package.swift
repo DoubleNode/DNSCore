@@ -30,15 +30,16 @@ let package = Package(
         .package(url: "https://github.com/DoubleNodeOpen/AtomicSwift.git", from: "1.2.2"),
         .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.11.1"),
         .package(url: "https://github.com/DoubleNode/DNSError.git", from: "1.11.1"),
+        .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "4.0.2"),
         .package(url: "https://github.com/Nirma/SFSymbol", from: "2.3.0"),
-        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.57.0") ,
+        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.2"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "DNSCore",
-            dependencies: ["AtomicSwift", "DNSCoreThreading", "DNSError", "SFSymbol"],
+            dependencies: ["AtomicSwift", "DNSCoreThreading", "DNSError", "PhoneNumberKit", "SFSymbol"],
             resources: [
                 .process("Resources"),
             ],
