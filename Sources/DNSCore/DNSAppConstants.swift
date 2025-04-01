@@ -36,6 +36,9 @@ open class DNSAppConstants: NSObject {
     public enum BuildType: String {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
+    public enum EnvType: String {
+        case unknown, dev, qa, prod
+    }
 
     static public var appAPIType: APIType {
         DNSAppConstants.shared.appAPITypeRead()
@@ -43,11 +46,17 @@ open class DNSAppConstants: NSObject {
     static public var appBuildType: BuildType {
         DNSAppConstants.shared.appBuildTypeRead()
     }
+    static public var appEnvType: EnvType {
+        DNSAppConstants.shared.appEnvTypeRead()
+    }
 
     open func appAPITypeRead() -> APIType {
         return .unknown
     }
     open func appBuildTypeRead() -> BuildType {
+        return .unknown
+    }
+    open func appEnvTypeRead() -> EnvType {
         return .unknown
     }
 
