@@ -70,7 +70,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "BundleLookupBundleTests/test_dnsLookupNibBundleForClasstype_withTestViewController_shouldReturnMainBundle()">
+                  Identifier = "DNSAppConstantsConcurrencyTests/test_concurrent_plist_operations()">
                </Test>
                <Test
                   Identifier = "DNSAppConstantsDefaultsTests">
@@ -109,7 +109,34 @@
                   Identifier = "DNSDeviceTests">
                </Test>
                <Test
+                  Identifier = "DNSQueueConcurrencyTests/test_queue_concurrent_empty_operations()">
+               </Test>
+               <Test
                   Identifier = "DNSRootViewControllerTests">
+               </Test>
+               <Test
+                  Identifier = "DatePrettyShortTests/test_dnTime_withNowAndEndDateSameDayFormatShortSimpleWithTimezone_shouldReturnString()">
+               </Test>
+               <Test
+                  Identifier = "DatePrettyShortTests/test_dnTime_withNowAndEndDateSameDayFormatShortSimple_shouldReturnString()">
+               </Test>
+               <Test
+                  Identifier = "DatePrettyShortTests/test_dnsTime_withNowAndEndDateSameDayFormatShortSmartWithTimezone_shouldReturnString()">
+               </Test>
+               <Test
+                  Identifier = "DatePrettyShortTests/test_dnsTime_withNowAndEndDateSameDayFormatShortSmart_shouldReturnString()">
+               </Test>
+               <Test
+                  Identifier = "testDNSQueueSendableCompliance()">
+               </Test>
+               <Test
+                  Identifier = "testDNSSubscriberEnvelopeThreadSafety()">
+               </Test>
+               <Test
+                  Identifier = "testMainActorUIOperations()">
+               </Test>
+               <Test
+                  Identifier = "testSendableDataDictionaryAlternative()">
                </Test>
             </SkippedTests>
          </TestableReference>

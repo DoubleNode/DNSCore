@@ -56,16 +56,16 @@ public extension DNSDataTranslation {
         return self.double(from: any as? String, nil)
     }
     func double(from double: Double?) -> Double? {
-        guard let double else { return 0 }
+        guard let double else { return nil }
         return double
     }
     func double(from number: NSNumber?) -> Double? {
-        guard let number else { return 0 }
+        guard let number else { return nil }
         return number.doubleValue
     }
     func double(from string: String?, _ numberFormatter: NumberFormatter?) -> Double? {
-        guard let string else { return 0 }
-        guard !string.isEmpty else { return 0 }
+        guard let string else { return nil }
+        guard !string.isEmpty else { return nil }
         return self.number(from: string, numberFormatter)?.doubleValue
     }
 }

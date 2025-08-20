@@ -11,11 +11,11 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyShortTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1760034041      // 2025-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "CDT"
     static let defaultDateDay: String = "\(Date().dnsDay())"
     static let defaultDateMonth: String = "\(Date().dnsMonth())"
-    static let defaultDateYear: String = "22"
+    static let defaultDateYear: String = "25"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let defaultEndFromNowDateTimeIntervalSinceNow: TimeInterval = Date.Seconds.deltaOneDay * 5
     static let defaultEndFromSameDayDateTimeIntervalSince1970: TimeInterval = defaultDateTimeIntervalSince1970 + Date.Seconds.deltaOneHour * 2
@@ -283,7 +283,7 @@ class DatePrettyShortTests: XCTestCase {
         let testIntervals: [TestInterval] = [
             TestInterval(start: 0 - Date.Seconds.deltaOneMinute, end: Date.Seconds.deltaTwoHours,
                          result: C.Localizations.DatePretty.todayShort),
-            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay,
+            TestInterval(start: 0 - Date.Seconds.deltaThreeMinutes, end: Date.Seconds.deltaOneDay - Date.Seconds.deltaOneMinute,
                          result: "\(C.Localizations.DatePretty.todayShort) - \(C.Localizations.DatePretty.tomorrowShort)"),
             TestInterval(start: 0 - Date.Seconds.deltaOneWeek, end: Date.Seconds.deltaSixMinutes,
                          result: String(format: C.Localizations.DatePretty.weekAgoShort, "\(1)") + " - \(C.Localizations.DatePretty.todayShort)"),

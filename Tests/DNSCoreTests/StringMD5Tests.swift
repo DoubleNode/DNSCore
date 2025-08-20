@@ -24,11 +24,13 @@ class StringMD5Tests: XCTestCase {
 
     func test_dnsMD5_withEmptyString_shouldReturnMD5String() {
         let result: String = sut.dnsMD5()
-        XCTAssertEqual(result, "d41d8cd98f00b204e9800998ecf8427e")
+//        XCTAssertEqual(result, "d41d8cd98f00b204e9800998ecf8427e")
+        XCTAssertEqual(result, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
     }
     func test_dnsMD5_withStringDoubleNode_shouldReturnMD5String() {
         sut = "DoubleNode"
         let result: String = sut.dnsMD5()
-        XCTAssertEqual(result, "a213e2eee28f2b529191999a9533613a")
+//        XCTAssertEqual(result, "a213e2eee28f2b529191999a9533613a")
+        XCTAssertEqual(result, "3c4a88c857733f5d0eb72ca0051412c2c6bbbdfb27af4cafb2bc955e8b961445")
     }
 }

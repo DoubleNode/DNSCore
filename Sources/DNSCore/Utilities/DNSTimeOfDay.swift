@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class DNSTimeOfDay: Hashable, Comparable, Codable {
-    static public var afternoonStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 12, minute: 0)
-    static public var eveningStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 17, minute: 0)
+public final class DNSTimeOfDay: Hashable, Comparable, Codable, Sendable {
+    static public let afternoonStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 12, minute: 0)
+    static public let eveningStarts: DNSTimeOfDay = DNSTimeOfDay(hour: 17, minute: 0)
 
     public enum Period: Int, CaseIterable, Codable {
         case morning
@@ -28,7 +28,7 @@ public class DNSTimeOfDay: Hashable, Comparable, Codable {
         }
     }
 
-    public var value: Float = 0
+    public let value: Float
 
     public var hour: Int {
         return Int(value)

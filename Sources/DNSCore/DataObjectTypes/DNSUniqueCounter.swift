@@ -6,10 +6,12 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import AtomicSwift
 import Foundation
 
 public class DNSUniqueCounter {
-    private static var intValue: Int = 0
+    nonisolated(unsafe) private static var intValue: Int = 0
+
     private static var value: Int {
         get {
             let retval = intValue

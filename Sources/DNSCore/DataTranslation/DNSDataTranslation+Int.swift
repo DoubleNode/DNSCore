@@ -57,16 +57,16 @@ public extension DNSDataTranslation {
         return self.int(from: any as? String, nil)
     }
     func int(from int: Int?) -> Int? {
-        guard let int else { return 0 }
+        guard let int else { return nil }
         return int
     }
     func int(from number: NSNumber?) -> Int? {
-        guard let number else { return 0 }
+        guard let number else { return nil }
         return number.intValue
     }
     func int(from string: String?, _ numberFormatter: NumberFormatter?) -> Int? {
-        guard let string else { return 0 }
-        guard !string.isEmpty else { return 0 }
+        guard let string else { return nil }
+        guard !string.isEmpty else { return nil }
         return self.number(from: string, numberFormatter)?.intValue
     }
 }

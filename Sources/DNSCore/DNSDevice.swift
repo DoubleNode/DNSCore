@@ -14,6 +14,7 @@ import AppKit
 import UIKit
 #endif
 
+@MainActor
 public class DNSDevice {
     public class var osVersion: String {
 #if !os(macOS)
@@ -193,13 +194,13 @@ extension DNSDevice {
         uname(&systemInfo)
         let modelCode = withUnsafePointer(to: &systemInfo.machine) {
             $0.withMemoryRebound(to: CChar.self, capacity: 1) { ptr in
-                String.init(validatingUTF8: ptr)
+                String(validatingCString: ptr)
             }
         }
         return modelCode ?? "Unknown"
     }
 
-    static var deviceModels: [String: String] = [
+    static let deviceModels: [String: String] = [
         "AirPods (1st generation)": "AirPods1,1",
         "AirPods (2nd generation)": "AirPods2,1",
         "AirPods Pro": "iProd8,1",

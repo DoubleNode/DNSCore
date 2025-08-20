@@ -19,17 +19,39 @@ public protocol DNSAppConstantsRootProtocol: UITextFieldDelegate {
 }
 #endif
 
-open class DNSAppConstants: NSObject {
-    static public var shared = DNSAppConstants()
-    static public var translator = DNSDataTranslation()
+open class DNSAppConstants: NSObject, @unchecked Sendable {
+    private static let sharedLock = NSLock()
+    nonisolated(unsafe) private static var _sharedInstance: DNSAppConstants?
 
-    static public var uniqueDeviceId: String = {
+    static public var shared: DNSAppConstants {
+        sharedLock.lock()
+        defer { sharedLock.unlock() }
+        if let instance = _sharedInstance {
+            return instance
+        }
+        let instance = DNSAppConstants()
+        _sharedInstance = instance
+        return instance
+    }
+
+    static public let translator = DNSDataTranslation()
+
+    @MainActor
+    static public let uniqueDeviceId: String = {
         return "iOS-" + DNSAppConstants.targetType + "-" +
             (UIDevice.current.identifierForVendor?.uuidString ?? "")
     }()
-    static public var targetType: String = {
+    @MainActor
+    static public let targetType: String = {
         return DNSCore.targetType
     }()
+
+    /// Override this property in your subclass to provide the app group path
+    /// Returns empty string by default which uses UserDefaults.standard
+    open class var appGroupPath: String {
+        return ""
+    }
+
     public enum APIType: String {
         case unknown, dev, qa, alpha, beta, gamma, prod
     }
@@ -166,7 +188,7 @@ open class DNSAppConstants: NSObject {
     // key + Size is the generated key for loading the font size in points. (divided by appFontScaling)
     public class func constant(from key: String, and filter: String = "") throws -> UIFont {
         let fontName: String = try self.constant(from: "\(key)Name", and: filter)
-        let fontScale: Double = try self.constant(from: "\(key)Size", and: filter)
+        let fontScale: Double = try self.constant(from: "\(key)Scale", and: filter)
         let fontSize: Double = try self.constant(from: "\(key)Size", and: filter)
 
         return UIFont.dnsCustom(with: fontName, and: CGFloat(fontSize / fontScale))
@@ -274,13 +296,34 @@ open class DNSAppConstants: NSObject {
         return plistDict[key]!
     }
 
+    // MARK: - Thread-safe plist dictionary management
+    // Use nonisolated(unsafe) to mark intentionally unsafe but lock-protected storage
+    private static let plistLock = NSLock()
+    nonisolated(unsafe) private static var _plistDictionaryStorage: [String: Any] = [:]
+
     public class func resetPlistDictionary() {
-        self._plistDictionary = [:]
+        plistLock.lock()
+        defer { plistLock.unlock() }
+        _plistDictionaryStorage.removeAll()
     }
-    private static var _plistDictionary: [String: Any] = [:]
+
+    private static var _plistDictionary: [String: Any] {
+        get {
+            plistLock.lock()
+            defer { plistLock.unlock() }
+            return _plistDictionaryStorage
+        }
+        set {
+            plistLock.lock()
+            defer { plistLock.unlock() }
+            _plistDictionaryStorage = newValue
+        }
+    }
 
     public func merge(constants: [String: Any]) {
-        DNSAppConstants._plistDictionary.merge(constants) { (_, new) in new }
+        DNSAppConstants.plistLock.lock()
+        defer { DNSAppConstants.plistLock.unlock() }
+        DNSAppConstants._plistDictionaryStorage.merge(constants) { (_, new) in new }
     }
 
     private let semaphoreLoadFuncards = DNSSemaphoreGate(count: 1)
@@ -288,8 +331,9 @@ open class DNSAppConstants: NSObject {
         _ = self.semaphoreLoadFuncards.wait()
         defer { _ = self.semaphoreLoadFuncards.done() }
 
-        if !DNSAppConstants._plistDictionary.isEmpty {
-            return DNSAppConstants._plistDictionary
+        let currentDict = DNSAppConstants._plistDictionary
+        if !currentDict.isEmpty {
+            return currentDict
         }
 
         let constantsName = DNSCore.appSetting(for: C.AppConstants.filenameOverride,

@@ -9,6 +9,7 @@
 #if !os(macOS)
 import UIKit
 
+@MainActor
 public extension UIView {
     @discardableResult
     func dnsLoadNib<T: UIView>(from bundle: Bundle?) -> T? {
@@ -28,6 +29,7 @@ public extension UIView {
         contentView.fixConstraintsInView(self)
         return contentView
     }
+
     func fixConstraintsInView(_ container: UIView!) {
         NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal,
                            toItem: container, attribute: .leading, multiplier: 1.0,

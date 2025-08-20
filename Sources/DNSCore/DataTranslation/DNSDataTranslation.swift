@@ -8,8 +8,9 @@
 
 import AtomicSwift
 import Foundation
+import os.lock
 
-open class DNSDataTranslation: NSObject {
+open class DNSDataTranslation: NSObject, @unchecked Sendable {
     let boolTrueCharacters = "YyTt1+"
     let firebaseDateDictionaryISOKey = "iso"
     let firebaseKeyInvalidCharacterSet = CharacterSet.init(charactersIn: "[].#$/")
@@ -123,7 +124,7 @@ open class DNSDataTranslation: NSObject {
         return retval
     }
 
-    static var defaultDateFormatters = [
+    static let defaultDateFormatters = [
         defaultDateFormatter1,
         defaultDateFormatter2,
         defaultDateFormatter3,
@@ -141,7 +142,7 @@ open class DNSDataTranslation: NSObject {
         localTimeFormatterMillisecondsWithoutTimezone,
         localTimeFormatterMilliseconds2WithoutTimezone,
     ]
-    static var defaultTimeFormatters = [
+    static let defaultTimeFormatters = [
         firebaseTimeFormatterMilliseconds,
         firebaseTimeFormatterMilliseconds2,
         firebaseTimeFormatter,
@@ -159,7 +160,7 @@ open class DNSDataTranslation: NSObject {
         defaultDateFormatter5,
     ]
 
-    var tokenReplacements: [String: String] = [:]
+    private let tokenLock = OSAllocatedUnfairLock(initialState: [String: String]())
 
     public override init() { }
 
@@ -172,12 +173,31 @@ open class DNSDataTranslation: NSObject {
 
     public func addTokenReplacement(token: String,
                                     replacement: String) {
-        tokenReplacements[token] = replacement
+        tokenLock.withLock { tokens in
+            tokens[token] = replacement
+        }
     }
+
     public func clearTokenReplacements() {
-        tokenReplacements = [:]
+        tokenLock.withLock { tokens in
+            tokens.removeAll()
+        }
     }
+
     public func removeTokenReplacement(token: String) {
-        tokenReplacements.removeValue(forKey: token)
+        _ = tokenLock.withLock { tokens in
+            tokens.removeValue(forKey: token)
+        }
+    }
+
+    public func replaceTokens(in string: String) -> String {
+        return tokenLock.withLock { tokens in
+            var string = string
+            tokens.keys.forEach {
+                string = string.replacingOccurrences(of: "%\($0)%",
+                                                     with: tokens[$0] ?? "")
+            }
+            return string
+        }
     }
 }

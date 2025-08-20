@@ -9,6 +9,7 @@
 import StoreKit
 import UIKit
 
+@MainActor
 extension UIApplication {
     public static func dnsCurrentScene() -> UIScene? {
         return Self.shared.connectedScenes.first(where: {

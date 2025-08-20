@@ -9,7 +9,7 @@
 import AtomicSwift
 import Contacts
 import Foundation
-import PhoneNumberKit
+@preconcurrency import PhoneNumberKit
 
 open class DNSPhone: Codable {
     static let xlt = DNSDataTranslation()
@@ -19,7 +19,7 @@ open class DNSPhone: Codable {
         case phone
     }
 
-    static let utility = PhoneNumberUtility()
+    static let utility: PhoneNumberUtility = { PhoneNumberUtility() }()
 
     private var phone: PhoneNumber?
 

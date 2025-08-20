@@ -6,34 +6,69 @@
 //  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
 //
 
-import AtomicSwift
-import Combine
+@preconcurrency import Combine
+import Foundation
+import os.lock
 
-public class DNSSubscriberEnvelope {
-    @Atomic
-    public static var subscribers: [AnyCancellable] = []
+public final class DNSSubscriberEnvelope: @unchecked Sendable {
+    private static let subscribersLock = OSAllocatedUnfairLock(initialState: [AnyCancellable]())
 
-    var subscriber: AnyCancellable? {
-        willSet {
-            guard newValue != subscriber else { return }
-            guard let oldSubscriber = subscriber else { return }
-            DNSSubscriberEnvelope.subscribers.removeAll { $0 == oldSubscriber }
+    public static var subscribers: [AnyCancellable] {
+        get {
+            subscribersLock.withLock { $0 }
         }
-        didSet {
-            guard oldValue != subscriber else { return }
-            guard let newSubscriber = subscriber else { return }
-            DNSSubscriberEnvelope.subscribers.append(newSubscriber)
+        set {
+            subscribersLock.withLock { $0 = newValue }
+        }
+    }
+
+    private static func addSubscriber(_ subscriber: AnyCancellable) {
+        subscribersLock.withLock { subscribers in
+            subscribers.append(subscriber)
+        }
+    }
+
+    private static func removeSubscriber(_ subscriber: AnyCancellable) {
+        subscribersLock.withLock { subscribers in
+            subscribers.removeAll { $0 == subscriber }
+        }
+    }
+
+    private let subscriberLock = OSAllocatedUnfairLock(initialState: Optional<AnyCancellable>.none)
+
+    private var _subscriber: AnyCancellable? {
+        get {
+            subscriberLock.withLock { $0 }
+        }
+        set {
+            subscriberLock.withLock { currentSubscriber in
+                // Remove old subscriber if it exists
+                if let oldSubscriber = currentSubscriber {
+                    Self.removeSubscriber(oldSubscriber)
+                }
+
+                // Set new subscriber
+                currentSubscriber = newValue
+
+                // Add new subscriber if it exists
+                if let newSubscriber = newValue {
+                    Self.addSubscriber(newSubscriber)
+                }
+            }
         }
     }
 
     public required init(with newSubscriber: AnyCancellable? = nil) {
-        guard let newSubscriber = subscriber else { return }
-        self.open(with: newSubscriber)
+        if let newSubscriber = newSubscriber {
+            self.open(with: newSubscriber)
+        }
     }
+
     public func open(with newSubscriber: AnyCancellable) {
-        self.subscriber = newSubscriber
+        self._subscriber = newSubscriber
     }
+
     public func close() {
-        self.subscriber = nil
+        self._subscriber = nil
     }
 }

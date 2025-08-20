@@ -57,15 +57,15 @@ public extension DNSDataTranslation {
         return self.duration(from: any as? String)
     }
     func duration(from date: Date?) -> DNSDuration? {
-        guard let date else { return DNSDuration() }
+        guard let date else { return nil }
         return DNSDuration(hour: date.dnsHour, minute: date.dnsMinute)
     }
     func duration(from duration: DNSDuration?) -> DNSDuration? {
-        guard let duration else { return DNSDuration() }
+        guard let duration else { return nil }
         return duration
     }
     func duration(from number: NSNumber?) -> DNSDuration? {
-        guard let number else { return DNSDuration() }
+        guard let number else { return nil }
         return DNSDuration(timeValue: number.floatValue)
     }
     func duration(from string: String?) -> DNSDuration? {

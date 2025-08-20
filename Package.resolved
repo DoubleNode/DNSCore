@@ -1,4 +1,5 @@
 {
+  "originHash" : "0cbb226db21a118bd0d2801dcfba3e1ad069191886cb638c513e6d758a973172",
   "pins" : [
     {
       "identity" : "atomicswift",
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DoubleNode/DNSCoreThreading.git",
       "state" : {
-        "revision" : "6061fa5df1a49ea51043a0760283ffc5d6ccf312",
-        "version" : "1.11.1"
+        "revision" : "d1bff76ae04022e36096f5a36b6a53ba21ffbc32",
+        "version" : "2.0.3"
       }
     },
     {
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/DoubleNode/DNSError.git",
       "state" : {
-        "revision" : "d9040c8ced0e3f3166c0554be101342c5d9021c6",
-        "version" : "1.11.1"
+        "revision" : "cf6f8820c3f61d42d796d466eaa896c78d6361e0",
+        "version" : "2.0.1"
       }
     },
     {
@@ -32,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/marmelroy/PhoneNumberKit",
       "state" : {
-        "revision" : "288b99e9e99926bc8be41220802df83c059fac9b",
-        "version" : "4.0.2"
+        "revision" : "8cba2258060e356d5fc4836d4ff8549faa2409dd",
+        "version" : "4.1.4"
       }
     },
     {
@@ -50,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
       "state" : {
-        "revision" : "7a3d77f3dd9f91d5cea138e52c20cfceabf352de",
-        "version" : "0.58.2"
+        "revision" : "8545ddf4de043e6f2051c5cf204f39ef778ebf6b",
+        "version" : "0.59.1"
       }
     },
     {
@@ -64,5 +65,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

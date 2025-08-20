@@ -9,13 +9,13 @@
 import Foundation
 
 public extension Date {
-    static var zeroTime: DNSTimeOfDay = DNSTimeOfDay(hour: 0, minute: 0)
+    static let zeroTime: DNSTimeOfDay = DNSTimeOfDay(hour: 0, minute: 0)
 
-    struct Format {
-        public enum Size {
+    struct Format : Sendable{
+        public enum Size : Sendable{
             case short, normal, long, longer, full
         }
-        public enum Style {
+        public enum Style : Sendable{
             case iso, simple, smart, pretty, military, militaryPlus
         }
 

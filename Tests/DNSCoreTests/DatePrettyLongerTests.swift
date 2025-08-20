@@ -11,11 +11,11 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyLongerTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1760034041      // 2025-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "Central Daylight Time"
-    static let defaultDateDay: String = "Sun"
+    static let defaultDateDay: String = "Thu"
     static let defaultDateMonth: String = "October"
-    static let defaultDateYear: String = "2022"
+    static let defaultDateYear: String = "2025"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let nowTenMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaTenMinutes
     static let nowFortyFiveMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaFourtyFiveMinutes
@@ -224,7 +224,7 @@ class DatePrettyLongerTests: XCTestCase {
     func test_dnsDate_withNowAndEndDateFormatLongerPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end, as: .longerPretty)
-        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today) \(C.Localizations.DatePretty.to) Wed, September 3, 2031")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.today) \(C.Localizations.DatePretty.to) September 3, 2031")
     }
 
     func test_dnsTime_withDefaultAndEndDateFormatLongerSimple_shouldReturnString() {
@@ -258,6 +258,6 @@ class DatePrettyLongerTests: XCTestCase {
     func test_dnsTime_withNowAndEndDateFormatLongerPretty_shouldReturnString() {
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end, as: .longerPretty)
-        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) \(C.Localizations.DatePretty.to) Wed, September 3, 2031")
+        XCTAssertEqual(result, "\(C.Localizations.DatePretty.justNow) \(C.Localizations.DatePretty.to) September 3, 2031")
     }
 }

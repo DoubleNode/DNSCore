@@ -9,6 +9,7 @@
 import DNSCoreThreading
 import DNSError
 import Foundation
+import os.lock
 #if !os(macOS)
 import UIKit
 #endif
@@ -39,75 +40,112 @@ public protocol DNSCoreApplicationProtocol {
 }
 
 public class DNSCore {
-    private static let translator   = DNSDataTranslation()
+    private static let translator = DNSDataTranslation()
 
-    @available(iOSApplicationExtension, unavailable)
-    public class var appDelegate: DNSCoreApplicationProtocol? {
-        var retval: DNSCoreApplicationProtocol?
-
-        DNSUIThread.run {
-#if !os(macOS)
-            retval = UIApplication.shared.delegate as? DNSCoreApplicationProtocol
-#else
-//            retval = NSApplication.shared.delegate as? DNSCoreApplicationProtocol
-#endif
-        }
-
-        return retval
+    // MARK: - Thread-safe language code management
+    private struct LanguageState {
+        var languageCode: String
+        var languageCodeOverride: String = ""
     }
 
-    public static var languageCode: String = {
-        let currentLocale = NSLocale.current
-        var languageCode = currentLocale.language.languageCode?.identifier ?? "en"
-        if languageCode == "es" {
-            languageCode = "es-419"
+    private static let languageLock = OSAllocatedUnfairLock(initialState: LanguageState(
+        languageCode: {
+            let currentLocale = NSLocale.current
+            var languageCode = currentLocale.language.languageCode?.identifier ?? "en"
+            if languageCode == "es" {
+                languageCode = "es-419"
+            }
+            return languageCode
+        }()
+    ))
+
+    public static var languageCode: String {
+        get {
+            languageLock.withLock { state in
+                state.languageCode
+            }
         }
-        return languageCode
-    }()
-    public static var languageCodeOverride: String = "" {
-        didSet {
-            if languageCodeOverride.isEmpty {
-                let currentLocale = NSLocale.current
-                var retval = currentLocale.language.languageCode?.identifier ?? "en"
-                if retval == "es" {
-                    retval = "es-419"
-                }
-                languageCode = retval
-            } else {
-                languageCode = languageCodeOverride
+        set {
+            languageLock.withLock { state in
+                state.languageCode = newValue
             }
         }
     }
 
+    public static var languageCodeOverride: String {
+        get {
+            languageLock.withLock { state in
+                state.languageCodeOverride
+            }
+        }
+        set {
+            languageLock.withLock { state in
+                state.languageCodeOverride = newValue
+
+                if newValue.isEmpty {
+                    let currentLocale = NSLocale.current
+                    var retval = currentLocale.language.languageCode?.identifier ?? "en"
+                    if retval == "es" {
+                        retval = "es-419"
+                    }
+                    state.languageCode = retval
+                } else {
+                    state.languageCode = newValue
+                }
+            }
+        }
+    }
+
+    @MainActor
+    @available(iOSApplicationExtension, unavailable)
+    public class var appDelegate: DNSCoreApplicationProtocol? {
+#if !os(macOS)
+        return UIApplication.shared.delegate as? DNSCoreApplicationProtocol
+#else
+        return nil
+//        return NSApplication.shared.delegate as? DNSCoreApplicationProtocol
+#endif
+    }
+
     // MARK: - Base methods
 
+    @MainActor
     public class var buildString: String {
         return DNSCore.appDelegate?.buildString() ?? ""
     }
+    @MainActor
     public class var bundleName: String {
         return DNSCore.appDelegate?.bundleName() ?? ""
     }
+    @MainActor
     public class var targetType: String {
         return DNSCore.appDelegate?.targetType() ?? ""
     }
+    @MainActor
     public class var userAgentString: String {
         return DNSCore.appDelegate?.userAgentString() ?? ""
     }
+    @MainActor
     public class var versionString: String {
         return DNSCore.appDelegate?.versionString() ?? ""
     }
+    @MainActor
     public class var appBuildString: String {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
+    @MainActor
     public class func reportError(_ error: Error) {
         DNSCore.appDelegate?.reportError(error)
     }
+    @MainActor
     public class func reportException(_ nsException: NSException) {
         DNSCore.appDelegate?.reportException(nsException)
     }
+    @MainActor
     public class func reportLog(_ string: String) {
         DNSCore.appDelegate?.reportLog(string)
     }
+    @MainActor
     public class func shortenErrorPath(_ filename: String) -> String {
         return DNSCore.appDelegate?.shortenErrorPath(filename) ?? filename
     }

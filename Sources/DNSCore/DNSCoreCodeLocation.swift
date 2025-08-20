@@ -11,6 +11,6 @@ import DNSError
 public extension DNSCodeLocation {
     typealias core = DNSCoreCodeLocation // swiftlint:disable:this type_name
 }
-open class DNSCoreCodeLocation: DNSCodeLocation {
+open class DNSCoreCodeLocation: DNSCodeLocation, @unchecked Sendable {
     override open class var domainPreface: String { "com.doublenode.core." }
 }

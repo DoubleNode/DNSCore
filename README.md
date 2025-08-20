@@ -20,9 +20,9 @@ DNSCore is a collection of core classes used for the DNSFramework
 
 ## Requirements
 
--   iOS 16.0+ / macOS 13.3+ / tvOS 16.4+ / watchOS 9.4+
--   Xcode 14.3.1+
--   Swift 5.8+
+-   iOS 17+ / macOS 15+ / tvOS 18+ / watchOS 11+
+-   Xcode 16.4+
+-   Swift 6.0+
 
 ## Installation
 
@@ -34,18 +34,18 @@ Once you have your Swift package set up, adding Alamofire as a dependency is as 
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/DoubleNode/DNSCore.git", from: "1.11.10")
+.package(url: "https://github.com/DoubleNode/DNSCore.git", from: "2.0.0")
 ]
 ```
 
 ## Dependencies
 
 -   AtomicSwift v1.2.2+
--   DNSCoreThreading v1.11.1+
--   DNSError v1.11.1+
--   PhoneNumberKit v4.0.2+
+-   DNSCoreThreading v2.0.3+
+-   DNSError v2.0.1+
+-   PhoneNumberKit v4.1.4+
 -   SFSymbol v2.3.0+
--   SwiftLintPlugins v0.58.2+
+-   SwiftLintPlugins v0.59.1+
 
 ## Credits
 

@@ -13,9 +13,9 @@ import UIKit
 
 @objc
 extension DNSAppConstants {
-    static public var appGroupPath: String {
-        DNSAppConstants.shared.appGroupPathRead()
-    }
+//   static public var appGroupPath: String {
+//        DNSAppConstants.shared.appGroupPathRead()
+//    }
     open func appGroupPathRead() -> String {
         do {
             return try DNSAppConstants.constant(from: "appGroupPath") as String

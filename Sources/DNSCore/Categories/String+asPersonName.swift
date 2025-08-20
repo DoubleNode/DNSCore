@@ -1,5 +1,5 @@
 //
-//  String+dnsMD5.swift
+//  String+asPersonName.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.

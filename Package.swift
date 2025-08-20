@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.0
 //
 //  Package.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
@@ -13,10 +13,11 @@ let package = Package(
     name: "DNSCore",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v16),
-        .tvOS(.v16),
-        .macOS(.v13),
-        .watchOS(.v9),
+        .iOS(.v18),
+        .tvOS(.v18),
+        .macCatalyst(.v18),
+        .macOS(.v15),
+        .watchOS(.v11),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
@@ -28,11 +29,11 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/DoubleNodeOpen/AtomicSwift.git", from: "1.2.2"),
-        .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "1.11.1"),
-        .package(url: "https://github.com/DoubleNode/DNSError.git", from: "1.11.1"),
-        .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "4.0.2"),
+        .package(url: "https://github.com/DoubleNode/DNSCoreThreading.git", from: "2.0.3"),
+        .package(url: "https://github.com/DoubleNode/DNSError.git", from: "2.0.1"),
+        .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "4.1.4"),
         .package(url: "https://github.com/Nirma/SFSymbol", from: "2.3.0"),
-        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.2"),
+        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.59.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -52,5 +53,5 @@ let package = Package(
             exclude: ["TestViewController.xib"]
         ),
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )

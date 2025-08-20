@@ -11,11 +11,11 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyFullTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = 1760034041      // 2025-10-09T18:20:41+00:00
     static let defaultDateTimezone: String = "Central Daylight Time"
-    static let defaultDateDay: String = "Sunday"
+    static let defaultDateDay: String = "Thursday"
     static let defaultDateMonth: String = "October"
-    static let defaultDateYear: String = "2022"
+    static let defaultDateYear: String = "2025"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let nowTenMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaTenMinutes
     static let nowFortyFiveMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaFourtyFiveMinutes

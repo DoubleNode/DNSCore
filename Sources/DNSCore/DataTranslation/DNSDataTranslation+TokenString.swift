@@ -19,11 +19,7 @@ public extension DNSDataTranslation {
         return self.tokenString(from: any as? String)
     }
     func tokenString(from string: String?) -> String? {
-        guard var string else { return nil }
-        self.tokenReplacements.keys.forEach {
-            string = string.replacingOccurrences(of: "%\($0)%",
-                                                 with: self.tokenReplacements[$0] ?? "")
-        }
-        return string
+        guard let string else { return nil }
+        return self.replaceTokens(in: string)
     }
 }
