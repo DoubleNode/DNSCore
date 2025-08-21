@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class DNSUIColor: Hashable, Codable, NSCopying {
+open class DNSUIColor: Hashable, Codable, NSCopying, @unchecked Sendable {
     static let xlt = DNSDataTranslation()
     // MARK: - Properties -
     internal static func field(_ from: CodingKeys) -> String { return from.rawValue }
