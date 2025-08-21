@@ -38,19 +38,40 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .testTarget(
+            name: "DNSCoreTests",
+            dependencies: ["DNSCore"],
+            exclude: ["TestViewController.xib"],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals"),
+                .enableUpcomingFeature("ConciseMagicFile"),
+                .enableUpcomingFeature("ForwardTrailingClosures"),
+                .enableUpcomingFeature("ImportObjcForwardDeclarations"),
+                .enableUpcomingFeature("DisableOutwardActorInference"),
+                .enableUpcomingFeature("ExistentialAny"),
+                .enableUpcomingFeature("StrictConcurrency"),
+                .enableUpcomingFeature("GlobalConcurrency")
+            ]
+        ),
         .target(
             name: "DNSCore",
             dependencies: ["AtomicSwift", "DNSCoreThreading", "DNSError", "PhoneNumberKit", "SFSymbol"],
             resources: [
                 .process("Resources"),
             ],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals"),
+                .enableUpcomingFeature("ConciseMagicFile"),
+                .enableUpcomingFeature("ForwardTrailingClosures"),
+                .enableUpcomingFeature("ImportObjcForwardDeclarations"),
+                .enableUpcomingFeature("DisableOutwardActorInference"),
+                .enableUpcomingFeature("ExistentialAny"),
+                .enableUpcomingFeature("StrictConcurrency"),
+                .enableUpcomingFeature("GlobalConcurrency")
+            ],
             plugins: [
                 .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
-            ]),
-        .testTarget(
-            name: "DNSCoreTests",
-            dependencies: ["DNSCore"],
-            exclude: ["TestViewController.xib"]
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

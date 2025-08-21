@@ -48,7 +48,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
     }
 
     // Codable protocol methods
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.color = try container.decode(DNSUIColor.self, forKey: .color)
         self.cornerRadius = try container.decode(Double.self, forKey: .cornerRadius)
@@ -59,7 +59,7 @@ open class DNSUIBorder: Hashable, Codable, NSCopying {
         self.cornerBottomRightRadius = try container.decode(Double.self, forKey: .cornerBottomRightRadius)
         self.width = try container.decode(Double.self, forKey: .width)
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.color, forKey: .color)
         try container.encode(self.cornerRadius, forKey: .cornerRadius)

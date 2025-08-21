@@ -36,14 +36,14 @@ open class DNSUIShadow: Hashable, Codable, NSCopying {
     }
 
     // Codable protocol methods
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.color = try container.decode(DNSUIColor.self, forKey: .color)
         self.offset = try container.decode(CGSize.self, forKey: .offset)
         self.opacity = try container.decode(Float.self, forKey: .opacity)
         self.radius = try container.decode(Double.self, forKey: .radius)
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.color, forKey: .color)
         try container.encode(self.offset, forKey: .offset)

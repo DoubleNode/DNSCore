@@ -57,7 +57,7 @@ extension DNSAppConstants {
 
         if !noUI {
             let hasRootController = MainActor.assumeIsolated {
-                DNSCore.appDelegate?.rootViewController() is DNSAppConstantsRootProtocol
+                DNSCore.appDelegate?.rootViewController() is (any DNSAppConstantsRootProtocol)
             }
             if !hasRootController {
                 noUI = true
@@ -163,8 +163,8 @@ extension DNSAppConstants {
 #if !os(macOS)
     private class func dictionaryLookupCreateCheckbox(forState state: Bool) -> UIButton {
         return MainActor.assumeIsolated {
-            let targetController: DNSAppConstantsRootProtocol? =
-                DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol
+            let targetController: (any DNSAppConstantsRootProtocol)? =
+            DNSCore.appDelegate?.rootViewController() as? (any DNSAppConstantsRootProtocol)
 
             let checkbox = UIButton.init(type: UIButton.ButtonType.custom)
 
@@ -172,7 +172,7 @@ extension DNSAppConstants {
             checkbox.tag        = 1
             checkbox.isSelected = state
             checkbox.addTarget(targetController,
-                               action: #selector(DNSAppConstantsRootProtocol.checkBoxPressed),
+                               action: #selector((any DNSAppConstantsRootProtocol).checkBoxPressed),
                                for: UIControl.Event.touchUpInside)
 
             checkbox.imageView?.contentMode = .scaleAspectFit
@@ -193,8 +193,8 @@ extension DNSAppConstants {
 
         var retval: [String: [String: Any]] = [:]
 
-        let targetController: DNSAppConstantsRootProtocol? =
-            DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol
+            let targetController: (any DNSAppConstantsRootProtocol)? =
+            DNSCore.appDelegate?.rootViewController() as? (any DNSAppConstantsRootProtocol)
 
         // Extract Sendable values
         let title = translator.string(from: togglesData[C.AppConstants.title]) ?? "\(key)_TITLE_NOT_SPECIFIED"
@@ -263,7 +263,7 @@ extension DNSAppConstants {
 
         if !noUI {
             let hasRootController = MainActor.assumeIsolated {
-                DNSCore.appDelegate?.rootViewController() is DNSAppConstantsRootProtocol
+                DNSCore.appDelegate?.rootViewController() is (any DNSAppConstantsRootProtocol)
             }
             if !hasRootController {
                 noUI = true

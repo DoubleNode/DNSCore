@@ -35,7 +35,7 @@ open class DNSUIFont: Hashable, Codable, NSCopying {
     }
 
     // Codable protocol methods
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let normalContainer = try container
             .nestedContainer(keyedBy: UIFont.ExtensionCodingKeys.self, forKey: .normal)
@@ -54,7 +54,7 @@ open class DNSUIFont: Hashable, Codable, NSCopying {
         self.highlighted = try UIFont.decode(from: highlightedContainer) ?? UIFont()
         self.selected = try UIFont.decode(from: selectedContainer) ?? UIFont()
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let normalContainer = container
             .nestedContainer(keyedBy: UIFont.ExtensionCodingKeys.self, forKey: .normal)

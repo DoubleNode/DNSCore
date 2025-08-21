@@ -73,11 +73,11 @@ open class DNSPhone: Codable {
     // MARK: - Codable protocol methods -
     required public init?(coder: NSCoder) {
     }
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.phone = try container.decodeIfPresent(PhoneNumber.self, forKey: .phone)
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.phone, forKey: .phone)
     }

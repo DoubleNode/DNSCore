@@ -18,7 +18,7 @@ public enum DNSCoreError: DNSError {
     case notImplemented(_ codeLocation: DNSCodeLocation)
     case notFound(field: String, value: String, _ codeLocation: DNSCodeLocation)
     case invalidParameters(parameters: [String], _ codeLocation: DNSCodeLocation)
-    case lowerError(error: Error, _ codeLocation: DNSCodeLocation)
+    case lowerError(error: any Error, _ codeLocation: DNSCodeLocation)
     // Domain-Specific Errors
 
     public static let domain = "CORE"
@@ -227,5 +227,5 @@ public enum C {
 
 public typealias DNSBoolBlock = (Bool) -> Void
 public typealias DNSBoolBoolBlock = (Bool, Bool) -> Void
-public typealias DNSBoolErrorBlock = (Bool, DNSError) -> Void
-public typealias DNSErrorBlock = (DNSError) -> Void
+public typealias DNSBoolErrorBlock = (Bool, any DNSError) -> Void
+public typealias DNSErrorBlock = (any DNSError) -> Void

@@ -30,7 +30,7 @@ public protocol DNSCoreApplicationProtocol {
 #if !os(macOS)
     func rootViewController() -> UIViewController
 #endif
-    func reportError(_ error: Error)
+    func reportError(_ error: any Error)
     func reportException(_ nsException: NSException)
     func reportLog(_ string: String)
     func shortenErrorPath(_ filename: String) -> String
@@ -98,9 +98,9 @@ public class DNSCore {
 
     @MainActor
     @available(iOSApplicationExtension, unavailable)
-    public class var appDelegate: DNSCoreApplicationProtocol? {
+    public class var appDelegate: (any DNSCoreApplicationProtocol)? {
 #if !os(macOS)
-        return UIApplication.shared.delegate as? DNSCoreApplicationProtocol
+        return UIApplication.shared.delegate as? (any DNSCoreApplicationProtocol)
 #else
         return nil
 //        return NSApplication.shared.delegate as? DNSCoreApplicationProtocol
@@ -134,7 +134,7 @@ public class DNSCore {
         return "\(DNSCore.bundleName) v\(DNSCore.versionString).\(DNSCore.buildString)"
     }
     @MainActor
-    public class func reportError(_ error: Error) {
+    public class func reportError(_ error: any Error) {
         DNSCore.appDelegate?.reportError(error)
     }
     @MainActor

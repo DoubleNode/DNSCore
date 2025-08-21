@@ -33,14 +33,14 @@ open class DNSUIStrikeThru: Hashable, Codable, NSCopying {
     }
 
     // Codable protocol methods
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.color = try container.decode(DNSUIColor.self, forKey: .color)
         self.enabled = try container.decode(DNSUIEnabled.self, forKey: .enabled)
         let styleInt = try container.decode(Int.self, forKey: .style)
         self.style = NSUnderlineStyle(rawValue: styleInt)
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.color, forKey: .color)
         try container.encode(self.enabled, forKey: .enabled)

@@ -35,7 +35,7 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
     }
 
     // Codable protocol methods
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.normal = try container.decode(Bool.self, forKey: .normal)
         self.disabled = try container.decode(Bool.self, forKey: .disabled)
@@ -43,7 +43,7 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
         self.highlighted = try container.decode(Bool.self, forKey: .highlighted)
         self.selected = try container.decode(Bool.self, forKey: .selected)
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.normal, forKey: .normal)
         try container.encode(self.disabled, forKey: .disabled)

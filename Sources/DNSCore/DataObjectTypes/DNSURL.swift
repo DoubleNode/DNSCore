@@ -64,13 +64,13 @@ public class DNSURL: Hashable, Codable, NSCopying, Comparable {
         case en
         case es419 = "es-419"
     }
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         _urls = [:]
         let container = try decoder.container(keyedBy: CodingKeys.self)
         _urls[Language.en.rawValue] = URL(string: try container.decode(String.self, forKey: .en))
         _urls[Language.es419.rawValue] = URL(string: try container.decode(String.self, forKey: .es419))
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let stringEn = _urls[Language.en.rawValue]??.absoluteString
         try container.encode(stringEn ?? "", forKey: .en)

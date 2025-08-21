@@ -86,7 +86,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.nickname = try container.decodeIfPresent(String.self, forKey: .nickname) ?? ""
@@ -99,7 +99,7 @@ open class DNSPostalAddress: CNMutablePostalAddress, Codable {
         self.country = try container.decodeIfPresent(String.self, forKey: .country) ?? ""
         self.isoCountryCode = try container.decodeIfPresent(String.self, forKey: .isoCountryCode) ?? ""
     }
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.nickname, forKey: .nickname)
         try container.encode(self.street, forKey: .street)
