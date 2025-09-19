@@ -6,7 +6,12 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 open class DNSUIColor: Hashable, Codable, NSCopying {
     static let xlt = DNSDataTranslation()
@@ -105,3 +110,4 @@ open class DNSUIColor: Hashable, Codable, NSCopying {
         return copy
     }
 }
+#endif

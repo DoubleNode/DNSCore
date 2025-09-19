@@ -3,7 +3,7 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import Foundation
@@ -75,7 +75,11 @@ public extension PersonNameComponents {
     var dnsSortableName: String {
         var retval = self.familyName ?? ""
         if retval.isEmpty {
-            return self.dnsFormatName(style: .long)
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                return self.dnsFormatName(style: .long)
+            } else {
+                return [self.givenName, self.middleName, self.familyName].compactMap { $0 }.joined(separator: " ")
+            }
         }
         if let givenName = self.givenName {
             retval += ", \(givenName)"
@@ -95,11 +99,26 @@ public extension PersonNameComponents {
                              and nickname: String? = nil) -> PersonNameComponents? {
         var retval = PersonNameComponents()
         do {
-            retval = try PersonNameComponents(name)
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                retval = try PersonNameComponents(name)
+            } else {
+                // Fallback for older OS versions - parse manually
+                let components = name.components(separatedBy: " ")
+                if components.count >= 2 {
+                    retval.givenName = components[0]
+                    retval.familyName = components.last
+                    if components.count > 2 {
+                        retval.middleName = components[1..<components.count-1].joined(separator: " ")
+                    }
+                } else if components.count == 1 {
+                    retval.givenName = components[0]
+                }
+            }
         } catch { }
         retval.nickname = nickname
         return retval
     }
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     func dnsFormatName(style: PersonNameComponents.FormatStyle.Style = .long) -> String {
         self.formatted(.name(style: style))
     }

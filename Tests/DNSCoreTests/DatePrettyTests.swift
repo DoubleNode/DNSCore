@@ -3,7 +3,7 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCoreTests
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import XCTest
@@ -11,10 +11,15 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
-    static let defaultDateYear: String = "2022"
+    static let defaultDateTimeIntervalSince1970: TimeInterval = {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        var components = DateComponents(year: currentYear, month: 10, day: 9, hour: 13, minute: 20, second: 41)
+        components.timeZone = TimeZone(abbreviation: "CDT")
+        return Calendar.current.date(from: components)?.timeIntervalSince1970 ?? 0
+    }()
+    static let defaultDateYear: String = "\(Calendar.current.component(.year, from: Date()))"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
-    
+
     let defaultDate = Date(timeIntervalSince1970: defaultDateTimeIntervalSince1970)
     let defaultDateYear = DatePrettyTests.defaultDateYear
     let defaultEndDate = Date(timeIntervalSince1970: defaultEndDateTimeIntervalSince1970)
@@ -51,12 +56,12 @@ class DatePrettyTests: XCTestCase {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsDate(to: end)
-        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) - Sep 3, 2031")
+        XCTAssertEqual(result, "Oct 9 - Sep 3, 2031")
     }
     func test_dnsTime_withDefaultAndEndDateDefaultFormat_shouldReturnString() {
         sut = defaultDate
         let end = defaultEndDate
         let result: String = sut.dnsTime(to: end)
-        XCTAssertEqual(result, "Oct 9, \(defaultDateYear) @ 1:20pm - Sep 3, 2031 @ 11:32am")
+        XCTAssertEqual(result, "Oct 9 @ 1:20pm - Sep 3, 2031 @ 11:32am")
     }
 }

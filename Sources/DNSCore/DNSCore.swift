@@ -3,13 +3,13 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import DNSError
 import Foundation
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -26,7 +26,7 @@ public protocol DNSCoreApplicationProtocol {
 
     func isReachable() -> Bool
     func networkActivity(display:Bool)
-#if !os(macOS)
+#if canImport(UIKit)
     func rootViewController() -> UIViewController
 #endif
     func reportError(_ error: Error)
@@ -46,7 +46,7 @@ public class DNSCore {
         var retval: DNSCoreApplicationProtocol?
 
         DNSUIThread.run {
-#if !os(macOS)
+#if canImport(UIKit)
             retval = UIApplication.shared.delegate as? DNSCoreApplicationProtocol
 #else
 //            retval = NSApplication.shared.delegate as? DNSCoreApplicationProtocol
@@ -58,7 +58,12 @@ public class DNSCore {
 
     public static var languageCode: String = {
         let currentLocale = NSLocale.current
-        var languageCode = currentLocale.language.languageCode?.identifier ?? "en"
+        var languageCode: String
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+            languageCode = currentLocale.language.languageCode?.identifier ?? "en"
+        } else {
+            languageCode = currentLocale.languageCode ?? "en"
+        }
         if languageCode == "es" {
             languageCode = "es-419"
         }
@@ -68,7 +73,12 @@ public class DNSCore {
         didSet {
             if languageCodeOverride.isEmpty {
                 let currentLocale = NSLocale.current
-                var retval = currentLocale.language.languageCode?.identifier ?? "en"
+                var retval: String
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                    retval = currentLocale.language.languageCode?.identifier ?? "en"
+                } else {
+                    retval = currentLocale.languageCode ?? "en"
+                }
                 if retval == "es" {
                     retval = "es-419"
                 }

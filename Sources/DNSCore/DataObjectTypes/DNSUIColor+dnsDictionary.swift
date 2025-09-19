@@ -6,7 +6,11 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 public extension DNSUIColor {
     convenience init?(from data: DNSDataDictionary) {
@@ -74,3 +78,4 @@ public extension DNSUIColor {
 //        self.selected = selected ?? normal
 //    }
 // }
+#endif

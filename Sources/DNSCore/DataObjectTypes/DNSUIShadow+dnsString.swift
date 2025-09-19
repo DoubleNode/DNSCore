@@ -1,12 +1,16 @@
 //
 //  DNSUIShadow+dnsString.swift
-//  DoubleNode Swift Framework (DNSFramework) - DNSBaseTheme
+//  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 public extension DNSUIShadow {
     convenience init?(with string: String) {
@@ -45,3 +49,4 @@ public extension DNSUIShadow {
         self.init(color: color, offset: offset, opacity: opacity, radius: radius)
     }
 }
+#endif

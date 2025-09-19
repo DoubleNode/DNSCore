@@ -1,12 +1,16 @@
 //
 //  DNSUIFont+dnsString.swift
-//  DoubleNode Swift Framework (DNSFramework) - DNSBaseTheme
+//  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 public extension DNSUIFont {
     convenience init?(with string: String) {
@@ -14,3 +18,4 @@ public extension DNSUIFont {
         self.init(font)
     }
 }
+#endif

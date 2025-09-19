@@ -73,40 +73,13 @@
                   Identifier = "BundleLookupBundleTests/test_dnsLookupNibBundleForClasstype_withTestViewController_shouldReturnMainBundle()">
                </Test>
                <Test
-                  Identifier = "DNSAppConstantsDefaultsTests">
+                  Identifier = "DNSAppConstantsDictionaryLookupsTests/test_dictionaryLookup_withEmptyConstant_shouldReturnEmptyString()">
                </Test>
                <Test
-                  Identifier = "DNSAppConstantsDictionaryLookupsTests">
+                  Identifier = "DNSAppConstantsDictionaryLookupsTests/test_dictionaryLookup_withInvalidKey_shouldReturnEmptyString()">
                </Test>
                <Test
                   Identifier = "DNSAppGlobalsTests">
-               </Test>
-               <Test
-                  Identifier = "DNSAppSystemTests">
-               </Test>
-               <Test
-                  Identifier = "DNSCoreTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationJsonTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationTimeTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationUIColorTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationUIntTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDataTranslationURLTests">
-               </Test>
-               <Test
-                  Identifier = "DNSDeviceTests">
                </Test>
                <Test
                   Identifier = "DNSRootViewControllerTests">

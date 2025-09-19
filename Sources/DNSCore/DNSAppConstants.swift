@@ -3,13 +3,13 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import DNSError
 import Foundation
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
 
 @objc
@@ -24,8 +24,12 @@ open class DNSAppConstants: NSObject {
     static public var translator = DNSDataTranslation()
 
     static public var uniqueDeviceId: String = {
+        #if canImport(UIKit)
         return "iOS-" + DNSAppConstants.targetType + "-" +
             (UIDevice.current.identifierForVendor?.uuidString ?? "")
+        #else
+        return "macOS-" + DNSAppConstants.targetType + "-" + UUID().uuidString
+        #endif
     }()
     static public var targetType: String = {
         return DNSCore.targetType
@@ -125,7 +129,7 @@ open class DNSAppConstants: NSObject {
             .notFound(field: key, value: filter, .core(self)) }
         return translator.string(from: value)!
     }
-#if !os(macOS)
+#if canImport(UIKit)
     public class func constant(from key: String, and filter: String = "") throws -> UIColor {
         let value = self._constant(from: key, and: filter)
         guard value != nil else { throw DNSError.Core
@@ -160,7 +164,7 @@ open class DNSAppConstants: NSObject {
 
     // MARK: - Compound Constant plist to object functions
 
-#if !os(macOS)
+#if canImport(UIKit)
     // key + Name is the generated key for loading the font postscript name.
     // key + Scale is the appFontScaling override for @2x, @3x (ie: 1.0, 2.0, 3.0)
     // key + Size is the generated key for loading the font size in points. (divided by appFontScaling)

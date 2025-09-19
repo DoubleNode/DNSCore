@@ -3,11 +3,10 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
-#if !os(macOS)
-import UIKit
+import CoreGraphics
 
 public extension CGSize {
     static let xlt = DNSDataTranslation()
@@ -29,4 +28,3 @@ public extension CGSize {
         return retval
     }
 }
-#endif

@@ -3,12 +3,12 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import Foundation
 import LocalAuthentication
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -30,7 +30,7 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
         self.asString(for: language.rawValue)
     }
     public func asString(for languageStr: String) -> String {
-        _strings[languageStr] ?? (_strings[fallbackLanguage.rawValue] ?? "")
+        _strings[languageStr] ?? (_strings[fallbackLanguage.rawValue] ?? (_strings[""] ?? ""))
     }
     public func rawValue(for language: DNSString.Language) -> String {
         self.rawValue(for: language.rawValue)
@@ -41,9 +41,11 @@ public class DNSString: Hashable, Codable, NSCopying, Comparable {
     public init() {
         _strings = [:]
     }
-    public init(with string: String) {
+    public init(with string: String?) {
         var newStrings: [String: String] = [:]
-        newStrings[fallbackLanguage.rawValue] = DNSString.utilityCleanupString(string)
+        if let string {
+            newStrings[fallbackLanguage.rawValue] = DNSString.utilityCleanupString(string)
+        }
         _strings = newStrings
     }
     @discardableResult

@@ -3,12 +3,12 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import Foundation
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -102,7 +102,7 @@ extension DNSAppConstants {
         return self.plistConfigValue(replace: key, with: retval!)
     }
 
-#if !os(macOS)
+#if canImport(UIKit)
     private class func dictionaryLookupCreateCheckbox(forState state: Bool) -> UIButton {
         let targetController: DNSAppConstantsRootProtocol? =
             DNSCore.appDelegate?.rootViewController() as? DNSAppConstantsRootProtocol

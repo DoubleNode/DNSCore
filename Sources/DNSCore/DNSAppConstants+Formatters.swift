@@ -3,14 +3,15 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import DNSError
 import Foundation
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
+#endif
 
 extension DNSAppConstants {
     static var defaultCurrencyFormatter: NumberFormatter = {
@@ -48,4 +49,3 @@ extension DNSAppConstants {
         return formatter
     }()
 }
-#endif

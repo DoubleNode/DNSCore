@@ -6,7 +6,12 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 open class DNSUIEnabled: Hashable, Codable, NSCopying {
     static let xlt = DNSDataTranslation()
@@ -83,3 +88,4 @@ open class DNSUIEnabled: Hashable, Codable, NSCopying {
         return copy
     }
 }
+#endif

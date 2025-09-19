@@ -6,7 +6,9 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 
 public extension DNSPhone {
     convenience init?(from data: DNSDataDictionary) {

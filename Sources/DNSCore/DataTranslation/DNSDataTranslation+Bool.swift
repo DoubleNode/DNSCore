@@ -3,12 +3,12 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCore
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import DNSCoreThreading
 import Foundation
-#if !os(macOS)
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -33,7 +33,7 @@ public extension DNSDataTranslation {
         if any is Bool {
             return any as? Bool
         }
-#if !os(macOS)
+#if canImport(UIKit)
         if any is UIColor {
             return self.bool(from: any as? UIColor)
         }

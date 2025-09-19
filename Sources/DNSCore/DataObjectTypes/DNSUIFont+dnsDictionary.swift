@@ -6,7 +6,11 @@
 //  Copyright © 2021 - 2016 DoubleNode.com. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(UIKit)
 
 public extension DNSUIFont {
     convenience init?(from data: DNSDataDictionary) {
@@ -33,3 +37,4 @@ public extension DNSUIFont {
         return retval
     }
 }
+#endif

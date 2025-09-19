@@ -3,7 +3,7 @@
 //  DoubleNode Swift Framework (DNSFramework) - DNSCoreTests
 //
 //  Created by Darren Ehlers.
-//  Copyright © 2022 - 2016 DoubleNode.com. All rights reserved.
+//  Copyright © 2025 - 2016 DoubleNode.com. All rights reserved.
 //
 
 import XCTest
@@ -11,10 +11,15 @@ import XCTest
 @testable import DNSCore
 
 class DatePrettyLongTests: XCTestCase {
-    static let defaultDateTimeIntervalSince1970: TimeInterval = 1665339641      // 2022-10-09T18:20:41+00:00
+    static let defaultDateTimeIntervalSince1970: TimeInterval = {
+        let currentYear = Calendar.current.component(.year, from: Date())
+        var components = DateComponents(year: currentYear, month: 10, day: 9, hour: 13, minute: 20, second: 41)
+        components.timeZone = TimeZone(abbreviation: "CDT")
+        return Calendar.current.date(from: components)?.timeIntervalSince1970 ?? 0
+    }()
     static let defaultDateTimezone: String = "CDT"
     static let defaultDateMonth: String = "October"
-    static let defaultDateYear: String = "2022"
+    static let defaultDateYear: String = "\(Calendar.current.component(.year, from: Date()))"
     static let defaultEndDateTimeIntervalSince1970: TimeInterval = 1946219541   // 2031-09-03T16:32:21+00:00
     static let defaultSimilarEndDateTimeIntervalSince1970: TimeInterval = 1666984038   // 2022-10-28T19:07:18+00:00
     static let nowTenMinutesAgoTimeIntervalSinceNow: TimeInterval = 0 - Date.Seconds.deltaTenMinutes
