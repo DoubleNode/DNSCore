@@ -298,7 +298,21 @@ open class DNSAppConstants: NSObject {
 
         let constantsName = DNSCore.appSetting(for: C.AppConstants.filenameOverride,
                                                withDefault: C.AppConstants.filenameDefault) as? String ?? ""
-        guard let constantsPath = Bundle.main.path(forResource: constantsName, ofType: "plist") else {
+
+        // First try Bundle.main (normal app execution)
+        var constantsPath = Bundle.main.path(forResource: constantsName, ofType: "plist")
+
+        // If not found in main bundle, search through all bundles (for test environments)
+        if constantsPath == nil {
+            for bundle in Bundle.allBundles {
+                if let path = bundle.path(forResource: constantsName, ofType: "plist") {
+                    constantsPath = path
+                    break
+                }
+            }
+        }
+
+        guard let constantsPath = constantsPath else {
             NSException.init(name: NSExceptionName(rawValue: "\(type(of: self)) Exception"),
                              reason: "Constants plist not found: \(constantsName)",
                              userInfo: nil).raise()
